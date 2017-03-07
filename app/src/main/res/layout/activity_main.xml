@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <com.skydoves.colorpickerviewdemo.ColorPickerView.ColorPickerView
+        android:id="@+id/colorPickerView"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        app:src="@drawable/paletee"
+        app:selector="@drawable/wheel" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/colorPickerView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:text="#ffffff"
+        android:textColor="@color/colorAccent"
+        android:textStyle="bold"
+        android:textSize="20sp"/>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:background="#ffffff"
+        android:orientation="horizontal"/>
+
+</RelativeLayout>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="colorpicker">
+        <attr name="src" format="reference"/>
+        <attr name="selector" format="reference"/>
+    </declare-styleable>
+</resources>
