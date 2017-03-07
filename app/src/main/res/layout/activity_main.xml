@@ -13,7 +13,7 @@
         android:layout_height="300dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
-        app:src="@drawable/paletee"
+        app:src="@drawable/palette"
         app:selector="@drawable/wheel" />
 
     <TextView
