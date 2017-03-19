@@ -5,8 +5,8 @@ You can use like using just ImageView and you can get color from any images.
 ![screenshot1](https://cloud.githubusercontent.com/assets/24237865/23684824/42e77472-03e4-11e7-9f5e-a58b7708dfd8.jpg)
 
 
-##Including in your project
-####build.gradle
+## Including in your project
+#### build.gradle
 ```java
 repositories {
   mavenCentral() // or jcenter() works as well
@@ -17,7 +17,7 @@ dependencies {
 }
 ```
 
-####or Maven
+#### or Maven
 ```xml
 <dependency>
   <groupId>com.github.skydoves</groupId>
@@ -26,17 +26,17 @@ dependencies {
 </dependency>
 ```
     
-##Usage
+## Usage
 You can use like using just ImageView and you can get color from any images.
 
-####Add XML Namespace
+#### Add XML Namespace
 First add below XML Namespace inside your XML layout file.
 
 ```xml
 xmlns:app="http://schemas.android.com/apk/res-auto"
 ```
 
-####ColorPickerView in layout
+#### ColorPickerView in layout
 ```xml
 <com.skydoves.colorpickerview.ColorPickerView
         android:id="@+id/colorPickerView"
@@ -46,7 +46,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
         app:selector="@drawable/wheel" />
 ```
 
-####attribute description
+#### Attribute description
 ```
 app:src="@drawable/palette" // set palette image
 ```
@@ -55,7 +55,7 @@ app:src="@drawable/palette" // set palette image
 app:selector="@drawable/wheel" // set selector image. This isn't required always. If you don't need, don't use.
 ```
 
-####Color Selected Listener
+#### Color Selected Listener
 ```java
 colorPickerView.setColorListener(new ColorPickerView.ColorListener() {
             @Override
@@ -65,7 +65,7 @@ colorPickerView.setColorListener(new ColorPickerView.ColorListener() {
         });
 ```
 
-####Methods
+#### Methods
 ```java
 colorPickerView.getColor() // return int what the last selected color
 ```
@@ -76,7 +76,7 @@ colorPickerView.getColorHtml() // return String what the last selected Html colo
 colorPickerView.getColorRGB() // return int array the last selected color's RGB value. int[0] : R, int[1] : G, int[2] : B
 ```
 
-#License
+# License
 ```xml
 Copyright 2017 skydoves
 
