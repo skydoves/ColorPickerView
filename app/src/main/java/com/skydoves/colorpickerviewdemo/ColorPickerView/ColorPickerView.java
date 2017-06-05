@@ -233,4 +233,20 @@ public class ColorPickerView extends FrameLayout {
         rgb[2] = (color >> 0) & 0xFF; // hex to int : B
         return rgb;
     }
+
+    public void setSelectorPoint(int x, int y) {
+        selector.setX(x);
+        selector.setY(y);
+        selectedPoint = new Point(x, y);
+        selectedColor = getColorFromBitmap(x, y);
+        fireColorListener(getColor());
+    }
+
+    public void setPaletteDrawable(Drawable drawable) {
+        imageView.setImageDrawable(drawable);
+    }
+
+    public void setSelectorDrawable(Drawable drawable) {
+        selector.setImageDrawable(drawable);
+    }
 }

@@ -2,17 +2,52 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background">
+
+    <LinearLayout
+        android:id="@+id/layout_options"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <Button
+            android:onClick="palette"
+            android:text="palette"
+            android:background="@color/btnColor"
+            android:textColor="#ffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:onClick="selector"
+            android:text="selector"
+            android:background="@color/btnColor"
+            android:textColor="#ffffff"
+            android:layout_marginLeft="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:onClick="points"
+            android:text="points"
+            android:background="@color/btnColor"
+            android:textColor="#ffffff"
+            android:layout_marginLeft="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
 
     <com.skydoves.colorpickerviewdemo.ColorPickerView.ColorPickerView
         android:id="@+id/colorPickerView"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
+        android:layout_below="@+id/layout_options"
+        android:layout_marginTop="10dp"
         app:src="@drawable/palette"
         app:selector="@drawable/wheel" />
 
