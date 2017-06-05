@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
      * @param v
      */
     public void points(View v) {
-        int x = (int)(Math.random() * 600) + 50;
+        int x = (int)(Math.random() * 600) + 100;
         int y = (int)(Math.random() * 400) + 150;
         colorPickerView.setSelectorPoint(x, y);
     }
