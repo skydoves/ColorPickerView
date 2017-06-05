@@ -13,7 +13,7 @@ repositories {
 }
 
 dependencies {
-  compile 'com.github.skydoves:colorpickerview:1.0.0'
+  compile 'com.github.skydoves:colorpickerview:1.0.1'
 }
 ```
 
@@ -22,7 +22,7 @@ dependencies {
 <dependency>
   <groupId>com.github.skydoves</groupId>
   <artifactId>colorpickerview</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
 </dependency>
 ```
     
@@ -74,6 +74,15 @@ colorPickerView.getColorHtml() // return String what the last selected Html colo
 ```
 ```java
 colorPickerView.getColorRGB() // return int array the last selected color's RGB value. int[0] : R, int[1] : G, int[2] : B
+```
+```java
+colorPickerView.setPaletteDrawable(Drawable drawable) // change palette drawable resource (you must initialize at first in xml)
+```
+```java
+colorPickerView.setSelectorDrawable(Drawable drawable) // change selector drawable resource (you must initialize at first in xml)
+```
+```java
+colorPickerView.setSelectorPoint(int x, int y) // moving selector's points (x, y)
 ```
 
 # License
