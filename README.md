@@ -84,6 +84,9 @@ colorPickerView.setSelectorDrawable(Drawable drawable) // change selector drawab
 ```java
 colorPickerView.setSelectorPoint(int x, int y) // moving selector's points (x, y)
 ```
+```java
+colorPickerView.selectCenter() // select center of drawable image
+```
 
 # License
 ```xml
