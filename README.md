@@ -13,7 +13,7 @@ repositories {
 }
 
 dependencies {
-  compile 'com.github.skydoves:colorpickerview:1.0.1'
+  compile 'com.github.skydoves:colorpickerview:1.0.2'
 }
 ```
 
