@@ -243,10 +243,24 @@ public class ColorPickerView extends FrameLayout {
     }
 
     public void setPaletteDrawable(Drawable drawable) {
-        imageView.setImageDrawable(drawable);
+        removeView(imageView);
+        imageView = new ImageView(getContext());
+        imageViewDrawable = drawable;
+        imageView.setImageDrawable(imageViewDrawable);
+        addView(imageView);
+
+        removeView(selector);
+        addView(selector);
+
+        selector.setX(getMeasuredWidth()/2 - selector.getWidth()/2);
+        selector.setY(getMeasuredHeight()/2- selector.getHeight()/2);
     }
 
     public void setSelectorDrawable(Drawable drawable) {
         selector.setImageDrawable(drawable);
+    }
+
+    public void selectCenter() {
+        setSelectorPoint(getMeasuredWidth()/2 - selector.getWidth()/2, getMeasuredHeight()/2- selector.getHeight()/2);
     }
 }
