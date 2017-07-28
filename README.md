@@ -1,5 +1,6 @@
 # ColorPickerView
-You can use like using just ImageView and you can get color from any images.
+You can use like just ImageView and you can get HSV colors, RGB values, Html color codes <br>
+from your gallery pictures or custom images just using touch.
 
 ![screenshot0](https://cloud.githubusercontent.com/assets/24237865/23684747/011279de-03e4-11e7-8cb3-3d5271efedc6.jpg)
 ![screenshot1](https://cloud.githubusercontent.com/assets/24237865/23684824/42e77472-03e4-11e7-9f5e-a58b7708dfd8.jpg)
