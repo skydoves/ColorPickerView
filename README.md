@@ -67,27 +67,15 @@ colorPickerView.setColorListener(new ColorPickerView.ColorListener() {
 ```
 
 #### Methods
-```java
-colorPickerView.getColor() // return int what the last selected color
-```
-```java
-colorPickerView.getColorHtml() // return String what the last selected Html color code
-```
-```java
-colorPickerView.getColorRGB() // return int array the last selected color's RGB value. int[0] : R, int[1] : G, int[2] : B
-```
-```java
-colorPickerView.setPaletteDrawable(Drawable drawable) // change palette drawable resource (you must initialize at first in xml)
-```
-```java
-colorPickerView.setSelectorDrawable(Drawable drawable) // change selector drawable resource (you must initialize at first in xml)
-```
-```java
-colorPickerView.setSelectorPoint(int x, int y) // moving selector's points (x, y)
-```
-```java
-colorPickerView.selectCenter() // select center of drawable image
-```
+Methods | Return | Description
+--- | --- | ---
+getColor() | int | the last selected color
+getColorHtml() | String | the last selected Html color code
+getColorRGB() | int[3] | the last selected color's RGB value.<br> int[0] : R, int[1] : G, int[2] : B
+setPaletteDrawable(Drawable drawable) | void | change palette drawable resource
+setSelectorDrawable(Drawable drawable) | void | change selector drawable resource
+setSelectorPoint(int x, int y) | void | moving selector at point(x, y)
+selectCenter() | void | select center of drawable image
 
 # License
 ```xml
