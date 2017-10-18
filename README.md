@@ -2,9 +2,9 @@
 You can use like just ImageView and you can get HSV colors, RGB values, Html color codes <br>
 from your gallery pictures or custom images just using touch.
 
-![screenshot0](https://cloud.githubusercontent.com/assets/24237865/23684747/011279de-03e4-11e7-8cb3-3d5271efedc6.jpg)
-![screenshot1](https://cloud.githubusercontent.com/assets/24237865/23684824/42e77472-03e4-11e7-9f5e-a58b7708dfd8.jpg)
-
+![111](https://user-images.githubusercontent.com/24237865/31732307-0bd47b5c-b473-11e7-9f17-d81bc4b59cf4.jpg)
+![222](https://user-images.githubusercontent.com/24237865/31732308-0c0892de-b473-11e7-88f4-9c91e02c543e.jpg)
+![333](https://user-images.githubusercontent.com/24237865/31732309-0c3557b0-b473-11e7-8104-43534a6ca0dc.jpg)
 
 ## Including in your project
 #### build.gradle
@@ -14,7 +14,7 @@ repositories {
 }
 
 dependencies {
-  compile 'com.github.skydoves:colorpickerview:1.0.5'
+  compile 'com.github.skydoves:colorpickerview:1.0.6'
 }
 ```
 
@@ -23,7 +23,7 @@ dependencies {
 <dependency>
   <groupId>com.github.skydoves</groupId>
   <artifactId>colorpickerview</artifactId>
-  <version>1.0.5</version>
+  <version>1.0.6</version>
 </dependency>
 ```
     
