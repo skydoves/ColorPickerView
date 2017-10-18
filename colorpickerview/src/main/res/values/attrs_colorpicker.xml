@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ColorPickerView">
+        <attr name="palette" format="reference"/>
+        <attr name="selector" format="reference"/>
+    </declare-styleable>
+    <declare-styleable name="MultiColorPickerView">
+        <attr name="palette2" format="reference"/>
+    </declare-styleable>
+</resources>

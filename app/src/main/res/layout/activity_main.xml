@@ -1,76 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:background="@color/background"
+    android:orientation="vertical"
+    android:weightSum="2.1"
+    android:padding="15dp">
 
-    <LinearLayout
-        android:id="@+id/layout_options"
+    <com.github.skydoves.ElasticLayout
+        android:id="@+id/example0"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:orientation="horizontal"
-        android:padding="10dp">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:layout_backgroundColor="@color/btnColor"
+        app:button_duration="250"
+        app:button_scale="0.87"
+        app:layout_round="20">
+        
+        <ImageView
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/palette"
+            android:scaleType="fitXY"
+            android:padding="20dp"/>
+        
+        <com.github.skydoves.ElasticLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorPrimaryDark"
+            app:layout_round="20">
 
-        <Button
-            android:onClick="palette"
-            android:text="palette"
-            android:background="@color/btnColor"
-            android:textColor="#ffffff"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:padding="5dp"
+                android:layout_centerInParent="true"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:text="ColorPickerView Example"/>
 
-        <Button
-            android:onClick="selector"
-            android:text="selector"
-            android:background="@color/btnColor"
-            android:textColor="#ffffff"
-            android:layout_marginLeft="15dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            </com.github.skydoves.ElasticLayout>
+    </com.github.skydoves.ElasticLayout>
 
-        <Button
-            android:onClick="points"
-            android:text="points"
-            android:background="@color/btnColor"
-            android:textColor="#ffffff"
-            android:layout_marginLeft="15dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+    <android.support.v4.widget.Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"/>
+    
+    <com.github.skydoves.ElasticLayout
+        android:id="@+id/example1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:layout_backgroundColor="@color/btnColor"
+        app:button_duration="250"
+        app:button_scale="0.87"
+        app:layout_round="20">
 
-    </LinearLayout>
+        <ImageView
+            android:layout_width="260dp"
+            android:layout_height="180dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/watercolor"
+            android:scaleType="fitXY"
+            android:padding="20dp"/>
 
-    <com.skydoves.colorpickerviewdemo.ColorPickerView.ColorPickerView
-        android:id="@+id/colorPickerView"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/layout_options"
-        android:layout_marginTop="10dp"
-        app:src="@drawable/palette"
-        app:selector="@drawable/wheel" />
+        <com.github.skydoves.ElasticLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorPrimaryDark"
+            app:layout_round="20">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/colorPickerView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
-        android:text="#ffffff"
-        android:textColor="@color/colorAccent"
-        android:textStyle="bold"
-        android:textSize="20sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:padding="5dp"
+                android:layout_centerInParent="true"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:text="Multi-ColorPickerView Example"/>
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
-        android:background="#ffffff"
-        android:orientation="horizontal"/>
+        </com.github.skydoves.ElasticLayout>
+    </com.github.skydoves.ElasticLayout>
 
-</RelativeLayout>
+</LinearLayout>

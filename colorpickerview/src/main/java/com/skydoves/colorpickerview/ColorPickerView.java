@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.skydoves.colorpickerviewdemo.ColorPickerView;
+package com.skydoves.colorpickerview;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -27,8 +27,6 @@ import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -38,21 +36,17 @@ import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.skydoves.colorpickerviewdemo.R;
-
 public class ColorPickerView extends FrameLayout {
 
     private int selectedColor;
     private Point selectedPoint;
 
-    private ImageView imageView;
+    private ImageView palette;
     private ImageView selector;
 
-    @Nullable
-    private Drawable imageViewDrawable;
+    private Drawable paletteDrawable;
     private Drawable selectorDrawable;
 
-    @Nullable
     protected ColorListener mColorListener;
 
     public ColorPickerView(Context context) {
@@ -96,38 +90,31 @@ public class ColorPickerView extends FrameLayout {
     }
 
     private void onFirstLayout() {
-        selectedPoint = new Point(getMeasuredWidth()/2, getMeasuredHeight()/2);
-        onTouchReceived(
-                MotionEvent.obtain(System.currentTimeMillis(),
-                        System.currentTimeMillis() + 100,
-                        MotionEvent.ACTION_UP,
-                        getMeasuredWidth() / 2,
-                        getMeasuredHeight() / 2,
-                        0)
-        );
+        selectCenter();
         loadListeners();
     }
 
     private void getAttrs(AttributeSet attrs) {
-        TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.colorpicker);
+        TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.ColorPickerView);
         try {
-            if (a.hasValue(R.styleable.colorpicker_src))
-                imageViewDrawable = a.getDrawable(R.styleable.colorpicker_src);
-            if (a.hasValue(R.styleable.colorpicker_selector))
-                selectorDrawable = a.getDrawable(R.styleable.colorpicker_selector);
+            if (a.hasValue(R.styleable.ColorPickerView_palette))
+                paletteDrawable = a.getDrawable(R.styleable.ColorPickerView_palette);
+            if (a.hasValue(R.styleable.ColorPickerView_selector))
+                selectorDrawable = a.getDrawable(R.styleable.ColorPickerView_selector);
         } finally {
             a.recycle();
         }
     }
 
     private void onCreate() {
-        imageView = new ImageView(getContext());
-        if (imageViewDrawable != null)
-            imageView.setImageDrawable(imageViewDrawable);
+        setPadding(0, 0, 0, 0);
+        palette = new ImageView(getContext());
+        if (paletteDrawable != null)
+            palette.setImageDrawable(paletteDrawable);
 
-        FrameLayout.LayoutParams wheelParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        FrameLayout.LayoutParams wheelParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         wheelParams.gravity = Gravity.CENTER;
-        addView(imageView, wheelParams);
+        addView(palette, wheelParams);
 
         selector = new ImageView(getContext());
         if (selectorDrawable != null) {
@@ -158,42 +145,36 @@ public class ColorPickerView extends FrameLayout {
         });
     }
 
-    private boolean onTouchReceived(@NonNull MotionEvent event) {
+    private boolean onTouchReceived(MotionEvent event) {
         Point snapPoint = new Point((int)event.getX(), (int)event.getY());
         selectedColor = getColorFromBitmap(snapPoint.x, snapPoint.y);
 
-        // check is selector pointed position is transparent field?
+        // check validation
         if(getColor() != Color.TRANSPARENT) {
             selector.setX(snapPoint.x - (selector.getMeasuredWidth() / 2));
             selector.setY(snapPoint.y - (selector.getMeasuredHeight() / 2));
             selectedPoint = new Point(snapPoint.x, snapPoint.y);
             fireColorListener(getColor());
-        }
-        // else
-        else{
-            selector.setX(selectedPoint.x - (selector.getMeasuredWidth() / 2));
-            selector.setY(selectedPoint.y - (selector.getMeasuredHeight() / 2));
-            selectedColor = getColorFromBitmap(selectedPoint.x , selectedPoint.y);
-            fireColorListener(selectedColor);
-        }
-        return true;
+            return true;
+        } else
+            return false;
     }
 
     private int getColorFromBitmap(float x, float y) {
-        if (imageViewDrawable == null) return 0;
+        if (paletteDrawable == null) return 0;
 
         Matrix invertMatrix = new Matrix();
-        imageView.getImageMatrix().invert(invertMatrix);
+        palette.getImageMatrix().invert(invertMatrix);
 
         float[] mappedPoints = new float[]{x, y};
         invertMatrix.mapPoints(mappedPoints);
 
-        if (imageView.getDrawable() != null && imageView.getDrawable() instanceof BitmapDrawable &&
+        if (palette.getDrawable() != null && palette.getDrawable() instanceof BitmapDrawable &&
                 mappedPoints[0] > 0 && mappedPoints[1] > 0 &&
-                mappedPoints[0] < imageView.getDrawable().getIntrinsicWidth() && mappedPoints[1] < imageView.getDrawable().getIntrinsicHeight()) {
+                mappedPoints[0] < palette.getDrawable().getIntrinsicWidth() && mappedPoints[1] < palette.getDrawable().getIntrinsicHeight()) {
 
             invalidate();
-            return ((BitmapDrawable) imageView.getDrawable()).getBitmap().getPixel((int) mappedPoints[0], (int) mappedPoints[1]);
+            return ((BitmapDrawable) palette.getDrawable()).getBitmap().getPixel((int) mappedPoints[0], (int) mappedPoints[1]);
         }
         return 0;
     }
@@ -209,12 +190,8 @@ public class ColorPickerView extends FrameLayout {
         }
     }
 
-    public void setColorListener(@Nullable ColorListener colorListener) {
+    public void setColorListener(ColorListener colorListener) {
         mColorListener = colorListener;
-    }
-
-    public interface ColorListener {
-        void onColorSelected(int color);
     }
 
     public int getColor() {
@@ -234,6 +211,10 @@ public class ColorPickerView extends FrameLayout {
         return rgb;
     }
 
+    public Point getSelectorPoint() {
+        return selectedPoint;
+    }
+
     public void setSelectorPoint(int x, int y) {
         selector.setX(x);
         selector.setY(y);
@@ -243,11 +224,11 @@ public class ColorPickerView extends FrameLayout {
     }
 
     public void setPaletteDrawable(Drawable drawable) {
-        removeView(imageView);
-        imageView = new ImageView(getContext());
-        imageViewDrawable = drawable;
-        imageView.setImageDrawable(imageViewDrawable);
-        addView(imageView);
+        removeView(palette);
+        palette = new ImageView(getContext());
+        paletteDrawable = drawable;
+        palette.setImageDrawable(paletteDrawable);
+        addView(palette);
 
         removeView(selector);
         addView(selector);
