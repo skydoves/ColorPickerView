@@ -4,6 +4,10 @@ from your gallery pictures or custom images just using touch.
 
 ![111](https://user-images.githubusercontent.com/24237865/31732307-0bd47b5c-b473-11e7-9f17-d81bc4b59cf4.jpg)
 ![222](https://user-images.githubusercontent.com/24237865/31732308-0c0892de-b473-11e7-88f4-9c91e02c543e.jpg)
+
+# Multi-ColorPickerView
+You can get colors using multi selectors.
+
 ![333](https://user-images.githubusercontent.com/24237865/31732309-0c3557b0-b473-11e7-8104-43534a6ca0dc.jpg)
 
 ## Including in your project
@@ -14,7 +18,7 @@ repositories {
 }
 
 dependencies {
-  compile 'com.github.skydoves:colorpickerview:1.0.6'
+  compile 'com.github.skydoves:colorpickerview:1.0.7'
 }
 ```
 
@@ -23,7 +27,7 @@ dependencies {
 <dependency>
   <groupId>com.github.skydoves</groupId>
   <artifactId>colorpickerview</artifactId>
-  <version>1.0.6</version>
+  <version>1.0.7</version>
 </dependency>
 ```
     
@@ -43,13 +47,13 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/colorPickerView"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        app:src="@drawable/palette"
+        app:palette="@drawable/palette"
         app:selector="@drawable/wheel" />
 ```
 
 #### Attribute description
 ```
-app:src="@drawable/palette" // set palette image
+app:palette="@drawable/palette" // set palette image
 ```
 
 ```
@@ -58,10 +62,11 @@ app:selector="@drawable/wheel" // set selector image. This isn't required always
 
 #### Color Selected Listener
 ```java
-colorPickerView.setColorListener(new ColorPickerView.ColorListener() {
+colorPickerView.setColorListener(new ColorListener() {
             @Override
             public void onColorSelected(int color) {
-
+                LinearLayout linearLayout = findViewById(R.id.linearLayout);
+                linearLayout.setBackgroundColor(color);
             }
         });
 ```
