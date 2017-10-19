@@ -211,7 +211,7 @@ public class ColorPickerView extends FrameLayout {
         return rgb;
     }
 
-    public Point getSelectorPoint() {
+    public Point getSelectedPoint() {
         return selectedPoint;
     }
 

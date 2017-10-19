@@ -9,7 +9,7 @@
     android:weightSum="2.1"
     android:padding="15dp">
 
-    <com.github.skydoves.ElasticLayout
+    <com.skydoves.elasticviews.ElasticLayout
         android:id="@+id/example0"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -27,7 +27,7 @@
             android:scaleType="fitXY"
             android:padding="20dp"/>
         
-        <com.github.skydoves.ElasticLayout
+        <com.skydoves.elasticviews.ElasticLayout
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_alignParentBottom="true"
@@ -44,15 +44,15 @@
                 android:textSize="20sp"
                 android:text="ColorPickerView Example"/>
 
-            </com.github.skydoves.ElasticLayout>
-    </com.github.skydoves.ElasticLayout>
+            </com.skydoves.elasticviews.ElasticLayout>
+    </com.skydoves.elasticviews.ElasticLayout>
 
     <android.support.v4.widget.Space
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.1"/>
     
-    <com.github.skydoves.ElasticLayout
+    <com.skydoves.elasticviews.ElasticLayout
         android:id="@+id/example1"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -70,7 +70,7 @@
             android:scaleType="fitXY"
             android:padding="20dp"/>
 
-        <com.github.skydoves.ElasticLayout
+        <com.skydoves.elasticviews.ElasticLayout
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_alignParentBottom="true"
@@ -87,7 +87,7 @@
                 android:textSize="20sp"
                 android:text="Multi-ColorPickerView Example"/>
 
-        </com.github.skydoves.ElasticLayout>
-    </com.github.skydoves.ElasticLayout>
+        </com.skydoves.elasticviews.ElasticLayout>
+    </com.skydoves.elasticviews.ElasticLayout>
 
 </LinearLayout>

@@ -38,7 +38,7 @@ public class ExampleColorPickerView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_color_picker_view_example);
 
-        colorPickerView  = (ColorPickerView)findViewById(R.id.colorPickerView);
+        colorPickerView  = findViewById(R.id.colorPickerView);
         colorPickerView.setColorListener(new ColorListener() {
             @Override
             public void onColorSelected(int color) {
@@ -52,10 +52,10 @@ public class ExampleColorPickerView extends AppCompatActivity {
      * @param color
      */
     private void setLayoutColor(int color) {
-        TextView textView = (TextView)findViewById(R.id.textView);
+        TextView textView = findViewById(R.id.textView);
         textView.setText("#" + colorPickerView.getColorHtml());
 
-        LinearLayout linearLayout = (LinearLayout)findViewById(R.id.linearLayout);
+        LinearLayout linearLayout = findViewById(R.id.linearLayout);
         linearLayout.setBackgroundColor(color);
     }
 

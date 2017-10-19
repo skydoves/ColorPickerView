@@ -5,7 +5,7 @@ publish {
     userOrg = 'devmagician'
     groupId = 'com.github.skydoves'
     artifactId = 'colorpickerview'
-    publishVersion = '1.0.6'
+    publishVersion = '1.0.7'
     desc = 'This is ColorPickerView by skydoves'
     website = 'https://github.com/skydoves/ColorPickerView'
     issueTracker = "${website}/issues"

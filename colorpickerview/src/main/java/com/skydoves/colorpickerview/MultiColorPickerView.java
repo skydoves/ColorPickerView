@@ -191,7 +191,7 @@ public class MultiColorPickerView extends FrameLayout {
         return selectedColor;
     }
 
-    public String getColorHtml(){
+    public String getColorHtml() {
         return String.format("%06X", (0xFFFFFF & selectedColor));
     }
 
@@ -214,13 +214,6 @@ public class MultiColorPickerView extends FrameLayout {
         }
     }
 
-    private void removeSelector(int index) {
-        if(index <= selectorList.size()) {
-            removeView(selectorList.remove(index - 1).getSelector());
-            selectorList.remove(index - 1);
-        }
-    }
-
     public void addSelector(Drawable drawable, ColorListener colorListener) {
         if(drawable == null || colorListener == null) return;
 
@@ -239,7 +232,7 @@ public class MultiColorPickerView extends FrameLayout {
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 switch (motionEvent.getAction()) {
                     case MotionEvent.ACTION_DOWN:
-                        alphaSwap(selector);
+                        swapAlpha(selector);
                         mainSelector = selector;
 
                         Matrix invertMatrix = new Matrix();
@@ -257,12 +250,12 @@ public class MultiColorPickerView extends FrameLayout {
         });
 
         addView(selector.getSelector(), thumbParams);
-        alphaSwap(selector);
+        swapAlpha(selector);
         selectorList.add(selector);
         mainSelector = selector;
     }
 
-    public void alphaSwap(Selector selector) {
+    private void swapAlpha(Selector selector) {
         if(mainSelector != null) {
             mainSelector.getSelector().setAlpha(1.0f);
             selector.getSelector().setAlpha(alpha);
@@ -278,7 +271,7 @@ public class MultiColorPickerView extends FrameLayout {
         this.alpha = alpha;
     }
 
-    public Point getSelectPoint() {
+    public Point getSelectedPoint() {
         return selectedPoint;
     }
 }

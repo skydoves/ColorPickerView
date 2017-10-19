@@ -34,7 +34,7 @@ public class ExampleMultiColorPickerView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_multi_color_picker_view_example);
 
-        multiColorPickerView = (MultiColorPickerView)findViewById(R.id.multiColorPickerView);
+        multiColorPickerView = findViewById(R.id.multiColorPickerView);
 
         multiColorPickerView.setSelectorAlpha(0.6f);
         multiColorPickerView.addSelector(ContextCompat.getDrawable(this, R.drawable.wheel), selector0_colorListener);
@@ -46,10 +46,10 @@ public class ExampleMultiColorPickerView extends AppCompatActivity {
     private ColorListener selector0_colorListener = new ColorListener() {
         @Override
         public void onColorSelected(int color) {
-            TextView textView = (TextView)findViewById(R.id.textView0);
+            TextView textView = findViewById(R.id.textView0);
             textView.setText("#" + multiColorPickerView.getColorHtml());
 
-            LinearLayout linearLayout = (LinearLayout)findViewById(R.id.linearLayout0);
+            LinearLayout linearLayout = findViewById(R.id.linearLayout0);
             linearLayout.setBackgroundColor(color);
         }
     };
@@ -57,10 +57,10 @@ public class ExampleMultiColorPickerView extends AppCompatActivity {
     private ColorListener selector1_colorListener = new ColorListener() {
         @Override
         public void onColorSelected(int color) {
-            TextView textView = (TextView)findViewById(R.id.textView1);
+            TextView textView = findViewById(R.id.textView1);
             textView.setText("#" + multiColorPickerView.getColorHtml());
 
-            LinearLayout linearLayout = (LinearLayout)findViewById(R.id.linearLayout1);
+            LinearLayout linearLayout = findViewById(R.id.linearLayout1);
             linearLayout.setBackgroundColor(color);
         }
     };
@@ -68,10 +68,10 @@ public class ExampleMultiColorPickerView extends AppCompatActivity {
     private ColorListener selector2_colorListener = new ColorListener() {
         @Override
         public void onColorSelected(int color) {
-            TextView textView = (TextView)findViewById(R.id.textView2);
+            TextView textView = findViewById(R.id.textView2);
             textView.setText("#" + multiColorPickerView.getColorHtml());
 
-            LinearLayout linearLayout = (LinearLayout)findViewById(R.id.linearLayout2);
+            LinearLayout linearLayout = findViewById(R.id.linearLayout2);
             linearLayout.setBackgroundColor(color);
         }
     };
@@ -79,10 +79,10 @@ public class ExampleMultiColorPickerView extends AppCompatActivity {
     private ColorListener selector3_colorListener = new ColorListener() {
         @Override
         public void onColorSelected(int color) {
-            TextView textView = (TextView)findViewById(R.id.textView3);
+            TextView textView = findViewById(R.id.textView3);
             textView.setText("#" + multiColorPickerView.getColorHtml());
 
-            LinearLayout linearLayout = (LinearLayout)findViewById(R.id.linearLayout3);
+            LinearLayout linearLayout = findViewById(R.id.linearLayout3);
             linearLayout.setBackgroundColor(color);
         }
     };

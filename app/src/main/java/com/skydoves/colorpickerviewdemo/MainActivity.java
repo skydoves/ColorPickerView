@@ -21,7 +21,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.github.skydoves.ElasticLayout;
+import com.skydoves.elasticviews.ElasticLayout;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ElasticLayout layout0 = (ElasticLayout)findViewById(R.id.example0);
+        ElasticLayout layout0 = findViewById(R.id.example0);
         layout0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        ElasticLayout layout1 = (ElasticLayout)findViewById(R.id.example1);
+        ElasticLayout layout1 = findViewById(R.id.example1);
         layout1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
