@@ -2,13 +2,13 @@
 You can use like just ImageView and you can get HSV colors, RGB values, Html color codes <br>
 from your gallery pictures or custom images just using touch.
 
-![111](https://user-images.githubusercontent.com/24237865/31732307-0bd47b5c-b473-11e7-9f17-d81bc4b59cf4.jpg)
-![222](https://user-images.githubusercontent.com/24237865/31732308-0c0892de-b473-11e7-88f4-9c91e02c543e.jpg)
+![555](https://user-images.githubusercontent.com/24237865/31853721-72b679c2-b6c8-11e7-8bfc-6d4bfe0427b5.jpg)
+![777](https://user-images.githubusercontent.com/24237865/31853722-72e25a74-b6c8-11e7-9903-19cd17a611d5.jpg)
 
 # Multi-ColorPickerView
 You can get colors using multi selectors.
 
-![333](https://user-images.githubusercontent.com/24237865/31732309-0c3557b0-b473-11e7-8104-43534a6ca0dc.jpg)
+![111](https://user-images.githubusercontent.com/24237865/31853730-9bb0ecfe-b6c8-11e7-9730-c16095042c1a.jpg)
 
 ## Including in your project
 #### build.gradle
