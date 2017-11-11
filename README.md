@@ -19,7 +19,7 @@ repositories {
 }
 
 dependencies {
-  compile 'com.github.skydoves:colorpickerview:1.0.7'
+  compile 'com.github.skydoves:colorpickerview:1.0.8'
 }
 ```
 
@@ -28,7 +28,7 @@ dependencies {
 <dependency>
   <groupId>com.github.skydoves</groupId>
   <artifactId>colorpickerview</artifactId>
-  <version>1.0.7</version>
+  <version>1.0.8</version>
 </dependency>
 ```
     
@@ -82,6 +82,7 @@ setPaletteDrawable(Drawable drawable) | void | change palette drawable resource
 setSelectorDrawable(Drawable drawable) | void | change selector drawable resource
 setSelectorPoint(int x, int y) | void | moving selector at point(x, y)
 selectCenter() | void | select center of drawable image
+setACTION\_UP(Boolean) | void | ColorListener only listening when ACTION\_UP.
 
 # License
 ```xml
