@@ -49,6 +49,8 @@ public class ColorPickerView extends FrameLayout {
 
     protected ColorListener mColorListener;
 
+    private boolean ACTON_UP = false;
+
     public ColorPickerView(Context context) {
         super(context);
     }
@@ -131,16 +133,29 @@ public class ColorPickerView extends FrameLayout {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
+                    case MotionEvent.ACTION_UP:
+                        if(ACTON_UP) {
+                            selector.setPressed(true);
+                            return onTouchReceived(event);
+                        }
+                        break;
                     case MotionEvent.ACTION_DOWN:
-                        selector.setPressed(true);
-                        return onTouchReceived(event);
+                        if(!ACTON_UP) {
+                            selector.setPressed(true);
+                            return onTouchReceived(event);
+                        }
+                        break;
                     case MotionEvent.ACTION_MOVE:
-                        selector.setPressed(true);
-                        return onTouchReceived(event);
+                        if(!ACTON_UP) {
+                            selector.setPressed(true);
+                            return onTouchReceived(event);
+                        }
+                        break;
                     default:
                         selector.setPressed(false);
                         return false;
                 }
+                return true;
             }
         });
     }
@@ -149,7 +164,6 @@ public class ColorPickerView extends FrameLayout {
         Point snapPoint = new Point((int)event.getX(), (int)event.getY());
         selectedColor = getColorFromBitmap(snapPoint.x, snapPoint.y);
 
-        // check validation
         if(getColor() != Color.TRANSPARENT) {
             selector.setX(snapPoint.x - (selector.getMeasuredWidth() / 2));
             selector.setY(snapPoint.y - (selector.getMeasuredHeight() / 2));
@@ -243,5 +257,9 @@ public class ColorPickerView extends FrameLayout {
 
     public void selectCenter() {
         setSelectorPoint(getMeasuredWidth()/2 - selector.getWidth()/2, getMeasuredHeight()/2- selector.getHeight()/2);
+    }
+
+    public void setACTON_UP(boolean value) {
+        this.ACTON_UP = value;
     }
 }
