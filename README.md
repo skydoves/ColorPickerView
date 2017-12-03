@@ -1,6 +1,8 @@
 # ColorPickerView
+[![license](https://img.shields.io/badge/license-apache%202.0-green.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
+![travis](https://travis-ci.org/skydoves/ColorPickerView.svg?branch=master) <br>
 You can use like just ImageView and you can get HSV colors, RGB values, Html color codes <br>
-from your gallery pictures or custom images just using touch.
+from your gallery pictures or custom images just touch.
 
 ![555](https://user-images.githubusercontent.com/24237865/31853721-72b679c2-b6c8-11e7-8bfc-6d4bfe0427b5.jpg)
 ![777](https://user-images.githubusercontent.com/24237865/31853722-72e25a74-b6c8-11e7-9903-19cd17a611d5.jpg)
