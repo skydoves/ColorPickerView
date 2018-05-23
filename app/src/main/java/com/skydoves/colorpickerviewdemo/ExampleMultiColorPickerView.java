@@ -45,7 +45,7 @@ public class ExampleMultiColorPickerView extends AppCompatActivity {
 
     private ColorListener selector0_colorListener = new ColorListener() {
         @Override
-        public void onColorSelected(int color) {
+        public void onColorSelected(int color, boolean fromUser) {
             TextView textView = findViewById(R.id.textView0);
             textView.setText("#" + multiColorPickerView.getColorHtml());
 
@@ -56,7 +56,7 @@ public class ExampleMultiColorPickerView extends AppCompatActivity {
 
     private ColorListener selector1_colorListener = new ColorListener() {
         @Override
-        public void onColorSelected(int color) {
+        public void onColorSelected(int color, boolean fromUser) {
             TextView textView = findViewById(R.id.textView1);
             textView.setText("#" + multiColorPickerView.getColorHtml());
 
@@ -67,7 +67,7 @@ public class ExampleMultiColorPickerView extends AppCompatActivity {
 
     private ColorListener selector2_colorListener = new ColorListener() {
         @Override
-        public void onColorSelected(int color) {
+        public void onColorSelected(int color, boolean fromUser) {
             TextView textView = findViewById(R.id.textView2);
             textView.setText("#" + multiColorPickerView.getColorHtml());
 
@@ -78,7 +78,7 @@ public class ExampleMultiColorPickerView extends AppCompatActivity {
 
     private ColorListener selector3_colorListener = new ColorListener() {
         @Override
-        public void onColorSelected(int color) {
+        public void onColorSelected(int color, boolean fromUser) {
             TextView textView = findViewById(R.id.textView3);
             textView.setText("#" + multiColorPickerView.getColorHtml());
 
