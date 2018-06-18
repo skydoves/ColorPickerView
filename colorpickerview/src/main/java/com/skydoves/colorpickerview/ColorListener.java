@@ -18,5 +18,5 @@
 package com.skydoves.colorpickerview;
 
 public interface ColorListener {
-    void onColorSelected(int color);
+    void onColorSelected(int color, boolean fromUser);
 }

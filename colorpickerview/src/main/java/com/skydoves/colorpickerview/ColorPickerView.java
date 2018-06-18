@@ -168,7 +168,7 @@ public class ColorPickerView extends FrameLayout {
             selector.setX(snapPoint.x - (selector.getMeasuredWidth() / 2));
             selector.setY(snapPoint.y - (selector.getMeasuredHeight() / 2));
             selectedPoint = new Point(snapPoint.x, snapPoint.y);
-            fireColorListener(getColor());
+            fireColorListener(getColor(), true);
             return true;
         } else
             return false;
@@ -198,9 +198,9 @@ public class ColorPickerView extends FrameLayout {
         super.dispatchDraw(canvas);
     }
 
-    private void fireColorListener(int color) {
+    private void fireColorListener(int color, boolean fromUser) {
         if (mColorListener != null) {
-            mColorListener.onColorSelected(color);
+            mColorListener.onColorSelected(color, fromUser);
         }
     }
 
@@ -234,7 +234,7 @@ public class ColorPickerView extends FrameLayout {
         selector.setY(y);
         selectedPoint = new Point(x, y);
         selectedColor = getColorFromBitmap(x, y);
-        fireColorListener(getColor());
+        fireColorListener(getColor(), false);
     }
 
     public void setPaletteDrawable(Drawable drawable) {

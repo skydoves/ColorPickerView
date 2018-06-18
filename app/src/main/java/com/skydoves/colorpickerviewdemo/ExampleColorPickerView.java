@@ -41,7 +41,7 @@ public class ExampleColorPickerView extends AppCompatActivity {
         colorPickerView  = findViewById(R.id.colorPickerView);
         colorPickerView.setColorListener(new ColorListener() {
             @Override
-            public void onColorSelected(int color) {
+            public void onColorSelected(int color, boolean fromUser) {
                 setLayoutColor(color);
             }
         });
