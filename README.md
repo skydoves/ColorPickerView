@@ -2,8 +2,8 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Build Status](https://travis-ci.org/skydoves/ColorPickerView.svg?branch=master)](https://travis-ci.org/skydoves/ColorPickerView)
 [![Android Weekly](https://img.shields.io/badge/Android%20Weekly-%23316-orange.svg)](https://androidweekly.net/issues/issue-316)<br>
-You can use like just ImageView and you can get HSV colors, RGB values, Html color codes <br>
-from your gallery pictures or custom images just touch.
+You can use ColorPickerView just like ImageView and get HSV colors, RGB values, Html color codes <br>
+from your gallery pictures or custom images by tapping on the desired color.
 
 ![555](https://user-images.githubusercontent.com/24237865/31853721-72b679c2-b6c8-11e7-8bfc-6d4bfe0427b5.jpg)
 ![777](https://user-images.githubusercontent.com/24237865/31853722-72e25a74-b6c8-11e7-9903-19cd17a611d5.jpg)
