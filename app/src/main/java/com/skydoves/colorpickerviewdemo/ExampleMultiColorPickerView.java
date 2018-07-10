@@ -22,8 +22,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.skydoves.colorpickerview.ColorListener;
 import com.skydoves.colorpickerview.MultiColorPickerView;
+import com.skydoves.colorpickerview.listeners.ColorListener;
 
 public class ExampleMultiColorPickerView extends AppCompatActivity {
 

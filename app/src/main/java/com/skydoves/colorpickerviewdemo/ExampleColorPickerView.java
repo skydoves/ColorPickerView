@@ -23,8 +23,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.skydoves.colorpickerview.ColorListener;
 import com.skydoves.colorpickerview.ColorPickerView;
+import com.skydoves.colorpickerview.listeners.ColorListener;
 
 public class ExampleColorPickerView extends AppCompatActivity {
 

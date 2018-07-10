@@ -15,8 +15,8 @@
  * limitations under the License.
  */
 
-package com.skydoves.colorpickerview;
+package com.skydoves.colorpickerview.listeners;
 
-public interface ColorListener {
+public interface ColorListener extends ColorPickerViewListener {
     void onColorSelected(int color, boolean fromUser);
 }
