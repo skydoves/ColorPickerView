@@ -36,6 +36,11 @@ import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener;
+import com.skydoves.colorpickerview.listeners.ColorListener;
+import com.skydoves.colorpickerview.listeners.ColorPickerViewListener;
+
+@SuppressWarnings({"WeakerAccess", "unchecked", "unused"})
 public class ColorPickerView extends FrameLayout {
 
     private int selectedColor;
@@ -47,9 +52,10 @@ public class ColorPickerView extends FrameLayout {
     private Drawable paletteDrawable;
     private Drawable selectorDrawable;
 
-    protected ColorListener mColorListener;
+    protected ColorPickerViewListener mColorListener;
 
     private boolean ACTON_UP = false;
+    private boolean SELECT_CENTER = true;
 
     public ColorPickerView(Context context) {
         super(context);
@@ -200,11 +206,16 @@ public class ColorPickerView extends FrameLayout {
 
     private void fireColorListener(int color, boolean fromUser) {
         if (mColorListener != null) {
-            mColorListener.onColorSelected(color, fromUser);
+            if(mColorListener instanceof ColorListener) {
+                ((ColorListener) mColorListener).onColorSelected(color, fromUser);
+            } else if(mColorListener instanceof ColorEnvelopeListener) {
+                ColorEnvelope envelope = new ColorEnvelope(color, getColorHtml(), getColorRGB());
+                ((ColorEnvelopeListener) mColorListener).onColorSelected(envelope, fromUser);
+            }
         }
     }
 
-    public void setColorListener(ColorListener colorListener) {
+    public void setColorListener(ColorPickerViewListener colorListener) {
         mColorListener = colorListener;
     }
 
@@ -247,8 +258,14 @@ public class ColorPickerView extends FrameLayout {
         removeView(selector);
         addView(selector);
 
-        selector.setX(getMeasuredWidth()/2 - selector.getWidth()/2);
-        selector.setY(getMeasuredHeight()/2- selector.getHeight()/2);
+        if(SELECT_CENTER) {
+            selector.setX(getMeasuredWidth() / 2 - selector.getWidth() / 2);
+            selector.setY(getMeasuredHeight() / 2 - selector.getHeight() / 2);
+        }
+    }
+
+    public void setPaletteDrawableSelectCenter(boolean selectCenter) {
+        this.SELECT_CENTER = selectCenter;
     }
 
     public void setSelectorDrawable(Drawable drawable) {

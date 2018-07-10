@@ -1,6 +1,6 @@
 
 /*
- * Copyright (C) 2017 skydoves
+ * Copyright (C) 2018 skydoves
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,26 +17,27 @@
 
 package com.skydoves.colorpickerview;
 
-import android.widget.ImageView;
+public class ColorEnvelope {
 
-import com.skydoves.colorpickerview.listeners.ColorListener;
-import com.skydoves.colorpickerview.listeners.ColorPickerViewListener;
+    private int color;
+    private String htmlCode;
+    private int[] rgb;
 
-public class Selector {
-
-    private ImageView selector;
-    private ColorPickerViewListener colorListener;
-
-    public Selector(ImageView selector, ColorListener colorListener) {
-        this.selector = selector;
-        this.colorListener = colorListener;
+    public ColorEnvelope(int color, String htmlCode, int[] rgb) {
+        this.color = color;
+        this.htmlCode = htmlCode;
+        this.rgb = rgb;
     }
 
-    public ImageView getSelector() {
-        return selector;
+    public int getColor() {
+        return color;
     }
 
-    public ColorPickerViewListener getColorListener() {
-        return colorListener;
+    public String getHtmlCode() {
+        return htmlCode;
+    }
+
+    public int[] getRgb() {
+        return rgb;
     }
 }

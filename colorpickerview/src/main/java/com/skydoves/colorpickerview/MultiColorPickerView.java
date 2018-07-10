@@ -36,9 +36,12 @@ import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.skydoves.colorpickerview.listeners.ColorListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings({"WeakerAccess", "unchecked", "unused"})
 public class MultiColorPickerView extends FrameLayout {
 
     private int selectedColor;
@@ -151,7 +154,7 @@ public class MultiColorPickerView extends FrameLayout {
             mainSelector.getSelector().setX(snapPoint.x - (mainSelector.getSelector().getMeasuredWidth() / 2));
             mainSelector.getSelector().setY(snapPoint.y - (mainSelector.getSelector().getMeasuredHeight() / 2));
             selectedPoint = new Point(snapPoint.x, snapPoint.y);
-            fireColorListener(getColor());
+            fireColorListener(getColor(), true);
             return true;
         } else
             return false;
@@ -181,9 +184,10 @@ public class MultiColorPickerView extends FrameLayout {
         super.dispatchDraw(canvas);
     }
 
-    private void fireColorListener(int color) {
+    private void fireColorListener(int color, boolean fromUser) {
         if (mainSelector.getColorListener() != null) {
-            mainSelector.getColorListener().onColorSelected(color);
+            if(mainSelector.getColorListener() instanceof ColorListener)
+                ((ColorListener) mainSelector.getColorListener()).onColorSelected(color, fromUser);
         }
     }
 
@@ -210,7 +214,7 @@ public class MultiColorPickerView extends FrameLayout {
             mainSelector.getSelector().setY(y);
             selectedPoint = new Point(x, y);
             selectedColor = getColorFromBitmap(x, y);
-            fireColorListener(getColor());
+            fireColorListener(getColor(), false);
         }
     }
 
