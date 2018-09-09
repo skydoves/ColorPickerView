@@ -56,6 +56,10 @@ public class AlphaSlideBar extends AbstractSlider {
         try {
             if(a.hasValue(R.styleable.AlphaSlideBar_selector_AlphaSlideBar))
                 selectorDrawable = a.getDrawable(R.styleable.AlphaSlideBar_selector_AlphaSlideBar);
+            if(a.hasValue(R.styleable.AlphaSlideBar_borderColor_AlphaSlideBar))
+                borderColor = a.getColor(R.styleable.AlphaSlideBar_borderColor_AlphaSlideBar, borderColor);
+            if(a.hasValue(R.styleable.AlphaSlideBar_borderSize_AlphaSlideBar))
+                borderSize = a.getInt(R.styleable.AlphaSlideBar_borderSize_AlphaSlideBar, borderSize);
         } finally {
             a.recycle();
         }
@@ -76,7 +80,8 @@ public class AlphaSlideBar extends AbstractSlider {
         Color.colorToHSV(getColor(), hsv);
         int startColor = Color.HSVToColor(0, hsv);
         int endColor = Color.HSVToColor(255, hsv);
-        Shader shader = new LinearGradient(0, 0, getWidth(), getHeight(), startColor, endColor, Shader.TileMode.CLAMP);
+        Shader shader = new LinearGradient(0, 0, getMeasuredWidth(), getMeasuredHeight(),
+                startColor, endColor, Shader.TileMode.CLAMP);
         colorPaint.setShader(shader);
     }
 
@@ -87,7 +92,7 @@ public class AlphaSlideBar extends AbstractSlider {
     }
 
     @Override
-    protected int assembleColor() {
+    public int assembleColor() {
         float[] hsv = new float[3];
         Color.colorToHSV(getColor(), hsv);
         int alpha = (int) (selectorPosition * 255);

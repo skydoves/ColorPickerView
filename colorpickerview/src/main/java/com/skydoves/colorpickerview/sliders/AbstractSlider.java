@@ -30,6 +30,7 @@ import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
@@ -37,15 +38,17 @@ import com.skydoves.colorpickerview.ColorPickerView;
 
 public abstract class AbstractSlider extends FrameLayout {
 
-    protected int color = Color.WHITE;
     protected Paint colorPaint;
     protected Paint borderPaint;
-    protected float selectorPosition;
+    protected float selectorPosition = 255;
 
-    private ColorPickerView colorPickerView;
+    public ColorPickerView colorPickerView;
 
     private ImageView selector;
     protected Drawable selectorDrawable;
+
+    protected int borderSize = 2;
+    protected int borderColor = Color.BLACK;
 
     public AbstractSlider(Context context) {
         super(context);
@@ -73,14 +76,14 @@ public abstract class AbstractSlider extends FrameLayout {
 
     protected abstract void getAttrs(AttributeSet attrs);
     protected abstract void updatePaint(Paint colorPaint);
-    protected abstract int assembleColor();
+    public abstract int assembleColor();
 
     private void onCreate() {
         this.colorPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         this.borderPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         this.borderPaint.setStyle(Paint.Style.STROKE);
-        this.borderPaint.setStrokeWidth(2);
-        this.borderPaint.setColor(Color.BLACK);
+        this.borderPaint.setStrokeWidth(borderSize);
+        this.borderPaint.setColor(borderColor);
         this.setBackgroundColor(Color.WHITE);
 
         selector = new ImageView(getContext());
@@ -90,9 +93,9 @@ public abstract class AbstractSlider extends FrameLayout {
             FrameLayout.LayoutParams thumbParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             thumbParams.gravity = Gravity.CENTER_VERTICAL;
             addView(selector, thumbParams);
-
-            initializeSelector();
         }
+
+        initializeSelector();
     }
 
     @Override
@@ -104,8 +107,7 @@ public abstract class AbstractSlider extends FrameLayout {
         canvas.drawRect(0, 0, width, height, borderPaint);
     }
 
-    public void notifyColor(int color) {
-        this.color = color;
+    public void notifyColor() {
         updatePaint(colorPaint);
         invalidate();
     }
@@ -157,22 +159,29 @@ public abstract class AbstractSlider extends FrameLayout {
     }
 
     private void initializeSelector() {
-        selector.setX(getMeasuredWidth() + selector.getMeasuredWidth() / 2);
-    }
-
-    public void setColor(int color) {
-        this.color = color;
+        getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                if (Build.VERSION.SDK_INT < 16) {
+                    getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                } else {
+                    getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                }
+                selector.setX(getMeasuredWidth() - selector.getMeasuredWidth());
+            }
+        });
     }
 
     public int getColor() {
-        return color;
+        if(colorPickerView != null) return colorPickerView.getColor();
+        else return -1;
     }
 
     public void attachColorPickerView(ColorPickerView colorPickerView) {
         this.colorPickerView = colorPickerView;
     }
 
-    public void setSelectorDrawable(Drawable drawable) {
-        selector.setImageDrawable(drawable);
+    public float getSelectorPosition() {
+        return this.selectorPosition;
     }
 }

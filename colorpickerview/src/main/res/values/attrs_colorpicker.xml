@@ -9,5 +9,12 @@
     </declare-styleable>
     <declare-styleable name="AlphaSlideBar">
         <attr name="selector_AlphaSlideBar" format="reference"/>
+        <attr name="borderColor_AlphaSlideBar" format="color"/>
+        <attr name="borderSize_AlphaSlideBar" format="integer"/>
+    </declare-styleable>
+    <declare-styleable name="BrightnessSlideBar">
+        <attr name="selector_BrightnessSlider" format="reference"/>
+        <attr name="borderColor_BrightnessSlider" format="color"/>
+        <attr name="borderSize_BrightnessSlider" format="integer"/>
     </declare-styleable>
 </resources>

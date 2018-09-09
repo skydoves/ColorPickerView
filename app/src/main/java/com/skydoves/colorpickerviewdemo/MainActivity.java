@@ -27,6 +27,7 @@ import com.skydoves.colorpickerview.ColorEnvelope;
 import com.skydoves.colorpickerview.ColorPickerView;
 import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener;
 import com.skydoves.colorpickerview.sliders.AlphaSlideBar;
+import com.skydoves.colorpickerview.sliders.BrightnessSlideBar;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,9 +49,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // attach alphaSlideBar
         final AlphaSlideBar alphaSlideBar = findViewById(R.id.alphaSlideBar);
         colorPickerView.attachAlphaSlider(alphaSlideBar);
-        colorPickerView.selectCenter();
+
+        // attach brightnessSlideBar
+        final BrightnessSlideBar brightnessSlideBar = findViewById(R.id.brightnessSlide);
+        colorPickerView.attachBrightnessSlider(brightnessSlideBar);
     }
 
     /**

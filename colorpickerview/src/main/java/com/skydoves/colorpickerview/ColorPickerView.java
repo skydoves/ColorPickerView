@@ -40,6 +40,7 @@ import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener;
 import com.skydoves.colorpickerview.listeners.ColorListener;
 import com.skydoves.colorpickerview.listeners.ColorPickerViewListener;
 import com.skydoves.colorpickerview.sliders.AlphaSlideBar;
+import com.skydoves.colorpickerview.sliders.BrightnessSlideBar;
 
 import java.util.Locale;
 
@@ -61,6 +62,7 @@ public class ColorPickerView extends FrameLayout {
     private boolean SELECT_CENTER = true;
 
     private AlphaSlideBar alphaSlideBar;
+    private BrightnessSlideBar brightnessSlider;
 
     public ColorPickerView(Context context) {
         super(context);
@@ -166,10 +168,19 @@ public class ColorPickerView extends FrameLayout {
             selector.setX(snapPoint.x - (selector.getMeasuredWidth() / 2));
             selector.setY(snapPoint.y - (selector.getMeasuredHeight() / 2));
             selectedPoint = new Point(snapPoint.x, snapPoint.y);
-            fireColorListener(getColor(), true);
-            if(alphaSlideBar != null) {
-                alphaSlideBar.notifyColor(getColor());
+
+            if(alphaSlideBar != null)
+                alphaSlideBar.notifyColor();
+            if(brightnessSlider != null) {
+                brightnessSlider.notifyColor();
+
+                if(brightnessSlider.assembleColor() != Color.WHITE)
+                    selectedColor = brightnessSlider.assembleColor();
+                else if(alphaSlideBar != null)
+                    selectedColor = alphaSlideBar.assembleColor();
             }
+
+            fireColorListener(getColor(), true);
             return true;
         } else
             return false;
@@ -287,6 +298,20 @@ public class ColorPickerView extends FrameLayout {
     public void attachAlphaSlider(AlphaSlideBar alphaSlideBar) {
         this.alphaSlideBar = alphaSlideBar;
         alphaSlideBar.attachColorPickerView(this);
-        alphaSlideBar.notifyColor(getColor());
+        alphaSlideBar.notifyColor();
+    }
+
+    public void attachBrightnessSlider(BrightnessSlideBar brightnessSlider) {
+        this.brightnessSlider = brightnessSlider;
+        brightnessSlider.attachColorPickerView(this);
+        brightnessSlider.notifyColor();
+    }
+
+    public AlphaSlideBar getAlphaSlideBar() {
+        return alphaSlideBar;
+    }
+
+    public BrightnessSlideBar getBrightnessSlider() {
+        return brightnessSlider;
     }
 }
