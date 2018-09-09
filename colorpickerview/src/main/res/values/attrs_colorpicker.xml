@@ -7,4 +7,7 @@
     <declare-styleable name="MultiColorPickerView">
         <attr name="palette2" format="reference"/>
     </declare-styleable>
+    <declare-styleable name="AlphaSlideBar">
+        <attr name="selector_AlphaSlideBar" format="reference"/>
+    </declare-styleable>
 </resources>

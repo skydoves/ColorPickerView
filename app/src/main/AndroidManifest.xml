@@ -15,9 +15,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ExampleColorPickerView" />
-        <activity android:name=".ExampleMultiColorPickerView"
-            android:screenOrientation="landscape"/>
     </application>
 
 </manifest>

@@ -17,6 +17,7 @@
 
 package com.skydoves.colorpickerview;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -30,7 +31,6 @@ import android.os.Build;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.MotionEvent;
-import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
@@ -39,6 +39,9 @@ import android.widget.ImageView;
 import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener;
 import com.skydoves.colorpickerview.listeners.ColorListener;
 import com.skydoves.colorpickerview.listeners.ColorPickerViewListener;
+import com.skydoves.colorpickerview.sliders.AlphaSlideBar;
+
+import java.util.Locale;
 
 @SuppressWarnings({"WeakerAccess", "unchecked", "unused"})
 public class ColorPickerView extends FrameLayout {
@@ -52,10 +55,12 @@ public class ColorPickerView extends FrameLayout {
     private Drawable paletteDrawable;
     private Drawable selectorDrawable;
 
-    protected ColorPickerViewListener mColorListener;
+    public ColorPickerViewListener mColorListener;
 
     private boolean ACTON_UP = false;
     private boolean SELECT_CENTER = true;
+
+    private AlphaSlideBar alphaSlideBar;
 
     public ColorPickerView(Context context) {
         super(context);
@@ -92,14 +97,9 @@ public class ColorPickerView extends FrameLayout {
                 } else {
                     getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 }
-                onFirstLayout();
+                selectCenter();
             }
         });
-    }
-
-    private void onFirstLayout() {
-        selectCenter();
-        loadListeners();
     }
 
     private void getAttrs(AttributeSet attrs) {
@@ -134,36 +134,28 @@ public class ColorPickerView extends FrameLayout {
         }
     }
 
-    private void loadListeners() {
-        setOnTouchListener(new OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_UP:
-                        if(ACTON_UP) {
-                            selector.setPressed(true);
-                            return onTouchReceived(event);
-                        }
-                        break;
-                    case MotionEvent.ACTION_DOWN:
-                        if(!ACTON_UP) {
-                            selector.setPressed(true);
-                            return onTouchReceived(event);
-                        }
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-                        if(!ACTON_UP) {
-                            selector.setPressed(true);
-                            return onTouchReceived(event);
-                        }
-                        break;
-                    default:
-                        selector.setPressed(false);
-                        return false;
+    @SuppressLint("ClickableViewAccessibility")
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getActionMasked()) {
+            case MotionEvent.ACTION_UP:
+                if(ACTON_UP) {
+                    selector.setPressed(true);
+                    return onTouchReceived(event);
                 }
-                return true;
-            }
-        });
+                break;
+            case MotionEvent.ACTION_DOWN:
+            case MotionEvent.ACTION_MOVE:
+                if(!ACTON_UP) {
+                    selector.setPressed(true);
+                    return onTouchReceived(event);
+                }
+                break;
+            default:
+                selector.setPressed(false);
+                return false;
+        }
+        return true;
     }
 
     private boolean onTouchReceived(MotionEvent event) {
@@ -175,6 +167,9 @@ public class ColorPickerView extends FrameLayout {
             selector.setY(snapPoint.y - (selector.getMeasuredHeight() / 2));
             selectedPoint = new Point(snapPoint.x, snapPoint.y);
             fireColorListener(getColor(), true);
+            if(alphaSlideBar != null) {
+                alphaSlideBar.notifyColor(getColor());
+            }
             return true;
         } else
             return false;
@@ -204,12 +199,12 @@ public class ColorPickerView extends FrameLayout {
         super.dispatchDraw(canvas);
     }
 
-    private void fireColorListener(int color, boolean fromUser) {
+    public void fireColorListener(int color, boolean fromUser) {
         if (mColorListener != null) {
             if(mColorListener instanceof ColorListener) {
                 ((ColorListener) mColorListener).onColorSelected(color, fromUser);
             } else if(mColorListener instanceof ColorEnvelopeListener) {
-                ColorEnvelope envelope = new ColorEnvelope(color, getColorHtml(), getColorRGB());
+                ColorEnvelope envelope = new ColorEnvelope(color, getHexCode(color), getColorARGB(color));
                 ((ColorEnvelopeListener) mColorListener).onColorSelected(envelope, fromUser);
             }
         }
@@ -223,17 +218,21 @@ public class ColorPickerView extends FrameLayout {
         return selectedColor;
     }
 
-    public String getColorHtml(){
-        return String.format("%06X", (0xFFFFFF & selectedColor));
+    public String getHexCode(int color) {
+        int a = Color.alpha(color);
+        int r = Color.red(color);
+        int g = Color.green(color);
+        int b = Color.blue(color);
+        return String.format(Locale.getDefault(), "0x%02X%02X%02X%02X", a, r, g, b);
     }
 
-    public int[] getColorRGB() {
-        int[] rgb = new int[3];
-        int color = (int) Long.parseLong(String.format("%06X", (0xFFFFFF & selectedColor)), 16);
-        rgb[0] = (color >> 16) & 0xFF; // hex to int : R
-        rgb[1] = (color >> 8) & 0xFF; // hex to int : G
-        rgb[2] = (color >> 0) & 0xFF; // hex to int : B
-        return rgb;
+    public int[] getColorARGB(int color) {
+        int[] argb = new int[4];
+        argb[0] =  Color.alpha(color);
+        argb[1] =  Color.red(color);
+        argb[2] = Color.green(color);
+        argb[3] = Color.blue(color);
+        return argb;
     }
 
     public Point getSelectedPoint() {
@@ -273,10 +272,21 @@ public class ColorPickerView extends FrameLayout {
     }
 
     public void selectCenter() {
-        setSelectorPoint(getMeasuredWidth()/2 - selector.getWidth()/2, getMeasuredHeight()/2- selector.getHeight()/2);
+        setSelectorPoint(getMeasuredWidth() / 2 - selector.getWidth() / 2,
+                getMeasuredHeight() / 2- selector.getHeight() / 2);
     }
 
     public void setACTON_UP(boolean value) {
         this.ACTON_UP = value;
+    }
+
+    public boolean getACTON_UP() {
+        return this.ACTON_UP;
+    }
+
+    public void attachAlphaSlider(AlphaSlideBar alphaSlideBar) {
+        this.alphaSlideBar = alphaSlideBar;
+        alphaSlideBar.attachColorPickerView(this);
+        alphaSlideBar.notifyColor(getColor());
     }
 }

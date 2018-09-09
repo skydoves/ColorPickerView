@@ -17,27 +17,28 @@
 
 package com.skydoves.colorpickerview;
 
+@SuppressWarnings({"WeakerAccess"})
 public class ColorEnvelope {
 
     private int color;
-    private String htmlCode;
-    private int[] rgb;
+    private String hexCode;
+    private int[] argb;
 
-    public ColorEnvelope(int color, String htmlCode, int[] rgb) {
+    public ColorEnvelope(int color, String hexCode, int[] argb) {
         this.color = color;
-        this.htmlCode = htmlCode;
-        this.rgb = rgb;
+        this.hexCode = hexCode;
+        this.argb = argb;
     }
 
     public int getColor() {
         return color;
     }
 
-    public String getHtmlCode() {
-        return htmlCode;
+    public String getHexCode() {
+        return hexCode;
     }
 
-    public int[] getRgb() {
-        return rgb;
+    public int[] getArgb() {
+        return argb;
     }
 }
