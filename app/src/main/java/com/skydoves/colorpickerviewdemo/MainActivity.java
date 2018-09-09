@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         colorPickerView.setColorListener(new ColorEnvelopeListener() {
             @Override
             public void onColorSelected(ColorEnvelope envelope, boolean fromUser) {
-                setLayoutColor(envelope.getColor());
+                setLayoutColor(envelope);
             }
         });
 
@@ -61,14 +61,14 @@ public class MainActivity extends AppCompatActivity {
     /**
      * set layout color & textView html code
      *
-     * @param color color by ColorListener
+     * @param envelope ColorEnvelope by ColorEnvelopeListener
      */
-    private void setLayoutColor(int color) {
+    private void setLayoutColor(ColorEnvelope envelope) {
         TextView textView = findViewById(R.id.textView);
-        textView.setText("#" + colorPickerView.getHexCode(color));
+        textView.setText("#" + envelope.getHexCode());
 
         LinearLayout linearLayout = findViewById(R.id.linearLayout);
-        linearLayout.setBackgroundColor(color);
+        linearLayout.setBackgroundColor(envelope.getColor());
     }
 
     /**

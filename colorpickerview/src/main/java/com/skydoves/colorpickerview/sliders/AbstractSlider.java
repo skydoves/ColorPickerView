@@ -40,7 +40,7 @@ public abstract class AbstractSlider extends FrameLayout {
 
     protected Paint colorPaint;
     protected Paint borderPaint;
-    protected float selectorPosition = 255;
+    protected float selectorPosition = 1;
 
     public ColorPickerView colorPickerView;
 
