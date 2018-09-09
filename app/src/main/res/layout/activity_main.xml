@@ -55,6 +55,7 @@
         android:layout_width="300dp"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_weight="5.5"
         android:layout_gravity="center"
         app:palette="@drawable/palette"
@@ -64,7 +65,7 @@
         android:id="@+id/alphaSlideBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="15dp"
         app:selector_AlphaSlideBar="@drawable/wheel"
         app:borderColor_AlphaSlideBar="@android:color/darker_gray"
         app:borderSize_AlphaSlideBar="5"/>
@@ -73,7 +74,7 @@
         android:id="@+id/brightnessSlide"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="15dp"
         app:selector_BrightnessSlider="@drawable/wheel"
         app:borderColor_BrightnessSlider="@android:color/darker_gray"
         app:borderSize_BrightnessSlider="5"/>

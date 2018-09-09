@@ -162,9 +162,10 @@ public class ColorPickerView extends FrameLayout {
 
     private boolean onTouchReceived(MotionEvent event) {
         Point snapPoint = new Point((int)event.getX(), (int)event.getY());
-        selectedColor = getColorFromBitmap(snapPoint.x, snapPoint.y);
+        int pixelColor = getColorFromBitmap(snapPoint.x, snapPoint.y);
 
-        if(getColor() != Color.TRANSPARENT) {
+        if(pixelColor != Color.TRANSPARENT && pixelColor != Color.BLACK) {
+            selectedColor = pixelColor;
             selector.setX(snapPoint.x - (selector.getMeasuredWidth() / 2));
             selector.setY(snapPoint.y - (selector.getMeasuredHeight() / 2));
             selectedPoint = new Point(snapPoint.x, snapPoint.y);
