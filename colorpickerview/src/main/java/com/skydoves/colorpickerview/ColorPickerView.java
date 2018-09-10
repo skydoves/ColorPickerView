@@ -177,17 +177,7 @@ public class ColorPickerView extends FrameLayout {
             selector.setY(snapPoint.y - (selector.getMeasuredHeight() / 2));
             selectedPoint = new Point(snapPoint.x, snapPoint.y);
             handleFlagView(getCenterPoint(snapPoint.x, snapPoint.y));
-
-            if(alphaSlideBar != null)
-                alphaSlideBar.notifyColor();
-            if(brightnessSlider != null) {
-                brightnessSlider.notifyColor();
-
-                if(brightnessSlider.assembleColor() != Color.WHITE)
-                    selectedColor = brightnessSlider.assembleColor();
-                else if(alphaSlideBar != null)
-                    selectedColor = alphaSlideBar.assembleColor();
-            }
+            notifyToSlideBars();
 
             if(ACTON_UP && event.getAction() == MotionEvent.ACTION_UP) {
                 fireColorListener(getColor(), true);
@@ -225,12 +215,16 @@ public class ColorPickerView extends FrameLayout {
 
     public void fireColorListener(int color, boolean fromUser) {
         if (mColorListener != null) {
+            selectedColor = color;
             if(mColorListener instanceof ColorListener) {
                 ((ColorListener) mColorListener).onColorSelected(color, fromUser);
             } else if(mColorListener instanceof ColorEnvelopeListener) {
                 ColorEnvelope envelope = new ColorEnvelope(color, getHexCode(color), getColorARGB(color));
                 ((ColorEnvelopeListener) mColorListener).onColorSelected(envelope, fromUser);
             }
+
+            if(flagView != null)
+                flagView.onRefresh(getColorEnvelope());
 
             if(VISIBLE_FLAG) {
                 VISIBLE_FLAG = false;
@@ -244,6 +238,19 @@ public class ColorPickerView extends FrameLayout {
         }
     }
 
+    private void notifyToSlideBars() {
+        if(alphaSlideBar != null)
+            alphaSlideBar.notifyColor();
+        if(brightnessSlider != null) {
+            brightnessSlider.notifyColor();
+
+            if(brightnessSlider.assembleColor() != Color.WHITE)
+                selectedColor = brightnessSlider.assembleColor();
+            else if(alphaSlideBar != null)
+                selectedColor = alphaSlideBar.assembleColor();
+        }
+    }
+
     public void setColorListener(ColorPickerViewListener colorListener) {
         mColorListener = colorListener;
     }
@@ -251,17 +258,19 @@ public class ColorPickerView extends FrameLayout {
     private void handleFlagView(Point centerPoint) {
         if (flagView != null) {
             if(flagMode == FlagMode.ALWAYS) flagView.visible();
+            int posX = centerPoint.x - flagView.getWidth() / 2 + selector.getWidth() / 2;
             if(centerPoint.y - flagView.getHeight() > 0) {
                 flagView.setRotation(0);
-                flagView.setX(centerPoint.x - flagView.getWidth() / 2 + selector.getWidth() / 2);
+                flagView.setX(posX);
                 flagView.setY(centerPoint.y - flagView.getHeight());
                 flagView.onRefresh(getColorEnvelope());
             } else if(getFlipAble()) {
                 flagView.setRotation(180);
-                flagView.setX(centerPoint.x - flagView.getWidth() / 2 + selector.getWidth() / 2);
+                flagView.setX(posX);
                 flagView.setY(centerPoint.y + flagView.getHeight() - selector.getHeight() / 2);
                 flagView.onRefresh(getColorEnvelope());
             }
+            if(posX < 0) flagView.setX(0);
         }
     }
 
@@ -340,6 +349,7 @@ public class ColorPickerView extends FrameLayout {
         selectedPoint = new Point(x, y);
         selectedColor = getColorFromBitmap(x, y);
         fireColorListener(getColor(), false);
+        notifyToSlideBars();
         handleFlagView(new Point(x, y));
     }
 
