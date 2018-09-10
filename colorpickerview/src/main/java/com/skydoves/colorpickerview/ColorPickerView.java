@@ -36,6 +36,8 @@ import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.skydoves.colorpickerview.flag.FlagMode;
+import com.skydoves.colorpickerview.flag.FlagView;
 import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener;
 import com.skydoves.colorpickerview.listeners.ColorListener;
 import com.skydoves.colorpickerview.listeners.ColorPickerViewListener;
@@ -52,17 +54,24 @@ public class ColorPickerView extends FrameLayout {
 
     private ImageView palette;
     private ImageView selector;
+    private FlagView flagView;
 
     private Drawable paletteDrawable;
     private Drawable selectorDrawable;
 
     public ColorPickerViewListener mColorListener;
 
-    private boolean ACTON_UP = false;
-    private boolean SELECT_CENTER = true;
-
     private AlphaSlideBar alphaSlideBar;
     private BrightnessSlideBar brightnessSlider;
+
+    private boolean ACTON_UP = false;
+
+    private FlagMode flagMode = FlagMode.ALWAYS;
+    private boolean flipAble = true;
+
+    private float alpha_selector = 1.0f;
+    private float alpha_flag = 1.0f;
+    private boolean VISIBLE_FLAG = false;
 
     public ColorPickerView(Context context) {
         super(context);
@@ -140,24 +149,22 @@ public class ColorPickerView extends FrameLayout {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getActionMasked()) {
-            case MotionEvent.ACTION_UP:
-                if(ACTON_UP) {
-                    selector.setPressed(true);
-                    return onTouchReceived(event);
-                }
-                break;
             case MotionEvent.ACTION_DOWN:
+                if(flagView != null && flagMode == FlagMode.LAST) flagView.gone();
+                selector.setPressed(true);
+                return onTouchReceived(event);
             case MotionEvent.ACTION_MOVE:
-                if(!ACTON_UP) {
-                    selector.setPressed(true);
-                    return onTouchReceived(event);
-                }
-                break;
+                if(flagView != null && flagMode == FlagMode.LAST) flagView.gone();
+                selector.setPressed(true);
+                return onTouchReceived(event);
+            case MotionEvent.ACTION_UP:
+                if(flagView != null && flagMode == FlagMode.LAST) flagView.visible();
+                selector.setPressed(true);
+                return onTouchReceived(event);
             default:
                 selector.setPressed(false);
                 return false;
         }
-        return true;
     }
 
     private boolean onTouchReceived(MotionEvent event) {
@@ -169,6 +176,7 @@ public class ColorPickerView extends FrameLayout {
             selector.setX(snapPoint.x - (selector.getMeasuredWidth() / 2));
             selector.setY(snapPoint.y - (selector.getMeasuredHeight() / 2));
             selectedPoint = new Point(snapPoint.x, snapPoint.y);
+            handleFlagView(getCenterPoint(snapPoint.x, snapPoint.y));
 
             if(alphaSlideBar != null)
                 alphaSlideBar.notifyColor();
@@ -181,7 +189,11 @@ public class ColorPickerView extends FrameLayout {
                     selectedColor = alphaSlideBar.assembleColor();
             }
 
-            fireColorListener(getColor(), true);
+            if(ACTON_UP && event.getAction() == MotionEvent.ACTION_UP) {
+                fireColorListener(getColor(), true);
+            } else {
+                fireColorListener(getColor(), true);
+            }
             return true;
         } else
             return false;
@@ -219,6 +231,16 @@ public class ColorPickerView extends FrameLayout {
                 ColorEnvelope envelope = new ColorEnvelope(color, getHexCode(color), getColorARGB(color));
                 ((ColorEnvelopeListener) mColorListener).onColorSelected(envelope, fromUser);
             }
+
+            if(VISIBLE_FLAG) {
+                VISIBLE_FLAG = false;
+                if(selector != null) {
+                    selector.setAlpha(alpha_selector);
+                }
+                if(flagView != null) {
+                    flagView.setAlpha(alpha_flag);
+                }
+            }
         }
     }
 
@@ -226,8 +248,29 @@ public class ColorPickerView extends FrameLayout {
         mColorListener = colorListener;
     }
 
+    private void handleFlagView(Point centerPoint) {
+        if (flagView != null) {
+            if(flagMode == FlagMode.ALWAYS) flagView.visible();
+            if(centerPoint.y - flagView.getHeight() > 0) {
+                flagView.setRotation(0);
+                flagView.setX(centerPoint.x - flagView.getWidth() / 2 + selector.getWidth() / 2);
+                flagView.setY(centerPoint.y - flagView.getHeight());
+                flagView.onRefresh(getColorEnvelope());
+            } else if(getFlipAble()) {
+                flagView.setRotation(180);
+                flagView.setX(centerPoint.x - flagView.getWidth() / 2 + selector.getWidth() / 2);
+                flagView.setY(centerPoint.y + flagView.getHeight() - selector.getHeight() / 2);
+                flagView.onRefresh(getColorEnvelope());
+            }
+        }
+    }
+
     public int getColor() {
         return selectedColor;
+    }
+
+    public ColorEnvelope getColorEnvelope() {
+        return new ColorEnvelope(getColor(), getHexCode(getColor()), getColorARGB(getColor()));
     }
 
     public String getHexCode(int color) {
@@ -235,7 +278,7 @@ public class ColorPickerView extends FrameLayout {
         int r = Color.red(color);
         int g = Color.green(color);
         int b = Color.blue(color);
-        return String.format(Locale.getDefault(), "0x%02X%02X%02X%02X", a, r, g, b);
+        return String.format(Locale.getDefault(), "%02X%02X%02X%02X", a, r, g, b);
     }
 
     public int[] getColorARGB(int color) {
@@ -251,12 +294,53 @@ public class ColorPickerView extends FrameLayout {
         return selectedPoint;
     }
 
+    public FlagView getFlagView() {
+        return this.flagView;
+    }
+
+    public FlagMode getFlagMode() {
+        return this.flagMode;
+    }
+
+    public void setFlagMode(FlagMode flagMode) {
+        this.flagMode = flagMode;
+    }
+
+    public boolean getFlipAble() {
+        return this.flipAble;
+    }
+
+    public void setFlipAble(boolean flipAble) {
+        this.flipAble = flipAble;
+    }
+
+    private Point getCenterPoint(int x, int y) {
+        return new Point(x - (selector.getMeasuredWidth() / 2), y - (selector.getMeasuredHeight() / 2));
+    }
+
+    public float getSelectorX() {
+        return selector.getX() - getSelectorHalfWidth();
+    }
+
+    public float getSelectorY() {
+        return selector.getY() - getSelectorHalfHeight();
+    }
+
+    public int getSelectorHalfWidth() {
+        return selector.getMeasuredWidth()/2;
+    }
+
+    public int getSelectorHalfHeight() {
+        return selector.getMeasuredHeight()/2;
+    }
+
     public void setSelectorPoint(int x, int y) {
         selector.setX(x);
         selector.setY(y);
         selectedPoint = new Point(x, y);
         selectedColor = getColorFromBitmap(x, y);
         fireColorListener(getColor(), false);
+        handleFlagView(new Point(x, y));
     }
 
     public void setPaletteDrawable(Drawable drawable) {
@@ -269,18 +353,32 @@ public class ColorPickerView extends FrameLayout {
         removeView(selector);
         addView(selector);
 
-        if(SELECT_CENTER) {
-            selector.setX(getMeasuredWidth() / 2 - selector.getWidth() / 2);
-            selector.setY(getMeasuredHeight() / 2 - selector.getHeight() / 2);
+        if(flagView != null) {
+            removeView(flagView);
+            addView(flagView);
         }
-    }
 
-    public void setPaletteDrawableSelectCenter(boolean selectCenter) {
-        this.SELECT_CENTER = selectCenter;
+        if(!VISIBLE_FLAG) {
+            VISIBLE_FLAG = true;
+            if (selector != null) {
+                alpha_selector = selector.getAlpha();
+                selector.setAlpha(0.0f);
+            }
+            if (flagView != null) {
+                alpha_flag = flagView.getAlpha();
+                flagView.setAlpha(0.0f);
+            }
+        }
     }
 
     public void setSelectorDrawable(Drawable drawable) {
         selector.setImageDrawable(drawable);
+    }
+
+    public void setFlagView(FlagView flagView) {
+        flagView.gone();
+        addView(flagView);
+        this.flagView = flagView;
     }
 
     public void selectCenter() {

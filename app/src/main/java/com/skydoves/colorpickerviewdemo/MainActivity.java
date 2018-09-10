@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         colorPickerView = findViewById(R.id.colorPickerView);
+        colorPickerView.setFlagView(new CustomFlag(this, R.layout.layout_flag));
         colorPickerView.setColorListener(new ColorEnvelopeListener() {
             @Override
             public void onColorSelected(ColorEnvelope envelope, boolean fromUser) {
