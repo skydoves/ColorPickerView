@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 27
-    buildToolsVersion '27.0.3'
+
     defaultConfig {
         applicationId "com.skydoves.colorpickerviewdemo"
         minSdkVersion 15
@@ -20,7 +20,8 @@ android {
 }
 
 dependencies {
-    implementation "com.android.support:appcompat-v7:27.1.0"
-    implementation "com.github.skydoves:elasticviews:2.0.0"
+    implementation "com.android.support:appcompat-v7:27.1.1"
+    implementation "com.android.support:design:27.1.1"
+    implementation "com.github.skydoves:powermenu:2.0.5"
     implementation project(":colorpickerview")
 }
