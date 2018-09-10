@@ -16,7 +16,6 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:onClick="onHamburger"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:src="@drawable/ic_list_white_24dp"
