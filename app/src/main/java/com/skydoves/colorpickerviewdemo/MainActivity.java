@@ -31,6 +31,9 @@ import com.skydoves.colorpickerview.ColorPickerView;
 import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener;
 import com.skydoves.colorpickerview.sliders.AlphaSlideBar;
 import com.skydoves.colorpickerview.sliders.BrightnessSlideBar;
+import com.skydoves.powermenu.OnMenuItemClickListener;
+import com.skydoves.powermenu.PowerMenu;
+import com.skydoves.powermenu.PowerMenuItem;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,10 +42,14 @@ public class MainActivity extends AppCompatActivity {
     private boolean FLAG_PALETTE = false;
     private boolean FLAG_SELECTOR = false;
 
+    private PowerMenu powerMenu;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        powerMenu =  PowerMenuUtils.getPowerMenu(this, this, powerMenuItemClickListener);
 
         colorPickerView = findViewById(R.id.colorPickerView);
         colorPickerView.setFlagView(new CustomFlag(this, R.layout.layout_flag));
@@ -62,6 +69,24 @@ public class MainActivity extends AppCompatActivity {
         colorPickerView.attachBrightnessSlider(brightnessSlideBar);
     }
 
+    private OnMenuItemClickListener<PowerMenuItem> powerMenuItemClickListener = new OnMenuItemClickListener<PowerMenuItem>() {
+        @Override
+        public void onItemClick(int position, PowerMenuItem item) {
+            switch (position) {
+               case 0 :
+                   palette();
+                   break;
+                case 1:
+                    selector();
+                    break;
+                case 2:
+                    dialog();
+                    break;
+            }
+            powerMenu.dismiss();
+        }
+    };
+
     /**
      * set layout color & textView html code
      *
@@ -75,13 +100,15 @@ public class MainActivity extends AppCompatActivity {
         alphaTileView.setPaintColor(envelope.getColor());
     }
 
+    public void overflowMenu(View view) {
+        powerMenu.showAsAnchorLeftTop(view);
+    }
+
     /**
      * change palette drawable resource
      * you must initialize at first in xml
-     *
-     * @param v view
      */
-    public void palette(View v) {
+    public void palette() {
         if (FLAG_PALETTE)
             colorPickerView.setPaletteDrawable(ContextCompat.getDrawable(this, R.drawable.palette));
         else
@@ -92,10 +119,8 @@ public class MainActivity extends AppCompatActivity {
     /**
      * change selector drawable resource
      * you must initialize at first in xml
-     *
-     * @param v view
      */
-    public void selector(View v) {
+    public void selector() {
         if (FLAG_SELECTOR)
             colorPickerView.setSelectorDrawable(ContextCompat.getDrawable(this, R.drawable.wheel));
         else
@@ -104,11 +129,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * moving selector's points (x, y)
-     *
-     * @param v view
+     * show ColorPickerDialog
      */
-    public void dialog(View v) {
+    public void dialog() {
         ColorPickerDialog.Builder builder = new ColorPickerDialog.Builder(this, AlertDialog.THEME_DEVICE_DEFAULT_DARK);
         builder.setTitle("ColorPicker Dialog");
         builder.setFlagView(new CustomFlag(this, R.layout.layout_flag));
@@ -127,5 +150,13 @@ public class MainActivity extends AppCompatActivity {
         builder.attachAlphaSlideBar();
         builder.attachBrightnessSlideBar();
         builder.show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(powerMenu.isShowing())
+            powerMenu.dismiss();
+        else
+            super.onBackPressed();
     }
 }
