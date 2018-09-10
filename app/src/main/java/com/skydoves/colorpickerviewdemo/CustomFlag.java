@@ -1,9 +1,9 @@
 package com.skydoves.colorpickerviewdemo;
 
 import android.content.Context;
-import android.view.View;
 import android.widget.TextView;
 
+import com.skydoves.colorpickerview.AlphaTileView;
 import com.skydoves.colorpickerview.ColorEnvelope;
 import com.skydoves.colorpickerview.flag.FlagView;
 
@@ -15,7 +15,7 @@ import com.skydoves.colorpickerview.flag.FlagView;
 public class CustomFlag extends FlagView {
 
     private TextView textView;
-    private View view;
+    private AlphaTileView alphaTileView;
 
     /**
      * onBind Views
@@ -25,7 +25,7 @@ public class CustomFlag extends FlagView {
     public CustomFlag(Context context, int layout) {
         super(context, layout);
         textView = findViewById(R.id.flag_color_code);
-        view = findViewById(R.id.flag_color_layout);
+        alphaTileView = findViewById(R.id.flag_color_layout);
     }
 
     /**
@@ -35,6 +35,6 @@ public class CustomFlag extends FlagView {
     @Override
     public void onRefresh(ColorEnvelope colorEnvelope) {
         textView.setText("#" + colorEnvelope.getHexCode());
-        view.setBackgroundColor(colorEnvelope.getColor());
+        alphaTileView.setPaintColor(colorEnvelope.getColor());
     }
 }

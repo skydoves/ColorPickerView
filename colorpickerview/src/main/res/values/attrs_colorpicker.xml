@@ -19,4 +19,9 @@
         <attr name="borderColor_BrightnessSlider" format="color"/>
         <attr name="borderSize_BrightnessSlider" format="integer"/>
     </declare-styleable>
+    <declare-styleable name="AlphaTileView">
+        <attr name="tileSize" format="integer"/>
+        <attr name="tileOddColor" format="color"/>
+        <attr name="tileEvenColor" format="color"/>
+    </declare-styleable>
 </resources>

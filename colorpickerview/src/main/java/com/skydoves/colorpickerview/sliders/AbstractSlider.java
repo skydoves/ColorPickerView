@@ -50,6 +50,8 @@ public abstract class AbstractSlider extends FrameLayout {
     protected int borderSize = 2;
     protected int borderColor = Color.BLACK;
 
+    protected int color = Color.WHITE;
+
     public AbstractSlider(Context context) {
         super(context);
         onCreate();
@@ -108,6 +110,7 @@ public abstract class AbstractSlider extends FrameLayout {
     }
 
     public void notifyColor() {
+        color = colorPickerView.getColor();
         updatePaint(colorPaint);
         invalidate();
     }
@@ -173,8 +176,7 @@ public abstract class AbstractSlider extends FrameLayout {
     }
 
     public int getColor() {
-        if(colorPickerView != null) return colorPickerView.getColor();
-        else return -1;
+        return color;
     }
 
     public void attachColorPickerView(ColorPickerView colorPickerView) {

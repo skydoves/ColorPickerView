@@ -27,16 +27,28 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 
-@SuppressWarnings({"WeakerAccess"})
+@SuppressWarnings({"WeakerAccess", "unused"})
 public class AlphaTileDrawable extends Drawable {
 
     private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-    private static final int tileSize = 25;
-    private static final int tileOdd = 0xFFFFFFFF;
-    private static final int tileEven = 0xFFCBCBCB;
+    private int tileSize;
+    private int tileOddColor;
+    private int tileEvenColor;
 
     public AlphaTileDrawable() {
         super();
+        Builder builder = new Builder();
+        this.tileSize = builder.tileSize;
+        this.tileOddColor = builder.tileOddColor;
+        this.tileEvenColor = builder.tileEvenColor;
+        drawTiles();
+    }
+
+    public AlphaTileDrawable(Builder builder) {
+        super();
+        this.tileSize = builder.tileSize;
+        this.tileOddColor = builder.tileOddColor;
+        this.tileEvenColor = builder.tileEvenColor;
         drawTiles();
     }
 
@@ -48,11 +60,11 @@ public class AlphaTileDrawable extends Drawable {
         Paint bitmapPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         bitmapPaint.setStyle(Paint.Style.FILL);
 
-        bitmapPaint.setColor(tileOdd);
+        bitmapPaint.setColor(tileOddColor);
         drawTile(canvas, rect, bitmapPaint, 0, 0);
         drawTile(canvas, rect, bitmapPaint, tileSize, tileSize);
 
-        bitmapPaint.setColor(tileEven);
+        bitmapPaint.setColor(tileEvenColor);
         drawTile(canvas, rect, bitmapPaint, -tileSize, 0);
         drawTile(canvas, rect, bitmapPaint, tileSize, -tileSize);
 
@@ -82,5 +94,45 @@ public class AlphaTileDrawable extends Drawable {
     @Override
     public int getOpacity() {
         return PixelFormat.OPAQUE;
+    }
+
+    public static class Builder {
+        private int tileSize = 25;
+        private int tileOddColor = 0xFFFFFFFF;
+        private int tileEvenColor = 0xFFCBCBCB;
+
+        public Builder() {
+        }
+
+        public Builder setTileSize(int tileSize) {
+            this.tileSize = tileSize;
+            return this;
+        }
+
+        public Builder setTileOddColor(int color) {
+            this.tileOddColor = color;
+            return this;
+        }
+
+        public Builder setTileEvenColor(int color) {
+            this.tileEvenColor = color;
+            return this;
+        }
+
+        public int getTileSize() {
+            return tileSize;
+        }
+
+        public int getTileOddColor() {
+            return tileOddColor;
+        }
+
+        public int getTileEvenColor() {
+            return tileEvenColor;
+        }
+
+        public AlphaTileDrawable build() {
+            return new AlphaTileDrawable(this);
+        }
     }
 }

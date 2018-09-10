@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="115dp"
     android:layout_height="40dp"
     android:background="@drawable/flag"
     android:orientation="horizontal">
 
-    <LinearLayout
+    <com.skydoves.colorpickerview.AlphaTileView
         android:id="@+id/flag_color_layout"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_marginTop="6dp"
         android:layout_marginLeft="5dp"
-        android:orientation="vertical"/>
+        android:background="@android:color/white"
+        app:tileSize="10"/>
 
     <TextView
         android:id="@+id/flag_color_code"

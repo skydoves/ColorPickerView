@@ -77,13 +77,14 @@
             android:textSize="20sp"
             android:layout_gravity="center"/>
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
+        <com.skydoves.colorpickerview.AlphaTileView
+            android:id="@+id/alphaTileView"
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:background="@android:color/white"
             android:orientation="horizontal"
             android:layout_marginTop="10dp"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            app:tileSize="20"/>
     </LinearLayout>
 </LinearLayout>
