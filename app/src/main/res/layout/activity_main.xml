@@ -4,90 +4,86 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
     android:orientation="vertical"
-    android:weightSum="2.1"
-    android:padding="15dp">
+    android:background="@color/background">
 
-    <com.skydoves.elasticviews.ElasticLayout
-        android:id="@+id/example0"
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        app:layout_backgroundColor="@color/btnColor"
-        app:button_duration="250"
-        app:button_scale="0.87"
-        app:layout_round="20">
-        
-        <ImageView
-            android:layout_width="180dp"
-            android:layout_height="180dp"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/palette"
-            android:scaleType="fitXY"
-            android:padding="20dp"/>
-        
-        <com.skydoves.elasticviews.ElasticLayout
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_alignParentBottom="true"
-            android:background="@color/colorPrimaryDark"
-            app:layout_round="20">
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/ic_list_white_24dp"
+                android:tint="@android:color/white"
+                android:layout_marginRight="10dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="ColorPickerView"
                 android:textColor="@android:color/white"
-                android:padding="5dp"
-                android:layout_centerInParent="true"
-                android:textStyle="bold"
-                android:textSize="20sp"
-                android:text="ColorPickerView Example"/>
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
 
-            </com.skydoves.elasticviews.ElasticLayout>
-    </com.skydoves.elasticviews.ElasticLayout>
+    <com.skydoves.colorpickerview.ColorPickerView
+        android:id="@+id/colorPickerView"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="center"
+        app:palette="@drawable/palette"
+        app:selector="@drawable/wheel" />
 
-    <android.support.v4.widget.Space
+    <com.skydoves.colorpickerview.sliders.AlphaSlideBar
+        android:id="@+id/alphaSlideBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        app:selector_AlphaSlideBar="@drawable/wheel"
+        app:borderColor_AlphaSlideBar="@android:color/darker_gray"
+        app:borderSize_AlphaSlideBar="5"/>
+
+    <com.skydoves.colorpickerview.sliders.BrightnessSlideBar
+        android:id="@+id/brightnessSlide"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        app:selector_BrightnessSlider="@drawable/wheel"
+        app:borderColor_BrightnessSlider="@android:color/darker_gray"
+        app:borderSize_BrightnessSlider="5"/>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.1"/>
-    
-    <com.skydoves.elasticviews.ElasticLayout
-        android:id="@+id/example1"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        app:layout_backgroundColor="@color/btnColor"
-        app:button_duration="250"
-        app:button_scale="0.87"
-        app:layout_round="20">
+        android:layout_weight="2"
+        android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="260dp"
-            android:layout_height="180dp"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/watercolor"
-            android:scaleType="fitXY"
-            android:padding="20dp"/>
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@android:color/white"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_gravity="center"/>
 
-        <com.skydoves.elasticviews.ElasticLayout
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_alignParentBottom="true"
-            android:background="@color/colorPrimaryDark"
-            app:layout_round="20">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/white"
-                android:padding="5dp"
-                android:layout_centerInParent="true"
-                android:textStyle="bold"
-                android:textSize="20sp"
-                android:text="Multi-ColorPickerView Example"/>
-
-        </com.skydoves.elasticviews.ElasticLayout>
-    </com.skydoves.elasticviews.ElasticLayout>
-
+        <com.skydoves.colorpickerview.AlphaTileView
+            android:id="@+id/alphaTileView"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:background="@android:color/white"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            app:tileSize="20"/>
+    </LinearLayout>
 </LinearLayout>

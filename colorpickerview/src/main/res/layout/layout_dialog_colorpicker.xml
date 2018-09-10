@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.skydoves.colorpickerview.ColorPickerView
+        android:id="@+id/ColorPickerView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_margin="20dp"
+        app:palette="@drawable/palette"
+        app:selector="@drawable/wheel"/>
+    
+    <com.skydoves.colorpickerview.sliders.AlphaSlideBar
+        android:id="@+id/AlphaSlideBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="10dp"
+        android:visibility="gone"
+        app:selector_AlphaSlideBar="@drawable/wheel"/>
+
+    <com.skydoves.colorpickerview.sliders.BrightnessSlideBar
+        android:id="@+id/BrightnessSlideBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="10dp"
+        android:visibility="gone"
+        app:selector_BrightnessSlider="@drawable/wheel"/>
+    
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+</LinearLayout>

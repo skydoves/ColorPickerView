@@ -15,30 +15,8 @@
  * limitations under the License.
  */
 
-package com.skydoves.colorpickerview;
+package com.skydoves.colorpickerview.flag;
 
-@SuppressWarnings({"WeakerAccess"})
-public class ColorEnvelope {
-
-    private int color;
-    private String hexCode;
-    private int[] argb;
-
-    public ColorEnvelope(int color, String hexCode, int[] argb) {
-        this.color = color;
-        this.hexCode = hexCode;
-        this.argb = argb;
-    }
-
-    public int getColor() {
-        return color;
-    }
-
-    public String getHexCode() {
-        return hexCode;
-    }
-
-    public int[] getArgb() {
-        return argb;
-    }
+public enum FlagMode {
+    ALWAYS, LAST
 }
