@@ -5,61 +5,43 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="10">
+    android:background="@color/background">
 
-    <LinearLayout
-        android:id="@+id/layout_options"
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1.5"
-        android:orientation="horizontal"
-        android:padding="10dp"
-        android:layout_marginTop="20dp">
+        android:layout_height="wrap_content">
 
-        <Button
-            android:onClick="palette"
-            android:text="palette"
-            android:background="@color/btnColor"
-            android:textColor="@android:color/white"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"/>
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <Button
-            android:onClick="selector"
-            android:text="selector"
-            android:background="@color/btnColor"
-            android:textColor="@android:color/white"
-            android:layout_marginLeft="15dp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"/>
+            <ImageView
+                android:onClick="onHamburger"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/ic_list_white_24dp"
+                android:tint="@android:color/white"
+                android:layout_marginRight="10dp"/>
 
-        <Button
-            android:onClick="dialog"
-            android:text="points"
-            android:background="@color/btnColor"
-            android:textColor="@android:color/white"
-            android:layout_marginLeft="15dp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"/>
-
-    </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ColorPickerView"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
 
     <com.skydoves.colorpickerview.ColorPickerView
         android:id="@+id/colorPickerView"
         android:layout_width="300dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
-        android:layout_weight="5.5"
         android:layout_gravity="center"
         app:palette="@drawable/palette"
-        app:selector="@drawable/wheel"/>
+        app:selector="@drawable/wheel" />
 
     <com.skydoves.colorpickerview.sliders.AlphaSlideBar
         android:id="@+id/alphaSlideBar"
@@ -103,6 +85,5 @@
             android:orientation="horizontal"
             android:layout_marginTop="10dp"
             android:layout_gravity="center"/>
-
     </LinearLayout>
 </LinearLayout>

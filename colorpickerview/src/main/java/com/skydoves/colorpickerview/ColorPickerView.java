@@ -146,6 +146,7 @@ public class ColorPickerView extends FrameLayout {
             FrameLayout.LayoutParams selectorParam = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             selectorParam.gravity = Gravity.CENTER;
             addView(selector, selectorParam);
+            selector.setAlpha(alpha_selector);
         }
     }
 
@@ -394,6 +395,7 @@ public class ColorPickerView extends FrameLayout {
         flagView.gone();
         addView(flagView);
         this.flagView = flagView;
+        flagView.setAlpha(alpha_flag);
     }
 
     public void selectCenter() {

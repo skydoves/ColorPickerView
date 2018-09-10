@@ -127,6 +127,7 @@ public class ColorPickerDialog extends AlertDialog {
             return super.setPositiveButton(textId, listener);
         }
 
+        @SuppressWarnings("UnusedReturnValue")
         public AlertDialog.Builder setPositiveButton(CharSequence text, final ColorPickerViewListener colorListener) {
             OnClickListener onClickListener = new OnClickListener() {
                 @Override
