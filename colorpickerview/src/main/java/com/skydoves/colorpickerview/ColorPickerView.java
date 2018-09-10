@@ -131,17 +131,17 @@ public class ColorPickerView extends FrameLayout {
         if (paletteDrawable != null)
             palette.setImageDrawable(paletteDrawable);
 
-        FrameLayout.LayoutParams wheelParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        wheelParams.gravity = Gravity.CENTER;
-        addView(palette, wheelParams);
+        FrameLayout.LayoutParams paletteParam = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        paletteParam.gravity = Gravity.CENTER;
+        addView(palette, paletteParam);
 
         selector = new ImageView(getContext());
         if (selectorDrawable != null) {
             selector.setImageDrawable(selectorDrawable);
 
-            FrameLayout.LayoutParams thumbParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            thumbParams.gravity = Gravity.CENTER;
-            addView(selector, thumbParams);
+            FrameLayout.LayoutParams selectorParam = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            selectorParam.gravity = Gravity.CENTER;
+            addView(selector, selectorParam);
         }
     }
 
@@ -271,6 +271,7 @@ public class ColorPickerView extends FrameLayout {
                 flagView.onRefresh(getColorEnvelope());
             }
             if(posX < 0) flagView.setX(0);
+            if(posX + flagView.getMeasuredWidth() > getMeasuredWidth()) flagView.setX(getMeasuredWidth() - flagView.getMeasuredWidth());
         }
     }
 
