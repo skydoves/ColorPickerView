@@ -3,6 +3,8 @@
     <declare-styleable name="ColorPickerView">
         <attr name="palette" format="reference"/>
         <attr name="selector" format="reference"/>
+        <attr name="alpha_selector" format="float"/>
+        <attr name="alpha_flag" format="float"/>
     </declare-styleable>
     <declare-styleable name="MultiColorPickerView">
         <attr name="palette2" format="reference"/>

@@ -25,6 +25,7 @@ import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 
 @SuppressWarnings({"WeakerAccess"})
 public class AlphaTileDrawable extends Drawable {
@@ -64,7 +65,7 @@ public class AlphaTileDrawable extends Drawable {
     }
 
     @Override
-    public void draw(Canvas canvas) {
+    public void draw(@NonNull Canvas canvas) {
         canvas.drawPaint(paint);
     }
 

@@ -38,7 +38,7 @@
             android:layout_gravity="center"/>
 
         <Button
-            android:onClick="points"
+            android:onClick="dialog"
             android:text="points"
             android:background="@color/btnColor"
             android:textColor="@android:color/white"

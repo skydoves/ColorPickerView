@@ -120,6 +120,10 @@ public class ColorPickerView extends FrameLayout {
                 paletteDrawable = a.getDrawable(R.styleable.ColorPickerView_palette);
             if (a.hasValue(R.styleable.ColorPickerView_selector))
                 selectorDrawable = a.getDrawable(R.styleable.ColorPickerView_selector);
+            if (a.hasValue(R.styleable.ColorPickerView_alpha_selector))
+                alpha_selector = a.getFloat(R.styleable.ColorPickerView_alpha_selector, alpha_selector);
+            if (a.hasValue(R.styleable.ColorPickerView_alpha_flag))
+                alpha_flag = a.getFloat(R.styleable.ColorPickerView_alpha_flag, alpha_flag);
         } finally {
             a.recycle();
         }

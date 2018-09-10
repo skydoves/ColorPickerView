@@ -16,16 +16,21 @@ package com.skydoves.colorpickerviewdemo;
  * limitations under the License.
  */
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.skydoves.colorpickerview.ColorEnvelope;
+import com.skydoves.colorpickerview.ColorPickerDialog;
 import com.skydoves.colorpickerview.ColorPickerView;
 import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener;
+import com.skydoves.colorpickerview.listeners.ColorListener;
 import com.skydoves.colorpickerview.sliders.AlphaSlideBar;
 import com.skydoves.colorpickerview.sliders.BrightnessSlideBar;
 
@@ -105,9 +110,24 @@ public class MainActivity extends AppCompatActivity {
      *
      * @param v view
      */
-    public void points(View v) {
-        int x = (int) (Math.random() * 600) + 100;
-        int y = (int) (Math.random() * 400) + 150;
-        colorPickerView.setSelectorPoint(x, y);
+    public void dialog(View v) {
+        ColorPickerDialog.Builder builder = new ColorPickerDialog.Builder(this, AlertDialog.THEME_DEVICE_DEFAULT_DARK);
+        builder.setTitle("ColorPicker Dialog");
+        builder.setFlagView(new CustomFlag(this, R.layout.layout_flag));
+        builder.setPositiveButton(getString(R.string.confirm), new ColorEnvelopeListener() {
+            @Override
+            public void onColorSelected(ColorEnvelope envelope, boolean fromUser) {
+                setLayoutColor(envelope);
+            }
+        });
+        builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        builder.attachAlphaSlideBar();
+        builder.attachBrightnessSlideBar();
+        builder.show();
     }
 }
