@@ -5,8 +5,8 @@
 You can use ColorPickerView just like ImageView and get HSV colors, RGB values, Html color codes <br>
 from your gallery pictures or custom images by tapping on the desired color.
 
-![555](https://user-images.githubusercontent.com/24237865/31853721-72b679c2-b6c8-11e7-8bfc-6d4bfe0427b5.jpg)
-![777](https://user-images.githubusercontent.com/24237865/31853722-72e25a74-b6c8-11e7-9903-19cd17a611d5.jpg)
+![img0](https://user-images.githubusercontent.com/24237865/45308724-1db83e80-b55d-11e8-9293-9f3b4d5010c1.jpg)
+![img1](https://user-images.githubusercontent.com/24237865/45308725-1db83e80-b55d-11e8-84b0-1d48c0405365.jpg)
 
 ## Multi-ColorPickerView
 You can get colors using multi selectors.<br>
@@ -22,7 +22,7 @@ repositories {
 }
 
 dependencies {
-  compile 'com.github.skydoves:colorpickerview:1.0.8'
+  implementation "com.github.skydoves:colorpickerview:2.0.0"
 }
 ```
 
@@ -31,7 +31,7 @@ dependencies {
 <dependency>
   <groupId>com.github.skydoves</groupId>
   <artifactId>colorpickerview</artifactId>
-  <version>1.0.8</version>
+  <version>2.0.0</version>
 </dependency>
 ```
     
