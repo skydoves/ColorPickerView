@@ -1,7 +1,7 @@
 # ColorPickerView
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Build Status](https://travis-ci.org/skydoves/ColorPickerView.svg?branch=master)](https://travis-ci.org/skydoves/ColorPickerView)
-[![Android Weekly](https://img.shields.io/badge/Android%20Weekly-%23316-orange.svg)](https://androidweekly.net/issues/issue-316)<br>
+[![Android Weekly](https://img.shields.io/badge/Android%20Weekly-%23316-orange.svg)](https://androidweekly.net/issues/issue-316)
+[![Build Status](https://travis-ci.org/skydoves/ColorPickerView.svg?branch=master)](https://travis-ci.org/skydoves/ColorPickerView) <br>
 You can use ColorPickerView just like ImageView and get HSV colors, ARGB values, Hex color codes <br>
 from your gallery pictures or custom images by tapping on the desired color. <br>
 
@@ -62,9 +62,8 @@ app:alpha_selector="0.8" // set selector's alpha. optional.
 app:alpha_flag="0.8" // set flag's alpha. optional.
 ```
 
-
 #### Color Selected Listener
-You can listen to only an int value of color by using **ColorListener**.
+You can listen to only an int value of a color by using **ColorListener**.
 ```java
 colorPickerView.setColorListener(new ColorListener() {
             @Override
@@ -94,6 +93,177 @@ ColorEnvelope provides HSV color, hex color code, argb.
 colorEnvelope.getColor() // int
 colorEnvelope.getHexCode() // String
 colorEnvelope.getArgb() // int[4]
+```
+
+### AlphaSlideBar
+![alpha_slide](https://user-images.githubusercontent.com/24237865/45362228-43058500-b60f-11e8-9b13-0b2e01a892de.jpg) <br>
+You can change the transparency value of a selected color by using AlphaSlideBar. <br>
+
+#### AlphaSlideBar in layout
+```xml
+<com.skydoves.colorpickerview.sliders.AlphaSlideBar
+        android:id="@+id/alphaSlideBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:selector_AlphaSlideBar="@drawable/wheel" // set palette image. Must be needed.
+        app:borderColor_AlphaSlideBar="@android:color/darker_gray" // set border color. optional.
+        app:borderSize_AlphaSlideBar="5"/> // set border size. optional.
+```
+You can attach to ColorPickerView like below.
+
+```java
+final AlphaSlideBar alphaSlideBar = findViewById(R.id.alphaSlideBar);
+colorPickerView.attachAlphaSlider(alphaSlideBar);
+```
+
+### BrightnessSlideBar
+![brigngtness_slide](https://user-images.githubusercontent.com/24237865/45362230-439e1b80-b60f-11e8-96ec-6907ab0ef678.jpg) <br>
+You can change the brightness value of a selected color by using BrightnessSlideBar. <br>
+
+#### BrightnessSlideBar in layout
+```xml
+<com.skydoves.colorpickerview.sliders.BrightnessSlideBar
+        android:id="@+id/brightnessSlide"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        app:selector_BrightnessSlider="@drawable/wheel" // set palette image. Must be needed.
+        app:borderColor_BrightnessSlider="@android:color/darker_gray" // set border color. optional.
+        app:borderSize_BrightnessSlider="5"/> // set border size. optional.
+```
+You can attach to ColorPickerView like below.
+
+```java
+final BrightnessSlideBar brightnessSlideBar = findViewById(R.id.brightnessSlide);
+colorPickerView.attachBrightnessSlider(brightnessSlideBar);
+```
+
+### ColorPickerDialog
+![dialog0](https://user-images.githubusercontent.com/24237865/45362890-0d619b80-b611-11e8-857b-e12f82978b53.jpg) 
+![dialog1](https://user-images.githubusercontent.com/24237865/45362892-0d619b80-b611-11e8-9cc5-25518a9d392a.jpg) <br>
+
+Can be used just like using AlertDialog and provides colors from any images. <br>
+It extends AlertDialog, so you can customizing themes also. <br>
+
+```java
+ColorPickerDialog.Builder builder = new ColorPickerDialog.Builder(this, AlertDialog.THEME_DEVICE_DEFAULT_DARK);
+builder.setTitle("ColorPicker Dialog");
+builder.setFlagView(new CustomFlag(this, R.layout.layout_flag));
+builder.setPositiveButton(getString(R.string.confirm), new ColorEnvelopeListener() {
+    @Override
+    public void onColorSelected(ColorEnvelope envelope, boolean fromUser) {
+        setLayoutColor(envelope);
+    }
+});
+builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+    @Override
+    public void onClick(DialogInterface dialogInterface, int i) {
+        dialogInterface.dismiss();
+    }
+});
+builder.attachAlphaSlideBar(); // attach AlphaSlideBar
+builder.attachBrightnessSlideBar(); // attach BrightnessSlideBar
+builder.show(); // show dialog
+```
+
+And you can get a ColorPickerView instance from `ColorPickerDialog.Builder`. <br> So you can customize ColorPickerDialog.
+```java
+ColorPickerView colorPickerView = builder.getColorPickerView();
+colorPickerView.setPaletteDrawable(ContextCompat.getDrawable(this, R.drawable.palettebar));
+```
+
+### FlagView
+![flag0](https://user-images.githubusercontent.com/24237865/45364191-75fe4780-b614-11e8-81a5-04690a4392db.jpg) 
+![flag1](https://user-images.githubusercontent.com/24237865/45364194-75fe4780-b614-11e8-844c-136d14c91560.jpg) <br><br>
+
+FlagView lets you can show a flag above a selector. This is optional.<br>
+First, create Flag layout as your taste like below. 
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="100dp"
+    android:layout_height="40dp"
+    android:background="@drawable/flag"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/flag_color_layout"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginLeft="5dp"
+        android:orientation="vertical"/>
+
+    <TextView
+        android:id="@+id/flag_color_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="5dp"
+        android:textSize="14dp"
+        android:textColor="@android:color/white"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        tools:text="#ffffff"/>
+</LinearLayout>
+```
+
+Second, create CustomFlagView extending FlagView. This is an example code.
+```java
+public class CustomFlag extends FlagView {
+
+    private TextView textView;
+    private AlphaTileView alphaTileView;
+
+    public CustomFlag(Context context, int layout) {
+        super(context, layout);
+        textView = findViewById(R.id.flag_color_code);
+        alphaTileView = findViewById(R.id.flag_color_layout);
+    }
+
+    @Override
+    public void onRefresh(ColorEnvelope colorEnvelope) {
+        textView.setText("#" + colorEnvelope.getHexCode());
+        alphaTileView.setPaintColor(colorEnvelope.getColor());
+    }
+}
+```
+
+The last, set FlagView on ColorPickerView or ColorPickerDialog.Builder.
+
+```java
+colorPickerView.setFlagView(new CustomFlag(this, R.layout.layout_flag));
+```
+```java
+ColorPickerDialog.Builder builder = new ColorPickerDialog.Builder(this, AlertDialog.THEME_DEVICE_DEFAULT_DARK);
+builder.setFlagView(new CustomFlag(this, R.layout.layout_flag));
+```
+
+#### Modes
+You can set FlagView's showing mode.
+```java
+colorPickerView.setFlagMode(FlagMode.ALWAYS); // showing always flagView
+colorPickerView.setFlagMode(FlagMode.LAST); // showing flagView when touch Action_UP
+```
+
+### AlphaTileView
+![alphatileview](https://user-images.githubusercontent.com/24237865/45364416-09377d00-b615-11e8-9707-b83f55053480.jpg) <br>
+AlphaTileView presents layout color as ARGB.<br>
+If you want to present ARGB color on general views, it will not be presented accurately.<br>
+because it will be mixed with the parent view's background color.<br>
+So if you want to show ARGB color accurately, should use AlphaTileView.<br>
+
+```xml
+<com.skydoves.colorpickerview.AlphaTileView
+            android:id="@+id/alphaTileView"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            app:tileSize="20" // the size of the repeating tile
+            app:tileEvenColor="@color/tile_even" // the color of even tiles
+            app:tileOddColor="@color/tile_odd"/> // the color of odd tiles
 ```
 
 #### Methods
