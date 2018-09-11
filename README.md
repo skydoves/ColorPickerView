@@ -2,31 +2,30 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Build Status](https://travis-ci.org/skydoves/ColorPickerView.svg?branch=master)](https://travis-ci.org/skydoves/ColorPickerView)
 [![Android Weekly](https://img.shields.io/badge/Android%20Weekly-%23316-orange.svg)](https://androidweekly.net/issues/issue-316)<br>
-You can use ColorPickerView just like ImageView and get HSV colors, RGB values, Html color codes <br>
-from your gallery pictures or custom images by tapping on the desired color.
+You can use ColorPickerView just like ImageView and get HSV colors, ARGB values, Hex color codes <br>
+from your gallery pictures or custom images by tapping on the desired color. <br>
 
 ![img0](https://user-images.githubusercontent.com/24237865/45309043-ccf51580-b55d-11e8-8985-02fc2d3a7250.jpg) 
 ![img1](https://user-images.githubusercontent.com/24237865/45308725-1db83e80-b55d-11e8-84b0-1d48c0405365.jpg)
 
-## Multi-ColorPickerView
-You can get colors using multi selectors.<br>
-At [Multi-ColorPicker](https://github.com/skydoves/Multi-ColorPicker) you can get more specialized library in multi-coloring.
-
-![111](https://user-images.githubusercontent.com/24237865/31853730-9bb0ecfe-b6c8-11e7-9730-c16095042c1a.jpg)
-
 ## Including in your project
-#### build.gradle
-```java
-repositories {
-  mavenCentral() // or jcenter() works as well
+### Gradle
+Add below codes to your **root** `build.gradle` file (not your module build.gradle file).
+```gradle
+allprojects {
+    repositories {
+        jcenter()
+    }
 }
-
+```
+And add a dependency code to your **module**'s `build.gradle` file.
+```gradle
 dependencies {
-  implementation "com.github.skydoves:colorpickerview:2.0.0"
+     implementation "com.github.skydoves:colorpickerview:2.0.0"
 }
 ```
 
-#### or Maven
+### or Maven
 ```xml
 <dependency>
   <groupId>com.github.skydoves</groupId>
@@ -41,7 +40,7 @@ You can use like using just ImageView and you can get color from any images.
 #### Add XML Namespace
 First add below XML Namespace inside your XML layout file.
 
-```xml
+```gradle
 xmlns:app="http://schemas.android.com/apk/res-auto"
 ```
 
@@ -55,16 +54,17 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
         app:selector="@drawable/wheel" />
 ```
 
-#### Attribute description
-```
-app:palette="@drawable/palette" // set palette image
+#### Attribute descriptions
+```gradle
+app:palette="@drawable/palette" // set palette image. Must be needed.
+app:selector="@drawable/wheel" // set selector image. optional.
+app:alpha_selector="0.8" // set selector's alpha. optional.
+app:alpha_flag="0.8" // set flag's alpha. optional.
 ```
 
-```
-app:selector="@drawable/wheel" // set selector image. This isn't required always. If you don't need, don't use.
-```
 
 #### Color Selected Listener
+You can listen to only an int value of color by using **ColorListener**.
 ```java
 colorPickerView.setColorListener(new ColorListener() {
             @Override
@@ -73,6 +73,27 @@ colorPickerView.setColorListener(new ColorListener() {
                 linearLayout.setBackgroundColor(color);
             }
         });
+```
+
+#### ColorEnvelope Listener
+Or you can listen to an instance has HSV color, hex color code, argb by using **ColorEnvelopeListener**.
+```java
+colorPickerView.setColorListener(new ColorEnvelopeListener() {
+            @Override
+            public void onColorSelected(ColorEnvelope envelope, boolean fromUser) {
+                linearLayout.setBackgroundColor(envelope.getColor());
+                textView.setText("#" + envelope.getHexCode());
+            }
+        });
+```
+
+#### ColorEnvelope
+onColorSelected method receives a ColorEnvelope's instance from ColorPickerView. <br>
+ColorEnvelope provides HSV color, hex color code, argb.
+```java
+colorEnvelope.getColor() // int
+colorEnvelope.getHexCode() // String
+colorEnvelope.getArgb() // int[4]
 ```
 
 #### Methods
@@ -86,6 +107,18 @@ setSelectorDrawable(Drawable drawable) | void | change selector drawable resourc
 setSelectorPoint(int x, int y) | void | moving selector at point(x, y)
 selectCenter() | void | select center of drawable image
 setACTION\_UP(Boolean) | void | ColorListener only listening when ACTION\_UP.
+
+## Other Libraries
+Other libraries released related to color picker!
+
+### ColorPickerPreference
+[A library](https://github.com/skydoves/ColorPickerPreference) that let you implement ColorPickerView, ColorPickerDialog, ColorPickerPreference. 
+
+### Multi-ColorPickerView
+You can get colors using multi selectors.<br>
+At [here](https://github.com/skydoves/Multi-ColorPicker) you can get a more specialized library in multi-coloring.
+
+![111](https://user-images.githubusercontent.com/24237865/31853730-9bb0ecfe-b6c8-11e7-9730-c16095042c1a.jpg)
 
 # License
 ```xml
