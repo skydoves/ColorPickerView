@@ -266,17 +266,21 @@ So if you want to show ARGB color accurately, should use AlphaTileView.<br>
             app:tileOddColor="@color/tile_odd"/> // the color of odd tiles
 ```
 
-#### Methods
+### ColorPickerView Methods
 Methods | Return | Description
 --- | --- | ---
 getColor() | int | the last selected color
-getColorHtml() | String | the last selected Html color code
-getColorRGB() | int[3] | the last selected color's RGB value.<br> int[0] : R, int[1] : G, int[2] : B
+getColorEnvelope() | ColorEnvelope | returns ColorEnvelope. It has the last selected Color, Hex, ARGB values
 setPaletteDrawable(Drawable drawable) | void | change palette drawable resource
 setSelectorDrawable(Drawable drawable) | void | change selector drawable resource
 setSelectorPoint(int x, int y) | void | moving selector at point(x, y)
 selectCenter() | void | select center of drawable image
 setACTION\_UP(Boolean) | void | ColorListener only listening when ACTION\_UP.
+setFlagView(FlagView flagview) | void | sets FlagView on ColorPickerView
+setFlagMode(FlagMode flagMode) | void | sets FlagMode on ColorPickerView
+setFlipable(boolean flipable) | void | sets FlagView be flipbed when go out the ColorPickerView
+attachAlphaSlider | void | attach an AlphaSlider
+attachBrightnessSlider | void | attach a BrightnessSlider
 
 ## Other Libraries
 Other libraries released related to color picker!
