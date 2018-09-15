@@ -1,5 +1,6 @@
 # ColorPickerView
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![API](https://img.shields.io/badge/API-15%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=15)
 [![Android Weekly](https://img.shields.io/badge/Android%20Weekly-%23316-orange.svg)](https://androidweekly.net/issues/issue-316)
 [![Build Status](https://travis-ci.org/skydoves/ColorPickerView.svg?branch=master)](https://travis-ci.org/skydoves/ColorPickerView) <br>
 You can use ColorPickerView just like ImageView and get HSV colors, ARGB values, Hex color codes <br>
@@ -63,7 +64,7 @@ app:alpha_flag="0.8" // set flag's alpha. optional.
 ```
 
 #### Color Selected Listener
-You can listen to only an int value of a color by using **ColorListener**.
+You can listen to only an int value of a color by using `ColorListener`.
 ```java
 colorPickerView.setColorListener(new ColorListener() {
             @Override
@@ -75,7 +76,7 @@ colorPickerView.setColorListener(new ColorListener() {
 ```
 
 #### ColorEnvelope Listener
-Or you can listen to an instance has HSV color, hex color code, argb by using **ColorEnvelopeListener**.
+Or you can listen to an instance has HSV color, hex color code, argb by using `ColorEnvelopeListener`.
 ```java
 colorPickerView.setColorListener(new ColorEnvelopeListener() {
             @Override
@@ -88,14 +89,14 @@ colorPickerView.setColorListener(new ColorEnvelopeListener() {
 
 #### ColorEnvelope
 onColorSelected method receives a ColorEnvelope's instance from ColorPickerView. <br>
-ColorEnvelope provides HSV color, hex color code, argb.
+`ColorEnvelope` provides HSV color, hex color code, argb.
 ```java
 colorEnvelope.getColor() // int
 colorEnvelope.getHexCode() // String
 colorEnvelope.getArgb() // int[4]
 ```
 
-### AlphaSlideBar
+### AlphaSlideBar(Optional)
 ![alpha_slide](https://user-images.githubusercontent.com/24237865/45362228-43058500-b60f-11e8-9b13-0b2e01a892de.jpg) <br>
 You can change the transparency value of a selected color by using AlphaSlideBar. <br>
 
@@ -116,7 +117,7 @@ final AlphaSlideBar alphaSlideBar = findViewById(R.id.alphaSlideBar);
 colorPickerView.attachAlphaSlider(alphaSlideBar);
 ```
 
-### BrightnessSlideBar
+### BrightnessSlideBar(Optional)
 ![brigngtness_slide](https://user-images.githubusercontent.com/24237865/45362230-439e1b80-b60f-11e8-96ec-6907ab0ef678.jpg) <br>
 You can change the brightness value of a selected color by using BrightnessSlideBar. <br>
 
@@ -172,11 +173,11 @@ ColorPickerView colorPickerView = builder.getColorPickerView();
 colorPickerView.setPaletteDrawable(ContextCompat.getDrawable(this, R.drawable.palettebar));
 ```
 
-### FlagView
+### FlagView(Optional)
 ![flag0](https://user-images.githubusercontent.com/24237865/45364191-75fe4780-b614-11e8-81a5-04690a4392db.jpg) 
 ![flag1](https://user-images.githubusercontent.com/24237865/45364194-75fe4780-b614-11e8-844c-136d14c91560.jpg) <br><br>
 
-FlagView lets you can show a flag above a selector. This is optional.<br>
+`FlagView` lets you can show a flag above a selector. This is optional.<br>
 First, create Flag layout as your taste like below. 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -211,7 +212,7 @@ First, create Flag layout as your taste like below.
 </LinearLayout>
 ```
 
-Second, create CustomFlagView extending FlagView. This is an example code.
+Second, create CustomFlagView extending `FlagView`. This is an example code.
 ```java
 public class CustomFlag extends FlagView {
 
@@ -292,7 +293,7 @@ Other libraries released related to color picker!
 You can get colors using multi selectors.<br>
 At [here](https://github.com/skydoves/Multi-ColorPicker) you can get a more specialized library in multi-coloring.
 
-![111](https://user-images.githubusercontent.com/24237865/31853730-9bb0ecfe-b6c8-11e7-9730-c16095042c1a.jpg)
+![screenshot1128436220](https://user-images.githubusercontent.com/24237865/45586566-4614b400-b934-11e8-9098-2d4341dd695e.png)
 
 # License
 ```xml
