@@ -25,6 +25,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Point;
+import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -208,7 +209,13 @@ public class ColorPickerView extends FrameLayout {
                 mappedPoints[0] < palette.getDrawable().getIntrinsicWidth() && mappedPoints[1] < palette.getDrawable().getIntrinsicHeight()) {
 
             invalidate();
-            return ((BitmapDrawable) palette.getDrawable()).getBitmap().getPixel((int) mappedPoints[0], (int) mappedPoints[1]);
+
+            Rect rect = palette.getDrawable().getBounds();
+            float scaleX = mappedPoints[0] / rect.height();
+            int x1 = (int) (scaleX * ((BitmapDrawable) palette.getDrawable()).getBitmap().getHeight());
+            float scaleY = mappedPoints[1] / rect.width();
+            int y1 = (int) (scaleY * ((BitmapDrawable) palette.getDrawable()).getBitmap().getWidth());
+            return ((BitmapDrawable) palette.getDrawable()).getBitmap().getPixel(x1, y1);
         }
         return 0;
     }

@@ -5,7 +5,7 @@ publish {
     userOrg = 'devmagician'
     groupId = 'com.github.skydoves'
     artifactId = 'colorpickerview'
-    publishVersion = '2.0.0'
+    publishVersion = '2.0.1'
     desc = 'This is ColorPickerView by skydoves'
     website = 'https://github.com/skydoves/ColorPickerView'
     issueTracker = "${website}/issues"
@@ -13,18 +13,17 @@ publish {
 }
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion '27.0.3'
+    compileSdkVersion 28
 
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
     }
 }
 
 dependencies {
-    implementation "com.android.support:support-annotations:27.1.0"
+    implementation "com.android.support:support-annotations:$supportLibrary"
 }
 
