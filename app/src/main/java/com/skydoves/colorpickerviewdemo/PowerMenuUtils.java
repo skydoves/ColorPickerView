@@ -1,6 +1,6 @@
 package com.skydoves.colorpickerviewdemo;
 
-import android.arch.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.graphics.Color;
 

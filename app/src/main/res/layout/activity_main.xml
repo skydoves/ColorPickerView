@@ -7,11 +7,11 @@
     android:orientation="vertical"
     android:background="@color/background">
 
-    <android.support.design.widget.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <android.support.v7.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -31,8 +31,8 @@
                 android:textColor="@android:color/white"
                 android:textSize="18sp"
                 android:textStyle="bold" />
-        </android.support.v7.widget.Toolbar>
-    </android.support.design.widget.AppBarLayout>
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <com.skydoves.colorpickerview.ColorPickerView
         android:id="@+id/colorPickerView"
