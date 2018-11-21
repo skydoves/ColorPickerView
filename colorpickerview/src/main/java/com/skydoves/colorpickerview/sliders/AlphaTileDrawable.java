@@ -25,7 +25,7 @@ import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class AlphaTileDrawable extends Drawable {

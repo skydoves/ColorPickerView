@@ -24,6 +24,6 @@ android {
 }
 
 dependencies {
-    implementation "com.android.support:support-annotations:$supportLibrary"
+    implementation "androidx.annotation:annotation:1.0.0"
 }
 
