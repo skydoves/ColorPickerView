@@ -121,20 +121,14 @@ public abstract class AbstractSlider extends FrameLayout {
         if(colorPickerView != null) {
             switch (event.getActionMasked()) {
                 case MotionEvent.ACTION_UP:
-                    if (colorPickerView.getACTON_UP()) {
-                        selector.setPressed(true);
-                        onTouchReceived(event);
-                        return true;
-                    }
-                    break;
+                    selector.setPressed(true);
+                    onTouchReceived(event);
+                    return true;
                 case MotionEvent.ACTION_DOWN:
                 case MotionEvent.ACTION_MOVE:
-                    if (!colorPickerView.getACTON_UP()) {
-                        selector.setPressed(true);
-                        onTouchReceived(event);
-                        return true;
-                    }
-                    break;
+                    selector.setPressed(true);
+                    onTouchReceived(event);
+                    return true;
                 default:
                     selector.setPressed(false);
                     return false;
@@ -154,7 +148,13 @@ public abstract class AbstractSlider extends FrameLayout {
 
         Point snapPoint = new Point((int)event.getX(), (int)event.getY());
         selector.setX(snapPoint.x - (selector.getMeasuredWidth() / 2));
-        colorPickerView.fireColorListener(assembleColor(), true);
+        if (colorPickerView.getACTON_UP()) {
+            if (event.getAction() == MotionEvent.ACTION_UP) {
+                colorPickerView.fireColorListener(assembleColor(), true);
+            }
+        } else {
+            colorPickerView.fireColorListener(assembleColor(), true);
+        }
 
         int maxPos = getMeasuredWidth() - selector.getMeasuredWidth();
         if(selector.getX() >= maxPos) selector.setX(maxPos);

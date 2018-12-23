@@ -185,8 +185,10 @@ public class ColorPickerView extends FrameLayout {
             handleFlagView(getCenterPoint(snapPoint.x, snapPoint.y));
             notifyToSlideBars();
 
-            if(ACTON_UP && event.getAction() == MotionEvent.ACTION_UP) {
-                fireColorListener(getColor(), true);
+            if(ACTON_UP) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    fireColorListener(getColor(), true);
+                }
             } else {
                 fireColorListener(getColor(), true);
             }
