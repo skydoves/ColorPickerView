@@ -22,7 +22,7 @@ android {
 
 dependencies {
     implementation "androidx.appcompat:appcompat:1.0.2"
-    implementation "com.google.android.material:material:1.1.0-alpha01"
+    implementation "com.google.android.material:material:1.1.0-alpha02"
     implementation "com.github.skydoves:powermenu:2.0.6"
     implementation project(":colorpickerview")
 }
