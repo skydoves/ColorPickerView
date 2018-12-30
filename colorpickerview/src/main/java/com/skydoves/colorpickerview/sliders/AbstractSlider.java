@@ -133,7 +133,6 @@ public abstract class AbstractSlider extends FrameLayout {
                     selector.setPressed(false);
                     return false;
             }
-            return true;
         } else
             return false;
     }
