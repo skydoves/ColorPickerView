@@ -179,10 +179,9 @@ public class ColorPickerView extends FrameLayout {
 
         if(pixelColor != Color.TRANSPARENT && pixelColor != Color.BLACK) {
             selectedColor = pixelColor;
-            selector.setX(snapPoint.x - (selector.getMeasuredWidth() / 2));
-            selector.setY(snapPoint.y - (selector.getMeasuredHeight() / 2));
             selectedPoint = new Point(snapPoint.x, snapPoint.y);
-            handleFlagView(getCenterPoint(snapPoint.x, snapPoint.y));
+            setCoordinate(snapPoint.x, snapPoint.y);
+            handleFlagView(selectedPoint);
             notifyToSlideBars();
 
             if(ACTON_UP) {
@@ -270,6 +269,7 @@ public class ColorPickerView extends FrameLayout {
     }
 
     private void handleFlagView(Point centerPoint) {
+        centerPoint = getCenterPoint(centerPoint.x, centerPoint.y);
         if (flagView != null) {
             if(flagMode == FlagMode.ALWAYS) flagView.visible();
             int posX = centerPoint.x - flagView.getWidth() / 2 + selector.getWidth() / 2;
@@ -359,13 +359,33 @@ public class ColorPickerView extends FrameLayout {
     }
 
     public void setSelectorPoint(int x, int y) {
-        selector.setX(x);
-        selector.setY(y);
-        selectedPoint = new Point(x, y);
         selectedColor = getColorFromBitmap(x, y);
-        fireColorListener(getColor(), false);
-        notifyToSlideBars();
-        handleFlagView(new Point(x, y));
+        if(selectedColor != Color.TRANSPARENT) {
+            selectedPoint = new Point(x, y);
+            setCoordinate(x, y);
+            fireColorListener(getColor(), false);
+            notifyToSlideBars();
+            handleFlagView(new Point(x, y));
+        }
+    }
+
+    public void selectByHsv(int color) {
+        int radius = getMeasuredWidth() / 2;
+
+        float[] hsv = new float[3];
+        Color.colorToHSV(color, hsv);
+
+        double x = hsv[1] * Math.cos(Math.toRadians(hsv[0]));
+        double y = hsv[1] * Math.sin(Math.toRadians(hsv[0]));
+
+        int pointX = (int) ((x + 1) * radius);
+        int pointY = (int) ((1 - y) * radius);
+        setSelectorPoint(pointX, pointY);
+    }
+
+    private void setCoordinate(int x, int y) {
+        selector.setX(x - (selector.getMeasuredWidth() / 2));
+        selector.setY(y - (selector.getMeasuredHeight() / 2));
     }
 
     public void setPaletteDrawable(Drawable drawable) {
@@ -408,8 +428,7 @@ public class ColorPickerView extends FrameLayout {
     }
 
     public void selectCenter() {
-        setSelectorPoint(getMeasuredWidth() / 2 - selector.getWidth() / 2,
-                getMeasuredHeight() / 2- selector.getHeight() / 2);
+        setSelectorPoint(getMeasuredWidth() / 2, getMeasuredHeight() / 2);
     }
 
     public void setACTON_UP(boolean value) {
