@@ -11,22 +11,22 @@
         android:id="@+id/flag_color_layout"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_marginTop="6dp"
         android:layout_marginLeft="5dp"
+        android:layout_marginTop="6dp"
         android:background="@android:color/white"
-        app:tileSize="10"/>
+        app:tileSize="10" />
 
     <TextView
         android:id="@+id/flag_color_code"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="6dp"
         android:layout_marginRight="5dp"
-        android:textSize="14dp"
-        android:textColor="@android:color/white"
-        android:maxLines="1"
         android:ellipsize="end"
+        android:maxLines="1"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        tools:text="#ffffff"/>
+        android:textColor="@android:color/white"
+        android:textSize="14dp"
+        tools:text="#ffffff" />
 </LinearLayout>

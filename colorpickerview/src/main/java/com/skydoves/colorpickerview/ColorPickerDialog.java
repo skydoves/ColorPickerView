@@ -20,7 +20,6 @@ package com.skydoves.colorpickerview;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import androidx.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +30,8 @@ import com.skydoves.colorpickerview.listeners.ColorListener;
 import com.skydoves.colorpickerview.listeners.ColorPickerViewListener;
 import com.skydoves.colorpickerview.sliders.AlphaSlideBar;
 import com.skydoves.colorpickerview.sliders.BrightnessSlideBar;
+
+import androidx.annotation.NonNull;
 
 @SuppressWarnings({"WeakerAccess", "unchecked", "unused"})
 public class ColorPickerDialog extends AlertDialog {
@@ -67,6 +68,33 @@ public class ColorPickerDialog extends AlertDialog {
         this.colorPickerView.setColorListener(colorListener);
     }
 
+    /**
+     * disable set overrides
+     */
+    @Override
+    public void setContentView(int layoutResID) {
+    }
+
+    @Override
+    public void setContentView(@NonNull View view) {
+    }
+
+    @Override
+    public void setContentView(@NonNull View view, ViewGroup.LayoutParams params) {
+    }
+
+    @Override
+    public void addContentView(@NonNull View view, ViewGroup.LayoutParams params) {
+    }
+
+    @Override
+    public void setView(View view) {
+    }
+
+    @Override
+    public void setView(View view, int viewSpacingLeft, int viewSpacingTop, int viewSpacingRight, int viewSpacingBottom) {
+    }
+
     public static class Builder extends AlertDialog.Builder {
         private ColorPickerView colorPickerView;
         private View view;
@@ -85,7 +113,7 @@ public class ColorPickerDialog extends AlertDialog {
             initColorPickerView();
         }
 
-        private void initColorPickerView()  {
+        private void initColorPickerView() {
             LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             this.view = layoutInflater.inflate(R.layout.layout_dialog_colorpicker, null);
             this.colorPickerView = view.findViewById(R.id.ColorPickerView);
@@ -132,42 +160,15 @@ public class ColorPickerDialog extends AlertDialog {
             OnClickListener onClickListener = new OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    if(colorListener instanceof ColorListener) {
-                        ((ColorListener)colorListener).onColorSelected(colorPickerView.getColor(), true);
-                    } else if(colorListener instanceof ColorEnvelopeListener) {
-                        ((ColorEnvelopeListener)colorListener).onColorSelected(colorPickerView.getColorEnvelope(), true);
+                    if (colorListener instanceof ColorListener) {
+                        ((ColorListener) colorListener).onColorSelected(colorPickerView.getColor(), true);
+                    } else if (colorListener instanceof ColorEnvelopeListener) {
+                        ((ColorEnvelopeListener) colorListener).onColorSelected(colorPickerView.getColorEnvelope(), true);
                     }
                 }
             };
 
             return super.setPositiveButton(text, onClickListener);
         }
-    }
-
-    /**
-     * disable set overrides
-     */
-    @Override
-    public void setContentView(int layoutResID) {
-    }
-
-    @Override
-    public void setContentView(@NonNull View view) {
-    }
-
-    @Override
-    public void setContentView(@NonNull View view, ViewGroup.LayoutParams params) {
-    }
-
-    @Override
-    public void addContentView(@NonNull View view, ViewGroup.LayoutParams params) {
-    }
-
-    @Override
-    public void setView(View view) {
-    }
-
-    @Override
-    public void setView(View view, int viewSpacingLeft, int viewSpacingTop, int viewSpacingRight, int viewSpacingBottom) {
     }
 }

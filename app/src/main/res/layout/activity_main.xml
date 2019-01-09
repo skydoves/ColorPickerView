@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/background">
+    android:background="@color/background"
+    android:orientation="vertical">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -17,12 +16,12 @@
 
             <ImageView
                 android:id="@+id/overflowMenu"
-                android:onClick="overflowMenu"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
+                android:layout_marginRight="10dp"
+                android:onClick="overflowMenu"
                 android:src="@drawable/ic_list_white_24dp"
-                android:tint="@android:color/white"
-                android:layout_marginRight="10dp"/>
+                android:tint="@android:color/white" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -38,9 +37,9 @@
         android:id="@+id/colorPickerView"
         android:layout_width="300dp"
         android:layout_height="300dp"
+        android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
-        android:layout_gravity="center"
         app:palette="@drawable/palette"
         app:selector="@drawable/wheel" />
 
@@ -49,18 +48,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        app:selector_AlphaSlideBar="@drawable/wheel"
         app:borderColor_AlphaSlideBar="@android:color/darker_gray"
-        app:borderSize_AlphaSlideBar="5"/>
+        app:borderSize_AlphaSlideBar="5"
+        app:selector_AlphaSlideBar="@drawable/wheel" />
 
     <com.skydoves.colorpickerview.sliders.BrightnessSlideBar
         android:id="@+id/brightnessSlide"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        app:selector_BrightnessSlider="@drawable/wheel"
         app:borderColor_BrightnessSlider="@android:color/darker_gray"
-        app:borderSize_BrightnessSlider="5"/>
+        app:borderSize_BrightnessSlider="5"
+        app:selector_BrightnessSlider="@drawable/wheel" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -72,20 +71,20 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:text="@android:color/white"
             android:textColor="@color/colorAccent"
-            android:textStyle="bold"
             android:textSize="20sp"
-            android:layout_gravity="center"/>
+            android:textStyle="bold" />
 
         <com.skydoves.colorpickerview.AlphaTileView
             android:id="@+id/alphaTileView"
             android:layout_width="55dp"
             android:layout_height="55dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
             android:background="@android:color/white"
             android:orientation="horizontal"
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center"
-            app:tileSize="20"/>
+            app:tileSize="20" />
     </LinearLayout>
 </LinearLayout>

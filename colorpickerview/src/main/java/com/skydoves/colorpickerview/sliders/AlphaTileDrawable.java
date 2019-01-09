@@ -25,6 +25,7 @@ import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+
 import androidx.annotation.NonNull;
 
 @SuppressWarnings({"WeakerAccess", "unused"})
@@ -104,9 +105,17 @@ public class AlphaTileDrawable extends Drawable {
         public Builder() {
         }
 
+        public int getTileSize() {
+            return tileSize;
+        }
+
         public Builder setTileSize(int tileSize) {
             this.tileSize = tileSize;
             return this;
+        }
+
+        public int getTileOddColor() {
+            return tileOddColor;
         }
 
         public Builder setTileOddColor(int color) {
@@ -114,21 +123,13 @@ public class AlphaTileDrawable extends Drawable {
             return this;
         }
 
+        public int getTileEvenColor() {
+            return tileEvenColor;
+        }
+
         public Builder setTileEvenColor(int color) {
             this.tileEvenColor = color;
             return this;
-        }
-
-        public int getTileSize() {
-            return tileSize;
-        }
-
-        public int getTileOddColor() {
-            return tileOddColor;
-        }
-
-        public int getTileEvenColor() {
-            return tileEvenColor;
         }
 
         public AlphaTileDrawable build() {

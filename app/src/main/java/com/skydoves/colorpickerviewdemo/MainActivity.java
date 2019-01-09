@@ -19,8 +19,6 @@ package com.skydoves.colorpickerviewdemo;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import androidx.core.content.ContextCompat;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
@@ -35,6 +33,9 @@ import com.skydoves.powermenu.OnMenuItemClickListener;
 import com.skydoves.powermenu.PowerMenu;
 import com.skydoves.powermenu.PowerMenuItem;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
 public class MainActivity extends AppCompatActivity {
 
     private ColorPickerView colorPickerView;
@@ -43,13 +44,30 @@ public class MainActivity extends AppCompatActivity {
     private boolean FLAG_SELECTOR = false;
 
     private PowerMenu powerMenu;
+    private OnMenuItemClickListener<PowerMenuItem> powerMenuItemClickListener = new OnMenuItemClickListener<PowerMenuItem>() {
+        @Override
+        public void onItemClick(int position, PowerMenuItem item) {
+            switch (position) {
+                case 0:
+                    palette();
+                    break;
+                case 1:
+                    selector();
+                    break;
+                case 2:
+                    dialog();
+                    break;
+            }
+            powerMenu.dismiss();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        powerMenu =  PowerMenuUtils.getPowerMenu(this, this, powerMenuItemClickListener);
+        powerMenu = PowerMenuUtils.getPowerMenu(this, this, powerMenuItemClickListener);
 
         colorPickerView = findViewById(R.id.colorPickerView);
         colorPickerView.setFlagView(new CustomFlag(this, R.layout.layout_flag));
@@ -68,24 +86,6 @@ public class MainActivity extends AppCompatActivity {
         final BrightnessSlideBar brightnessSlideBar = findViewById(R.id.brightnessSlide);
         colorPickerView.attachBrightnessSlider(brightnessSlideBar);
     }
-
-    private OnMenuItemClickListener<PowerMenuItem> powerMenuItemClickListener = new OnMenuItemClickListener<PowerMenuItem>() {
-        @Override
-        public void onItemClick(int position, PowerMenuItem item) {
-            switch (position) {
-               case 0 :
-                   palette();
-                   break;
-                case 1:
-                    selector();
-                    break;
-                case 2:
-                    dialog();
-                    break;
-            }
-            powerMenu.dismiss();
-        }
-    };
 
     /**
      * set layout color & textView html code
@@ -154,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if(powerMenu.isShowing())
+        if (powerMenu.isShowing())
             powerMenu.dismiss();
         else
             super.onBackPressed();

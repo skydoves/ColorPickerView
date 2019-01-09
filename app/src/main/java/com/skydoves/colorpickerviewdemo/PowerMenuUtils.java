@@ -1,6 +1,5 @@
 package com.skydoves.colorpickerviewdemo;
 
-import androidx.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.graphics.Color;
 
@@ -8,6 +7,8 @@ import com.skydoves.powermenu.MenuAnimation;
 import com.skydoves.powermenu.OnMenuItemClickListener;
 import com.skydoves.powermenu.PowerMenu;
 import com.skydoves.powermenu.PowerMenuItem;
+
+import androidx.lifecycle.LifecycleOwner;
 
 /**
  * Developed by skydoves on 2018-09-11.

@@ -25,12 +25,13 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Build;
-import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewTreeObserver;
 
 import com.skydoves.colorpickerview.sliders.AlphaTileDrawable;
+
+import androidx.annotation.Nullable;
 
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class AlphaTileView extends View {

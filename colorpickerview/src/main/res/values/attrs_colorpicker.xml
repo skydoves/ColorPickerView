@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="ColorPickerView">
-        <attr name="palette" format="reference"/>
-        <attr name="selector" format="reference"/>
-        <attr name="alpha_selector" format="float"/>
-        <attr name="alpha_flag" format="float"/>
+        <attr name="palette" format="reference" />
+        <attr name="selector" format="reference" />
+        <attr name="alpha_selector" format="float" />
+        <attr name="alpha_flag" format="float" />
     </declare-styleable>
     <declare-styleable name="MultiColorPickerView">
-        <attr name="palette2" format="reference"/>
+        <attr name="palette2" format="reference" />
     </declare-styleable>
     <declare-styleable name="AlphaSlideBar">
-        <attr name="selector_AlphaSlideBar" format="reference"/>
-        <attr name="borderColor_AlphaSlideBar" format="color"/>
-        <attr name="borderSize_AlphaSlideBar" format="integer"/>
+        <attr name="selector_AlphaSlideBar" format="reference" />
+        <attr name="borderColor_AlphaSlideBar" format="color" />
+        <attr name="borderSize_AlphaSlideBar" format="integer" />
     </declare-styleable>
     <declare-styleable name="BrightnessSlideBar">
-        <attr name="selector_BrightnessSlider" format="reference"/>
-        <attr name="borderColor_BrightnessSlider" format="color"/>
-        <attr name="borderSize_BrightnessSlider" format="integer"/>
+        <attr name="selector_BrightnessSlider" format="reference" />
+        <attr name="borderColor_BrightnessSlider" format="color" />
+        <attr name="borderSize_BrightnessSlider" format="integer" />
     </declare-styleable>
     <declare-styleable name="AlphaTileView">
-        <attr name="tileSize" format="integer"/>
-        <attr name="tileOddColor" format="color"/>
-        <attr name="tileEvenColor" format="color"/>
+        <attr name="tileSize" format="integer" />
+        <attr name="tileOddColor" format="color" />
+        <attr name="tileEvenColor" format="color" />
     </declare-styleable>
 </resources>

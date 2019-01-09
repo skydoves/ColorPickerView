@@ -38,19 +38,15 @@ import com.skydoves.colorpickerview.ColorPickerView;
 
 public abstract class AbstractSlider extends FrameLayout {
 
+    public ColorPickerView colorPickerView;
     protected Paint colorPaint;
     protected Paint borderPaint;
     protected float selectorPosition = 1f;
-
-    public ColorPickerView colorPickerView;
-
-    private ImageView selector;
     protected Drawable selectorDrawable;
-
     protected int borderSize = 2;
     protected int borderColor = Color.BLACK;
-
     protected int color = Color.WHITE;
+    private ImageView selector;
 
     public AbstractSlider(Context context) {
         super(context);
@@ -77,7 +73,9 @@ public abstract class AbstractSlider extends FrameLayout {
     }
 
     protected abstract void getAttrs(AttributeSet attrs);
+
     protected abstract void updatePaint(Paint colorPaint);
+
     public abstract int assembleColor();
 
     private void onCreate() {
@@ -118,7 +116,7 @@ public abstract class AbstractSlider extends FrameLayout {
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if(colorPickerView != null) {
+        if (colorPickerView != null) {
             switch (event.getActionMasked()) {
                 case MotionEvent.ACTION_UP:
                     selector.setPressed(true);
@@ -145,7 +143,7 @@ public abstract class AbstractSlider extends FrameLayout {
         if (eventX > right) eventX = right;
         selectorPosition = (eventX - left) / (right - left);
 
-        Point snapPoint = new Point((int)event.getX(), (int)event.getY());
+        Point snapPoint = new Point((int) event.getX(), (int) event.getY());
         selector.setX(snapPoint.x - (selector.getMeasuredWidth() / 2));
         if (colorPickerView.getACTON_UP()) {
             if (event.getAction() == MotionEvent.ACTION_UP) {
@@ -156,8 +154,8 @@ public abstract class AbstractSlider extends FrameLayout {
         }
 
         int maxPos = getMeasuredWidth() - selector.getMeasuredWidth();
-        if(selector.getX() >= maxPos) selector.setX(maxPos);
-        if(selector.getX() <= 0) selector.setX(0);
+        if (selector.getX() >= maxPos) selector.setX(maxPos);
+        if (selector.getX() <= 0) selector.setX(0);
     }
 
     private void initializeSelector() {

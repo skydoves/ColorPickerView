@@ -54,11 +54,11 @@ public class AlphaSlideBar extends AbstractSlider {
     protected void getAttrs(AttributeSet attrs) {
         TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.AlphaSlideBar);
         try {
-            if(a.hasValue(R.styleable.AlphaSlideBar_selector_AlphaSlideBar))
+            if (a.hasValue(R.styleable.AlphaSlideBar_selector_AlphaSlideBar))
                 selectorDrawable = a.getDrawable(R.styleable.AlphaSlideBar_selector_AlphaSlideBar);
-            if(a.hasValue(R.styleable.AlphaSlideBar_borderColor_AlphaSlideBar))
+            if (a.hasValue(R.styleable.AlphaSlideBar_borderColor_AlphaSlideBar))
                 borderColor = a.getColor(R.styleable.AlphaSlideBar_borderColor_AlphaSlideBar, borderColor);
-            if(a.hasValue(R.styleable.AlphaSlideBar_borderSize_AlphaSlideBar))
+            if (a.hasValue(R.styleable.AlphaSlideBar_borderSize_AlphaSlideBar))
                 borderSize = a.getInt(R.styleable.AlphaSlideBar_borderSize_AlphaSlideBar, borderSize);
         } finally {
             a.recycle();
