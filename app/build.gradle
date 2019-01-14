@@ -26,3 +26,5 @@ dependencies {
     implementation "com.github.skydoves:powermenu:2.0.6"
     implementation project(":colorpickerview")
 }
+
+apply from: '../spotless.gradle'
