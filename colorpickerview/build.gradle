@@ -1,16 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.novoda.bintray-release'
-
-publish {
-    userOrg = 'devmagician'
-    groupId = 'com.github.skydoves'
-    artifactId = 'colorpickerview'
-    publishVersion = '2.0.2'
-    desc = 'This is ColorPickerView by skydoves'
-    website = 'https://github.com/skydoves/ColorPickerView'
-    issueTracker = "${website}/issues"
-    repository = "${website}.git"
-}
+apply from: '../publish.gradle'
 
 android {
     compileSdkVersion 28
@@ -26,3 +16,5 @@ android {
 dependencies {
     implementation "androidx.annotation:annotation:1.0.1"
 }
+
+apply from: '../spotless.gradle'
