@@ -1,6 +1,5 @@
-
 /*
- * Copyright (C) 2018 skydoves
+ * Copyright (C) 2017 skydoves
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,5 +17,6 @@
 package com.skydoves.colorpickerview.flag;
 
 public enum FlagMode {
-    ALWAYS, LAST
+    ALWAYS,
+    LAST
 }

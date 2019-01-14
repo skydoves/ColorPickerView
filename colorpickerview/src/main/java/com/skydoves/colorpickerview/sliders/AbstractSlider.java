@@ -1,6 +1,5 @@
-
 /*
- * Copyright (C) 2018 skydoves
+ * Copyright (C) 2017 skydoves
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +32,6 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-
 import com.skydoves.colorpickerview.ColorPickerView;
 
 public abstract class AbstractSlider extends FrameLayout {
@@ -90,7 +88,10 @@ public abstract class AbstractSlider extends FrameLayout {
         if (selectorDrawable != null) {
             selector.setImageDrawable(selectorDrawable);
 
-            FrameLayout.LayoutParams thumbParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            FrameLayout.LayoutParams thumbParams =
+                    new LayoutParams(
+                            ViewGroup.LayoutParams.WRAP_CONTENT,
+                            ViewGroup.LayoutParams.WRAP_CONTENT);
             thumbParams.gravity = Gravity.CENTER_VERTICAL;
             addView(selector, thumbParams);
         }
@@ -131,8 +132,7 @@ public abstract class AbstractSlider extends FrameLayout {
                     selector.setPressed(false);
                     return false;
             }
-        } else
-            return false;
+        } else return false;
     }
 
     private void onTouchReceived(MotionEvent event) {
@@ -159,17 +159,19 @@ public abstract class AbstractSlider extends FrameLayout {
     }
 
     private void initializeSelector() {
-        getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                if (Build.VERSION.SDK_INT < 16) {
-                    getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                } else {
-                    getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                }
-                selector.setX(getMeasuredWidth() - selector.getMeasuredWidth());
-            }
-        });
+        getViewTreeObserver()
+                .addOnGlobalLayoutListener(
+                        new ViewTreeObserver.OnGlobalLayoutListener() {
+                            @Override
+                            public void onGlobalLayout() {
+                                if (Build.VERSION.SDK_INT < 16) {
+                                    getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                                } else {
+                                    getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                                }
+                                selector.setX(getMeasuredWidth() - selector.getMeasuredWidth());
+                            }
+                        });
     }
 
     public int getColor() {

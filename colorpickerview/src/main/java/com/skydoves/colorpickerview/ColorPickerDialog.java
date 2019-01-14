@@ -1,6 +1,5 @@
-
 /*
- * Copyright (C) 2018 skydoves
+ * Copyright (C) 2017 skydoves
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,21 +16,20 @@
 
 package com.skydoves.colorpickerview;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import androidx.annotation.NonNull;
 import com.skydoves.colorpickerview.flag.FlagView;
 import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener;
 import com.skydoves.colorpickerview.listeners.ColorListener;
 import com.skydoves.colorpickerview.listeners.ColorPickerViewListener;
 import com.skydoves.colorpickerview.sliders.AlphaSlideBar;
 import com.skydoves.colorpickerview.sliders.BrightnessSlideBar;
-
-import androidx.annotation.NonNull;
 
 @SuppressWarnings({"WeakerAccess", "unchecked", "unused"})
 public class ColorPickerDialog extends AlertDialog {
@@ -43,7 +41,8 @@ public class ColorPickerDialog extends AlertDialog {
         initColorPickerView();
     }
 
-    protected ColorPickerDialog(Context context, boolean cancelable, OnCancelListener cancelListener) {
+    protected ColorPickerDialog(
+            Context context, boolean cancelable, OnCancelListener cancelListener) {
         super(context, cancelable, cancelListener);
         initColorPickerView();
     }
@@ -55,7 +54,7 @@ public class ColorPickerDialog extends AlertDialog {
 
     private void initColorPickerView() {
         LayoutInflater layoutInflater = this.getLayoutInflater();
-        View view = layoutInflater.inflate(R.layout.layout_dialog_colorpicker, null);
+        @SuppressLint("InflateParams") View view = layoutInflater.inflate(R.layout.layout_dialog_colorpicker, null);
         this.colorPickerView = view.findViewById(R.id.ColorPickerView);
         super.setView(view);
     }
@@ -68,33 +67,31 @@ public class ColorPickerDialog extends AlertDialog {
         this.colorPickerView.setColorListener(colorListener);
     }
 
-    /**
-     * disable set overrides
-     */
+    /** disable set overrides */
     @Override
-    public void setContentView(int layoutResID) {
-    }
+    public void setContentView(int layoutResID) {}
 
     @Override
-    public void setContentView(@NonNull View view) {
-    }
+    public void setContentView(@NonNull View view) {}
 
     @Override
-    public void setContentView(@NonNull View view, ViewGroup.LayoutParams params) {
-    }
+    public void setContentView(@NonNull View view, ViewGroup.LayoutParams params) {}
 
     @Override
-    public void addContentView(@NonNull View view, ViewGroup.LayoutParams params) {
-    }
+    public void addContentView(@NonNull View view, ViewGroup.LayoutParams params) {}
 
     @Override
-    public void setView(View view) {
-    }
+    public void setView(View view) {}
 
     @Override
-    public void setView(View view, int viewSpacingLeft, int viewSpacingTop, int viewSpacingRight, int viewSpacingBottom) {
-    }
+    public void setView(
+            View view,
+            int viewSpacingLeft,
+            int viewSpacingTop,
+            int viewSpacingRight,
+            int viewSpacingBottom) {}
 
+    @SuppressWarnings("ConstantConditions")
     public static class Builder extends AlertDialog.Builder {
         private ColorPickerView colorPickerView;
         private View view;
@@ -113,16 +110,19 @@ public class ColorPickerDialog extends AlertDialog {
             initColorPickerView();
         }
 
+        @SuppressLint("InflateParams")
         private void initColorPickerView() {
-            LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater layoutInflater =
+                    (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             this.view = layoutInflater.inflate(R.layout.layout_dialog_colorpicker, null);
             this.colorPickerView = view.findViewById(R.id.ColorPickerView);
-            this.colorPickerView.setColorListener(new ColorListener() {
-                @Override
-                public void onColorSelected(int color, boolean fromUser) {
-                    // nothing
-                }
-            });
+            this.colorPickerView.setColorListener(
+                    new ColorListener() {
+                        @Override
+                        public void onColorSelected(int color, boolean fromUser) {
+                            // nothing
+                        }
+                    });
             super.setView(view);
         }
 
@@ -156,17 +156,21 @@ public class ColorPickerDialog extends AlertDialog {
         }
 
         @SuppressWarnings("UnusedReturnValue")
-        public AlertDialog.Builder setPositiveButton(CharSequence text, final ColorPickerViewListener colorListener) {
-            OnClickListener onClickListener = new OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    if (colorListener instanceof ColorListener) {
-                        ((ColorListener) colorListener).onColorSelected(colorPickerView.getColor(), true);
-                    } else if (colorListener instanceof ColorEnvelopeListener) {
-                        ((ColorEnvelopeListener) colorListener).onColorSelected(colorPickerView.getColorEnvelope(), true);
-                    }
-                }
-            };
+        public AlertDialog.Builder setPositiveButton(
+                CharSequence text, final ColorPickerViewListener colorListener) {
+            OnClickListener onClickListener =
+                    new OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            if (colorListener instanceof ColorListener) {
+                                ((ColorListener) colorListener)
+                                        .onColorSelected(colorPickerView.getColor(), true);
+                            } else if (colorListener instanceof ColorEnvelopeListener) {
+                                ((ColorEnvelopeListener) colorListener)
+                                        .onColorSelected(colorPickerView.getColorEnvelope(), true);
+                            }
+                        }
+                    };
 
             return super.setPositiveButton(text, onClickListener);
         }

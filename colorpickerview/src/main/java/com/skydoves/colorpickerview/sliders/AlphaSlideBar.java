@@ -1,6 +1,5 @@
-
 /*
- * Copyright (C) 2018 skydoves
+ * Copyright (C) 2017 skydoves
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +25,6 @@ import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Shader;
 import android.util.AttributeSet;
-
 import com.skydoves.colorpickerview.R;
 
 public class AlphaSlideBar extends AbstractSlider {
@@ -57,9 +55,12 @@ public class AlphaSlideBar extends AbstractSlider {
             if (a.hasValue(R.styleable.AlphaSlideBar_selector_AlphaSlideBar))
                 selectorDrawable = a.getDrawable(R.styleable.AlphaSlideBar_selector_AlphaSlideBar);
             if (a.hasValue(R.styleable.AlphaSlideBar_borderColor_AlphaSlideBar))
-                borderColor = a.getColor(R.styleable.AlphaSlideBar_borderColor_AlphaSlideBar, borderColor);
+                borderColor =
+                        a.getColor(
+                                R.styleable.AlphaSlideBar_borderColor_AlphaSlideBar, borderColor);
             if (a.hasValue(R.styleable.AlphaSlideBar_borderSize_AlphaSlideBar))
-                borderSize = a.getInt(R.styleable.AlphaSlideBar_borderSize_AlphaSlideBar, borderSize);
+                borderSize =
+                        a.getInt(R.styleable.AlphaSlideBar_borderSize_AlphaSlideBar, borderSize);
         } finally {
             a.recycle();
         }
@@ -80,8 +81,15 @@ public class AlphaSlideBar extends AbstractSlider {
         Color.colorToHSV(getColor(), hsv);
         int startColor = Color.HSVToColor(0, hsv);
         int endColor = Color.HSVToColor(255, hsv);
-        Shader shader = new LinearGradient(0, 0, getMeasuredWidth(), getMeasuredHeight(),
-                startColor, endColor, Shader.TileMode.CLAMP);
+        Shader shader =
+                new LinearGradient(
+                        0,
+                        0,
+                        getMeasuredWidth(),
+                        getMeasuredHeight(),
+                        startColor,
+                        endColor,
+                        Shader.TileMode.CLAMP);
         colorPaint.setShader(shader);
     }
 

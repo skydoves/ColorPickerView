@@ -1,6 +1,5 @@
-
 /*
- * Copyright (C) 2018 skydoves
+ * Copyright (C) 2017 skydoves
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +20,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RelativeLayout;
-
 import com.skydoves.colorpickerview.ColorEnvelope;
 
 public abstract class FlagView extends RelativeLayout {
@@ -33,8 +31,11 @@ public abstract class FlagView extends RelativeLayout {
 
     private void initializeLayout(int layout) {
         View inflated = LayoutInflater.from(getContext()).inflate(layout, this);
-        inflated.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-        inflated.measure(MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED), MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
+        inflated.setLayoutParams(
+                new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+        inflated.measure(
+                MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED),
+                MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
         inflated.layout(0, 0, inflated.getMeasuredWidth(), inflated.getMeasuredHeight());
     }
 
