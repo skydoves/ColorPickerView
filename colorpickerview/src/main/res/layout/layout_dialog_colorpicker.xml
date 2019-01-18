@@ -5,35 +5,51 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <com.skydoves.colorpickerview.ColorPickerView
-        android:id="@+id/ColorPickerView"
+    <FrameLayout
+        android:id="@+id/colorPickerViewFrame"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_margin="20dp"
-        app:palette="@drawable/palette"
-        app:selector="@drawable/wheel" />
+        android:layout_height="wrap_content">
 
-    <com.skydoves.colorpickerview.sliders.AlphaSlideBar
-        android:id="@+id/AlphaSlideBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginBottom="10dp"
-        android:visibility="gone"
-        app:selector_AlphaSlideBar="@drawable/wheel" />
+        <com.skydoves.colorpickerview.ColorPickerView
+            android:id="@+id/ColorPickerView"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_margin="20dp"
+            app:palette="@drawable/palette"
+            app:selector="@drawable/wheel" />
+    </FrameLayout>
 
-    <com.skydoves.colorpickerview.sliders.BrightnessSlideBar
-        android:id="@+id/BrightnessSlideBar"
+    <FrameLayout
+        android:id="@+id/alphaSlideBarFrame"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginBottom="10dp"
-        android:visibility="gone"
-        app:selector_BrightnessSlider="@drawable/wheel" />
+        android:layout_height="wrap_content">
+
+        <com.skydoves.colorpickerview.sliders.AlphaSlideBar
+            android:id="@+id/AlphaSlideBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp"
+            app:selector_AlphaSlideBar="@drawable/wheel" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/brightnessSlideBarFrame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.skydoves.colorpickerview.sliders.BrightnessSlideBar
+            android:id="@+id/BrightnessSlideBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp"
+            app:selector_BrightnessSlider="@drawable/wheel" />
+    </FrameLayout>
 
     <Space
         android:layout_width="match_parent"

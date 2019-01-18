@@ -154,7 +154,7 @@ public class ColorPickerView extends FrameLayout {
                         });
     }
 
-    public void onCreateByBuilder(Builder builder) {
+    protected void onCreateByBuilder(Builder builder) {
         FrameLayout.LayoutParams params =
                 new FrameLayout.LayoutParams(
                         SizeUtils.dp2Px(getContext(), builder.width),
