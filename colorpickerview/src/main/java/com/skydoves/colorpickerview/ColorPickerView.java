@@ -99,6 +99,11 @@ public class ColorPickerView extends FrameLayout {
                         a.getFloat(R.styleable.ColorPickerView_alpha_selector, alpha_selector);
             if (a.hasValue(R.styleable.ColorPickerView_alpha_flag))
                 alpha_flag = a.getFloat(R.styleable.ColorPickerView_alpha_flag, alpha_flag);
+            if (a.hasValue(R.styleable.ColorPickerView_actionMode)) {
+                int actionMode = a.getInteger(R.styleable.ColorPickerView_actionMode, 0);
+                if (actionMode == 0) this.actionMode = ActionMode.ALWAYS;
+                else if (actionMode == 1) this.actionMode = ActionMode.LAST;
+            }
         } finally {
             a.recycle();
         }

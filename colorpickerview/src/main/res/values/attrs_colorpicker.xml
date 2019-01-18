@@ -5,6 +5,10 @@
         <attr name="selector" format="reference" />
         <attr name="alpha_selector" format="float" />
         <attr name="alpha_flag" format="float" />
+        <attr name="actionMode" format="enum">
+            <enum name="always" value="0"/>
+            <enum name="last" value="1"/>
+        </attr>
     </declare-styleable>
     <declare-styleable name="MultiColorPickerView">
         <attr name="palette2" format="reference" />
