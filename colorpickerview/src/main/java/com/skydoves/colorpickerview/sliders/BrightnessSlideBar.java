@@ -23,8 +23,10 @@ import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Shader;
 import android.util.AttributeSet;
+
 import com.skydoves.colorpickerview.R;
 
+@SuppressWarnings("unused")
 public class BrightnessSlideBar extends AbstractSlider {
 
     public BrightnessSlideBar(Context context) {
@@ -40,7 +42,7 @@ public class BrightnessSlideBar extends AbstractSlider {
     }
 
     public BrightnessSlideBar(
-            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+          Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
@@ -50,17 +52,17 @@ public class BrightnessSlideBar extends AbstractSlider {
         try {
             if (a.hasValue(R.styleable.BrightnessSlideBar_selector_BrightnessSlider))
                 selectorDrawable =
-                        a.getDrawable(R.styleable.BrightnessSlideBar_selector_BrightnessSlider);
+                      a.getDrawable(R.styleable.BrightnessSlideBar_selector_BrightnessSlider);
             if (a.hasValue(R.styleable.BrightnessSlideBar_borderColor_BrightnessSlider))
                 borderColor =
-                        a.getColor(
-                                R.styleable.BrightnessSlideBar_borderColor_BrightnessSlider,
-                                borderColor);
+                      a.getColor(
+                            R.styleable.BrightnessSlideBar_borderColor_BrightnessSlider,
+                            borderColor);
             if (a.hasValue(R.styleable.BrightnessSlideBar_borderSize_BrightnessSlider))
                 borderSize =
-                        a.getInt(
-                                R.styleable.BrightnessSlideBar_borderSize_BrightnessSlider,
-                                borderSize);
+                      a.getInt(
+                            R.styleable.BrightnessSlideBar_borderSize_BrightnessSlider,
+                            borderSize);
         } finally {
             a.recycle();
         }
@@ -75,8 +77,8 @@ public class BrightnessSlideBar extends AbstractSlider {
         hsv[2] = 1;
         int endColor = Color.HSVToColor(hsv);
         Shader shader =
-                new LinearGradient(
-                        0, 0, getWidth(), getHeight(), startColor, endColor, Shader.TileMode.CLAMP);
+              new LinearGradient(
+                    0, 0, getWidth(), getHeight(), startColor, endColor, Shader.TileMode.CLAMP);
         colorPaint.setShader(shader);
     }
 

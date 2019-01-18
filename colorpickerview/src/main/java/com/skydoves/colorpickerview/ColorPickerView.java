@@ -35,6 +35,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+
 import com.skydoves.colorpickerview.flag.FlagMode;
 import com.skydoves.colorpickerview.flag.FlagView;
 import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener;
@@ -42,9 +43,10 @@ import com.skydoves.colorpickerview.listeners.ColorListener;
 import com.skydoves.colorpickerview.listeners.ColorPickerViewListener;
 import com.skydoves.colorpickerview.sliders.AlphaSlideBar;
 import com.skydoves.colorpickerview.sliders.BrightnessSlideBar;
+
 import java.util.Locale;
 
-@SuppressWarnings({"WeakerAccess", "unchecked", "unused"})
+@SuppressWarnings({"WeakerAccess", "unchecked", "unused", "IntegerDivisionInFloatingPointContext"})
 public class ColorPickerView extends FrameLayout {
 
     public ColorPickerViewListener mColorListener;
@@ -95,18 +97,18 @@ public class ColorPickerView extends FrameLayout {
 
     private void init() {
         getViewTreeObserver()
-                .addOnGlobalLayoutListener(
-                        new ViewTreeObserver.OnGlobalLayoutListener() {
-                            @Override
-                            public void onGlobalLayout() {
-                                if (Build.VERSION.SDK_INT < 16) {
-                                    getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                                } else {
-                                    getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                                }
-                                selectCenter();
+              .addOnGlobalLayoutListener(
+                    new ViewTreeObserver.OnGlobalLayoutListener() {
+                        @Override
+                        public void onGlobalLayout() {
+                            if (Build.VERSION.SDK_INT < 16) {
+                                getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                            } else {
+                                getViewTreeObserver().removeOnGlobalLayoutListener(this);
                             }
-                        });
+                            selectCenter();
+                        }
+                    });
     }
 
     private void getAttrs(AttributeSet attrs) {
@@ -118,7 +120,7 @@ public class ColorPickerView extends FrameLayout {
                 selectorDrawable = a.getDrawable(R.styleable.ColorPickerView_selector);
             if (a.hasValue(R.styleable.ColorPickerView_alpha_selector))
                 alpha_selector =
-                        a.getFloat(R.styleable.ColorPickerView_alpha_selector, alpha_selector);
+                      a.getFloat(R.styleable.ColorPickerView_alpha_selector, alpha_selector);
             if (a.hasValue(R.styleable.ColorPickerView_alpha_flag))
                 alpha_flag = a.getFloat(R.styleable.ColorPickerView_alpha_flag, alpha_flag);
         } finally {
@@ -132,8 +134,8 @@ public class ColorPickerView extends FrameLayout {
         if (paletteDrawable != null) palette.setImageDrawable(paletteDrawable);
 
         FrameLayout.LayoutParams paletteParam =
-                new LayoutParams(
-                        ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+              new LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         paletteParam.gravity = Gravity.CENTER;
         addView(palette, paletteParam);
 
@@ -142,9 +144,9 @@ public class ColorPickerView extends FrameLayout {
             selector.setImageDrawable(selectorDrawable);
 
             FrameLayout.LayoutParams selectorParam =
-                    new LayoutParams(
-                            ViewGroup.LayoutParams.WRAP_CONTENT,
-                            ViewGroup.LayoutParams.WRAP_CONTENT);
+                  new LayoutParams(
+                        ViewGroup.LayoutParams.WRAP_CONTENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT);
             selectorParam.gravity = Gravity.CENTER;
             addView(selector, selectorParam);
             selector.setAlpha(alpha_selector);
@@ -201,33 +203,33 @@ public class ColorPickerView extends FrameLayout {
         Matrix invertMatrix = new Matrix();
         palette.getImageMatrix().invert(invertMatrix);
 
-        float[] mappedPoints = new float[] {x, y};
+        float[] mappedPoints = new float[]{x, y};
         invertMatrix.mapPoints(mappedPoints);
 
         if (palette.getDrawable() != null
-                && palette.getDrawable() instanceof BitmapDrawable
-                && mappedPoints[0] > 0
-                && mappedPoints[1] > 0
-                && mappedPoints[0] < palette.getDrawable().getIntrinsicWidth()
-                && mappedPoints[1] < palette.getDrawable().getIntrinsicHeight()) {
+              && palette.getDrawable() instanceof BitmapDrawable
+              && mappedPoints[0] > 0
+              && mappedPoints[1] > 0
+              && mappedPoints[0] < palette.getDrawable().getIntrinsicWidth()
+              && mappedPoints[1] < palette.getDrawable().getIntrinsicHeight()) {
 
             invalidate();
 
             Rect rect = palette.getDrawable().getBounds();
             float scaleX = mappedPoints[0] / rect.height();
             int x1 =
-                    (int)
-                            (scaleX
-                                    * ((BitmapDrawable) palette.getDrawable())
-                                            .getBitmap()
-                                            .getHeight());
+                  (int)
+                        (scaleX
+                              * ((BitmapDrawable) palette.getDrawable())
+                              .getBitmap()
+                              .getHeight());
             float scaleY = mappedPoints[1] / rect.width();
             int y1 =
-                    (int)
-                            (scaleY
-                                    * ((BitmapDrawable) palette.getDrawable())
-                                            .getBitmap()
-                                            .getWidth());
+                  (int)
+                        (scaleY
+                              * ((BitmapDrawable) palette.getDrawable())
+                              .getBitmap()
+                              .getWidth());
             return ((BitmapDrawable) palette.getDrawable()).getBitmap().getPixel(x1, y1);
         }
         return 0;
@@ -245,7 +247,7 @@ public class ColorPickerView extends FrameLayout {
                 ((ColorListener) mColorListener).onColorSelected(color, fromUser);
             } else if (mColorListener instanceof ColorEnvelopeListener) {
                 ColorEnvelope envelope =
-                        new ColorEnvelope(color, getHexCode(color), getColorARGB(color));
+                      new ColorEnvelope(color, getHexCode(color), getColorARGB(color));
                 ((ColorEnvelopeListener) mColorListener).onColorSelected(envelope, fromUser);
             }
 
@@ -358,7 +360,7 @@ public class ColorPickerView extends FrameLayout {
 
     private Point getCenterPoint(int x, int y) {
         return new Point(
-                x - (selector.getMeasuredWidth() / 2), y - (selector.getMeasuredHeight() / 2));
+              x - (selector.getMeasuredWidth() / 2), y - (selector.getMeasuredHeight() / 2));
     }
 
     public float getSelectorX() {

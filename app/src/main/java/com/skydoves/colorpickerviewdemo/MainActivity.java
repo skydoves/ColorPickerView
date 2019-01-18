@@ -22,8 +22,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
+
 import com.skydoves.colorpickerview.AlphaTileView;
 import com.skydoves.colorpickerview.ColorEnvelope;
 import com.skydoves.colorpickerview.ColorPickerDialog;
@@ -35,6 +34,9 @@ import com.skydoves.powermenu.OnMenuItemClickListener;
 import com.skydoves.powermenu.PowerMenu;
 import com.skydoves.powermenu.PowerMenuItem;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
 public class MainActivity extends AppCompatActivity {
 
     private ColorPickerView colorPickerView;
@@ -44,23 +46,23 @@ public class MainActivity extends AppCompatActivity {
 
     private PowerMenu powerMenu;
     private OnMenuItemClickListener<PowerMenuItem> powerMenuItemClickListener =
-            new OnMenuItemClickListener<PowerMenuItem>() {
-                @Override
-                public void onItemClick(int position, PowerMenuItem item) {
-                    switch (position) {
-                        case 0:
-                            palette();
-                            break;
-                        case 1:
-                            selector();
-                            break;
-                        case 2:
-                            dialog();
-                            break;
-                    }
-                    powerMenu.dismiss();
-                }
-            };
+          new OnMenuItemClickListener<PowerMenuItem>() {
+              @Override
+              public void onItemClick(int position, PowerMenuItem item) {
+                  switch (position) {
+                      case 0:
+                          palette();
+                          break;
+                      case 1:
+                          selector();
+                          break;
+                      case 2:
+                          dialog();
+                          break;
+                  }
+                  powerMenu.dismiss();
+              }
+          };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,12 +74,12 @@ public class MainActivity extends AppCompatActivity {
         colorPickerView = findViewById(R.id.colorPickerView);
         colorPickerView.setFlagView(new CustomFlag(this, R.layout.layout_flag));
         colorPickerView.setColorListener(
-                new ColorEnvelopeListener() {
-                    @Override
-                    public void onColorSelected(ColorEnvelope envelope, boolean fromUser) {
-                        setLayoutColor(envelope);
-                    }
-                });
+              new ColorEnvelopeListener() {
+                  @Override
+                  public void onColorSelected(ColorEnvelope envelope, boolean fromUser) {
+                      setLayoutColor(envelope);
+                  }
+              });
 
         // attach alphaSlideBar
         final AlphaSlideBar alphaSlideBar = findViewById(R.id.alphaSlideBar);
@@ -106,48 +108,54 @@ public class MainActivity extends AppCompatActivity {
         powerMenu.showAsAnchorLeftTop(view);
     }
 
-    /** change palette drawable resource you must initialize at first in xml */
+    /**
+     * change palette drawable resource you must initialize at first in xml
+     */
     public void palette() {
         if (FLAG_PALETTE)
             colorPickerView.setPaletteDrawable(ContextCompat.getDrawable(this, R.drawable.palette));
         else
             colorPickerView.setPaletteDrawable(
-                    ContextCompat.getDrawable(this, R.drawable.palettebar));
+                  ContextCompat.getDrawable(this, R.drawable.palettebar));
         FLAG_PALETTE = !FLAG_PALETTE;
     }
 
-    /** change selector drawable resource you must initialize at first in xml */
+    /**
+     * change selector drawable resource you must initialize at first in xml
+     */
     public void selector() {
         if (FLAG_SELECTOR)
             colorPickerView.setSelectorDrawable(ContextCompat.getDrawable(this, R.drawable.wheel));
         else
             colorPickerView.setSelectorDrawable(
-                    ContextCompat.getDrawable(this, R.drawable.wheel_dark));
+                  ContextCompat.getDrawable(this, R.drawable.wheel_dark));
         FLAG_SELECTOR = !FLAG_SELECTOR;
     }
 
-    /** show ColorPickerDialog */
+    /**
+     * show ColorPickerDialog
+     */
     public void dialog() {
         ColorPickerDialog.Builder builder =
-                new ColorPickerDialog.Builder(this, AlertDialog.THEME_DEVICE_DEFAULT_DARK);
+              new ColorPickerDialog.Builder(this, AlertDialog.THEME_DEVICE_DEFAULT_DARK);
         builder.setTitle("ColorPicker Dialog");
         builder.setFlagView(new CustomFlag(this, R.layout.layout_flag));
         builder.setPositiveButton(
-                getString(R.string.confirm),
-                new ColorEnvelopeListener() {
-                    @Override
-                    public void onColorSelected(ColorEnvelope envelope, boolean fromUser) {
-                        setLayoutColor(envelope);
-                    }
-                });
+              getString(R.string.confirm),
+              new ColorEnvelopeListener() {
+                  @Override
+                  public void onColorSelected(ColorEnvelope envelope, boolean fromUser) {
+                      setLayoutColor(envelope);
+                  }
+              });
         builder.setNegativeButton(
-                getString(R.string.cancel),
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                });
+              getString(R.string.cancel),
+              new DialogInterface.OnClickListener() {
+                  @Override
+                  public void onClick(DialogInterface dialogInterface, int i) {
+                      dialogInterface.dismiss();
+                  }
+              });
         builder.attachAlphaSlideBar();
         builder.attachBrightnessSlideBar();
         builder.show();

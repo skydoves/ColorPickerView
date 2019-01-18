@@ -19,6 +19,7 @@ package com.skydoves.colorpickerviewdemo;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.widget.TextView;
+
 import com.skydoves.colorpickerview.AlphaTileView;
 import com.skydoves.colorpickerview.ColorEnvelope;
 import com.skydoves.colorpickerview.flag.FlagView;
@@ -33,7 +34,7 @@ public class CustomFlag extends FlagView {
      * onBind Views
      *
      * @param context context
-     * @param layout custom flagView's layout
+     * @param layout  custom flagView's layout
      */
     public CustomFlag(Context context, int layout) {
         super(context, layout);
