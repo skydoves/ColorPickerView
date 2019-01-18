@@ -22,17 +22,8 @@ allprojects {
 And add a dependency code to your **module**'s `build.gradle` file.
 ```gradle
 dependencies {
-     implementation "com.github.skydoves:colorpickerview:2.0.1"
+    implementation "com.github.skydoves:colorpickerview:2.0.2"
 }
-```
-
-### or Maven
-```xml
-<dependency>
-  <groupId>com.github.skydoves</groupId>
-  <artifactId>colorpickerview</artifactId>
-  <version>2.0.1</version>
-</dependency>
 ```
     
 ## Usage
@@ -48,43 +39,44 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 #### ColorPickerView in layout
 ```xml
 <com.skydoves.colorpickerview.ColorPickerView
-        android:id="@+id/colorPickerView"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        app:palette="@drawable/palette"
-        app:selector="@drawable/wheel" />
+     android:id="@+id/colorPickerView"
+     android:layout_width="300dp"
+     android:layout_height="300dp"
+     app:palette="@drawable/palette"
+     app:selector="@drawable/wheel" />
 ```
 
 #### Attribute descriptions
 ```gradle
-app:palette="@drawable/palette" // set palette image. Must be needed.
-app:selector="@drawable/wheel" // set selector image. optional.
-app:alpha_selector="0.8" // set selector's alpha. optional.
-app:alpha_flag="0.8" // set flag's alpha. optional.
+app:palette="@drawable/palette" // sets palette image. Must be needed.
+app:selector="@drawable/wheel" // sets selector image. optional.
+app:alpha_selector="0.8" // sets selector's alpha. optional.
+app:alpha_flag="0.8" // sets flag's alpha. optional.
+app:actionMode="last" // sets action mode "always" or "last".
 ```
 
 #### Color Selected Listener
 You can listen to only an int value of a color by using `ColorListener`.
 ```java
 colorPickerView.setColorListener(new ColorListener() {
-            @Override
-            public void onColorSelected(int color) {
-                LinearLayout linearLayout = findViewById(R.id.linearLayout);
-                linearLayout.setBackgroundColor(color);
-            }
-        });
+    @Override
+    public void onColorSelected(int color, boolean fromUser) {
+        LinearLayout linearLayout = findViewById(R.id.linearLayout);
+        linearLayout.setBackgroundColor(color);
+    }
+});
 ```
 
 #### ColorEnvelope Listener
 Or you can listen to an instance has HSV color, hex color code, argb by using `ColorEnvelopeListener`.
 ```java
 colorPickerView.setColorListener(new ColorEnvelopeListener() {
-            @Override
-            public void onColorSelected(ColorEnvelope envelope, boolean fromUser) {
-                linearLayout.setBackgroundColor(envelope.getColor());
-                textView.setText("#" + envelope.getHexCode());
-            }
-        });
+    @Override
+    public void onColorSelected(ColorEnvelope envelope, boolean fromUser) {
+        linearLayout.setBackgroundColor(envelope.getColor());
+        textView.setText("#" + envelope.getHexCode());
+    }
+});
 ```
 
 #### ColorEnvelope
@@ -96,6 +88,12 @@ colorEnvelope.getHexCode() // String
 colorEnvelope.getArgb() // int[4]
 ```
 
+#### ActionMode
+we can control invoking action using `ActionMode`.
+```java
+colorPickerView.setActionMode(ActionMode.LAST); // the listener will be invoked only when finger released
+```
+
 ### AlphaSlideBar(Optional)
 ![alpha_slide](https://user-images.githubusercontent.com/24237865/45362228-43058500-b60f-11e8-9b13-0b2e01a892de.jpg) <br>
 You can change the transparency value of a selected color by using AlphaSlideBar. <br>
@@ -103,12 +101,12 @@ You can change the transparency value of a selected color by using AlphaSlideBar
 #### AlphaSlideBar in layout
 ```xml
 <com.skydoves.colorpickerview.sliders.AlphaSlideBar
-        android:id="@+id/alphaSlideBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:selector_AlphaSlideBar="@drawable/wheel" // set palette image. Must be needed.
-        app:borderColor_AlphaSlideBar="@android:color/darker_gray" // set border color. optional.
-        app:borderSize_AlphaSlideBar="5"/> // set border size. optional.
+     android:id="@+id/alphaSlideBar"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     app:selector_AlphaSlideBar="@drawable/wheel" // sets selector drawable.
+     app:borderColor_AlphaSlideBar="@android:color/darker_gray" // sets border color.
+     app:borderSize_AlphaSlideBar="5"/> // sets border size.
 ```
 You can attach to ColorPickerView like below.
 
@@ -124,13 +122,13 @@ You can change the brightness value of a selected color by using BrightnessSlide
 #### BrightnessSlideBar in layout
 ```xml
 <com.skydoves.colorpickerview.sliders.BrightnessSlideBar
-        android:id="@+id/brightnessSlide"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        app:selector_BrightnessSlider="@drawable/wheel" // set palette image. Must be needed.
-        app:borderColor_BrightnessSlider="@android:color/darker_gray" // set border color. optional.
-        app:borderSize_BrightnessSlider="5"/> // set border size. optional.
+     android:id="@+id/brightnessSlide"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:layout_margin="15dp"
+     app:selector_BrightnessSlider="@drawable/wheel" // sets selector drawable.
+     app:borderColor_BrightnessSlider="@android:color/darker_gray" // sets border color.
+     app:borderSize_BrightnessSlider="5"/> // sets border size.
 ```
 You can attach to ColorPickerView like below.
 
@@ -259,39 +257,37 @@ So if you want to show ARGB color accurately, should use AlphaTileView.<br>
 
 ```xml
 <com.skydoves.colorpickerview.AlphaTileView
-            android:id="@+id/alphaTileView"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            app:tileSize="20" // the size of the repeating tile
-            app:tileEvenColor="@color/tile_even" // the color of even tiles
-            app:tileOddColor="@color/tile_odd"/> // the color of odd tiles
+     android:id="@+id/alphaTileView"
+     android:layout_width="55dp"
+     android:layout_height="55dp"
+     app:tileSize="20" // the size of the repeating tile
+     app:tileEvenColor="@color/tile_even" // the color of even tiles
+     app:tileOddColor="@color/tile_odd"/> // the color of odd tiles
 ```
 
 ### ColorPickerView Methods
 Methods | Return | Description
 --- | --- | ---
 getColor() | int | the last selected color
-getColorEnvelope() | ColorEnvelope | returns ColorEnvelope. It has the last selected Color, Hex, ARGB values
-setPaletteDrawable(Drawable drawable) | void | change palette drawable resource
-setSelectorDrawable(Drawable drawable) | void | change selector drawable resource
-setSelectorPoint(int x, int y) | void | moving selector at point(x, y)
-selectCenter() | void | select center of drawable image
-setACTION\_UP(Boolean) | void | ColorListener only listening when ACTION\_UP.
-setFlagView(FlagView flagview) | void | sets FlagView on ColorPickerView
-setFlagMode(FlagMode flagMode) | void | sets FlagMode on ColorPickerView
-setFlipable(boolean flipable) | void | sets FlagView be flipbed when go out the ColorPickerView
-attachAlphaSlider | void | attach an AlphaSlider
-attachBrightnessSlider | void | attach a BrightnessSlider
+getColorEnvelope() | ColorEnvelope | returns ColorEnvelope. It has the last selected Color, Hex, ARGB values.
+setPaletteDrawable(Drawable drawable) | void | changes palette drawable resource.
+setSelectorDrawable(Drawable drawable) | void | changes selector drawable resource.
+setSelectorPoint(int x, int y) | void | moves selector at point(x, y).
+selectCenter() | void | selects center of drawable image.
+setActionMode(ActionMode) | void | sets the color listener's trigger action mode.
+setFlagView(FlagView flagview) | void | sets `FlagView` on `ColorPickerView`.
+attachAlphaSlider | void | attaches an AlphaSlider.
+attachBrightnessSlider | void | attaches a BrightnessSlider.
 
 ## Other Libraries
-Other libraries released related to color picker!
+Other ColorPicker libraries are released!
 
 ### ColorPickerPreference
 [A library](https://github.com/skydoves/ColorPickerPreference) that let you implement ColorPickerView, ColorPickerDialog, ColorPickerPreference. 
 
 ### Multi-ColorPickerView
 You can get colors using multi selectors.<br>
-At [here](https://github.com/skydoves/Multi-ColorPicker) you can get a more specialized library in multi-coloring.
+At [here](https://github.com/skydoves/Multi-ColorPicker) you can get a more specialized library on multi-coloring.
 
 ![screenshot1128436220](https://user-images.githubusercontent.com/24237865/45586566-4614b400-b934-11e8-9098-2d4341dd695e.png)
 
