@@ -50,29 +50,17 @@ public class ColorPickerDialog extends AlertDialog {
         initColorPickerView();
     }
 
+    @SuppressLint("InflateParams")
     private void initColorPickerView() {
         LayoutInflater layoutInflater = this.getLayoutInflater();
-        @SuppressLint("InflateParams")
         View view = layoutInflater.inflate(R.layout.layout_dialog_colorpicker, null);
         this.colorPickerView = view.findViewById(R.id.ColorPickerView);
         super.setView(view);
     }
 
-    public void setFlagView(FlagView flagView) {
-        this.colorPickerView.setFlagView(flagView);
+    public ColorPickerView getColorPickerView() {
+        return colorPickerView;
     }
-
-    public void setOnColorListener(ColorListener colorListener) {
-        this.colorPickerView.setColorListener(colorListener);
-    }
-
-    @Override
-    public void setView(
-            View view,
-            int viewSpacingLeft,
-            int viewSpacingTop,
-            int viewSpacingRight,
-            int viewSpacingBottom) {}
 
     @SuppressWarnings("ConstantConditions")
     public static class Builder extends AlertDialog.Builder {

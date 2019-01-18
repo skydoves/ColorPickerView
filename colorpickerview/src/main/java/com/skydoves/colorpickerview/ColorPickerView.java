@@ -20,7 +20,6 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Point;
@@ -35,6 +34,8 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import com.skydoves.colorpickerview.flag.FlagMode;
 import com.skydoves.colorpickerview.flag.FlagView;
 import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener;
@@ -47,7 +48,7 @@ import java.util.Locale;
 @SuppressWarnings({"WeakerAccess", "unchecked", "unused", "IntegerDivisionInFloatingPointContext"})
 public class ColorPickerView extends FrameLayout {
 
-    public ColorPickerViewListener mColorListener;
+    public ColorPickerViewListener colorListener;
     private int selectedColor;
     private Point selectedPoint;
     private ImageView palette;
@@ -112,7 +113,11 @@ public class ColorPickerView extends FrameLayout {
     private void onCreate() {
         setPadding(0, 0, 0, 0);
         palette = new ImageView(getContext());
-        if (paletteDrawable != null) palette.setImageDrawable(paletteDrawable);
+        if (paletteDrawable != null) {
+            palette.setImageDrawable(paletteDrawable);
+        } else {
+            palette.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.palette));
+        }
 
         FrameLayout.LayoutParams paletteParam =
                 new LayoutParams(
@@ -123,15 +128,16 @@ public class ColorPickerView extends FrameLayout {
         selector = new ImageView(getContext());
         if (selectorDrawable != null) {
             selector.setImageDrawable(selectorDrawable);
-
-            FrameLayout.LayoutParams selectorParam =
-                    new LayoutParams(
-                            ViewGroup.LayoutParams.WRAP_CONTENT,
-                            ViewGroup.LayoutParams.WRAP_CONTENT);
-            selectorParam.gravity = Gravity.CENTER;
-            addView(selector, selectorParam);
-            selector.setAlpha(alpha_selector);
+        } else {
+            selector.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.wheel));
         }
+
+        FrameLayout.LayoutParams selectorParam =
+                new LayoutParams(
+                        ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        selectorParam.gravity = Gravity.CENTER;
+        addView(selector, selectorParam);
+        selector.setAlpha(alpha_selector);
 
         getViewTreeObserver()
                 .addOnGlobalLayoutListener(
@@ -146,6 +152,27 @@ public class ColorPickerView extends FrameLayout {
                                 selectCenter();
                             }
                         });
+    }
+
+    public void onCreateByBuilder(Builder builder) {
+        FrameLayout.LayoutParams params =
+                new FrameLayout.LayoutParams(
+                        SizeUtils.dp2Px(getContext(), builder.width),
+                        SizeUtils.dp2Px(getContext(), builder.height));
+        setLayoutParams(params);
+
+        this.paletteDrawable = builder.paletteDrawable;
+        this.selectorDrawable = builder.selectorDrawable;
+        this.alpha_selector = builder.alpha_selector;
+        this.alpha_flag = builder.alpha_flag;
+        onCreate();
+
+        if (builder.colorPickerViewListener != null)
+            setColorListener(builder.colorPickerViewListener);
+        if (builder.alphaSlideBar != null) attachAlphaSlider(builder.alphaSlideBar);
+        if (builder.brightnessSlider != null) attachBrightnessSlider(builder.brightnessSlider);
+        if (builder.actionMode != null) this.actionMode = builder.actionMode;
+        if (builder.flagView != null) setFlagView(builder.flagView);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -194,8 +221,6 @@ public class ColorPickerView extends FrameLayout {
     }
 
     private int getColorFromBitmap(float x, float y) {
-        if (paletteDrawable == null) return 0;
-
         Matrix invertMatrix = new Matrix();
         palette.getImageMatrix().invert(invertMatrix);
 
@@ -231,20 +256,15 @@ public class ColorPickerView extends FrameLayout {
         return 0;
     }
 
-    @Override
-    protected void dispatchDraw(Canvas canvas) {
-        super.dispatchDraw(canvas);
-    }
-
     public void fireColorListener(int color, boolean fromUser) {
-        if (mColorListener != null) {
+        if (colorListener != null) {
             selectedColor = color;
-            if (mColorListener instanceof ColorListener) {
-                ((ColorListener) mColorListener).onColorSelected(color, fromUser);
-            } else if (mColorListener instanceof ColorEnvelopeListener) {
+            if (colorListener instanceof ColorListener) {
+                ((ColorListener) colorListener).onColorSelected(color, fromUser);
+            } else if (colorListener instanceof ColorEnvelopeListener) {
                 ColorEnvelope envelope =
                         new ColorEnvelope(color, getHexCode(color), getColorARGB(color));
-                ((ColorEnvelopeListener) mColorListener).onColorSelected(envelope, fromUser);
+                ((ColorEnvelopeListener) colorListener).onColorSelected(envelope, fromUser);
             }
 
             if (flagView != null) flagView.onRefresh(getColorEnvelope());
@@ -273,7 +293,7 @@ public class ColorPickerView extends FrameLayout {
     }
 
     public void setColorListener(ColorPickerViewListener colorListener) {
-        mColorListener = colorListener;
+        this.colorListener = colorListener;
     }
 
     private void handleFlagView(Point centerPoint) {
@@ -331,7 +351,7 @@ public class ColorPickerView extends FrameLayout {
         return this.flagView;
     }
 
-    public void setFlagView(FlagView flagView) {
+    public void setFlagView(@NonNull FlagView flagView) {
         flagView.gone();
         addView(flagView);
         this.flagView = flagView;
@@ -389,7 +409,7 @@ public class ColorPickerView extends FrameLayout {
         selector.setY(y - (selector.getMeasuredHeight() / 2));
     }
 
-    public void setPaletteDrawable(Drawable drawable) {
+    public void setPaletteDrawable(@NonNull Drawable drawable) {
         removeView(palette);
         palette = new ImageView(getContext());
         paletteDrawable = drawable;
@@ -417,7 +437,7 @@ public class ColorPickerView extends FrameLayout {
         }
     }
 
-    public void setSelectorDrawable(Drawable drawable) {
+    public void setSelectorDrawable(@NonNull Drawable drawable) {
         selector.setImageDrawable(drawable);
     }
 
@@ -433,13 +453,13 @@ public class ColorPickerView extends FrameLayout {
         this.actionMode = actionMode;
     }
 
-    public void attachAlphaSlider(AlphaSlideBar alphaSlideBar) {
+    public void attachAlphaSlider(@NonNull AlphaSlideBar alphaSlideBar) {
         this.alphaSlideBar = alphaSlideBar;
         alphaSlideBar.attachColorPickerView(this);
         alphaSlideBar.notifyColor();
     }
 
-    public void attachBrightnessSlider(BrightnessSlideBar brightnessSlider) {
+    public void attachBrightnessSlider(@NonNull BrightnessSlideBar brightnessSlider) {
         this.brightnessSlider = brightnessSlider;
         brightnessSlider.attachColorPickerView(this);
         brightnessSlider.notifyColor();
@@ -451,5 +471,85 @@ public class ColorPickerView extends FrameLayout {
 
     public BrightnessSlideBar getBrightnessSlider() {
         return brightnessSlider;
+    }
+
+    public static class Builder {
+        private Context context;
+        private ColorPickerViewListener colorPickerViewListener;
+        private FlagView flagView;
+        private Drawable paletteDrawable;
+        private Drawable selectorDrawable;
+        private AlphaSlideBar alphaSlideBar;
+        private BrightnessSlideBar brightnessSlider;
+        private ActionMode actionMode = ActionMode.ALWAYS;
+        private float alpha_selector = 1.0f;
+        private float alpha_flag = 1.0f;
+        private int width = LayoutParams.MATCH_PARENT;
+        private int height = LayoutParams.MATCH_PARENT;
+
+        public Builder(Context context) {
+            this.context = context;
+        }
+
+        public Builder setColorListener(ColorPickerViewListener colorPickerViewListener) {
+            this.colorPickerViewListener = colorPickerViewListener;
+            return this;
+        }
+
+        public Builder setPaletteDrawable(@NonNull Drawable palette) {
+            this.paletteDrawable = palette;
+            return this;
+        }
+
+        public Builder setSelectorDrawable(@NonNull Drawable selector) {
+            this.selectorDrawable = selector;
+            return this;
+        }
+
+        public Builder setFlagView(@NonNull FlagView flagView) {
+            this.flagView = flagView;
+            return this;
+        }
+
+        public Builder setAlphaSlideBar(AlphaSlideBar alphaSlideBar) {
+            this.alphaSlideBar = alphaSlideBar;
+            return this;
+        }
+
+        public Builder setBrightnessSlideBar(BrightnessSlideBar brightnessSlideBar) {
+            this.brightnessSlider = brightnessSlideBar;
+            return this;
+        }
+
+        public Builder setActionMode(ActionMode actionMode) {
+            this.actionMode = actionMode;
+            return this;
+        }
+
+        public Builder setSelectorAlpha(float alpha) {
+            this.alpha_selector = alpha;
+            return this;
+        }
+
+        public Builder setFlagAlpha(float alpha) {
+            this.alpha_flag = alpha;
+            return this;
+        }
+
+        public Builder setWidth(int width) {
+            this.width = width;
+            return this;
+        }
+
+        public Builder setHeight(int height) {
+            this.height = height;
+            return this;
+        }
+
+        public ColorPickerView build() {
+            ColorPickerView colorPickerView = new ColorPickerView(context);
+            colorPickerView.onCreateByBuilder(this);
+            return colorPickerView;
+        }
     }
 }
