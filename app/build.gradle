@@ -1,15 +1,15 @@
 apply plugin: 'com.android.application'
+apply from: '../dependencies.gradle'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion versions.compileSdk
 
     defaultConfig {
         applicationId "com.skydoves.colorpickerviewdemo"
-        minSdkVersion 15
-        targetSdkVersion 28
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.compileSdk
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -21,9 +21,9 @@ android {
 }
 
 dependencies {
-    implementation "androidx.appcompat:appcompat:1.0.2"
-    implementation "com.google.android.material:material:1.1.0-alpha02"
-    implementation "com.github.skydoves:powermenu:2.0.6"
+    implementation "androidx.appcompat:appcompat:$versions.androidxAppcompat"
+    implementation "com.google.android.material:material:$versions.googleMaterial"
+    implementation "com.github.skydoves:powermenu:$versions.powermenu"
     implementation project(":colorpickerview")
 }
 

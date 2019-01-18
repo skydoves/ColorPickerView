@@ -1,19 +1,20 @@
 apply plugin: 'com.android.library'
+apply from: '../dependencies.gradle'
 apply from: '../publish.gradle'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion versions.compileSdk
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 28
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.compileSdk
         versionCode 1
         versionName "1.0"
     }
 }
 
 dependencies {
-    implementation "androidx.annotation:annotation:1.0.1"
+    implementation "androidx.annotation:annotation:$versions.androidxAnnotation"
 }
 
 apply from: '../spotless.gradle'

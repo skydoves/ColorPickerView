@@ -1,15 +1,14 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-
 buildscript {
+    apply from: './dependencies.gradle'
+
     repositories {
         jcenter()
         google()
     }
-
     dependencies {
-        classpath "com.android.tools.build:gradle:3.2.1"
-        classpath "com.diffplug.spotless:spotless-plugin-gradle:3.16.0"
-        classpath "com.novoda:bintray-release:0.9"
+        classpath "com.android.tools.build:gradle:$versions.gradleBuildTool"
+        classpath "com.diffplug.spotless:spotless-plugin-gradle:$versions.spotlessGradle"
+        classpath "com.novoda:bintray-release:$versions.bintrayRelease"
     }
 }
 
