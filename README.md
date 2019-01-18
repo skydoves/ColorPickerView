@@ -104,9 +104,9 @@ You can change the transparency value of a selected color by using AlphaSlideBar
      android:id="@+id/alphaSlideBar"
      android:layout_width="match_parent"
      android:layout_height="wrap_content"
-     app:selector_AlphaSlideBar="@drawable/wheel" // set palette image. Must be needed.
-     app:borderColor_AlphaSlideBar="@android:color/darker_gray" // set border color. optional.
-     app:borderSize_AlphaSlideBar="5"/> // set border size. optional.
+     app:selector_AlphaSlideBar="@drawable/wheel" // sets selector drawable.
+     app:borderColor_AlphaSlideBar="@android:color/darker_gray" // sets border color.
+     app:borderSize_AlphaSlideBar="5"/> // sets border size.
 ```
 You can attach to ColorPickerView like below.
 
@@ -126,9 +126,9 @@ You can change the brightness value of a selected color by using BrightnessSlide
      android:layout_width="match_parent"
      android:layout_height="wrap_content"
      android:layout_margin="15dp"
-     app:selector_BrightnessSlider="@drawable/wheel" // set palette image. Must be needed.
-     app:borderColor_BrightnessSlider="@android:color/darker_gray" // set border color. optional.
-     app:borderSize_BrightnessSlider="5"/> // set border size. optional.
+     app:selector_BrightnessSlider="@drawable/wheel" // sets selector drawable.
+     app:borderColor_BrightnessSlider="@android:color/darker_gray" // sets border color.
+     app:borderSize_BrightnessSlider="5"/> // sets border size.
 ```
 You can attach to ColorPickerView like below.
 
