@@ -32,9 +32,10 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-
+import com.skydoves.colorpickerview.ActionMode;
 import com.skydoves.colorpickerview.ColorPickerView;
 
+@SuppressWarnings("IntegerDivisionInFloatingPointContext")
 public abstract class AbstractSlider extends FrameLayout {
 
     public ColorPickerView colorPickerView;
@@ -90,9 +91,9 @@ public abstract class AbstractSlider extends FrameLayout {
             selector.setImageDrawable(selectorDrawable);
 
             FrameLayout.LayoutParams thumbParams =
-                  new LayoutParams(
-                        ViewGroup.LayoutParams.WRAP_CONTENT,
-                        ViewGroup.LayoutParams.WRAP_CONTENT);
+                    new LayoutParams(
+                            ViewGroup.LayoutParams.WRAP_CONTENT,
+                            ViewGroup.LayoutParams.WRAP_CONTENT);
             thumbParams.gravity = Gravity.CENTER_VERTICAL;
             addView(selector, thumbParams);
         }
@@ -146,7 +147,7 @@ public abstract class AbstractSlider extends FrameLayout {
 
         Point snapPoint = new Point((int) event.getX(), (int) event.getY());
         selector.setX(snapPoint.x - (selector.getMeasuredWidth() / 2));
-        if (colorPickerView.getACTON_UP()) {
+        if (colorPickerView.getActionMode() == ActionMode.LAST) {
             if (event.getAction() == MotionEvent.ACTION_UP) {
                 colorPickerView.fireColorListener(assembleColor(), true);
             }
@@ -161,18 +162,18 @@ public abstract class AbstractSlider extends FrameLayout {
 
     private void initializeSelector() {
         getViewTreeObserver()
-              .addOnGlobalLayoutListener(
-                    new ViewTreeObserver.OnGlobalLayoutListener() {
-                        @Override
-                        public void onGlobalLayout() {
-                            if (Build.VERSION.SDK_INT < 16) {
-                                getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                            } else {
-                                getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                .addOnGlobalLayoutListener(
+                        new ViewTreeObserver.OnGlobalLayoutListener() {
+                            @Override
+                            public void onGlobalLayout() {
+                                if (Build.VERSION.SDK_INT < 16) {
+                                    getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                                } else {
+                                    getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                                }
+                                selector.setX(getMeasuredWidth() - selector.getMeasuredWidth());
                             }
-                            selector.setX(getMeasuredWidth() - selector.getMeasuredWidth());
-                        }
-                    });
+                        });
     }
 
     public int getColor() {

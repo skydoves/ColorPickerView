@@ -24,7 +24,6 @@ import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-
 import androidx.annotation.NonNull;
 
 @SuppressWarnings({"WeakerAccess", "unused"})
@@ -69,8 +68,8 @@ public class AlphaTileDrawable extends Drawable {
         drawTile(canvas, rect, bitmapPaint, tileSize, -tileSize);
 
         paint.setShader(
-              new BitmapShader(
-                    bitmap, BitmapShader.TileMode.REPEAT, BitmapShader.TileMode.REPEAT));
+                new BitmapShader(
+                        bitmap, BitmapShader.TileMode.REPEAT, BitmapShader.TileMode.REPEAT));
     }
 
     private void drawTile(Canvas canvas, Rect rect, Paint bitmapPaint, int dx, int dy) {
@@ -104,8 +103,7 @@ public class AlphaTileDrawable extends Drawable {
         private int tileOddColor = 0xFFFFFFFF;
         private int tileEvenColor = 0xFFCBCBCB;
 
-        public Builder() {
-        }
+        public Builder() {}
 
         public int getTileSize() {
             return tileSize;

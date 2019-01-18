@@ -27,10 +27,8 @@ import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewTreeObserver;
-
-import com.skydoves.colorpickerview.sliders.AlphaTileDrawable;
-
 import androidx.annotation.Nullable;
+import com.skydoves.colorpickerview.sliders.AlphaTileDrawable;
 
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class AlphaTileView extends View {
@@ -62,7 +60,7 @@ public class AlphaTileView extends View {
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public AlphaTileView(
-        Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+            Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         onCreate();
         getAttrs(attrs);
@@ -79,16 +77,16 @@ public class AlphaTileView extends View {
         try {
             if (a.hasValue(R.styleable.AlphaTileView_tileSize))
                 builder.setTileSize(
-                    a.getInt(R.styleable.AlphaTileView_tileSize, builder.getTileSize()));
+                        a.getInt(R.styleable.AlphaTileView_tileSize, builder.getTileSize()));
             if (a.hasValue(R.styleable.AlphaTileView_tileOddColor))
                 builder.setTileOddColor(
-                    a.getInt(
-                        R.styleable.AlphaTileView_tileOddColor, builder.getTileOddColor()));
+                        a.getInt(
+                                R.styleable.AlphaTileView_tileOddColor, builder.getTileOddColor()));
             if (a.hasValue(R.styleable.AlphaTileView_tileEvenColor))
                 builder.setTileEvenColor(
-                    a.getInt(
-                        R.styleable.AlphaTileView_tileEvenColor,
-                        builder.getTileEvenColor()));
+                        a.getInt(
+                                R.styleable.AlphaTileView_tileEvenColor,
+                                builder.getTileEvenColor()));
         } finally {
             a.recycle();
         }
@@ -96,30 +94,30 @@ public class AlphaTileView extends View {
 
     private void draw() {
         getViewTreeObserver()
-            .addOnGlobalLayoutListener(
-                new ViewTreeObserver.OnGlobalLayoutListener() {
-                    @Override
-                    public void onGlobalLayout() {
-                        if (Build.VERSION.SDK_INT < 16) {
-                            getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                        } else {
-                            getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                        }
-                        drawable = builder.build();
-                        backgroundBitmap =
-                            Bitmap.createBitmap(
-                                getMeasuredWidth(),
-                                getMeasuredHeight(),
-                                Bitmap.Config.ARGB_8888);
-                        Canvas backgroundCanvas = new Canvas(backgroundBitmap);
-                        drawable.setBounds(
-                            0,
-                            0,
-                            backgroundCanvas.getWidth(),
-                            backgroundCanvas.getHeight());
-                        drawable.draw(backgroundCanvas);
-                    }
-                });
+                .addOnGlobalLayoutListener(
+                        new ViewTreeObserver.OnGlobalLayoutListener() {
+                            @Override
+                            public void onGlobalLayout() {
+                                if (Build.VERSION.SDK_INT < 16) {
+                                    getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                                } else {
+                                    getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                                }
+                                drawable = builder.build();
+                                backgroundBitmap =
+                                        Bitmap.createBitmap(
+                                                getMeasuredWidth(),
+                                                getMeasuredHeight(),
+                                                Bitmap.Config.ARGB_8888);
+                                Canvas backgroundCanvas = new Canvas(backgroundBitmap);
+                                drawable.setBounds(
+                                        0,
+                                        0,
+                                        backgroundCanvas.getWidth(),
+                                        backgroundCanvas.getHeight());
+                                drawable.draw(backgroundCanvas);
+                            }
+                        });
     }
 
     @Override

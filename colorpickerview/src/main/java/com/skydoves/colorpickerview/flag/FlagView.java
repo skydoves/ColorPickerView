@@ -20,23 +20,28 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RelativeLayout;
-
 import com.skydoves.colorpickerview.ColorEnvelope;
 
+@SuppressWarnings("unused")
 public abstract class FlagView extends RelativeLayout {
+
+    private FlagMode flagMode = FlagMode.ALWAYS;
+    private boolean flipAble = true;
 
     public FlagView(Context context, int layout) {
         super(context);
         initializeLayout(layout);
     }
 
+    public abstract void onRefresh(ColorEnvelope colorEnvelope);
+
     private void initializeLayout(int layout) {
         View inflated = LayoutInflater.from(getContext()).inflate(layout, this);
         inflated.setLayoutParams(
-              new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+                new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
         inflated.measure(
-              MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED),
-              MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
+                MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED),
+                MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
         inflated.layout(0, 0, inflated.getMeasuredWidth(), inflated.getMeasuredHeight());
     }
 
@@ -48,5 +53,19 @@ public abstract class FlagView extends RelativeLayout {
         setVisibility(View.GONE);
     }
 
-    public abstract void onRefresh(ColorEnvelope colorEnvelope);
+    public FlagMode getFlagMode() {
+        return flagMode;
+    }
+
+    public void setFlagMode(FlagMode flagMode) {
+        this.flagMode = flagMode;
+    }
+
+    public boolean isFlipAble() {
+        return flipAble;
+    }
+
+    public void setFlipAble(boolean flipAble) {
+        this.flipAble = flipAble;
+    }
 }
