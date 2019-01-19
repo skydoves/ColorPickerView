@@ -34,7 +34,7 @@ Add following XML namespace inside your XML layout file.
 xmlns:app="http://schemas.android.com/apk/res-auto"
 ```
 
-#### ColorPickerView in layout
+### ColorPickerView in layout
 ```xml
 <com.skydoves.colorpickerview.ColorPickerView
      android:id="@+id/colorPickerView"
@@ -44,7 +44,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
      app:selector="@drawable/wheel" />
 ```
 
-#### Attribute descriptions
+### Attribute descriptions
 ```gradle
 app:palette="@drawable/palette" // sets palette image.
 app:selector="@drawable/wheel" // sets selector image.
@@ -53,7 +53,7 @@ app:alpha_flag="0.8" // sets flag's alpha.
 app:actionMode="last" // sets action mode "always" or "last".
 ```
 
-#### ColorListener Listener
+### ColorListener Listener
 ColorListener is invoked whenever tapped by a user or selecting position manually.
 ```java
 colorPickerView.setColorListener(new ColorListener() {
@@ -65,7 +65,7 @@ colorPickerView.setColorListener(new ColorListener() {
 });
 ```
 
-#### ColorEnvelope Listener
+### ColorEnvelope Listener
 ColorEnvelopeListener provides hsv color, hex code, argb by `ColorEnvelope`.
 ```java
 colorPickerView.setColorListener(new ColorEnvelopeListener() {
@@ -77,7 +77,7 @@ colorPickerView.setColorListener(new ColorEnvelopeListener() {
 });
 ```
 
-#### ColorEnvelope
+### ColorEnvelope
 ColorEnvelope is a wrapper class of colors for provide various forms of color.
 ```java
 colorEnvelope.getColor() // returns a integer color.
@@ -85,13 +85,27 @@ colorEnvelope.getHexCode() // returns a hex code string.
 colorEnvelope.getArgb() // returns a argb integer array.
 ```
 
-#### ActionMode
+### ActionMode
 ActionMode controls an action about `ColorListener` invoking.
 ```java
 colorPickerView.setActionMode(ActionMode.LAST); // the listener will be invoked only when finger released.
 ```
 
-### AlphaSlideBar(Optional)
+### Create using builder
+This is how to create `ColorPickerView`'s instance using `ColorPickerView.Builder` class.
+```java
+ColorPickerView colorPickerView = new ColorPickerView.Builder(context)
+      .setColorListener(colorListener)
+      .setActionMode(ActionMode.LAST)
+      .setAlphaSlideBar(alphaSlideBar)
+      .setBrightnessSlideBar(brightnessSlideBar)
+      .setFlagView(new CustomFlag(context, R.layout.layout_flag))
+      .setPaletteDrawable(ContextCompat.getDrawable(context, R.drawable.palette))
+      .setSelectorDrawable(ContextCompat.getDrawable(context, R.drawable.selector))
+      .build();
+```
+
+## AlphaSlideBar(Optional)
 ![alpha_slide](https://user-images.githubusercontent.com/24237865/45362228-43058500-b60f-11e8-9b13-0b2e01a892de.jpg) <br>
 AlphaSlideBar changes the transparency of `ColorPickerView`'s the selected color. <br>
 
@@ -112,11 +126,11 @@ AlphaSlideBar alphaSlideBar = findViewById(R.id.alphaSlideBar);
 colorPickerView.attachAlphaSlider(alphaSlideBar);
 ```
 
-### BrightnessSlideBar(Optional)
+## BrightnessSlideBar(Optional)
 ![brigngtness_slide](https://user-images.githubusercontent.com/24237865/45362230-439e1b80-b60f-11e8-96ec-6907ab0ef678.jpg) <br>
 BrightnessSlideBar changes the brightness of `ColorPickerView`'s the selected color. <br>
 
-#### BrightnessSlideBar in layout
+### BrightnessSlideBar in layout
 ```xml
 <com.skydoves.colorpickerview.sliders.BrightnessSlideBar
      android:id="@+id/brightnessSlide"
@@ -134,7 +148,7 @@ BrightnessSlideBar brightnessSlideBar = findViewById(R.id.brightnessSlide);
 colorPickerView.attachBrightnessSlider(brightnessSlideBar);
 ```
 
-### ColorPickerDialog
+## ColorPickerDialog
 ![dialog0](https://user-images.githubusercontent.com/24237865/45362890-0d619b80-b611-11e8-857b-e12f82978b53.jpg) 
 ![dialog1](https://user-images.githubusercontent.com/24237865/45362892-0d619b80-b611-11e8-9cc5-25518a9d392a.jpg) <br>
 
@@ -147,11 +161,10 @@ new ColorPickerDialog.Builder(this, AlertDialog.THEME_DEVICE_DEFAULT_DARK)
       .setPositiveButton(getString(R.string.confirm),
           new ColorEnvelopeListener() {
               @Override
-              public void onColorSelected(
-                  ColorEnvelope envelope, boolean fromUser) {
-                      setLayoutColor(envelope);
-                   }
-              })
+              public void onColorSelected(ColorEnvelope envelope, boolean fromUser) {
+                  setLayoutColor(envelope);
+              }
+          })
        setNegativeButton(getString(R.string.cancel),
           new DialogInterface.OnClickListener() {
               @Override
@@ -171,7 +184,7 @@ colorPickerView.setFlagView(new CustomFlag(this, R.layout.layout_flag)); // sets
 builder.show(); // shows the dialog
 ```
 
-### FlagView(Optional)
+## FlagView(Optional)
 ![flag0](https://user-images.githubusercontent.com/24237865/45364191-75fe4780-b614-11e8-81a5-04690a4392db.jpg) 
 ![flag1](https://user-images.githubusercontent.com/24237865/45364194-75fe4780-b614-11e8-844c-136d14c91560.jpg) <br>
 
@@ -237,14 +250,14 @@ The last, set `FlagView` on the `ColorPickerView` using `setFlagView` method.
 colorPickerView.setFlagView(new CustomFlag(this, R.layout.layout_flag));
 ```
 
-#### FlagMode
+### FlagMode
 FlagMode decides the `FlagView`'s visibility action.
 ```java
 colorPickerView.setFlagMode(FlagMode.ALWAYS); // showing always by tapping and dragging.
 colorPickerView.setFlagMode(FlagMode.LAST); // showing only when finger released.
 ```
 
-### AlphaTileView
+## AlphaTileView
 ![alphatileview](https://user-images.githubusercontent.com/24237865/45364416-09377d00-b615-11e8-9707-b83f55053480.jpg) <br>
 AlphaTileView visualizes ARGB color on the view. If you want to visualizes ARGB color on the general view, it will not be shown accurately. because it will be mixed with the parent view's background color. so if you want to visualize ARGB color accurately, should use `AlphaTileView`.<br>
 
