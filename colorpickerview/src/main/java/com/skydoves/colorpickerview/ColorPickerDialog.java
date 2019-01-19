@@ -17,7 +17,6 @@
 package com.skydoves.colorpickerview;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
@@ -27,12 +26,17 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ListAdapter;
+import androidx.appcompat.app.AlertDialog;
 import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener;
 import com.skydoves.colorpickerview.listeners.ColorListener;
 import com.skydoves.colorpickerview.listeners.ColorPickerViewListener;
 import com.skydoves.colorpickerview.sliders.AlphaSlideBar;
 import com.skydoves.colorpickerview.sliders.BrightnessSlideBar;
 
+/**
+ * ColorPickerDialog is a dialog what having {@link ColorPickerView}, {@link AlphaSlideBar} and
+ * {@link BrightnessSlideBar}.
+ */
 @SuppressWarnings({"WeakerAccess", "unchecked", "unused"})
 public class ColorPickerDialog extends AlertDialog {
 
@@ -42,6 +46,7 @@ public class ColorPickerDialog extends AlertDialog {
         super(context);
     }
 
+    /** Builder class for create {@link ColorPickerDialog}. */
     @SuppressWarnings("ConstantConditions")
     public static class Builder extends AlertDialog.Builder {
         private ColorPickerView colorPickerView;
@@ -72,31 +77,70 @@ public class ColorPickerDialog extends AlertDialog {
             super.setView(parentView);
         }
 
+        /**
+         * sets {@link ColorPickerView} manually.
+         *
+         * @param colorPickerView {@link ColorPickerView}.
+         * @return {@link Builder}.
+         */
         public Builder setColorPickerView(ColorPickerView colorPickerView) {
             this.colorPickerView = colorPickerView;
             return this;
         }
 
+        /**
+         * gets {@link ColorPickerView} on {@link Builder}.
+         *
+         * @return {@link ColorPickerView}.
+         */
         public ColorPickerView getColorPickerView() {
             return colorPickerView;
         }
 
+        /**
+         * if true, attaches a {@link AlphaSlideBar} on the {@link ColorPickerDialog}.
+         *
+         * @param value true or false.
+         * @return {@link Builder}.
+         */
         public Builder attachAlphaSlideBar(boolean value) {
             this.alphaSlideBar = value;
             return this;
         }
 
+        /**
+         * if true, attaches a {@link BrightnessSlideBar} on the {@link ColorPickerDialog}.
+         *
+         * @param value true or false.
+         * @return {@link Builder}.
+         */
         public Builder attachBrightnessSlideBar(boolean value) {
             this.brightnessSlideBar = value;
             return this;
         }
 
+        /**
+         * sets positive button with {@link ColorPickerViewListener} on the {@link
+         * ColorPickerDialog}.
+         *
+         * @param textId string resource integer id.
+         * @param colorListener {@link ColorListener}.
+         * @return {@link Builder}.
+         */
         @SuppressWarnings("UnusedReturnValue")
         public Builder setPositiveButton(int textId, final ColorPickerViewListener colorListener) {
             super.setPositiveButton(textId, getOnClickListener(colorListener));
             return this;
         }
 
+        /**
+         * sets positive button with {@link ColorPickerViewListener} on the {@link
+         * ColorPickerDialog}.
+         *
+         * @param text string text value.
+         * @param colorListener {@link ColorListener}.
+         * @return {@link Builder}.
+         */
         @SuppressWarnings("UnusedReturnValue")
         public Builder setPositiveButton(
                 CharSequence text, final ColorPickerViewListener colorListener) {
@@ -131,6 +175,11 @@ public class ColorPickerDialog extends AlertDialog {
             };
         }
 
+        /**
+         * shows a created {@link ColorPickerDialog}.
+         *
+         * @return {@link AlertDialog}.
+         */
         @Override
         public AlertDialog show() {
             if (colorPickerView != null) {
@@ -153,7 +202,6 @@ public class ColorPickerDialog extends AlertDialog {
                 }
             }
             super.setView(parentView);
-
             return super.show();
         }
 

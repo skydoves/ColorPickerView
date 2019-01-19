@@ -26,6 +26,10 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import androidx.annotation.NonNull;
 
+/**
+ * AlphaTileDrawable visualizes ARGB color on the {@link
+ * com.skydoves.colorpickerview.AlphaTileView}.
+ */
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class AlphaTileDrawable extends Drawable {
 
@@ -97,13 +101,12 @@ public class AlphaTileDrawable extends Drawable {
         return PixelFormat.OPAQUE;
     }
 
+    /** Builder class for create {@link AlphaTileDrawable}. */
     @SuppressWarnings("UnusedReturnValue")
     public static class Builder {
         private int tileSize = 25;
         private int tileOddColor = 0xFFFFFFFF;
         private int tileEvenColor = 0xFFCBCBCB;
-
-        public Builder() {}
 
         public int getTileSize() {
             return tileSize;

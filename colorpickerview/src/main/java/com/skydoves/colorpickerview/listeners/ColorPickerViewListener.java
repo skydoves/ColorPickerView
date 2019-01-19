@@ -16,4 +16,8 @@
 
 package com.skydoves.colorpickerview.listeners;
 
+/**
+ * ColorPickerViewListener is invoked whenever {@link com.skydoves.colorpickerview.ColorPickerView}
+ * is triggered.
+ */
 public interface ColorPickerViewListener {}

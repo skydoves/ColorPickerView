@@ -27,6 +27,9 @@ import android.graphics.Shader;
 import android.util.AttributeSet;
 import com.skydoves.colorpickerview.R;
 
+/**
+ * AlphaSlideBar extends {@link AbstractSlider} and more being specific to implement alpha slide.
+ */
 @SuppressWarnings("unused")
 public class AlphaSlideBar extends AbstractSlider {
 
@@ -68,9 +71,9 @@ public class AlphaSlideBar extends AbstractSlider {
     }
 
     @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
-        backgroundBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+    protected void onSizeChanged(int width, int height, int oldWidth, int oldHeight) {
+        super.onSizeChanged(width, height, oldWidth, oldHeight);
+        backgroundBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         Canvas backgroundCanvas = new Canvas(backgroundBitmap);
         drawable.setBounds(0, 0, backgroundCanvas.getWidth(), backgroundCanvas.getHeight());
         drawable.draw(backgroundCanvas);

@@ -25,6 +25,10 @@ import android.graphics.Shader;
 import android.util.AttributeSet;
 import com.skydoves.colorpickerview.R;
 
+/**
+ * BrightnessSlideBar extends {@link AbstractSlider} and more being specific to implement brightness
+ * slide.
+ */
 @SuppressWarnings("unused")
 public class BrightnessSlideBar extends AbstractSlider {
 
