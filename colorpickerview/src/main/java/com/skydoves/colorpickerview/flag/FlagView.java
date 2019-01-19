@@ -22,6 +22,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import com.skydoves.colorpickerview.ColorEnvelope;
 
+/** FlaView implements showing a flag above a selector. */
 @SuppressWarnings("unused")
 public abstract class FlagView extends RelativeLayout {
 
@@ -33,6 +34,7 @@ public abstract class FlagView extends RelativeLayout {
         initializeLayout(layout);
     }
 
+    /** called whenever color is changed on {@link com.skydoves.colorpickerview.ColorPickerView}. */
     public abstract void onRefresh(ColorEnvelope colorEnvelope);
 
     private void initializeLayout(int layout) {
@@ -45,26 +47,48 @@ public abstract class FlagView extends RelativeLayout {
         inflated.layout(0, 0, inflated.getMeasuredWidth(), inflated.getMeasuredHeight());
     }
 
+    /** makes {@link FlagView} visible. */
     public void visible() {
         setVisibility(View.VISIBLE);
     }
 
+    /** makes {@link FlagView} invisible. */
     public void gone() {
         setVisibility(View.GONE);
     }
 
+    /**
+     * gets the flag's mode of visibility action.
+     *
+     * @return {@link FlagMode}
+     */
     public FlagMode getFlagMode() {
         return flagMode;
     }
 
+    /**
+     * sets the flag's mode of visibility action.
+     *
+     * @param flagMode {@link FlagMode}
+     */
     public void setFlagMode(FlagMode flagMode) {
         this.flagMode = flagMode;
     }
 
+    /**
+     * gets is flag flip-able.
+     *
+     * @return true or false.
+     */
     public boolean isFlipAble() {
         return flipAble;
     }
 
+    /**
+     * sets the flag being flipped down-sided automatically.
+     *
+     * @param flipAble true or false.
+     */
     public void setFlipAble(boolean flipAble) {
         this.flipAble = flipAble;
     }

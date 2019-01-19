@@ -43,8 +43,16 @@ import com.skydoves.colorpickerview.listeners.ColorListener;
 import com.skydoves.colorpickerview.listeners.ColorPickerViewListener;
 import com.skydoves.colorpickerview.sliders.AlphaSlideBar;
 import com.skydoves.colorpickerview.sliders.BrightnessSlideBar;
-import java.util.Locale;
 
+/**
+ * ColorPickerView implements getting HSV colors, ARGB values, Hex color codes from any image
+ * drawables.
+ *
+ * <p>{@link ColorPickerViewListener} will be invoked whenever ColorPickerView is triggered by
+ * {@link ActionMode} rules.
+ *
+ * <p>Implements {@link FlagView}, {@link AlphaSlideBar} and {@link BrightnessSlideBar} optional.
+ */
 @SuppressWarnings({"WeakerAccess", "unchecked", "unused", "IntegerDivisionInFloatingPointContext"})
 public class ColorPickerView extends FrameLayout {
 
@@ -154,6 +162,11 @@ public class ColorPickerView extends FrameLayout {
                         });
     }
 
+    /**
+     * initialize the {@link ColorPickerView} by {@link ColorPickerView.Builder}.
+     *
+     * @param builder {@link ColorPickerView.Builder}.
+     */
     protected void onCreateByBuilder(Builder builder) {
         FrameLayout.LayoutParams params =
                 new FrameLayout.LayoutParams(
@@ -197,6 +210,12 @@ public class ColorPickerView extends FrameLayout {
         }
     }
 
+    /**
+     * notify to the other views by the onTouchEvent.
+     *
+     * @param event {@link MotionEvent}.
+     * @return notified or not.
+     */
     private boolean onTouchReceived(MotionEvent event) {
         Point snapPoint = new Point((int) event.getX(), (int) event.getY());
         int pixelColor = getColorFromBitmap(snapPoint.x, snapPoint.y);
@@ -205,7 +224,7 @@ public class ColorPickerView extends FrameLayout {
             selectedColor = pixelColor;
             selectedPoint = new Point(snapPoint.x, snapPoint.y);
             setCoordinate(snapPoint.x, snapPoint.y);
-            handleFlagView(selectedPoint);
+            notifyToFlagView(selectedPoint);
 
             if (actionMode == ActionMode.LAST) {
                 if (event.getAction() == MotionEvent.ACTION_UP) {
@@ -220,6 +239,13 @@ public class ColorPickerView extends FrameLayout {
         } else return false;
     }
 
+    /**
+     * gets a pixel color on the specific coordinate from the bitmap.
+     *
+     * @param x coordinate x.
+     * @param y coordinate y.
+     * @return selected color.
+     */
     private int getColorFromBitmap(float x, float y) {
         Matrix invertMatrix = new Matrix();
         palette.getImageMatrix().invert(invertMatrix);
@@ -256,14 +282,28 @@ public class ColorPickerView extends FrameLayout {
         return 0;
     }
 
+    /**
+     * sets a {@link ColorPickerViewListener} on the {@link ColorPickerView}.
+     *
+     * @param colorListener {@link ColorListener} or {@link ColorEnvelopeListener}.
+     */
+    public void setColorListener(ColorPickerViewListener colorListener) {
+        this.colorListener = colorListener;
+    }
+
+    /**
+     * invokes {@link ColorListener} or {@link ColorEnvelopeListener} with a color value.
+     *
+     * @param color color.
+     * @param fromUser triggered by user or not.
+     */
     public void fireColorListener(int color, boolean fromUser) {
         if (colorListener != null) {
             selectedColor = color;
             if (colorListener instanceof ColorListener) {
                 ((ColorListener) colorListener).onColorSelected(color, fromUser);
             } else if (colorListener instanceof ColorEnvelopeListener) {
-                ColorEnvelope envelope =
-                        new ColorEnvelope(color, getHexCode(color), getColorARGB(color));
+                ColorEnvelope envelope = new ColorEnvelope(color);
                 ((ColorEnvelopeListener) colorListener).onColorSelected(envelope, fromUser);
             }
 
@@ -281,6 +321,7 @@ public class ColorPickerView extends FrameLayout {
         }
     }
 
+    /** notify to sliders about a new trigger. */
     private void notifyToSlideBars() {
         if (alphaSlideBar != null) alphaSlideBar.notifyColor();
         if (brightnessSlider != null) {
@@ -292,24 +333,25 @@ public class ColorPickerView extends FrameLayout {
         }
     }
 
-    public void setColorListener(ColorPickerViewListener colorListener) {
-        this.colorListener = colorListener;
-    }
-
-    private void handleFlagView(Point centerPoint) {
-        centerPoint = getCenterPoint(centerPoint.x, centerPoint.y);
+    /**
+     * notify to {@link FlagView} about a new trigger.
+     *
+     * @param point a new coordinate {@link Point}.
+     */
+    private void notifyToFlagView(Point point) {
+        point = getCenterPoint(point.x, point.y);
         if (flagView != null) {
             if (flagView.getFlagMode() == FlagMode.ALWAYS) flagView.visible();
-            int posX = centerPoint.x - flagView.getWidth() / 2 + selector.getWidth() / 2;
-            if (centerPoint.y - flagView.getHeight() > 0) {
+            int posX = point.x - flagView.getWidth() / 2 + selector.getWidth() / 2;
+            if (point.y - flagView.getHeight() > 0) {
                 flagView.setRotation(0);
                 flagView.setX(posX);
-                flagView.setY(centerPoint.y - flagView.getHeight());
+                flagView.setY(point.y - flagView.getHeight());
                 flagView.onRefresh(getColorEnvelope());
             } else if (flagView.isFlipAble()) {
                 flagView.setRotation(180);
                 flagView.setX(posX);
-                flagView.setY(centerPoint.y + flagView.getHeight() - selector.getHeight() / 2);
+                flagView.setY(point.y + flagView.getHeight() - selector.getHeight() / 2);
                 flagView.onRefresh(getColorEnvelope());
             }
             if (posX < 0) flagView.setX(0);
@@ -318,39 +360,38 @@ public class ColorPickerView extends FrameLayout {
         }
     }
 
+    /**
+     * gets the selected color.
+     *
+     * @return the selected color.
+     */
     public int getColor() {
         return selectedColor;
     }
 
+    /**
+     * gets the {@link ColorEnvelope} of the selected color.
+     *
+     * @return {@link ColorEnvelope}.
+     */
     public ColorEnvelope getColorEnvelope() {
-        return new ColorEnvelope(getColor(), getHexCode(getColor()), getColorARGB(getColor()));
+        return new ColorEnvelope(getColor());
     }
 
-    public String getHexCode(int color) {
-        int a = Color.alpha(color);
-        int r = Color.red(color);
-        int g = Color.green(color);
-        int b = Color.blue(color);
-        return String.format(Locale.getDefault(), "%02X%02X%02X%02X", a, r, g, b);
-    }
-
-    public int[] getColorARGB(int color) {
-        int[] argb = new int[4];
-        argb[0] = Color.alpha(color);
-        argb[1] = Color.red(color);
-        argb[2] = Color.green(color);
-        argb[3] = Color.blue(color);
-        return argb;
-    }
-
-    public Point getSelectedPoint() {
-        return selectedPoint;
-    }
-
+    /**
+     * gets a {@link FlagView}.
+     *
+     * @return {@link FlagView}.
+     */
     public FlagView getFlagView() {
         return this.flagView;
     }
 
+    /**
+     * sets a {@link FlagView}.
+     *
+     * @param flagView {@link FlagView}.
+     */
     public void setFlagView(@NonNull FlagView flagView) {
         flagView.gone();
         addView(flagView);
@@ -358,27 +399,51 @@ public class ColorPickerView extends FrameLayout {
         flagView.setAlpha(alpha_flag);
     }
 
+    /**
+     * gets center coordinate of the selector.
+     *
+     * @param x coordinate x.
+     * @param y coordinate y.
+     * @return the center coordinate of the selector.
+     */
     private Point getCenterPoint(int x, int y) {
         return new Point(
                 x - (selector.getMeasuredWidth() / 2), y - (selector.getMeasuredHeight() / 2));
     }
 
+    /**
+     * gets a selector's selected coordinate x.
+     *
+     * @return a selected coordinate x.
+     */
     public float getSelectorX() {
-        return selector.getX() - getSelectorHalfWidth();
+        return selector.getX() - (selector.getMeasuredWidth() / 2);
     }
 
+    /**
+     * gets a selector's selected coordinate y.
+     *
+     * @return a selected coordinate y.
+     */
     public float getSelectorY() {
-        return selector.getY() - getSelectorHalfHeight();
+        return selector.getY() - (selector.getMeasuredHeight() / 2);
     }
 
-    private int getSelectorHalfWidth() {
-        return selector.getMeasuredWidth() / 2;
+    /**
+     * gets a selector's selected coordinate.
+     *
+     * @return a selected coordinate {@link Point}.
+     */
+    public Point getSelectedPoint() {
+        return selectedPoint;
     }
 
-    private int getSelectorHalfHeight() {
-        return selector.getMeasuredHeight() / 2;
-    }
-
+    /**
+     * changes selector's selected point with notifies about changes manually.
+     *
+     * @param x coordinate x of the selector.
+     * @param y coordinate y of the selector.
+     */
     public void setSelectorPoint(int x, int y) {
         selectedColor = getColorFromBitmap(x, y);
         if (selectedColor != Color.TRANSPARENT) {
@@ -386,10 +451,28 @@ public class ColorPickerView extends FrameLayout {
             setCoordinate(x, y);
             fireColorListener(getColor(), false);
             notifyToSlideBars();
-            handleFlagView(new Point(x, y));
+            notifyToFlagView(new Point(x, y));
         }
     }
 
+    /**
+     * changes selector's selected point without notifies.
+     *
+     * @param x coordinate x of the selector.
+     * @param y coordinate y of the selector.
+     */
+    private void setCoordinate(int x, int y) {
+        selector.setX(x - (selector.getMeasuredWidth() / 2));
+        selector.setY(y - (selector.getMeasuredHeight() / 2));
+    }
+
+    /**
+     * changes selector's selected point by a specific color.
+     *
+     * <p>It may not work properly if change the default palette drawable.
+     *
+     * @param color color.
+     */
     public void selectByHsv(int color) {
         int radius = getMeasuredWidth() / 2;
 
@@ -404,11 +487,11 @@ public class ColorPickerView extends FrameLayout {
         setSelectorPoint(pointX, pointY);
     }
 
-    private void setCoordinate(int x, int y) {
-        selector.setX(x - (selector.getMeasuredWidth() / 2));
-        selector.setY(y - (selector.getMeasuredHeight() / 2));
-    }
-
+    /**
+     * changes palette drawable manually.
+     *
+     * @param drawable palette drawable.
+     */
     public void setPaletteDrawable(@NonNull Drawable drawable) {
         removeView(palette);
         palette = new ImageView(getContext());
@@ -437,42 +520,79 @@ public class ColorPickerView extends FrameLayout {
         }
     }
 
+    /**
+     * changes selector drawable manually.
+     *
+     * @param drawable selector drawable.
+     */
     public void setSelectorDrawable(@NonNull Drawable drawable) {
         selector.setImageDrawable(drawable);
     }
 
+    /** selects the center of the palette manually. */
     public void selectCenter() {
         setSelectorPoint(getMeasuredWidth() / 2, getMeasuredHeight() / 2);
     }
 
+    /**
+     * gets an {@link ActionMode}.
+     *
+     * @return {@link ActionMode}.
+     */
     public ActionMode getActionMode() {
         return this.actionMode;
     }
 
+    /**
+     * sets an {@link ActionMode}.
+     *
+     * @param actionMode {@link ActionMode}.
+     */
     public void setActionMode(ActionMode actionMode) {
         this.actionMode = actionMode;
     }
 
+    /**
+     * gets an {@link AlphaSlideBar}.
+     *
+     * @return {@link AlphaSlideBar}.
+     */
+    public AlphaSlideBar getAlphaSlideBar() {
+        return alphaSlideBar;
+    }
+
+    /**
+     * linking an {@link AlphaSlideBar} on the {@link ColorPickerView}.
+     *
+     * @param alphaSlideBar {@link AlphaSlideBar}.
+     */
     public void attachAlphaSlider(@NonNull AlphaSlideBar alphaSlideBar) {
         this.alphaSlideBar = alphaSlideBar;
         alphaSlideBar.attachColorPickerView(this);
         alphaSlideBar.notifyColor();
     }
 
+    /**
+     * gets an {@link BrightnessSlideBar}.
+     *
+     * @return {@link BrightnessSlideBar}.
+     */
+    public BrightnessSlideBar getBrightnessSlider() {
+        return brightnessSlider;
+    }
+
+    /**
+     * linking an {@link BrightnessSlideBar} on the {@link ColorPickerView}.
+     *
+     * @param brightnessSlider {@link BrightnessSlideBar}.
+     */
     public void attachBrightnessSlider(@NonNull BrightnessSlideBar brightnessSlider) {
         this.brightnessSlider = brightnessSlider;
         brightnessSlider.attachColorPickerView(this);
         brightnessSlider.notifyColor();
     }
 
-    public AlphaSlideBar getAlphaSlideBar() {
-        return alphaSlideBar;
-    }
-
-    public BrightnessSlideBar getBrightnessSlider() {
-        return brightnessSlider;
-    }
-
+    /** Builder class for create {@link ColorPickerView}. */
     public static class Builder {
         private Context context;
         private ColorPickerViewListener colorPickerViewListener;

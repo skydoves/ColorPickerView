@@ -16,7 +16,11 @@
 
 package com.skydoves.colorpickerview.flag;
 
+/** FlagMode decides the {@link FlagView}'s visibility action. */
 public enum FlagMode {
+    /** showing always by tapping and dragging. */
     ALWAYS,
+
+    /** showing only when finger released. */
     LAST
 }

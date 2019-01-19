@@ -35,13 +35,14 @@ import android.widget.ImageView;
 import com.skydoves.colorpickerview.ActionMode;
 import com.skydoves.colorpickerview.ColorPickerView;
 
+/** AbstractSlider is the abstract class for implementing sliders. */
 @SuppressWarnings("IntegerDivisionInFloatingPointContext")
 public abstract class AbstractSlider extends FrameLayout {
 
     public ColorPickerView colorPickerView;
     protected Paint colorPaint;
     protected Paint borderPaint;
-    protected float selectorPosition = 1f;
+    protected float selectorPosition = 1.0f;
     protected Drawable selectorDrawable;
     protected int borderSize = 2;
     protected int borderColor = Color.BLACK;
@@ -72,10 +73,17 @@ public abstract class AbstractSlider extends FrameLayout {
         onCreate();
     }
 
+    /** gets attribute sets style from layout */
     protected abstract void getAttrs(AttributeSet attrs);
 
+    /** update paint color whenever the triggered colors are changed. */
     protected abstract void updatePaint(Paint colorPaint);
 
+    /**
+     * assembles about the selected color.
+     *
+     * @return assembled color.
+     */
     public abstract int assembleColor();
 
     private void onCreate() {
@@ -110,6 +118,7 @@ public abstract class AbstractSlider extends FrameLayout {
         canvas.drawRect(0, 0, width, height, borderPaint);
     }
 
+    /** called by {@link ColorPickerView} whenever {@link ColorPickerView} is triggered. */
     public void notifyColor() {
         color = colorPickerView.getColor();
         updatePaint(colorPaint);
@@ -176,14 +185,29 @@ public abstract class AbstractSlider extends FrameLayout {
                         });
     }
 
+    /**
+     * gets assembled color
+     *
+     * @return color
+     */
     public int getColor() {
         return color;
     }
 
+    /**
+     * attaches {@link ColorPickerView} to slider.
+     *
+     * @param colorPickerView {@link ColorPickerView}
+     */
     public void attachColorPickerView(ColorPickerView colorPickerView) {
         this.colorPickerView = colorPickerView;
     }
 
+    /**
+     * gets selector's position ratio.
+     *
+     * @return selector's position ratio.
+     */
     public float getSelectorPosition() {
         return this.selectorPosition;
     }

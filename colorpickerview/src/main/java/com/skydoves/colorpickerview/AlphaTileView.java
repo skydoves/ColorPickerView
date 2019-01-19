@@ -30,6 +30,7 @@ import android.view.ViewTreeObserver;
 import androidx.annotation.Nullable;
 import com.skydoves.colorpickerview.sliders.AlphaTileDrawable;
 
+/** AlphaTileView visualizes ARGB color on the canvas using {@link AlphaTileDrawable}. */
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class AlphaTileView extends View {
 
