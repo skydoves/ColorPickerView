@@ -3,9 +3,11 @@
 [![API](https://img.shields.io/badge/API-15%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=15)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/e5d06ece54644717845a059f90632660)](https://www.codacy.com/app/skydoves/ColorPickerView?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=skydoves/ColorPickerView&amp;utm_campaign=Badge_Grade)
 [![Build Status](https://travis-ci.org/skydoves/ColorPickerView.svg?branch=master)](https://travis-ci.org/skydoves/ColorPickerView) 
-[![Android Weekly](https://img.shields.io/badge/Android%20Weekly-%23316-orange.svg)](https://androidweekly.net/issues/issue-316) <br>
+[![Android Weekly](https://img.shields.io/badge/Android%20Weekly-%23316-orange.svg)](https://androidweekly.net/issues/issue-316)
+[![Javadoc](https://img.shields.io/badge/Javadoc-ColorPickerView-yellow.svg)](https://skydoves.github.io/libraries/colorpickerview/javadoc/) <br>
 ColorPickerView implements getting HSV colors, ARGB values, Hex color codes from <br>
 any image drawables or your gallery pictures by tapping on the desired color.<br>
+
 
 ![img0](https://user-images.githubusercontent.com/24237865/45309043-ccf51580-b55d-11e8-8985-02fc2d3a7250.jpg) 
 ![img1](https://user-images.githubusercontent.com/24237865/45308725-1db83e80-b55d-11e8-84b0-1d48c0405365.jpg)
@@ -117,7 +119,8 @@ AlphaSlideBar changes the transparency of `ColorPickerView`'s the selected color
      android:layout_height="wrap_content"
      app:selector_AlphaSlideBar="@drawable/wheel" // sets the selector's drawable.
      app:borderColor_AlphaSlideBar="@android:color/darker_gray" // sets the border color.
-     app:borderSize_AlphaSlideBar="5"/> // sets the border size.
+     app:borderSize_AlphaSlideBar="5" // sets the border size.
+     />
 ```
 `attachAlphaSlider` method links the `AlphaSlideBar` to `ColorPickerView`.
 
