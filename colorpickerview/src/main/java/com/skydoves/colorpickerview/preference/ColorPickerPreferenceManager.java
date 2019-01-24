@@ -109,8 +109,8 @@ public class ColorPickerPreferenceManager {
      * @param position position of the {@link com.skydoves.colorpickerview.sliders.AlphaSlideBar}.
      * @return {@link ColorPickerPreferenceManager}.
      */
-    public ColorPickerPreferenceManager setAlphaSliderPosition(String name, float position) {
-        sharedPreferences.edit().putFloat(getAlphaSliderName(name), position).apply();
+    public ColorPickerPreferenceManager setAlphaSliderPosition(String name, int position) {
+        sharedPreferences.edit().putInt(getAlphaSliderName(name), position).apply();
         return colorPickerPreferenceManager;
     }
 
@@ -120,8 +120,8 @@ public class ColorPickerPreferenceManager {
      * @param defaultPosition default position of alpha slider position.
      * @return {@link ColorPickerPreferenceManager}.
      */
-    public float getAlphaSliderPosition(String name, float defaultPosition) {
-        return sharedPreferences.getFloat(getAlphaSliderName(name), defaultPosition);
+    public int getAlphaSliderPosition(String name, int defaultPosition) {
+        return sharedPreferences.getInt(getAlphaSliderName(name), defaultPosition);
     }
 
     /**
@@ -140,8 +140,8 @@ public class ColorPickerPreferenceManager {
      * @param position position of the {@link com.skydoves.colorpickerview.sliders.BrightnessSlideBar}.
      * @return {@link ColorPickerPreferenceManager}.
      */
-    public ColorPickerPreferenceManager setBrightnessSliderPosition(String name, float position) {
-        sharedPreferences.edit().putFloat(getBrightnessSliderName(name), position).apply();
+    public ColorPickerPreferenceManager setBrightnessSliderPosition(String name, int position) {
+        sharedPreferences.edit().putInt(getBrightnessSliderName(name), position).apply();
         return colorPickerPreferenceManager;
     }
 
@@ -151,8 +151,8 @@ public class ColorPickerPreferenceManager {
      * @param defaultPosition default position of brightness slider position.
      * @return {@link ColorPickerPreferenceManager}.
      */
-    public float getBrightnessSliderPosition(String name, float defaultPosition) {
-        return sharedPreferences.getFloat(getBrightnessSliderName(name),defaultPosition);
+    public int getBrightnessSliderPosition(String name, int defaultPosition) {
+        return sharedPreferences.getInt(getBrightnessSliderName(name),defaultPosition);
     }
 
     /**
@@ -174,8 +174,8 @@ public class ColorPickerPreferenceManager {
             String name = colorPickerView.getPreferenceName();
             setColor(name, colorPickerView.getColor());
             setSelectorPosition(name, colorPickerView.getSelectedPoint());
-            setAlphaSliderPosition(name, colorPickerView.getAlphaSlideBar().getSelectorPosition());
-            setBrightnessSliderPosition(name, colorPickerView.getBrightnessSlider().getSelectorPosition());
+            setAlphaSliderPosition(name, colorPickerView.getAlphaSlideBar().getSelectedX());
+            setBrightnessSliderPosition(name, colorPickerView.getBrightnessSlider().getSelectedX());
         }
     }
 
@@ -186,7 +186,10 @@ public class ColorPickerPreferenceManager {
     public void restoreColorPickerData(ColorPickerView colorPickerView) {
         if (colorPickerView != null && colorPickerView.getPreferenceName() != null) {
             String name = colorPickerView.getPreferenceName();
-
+            colorPickerView.setPureColor(getColor(name, -1));
+            Point defaultPoint = new Point(colorPickerView.getMeasuredWidth() / 2, colorPickerView.getMeasuredHeight() / 2);
+            colorPickerView.setCoordinate(getSelectorPosition(name, defaultPoint).x, getSelectorPosition(name, defaultPoint).y);
+            colorPickerView.setSelectorPoint(getSelectorPosition(name, defaultPoint).x, getSelectorPosition(name, defaultPoint).y);
         }
     }
 

@@ -40,6 +40,7 @@ import com.skydoves.colorpickerview.flag.FlagView;
 import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener;
 import com.skydoves.colorpickerview.listeners.ColorListener;
 import com.skydoves.colorpickerview.listeners.ColorPickerViewListener;
+import com.skydoves.colorpickerview.preference.ColorPickerPreferenceManager;
 import com.skydoves.colorpickerview.sliders.AlphaSlideBar;
 import com.skydoves.colorpickerview.sliders.BrightnessSlideBar;
 
@@ -59,6 +60,7 @@ import androidx.core.content.ContextCompat;
 public class ColorPickerView extends FrameLayout {
 
     public ColorPickerViewListener colorListener;
+    private int selectedPureColor;
     private int selectedColor;
     private Point selectedPoint;
     private ImageView palette;
@@ -161,9 +163,17 @@ public class ColorPickerView extends FrameLayout {
                                 } else {
                                     getViewTreeObserver().removeOnGlobalLayoutListener(this);
                                 }
-                                selectCenter();
+                                onFinishInflated();
                             }
                         });
+    }
+
+    private void onFinishInflated() {
+        if (getPreferenceName() != null) {
+            ColorPickerPreferenceManager.getInstance(getContext()).restoreColorPickerData(this);
+        } else {
+            selectCenter();
+        }
     }
 
     /**
@@ -225,6 +235,7 @@ public class ColorPickerView extends FrameLayout {
         int pixelColor = getColorFromBitmap(snapPoint.x, snapPoint.y);
 
         if (pixelColor != Color.TRANSPARENT && pixelColor != Color.BLACK) {
+            selectedPureColor = pixelColor;
             selectedColor = pixelColor;
             selectedPoint = new Point(snapPoint.x, snapPoint.y);
             setCoordinate(snapPoint.x, snapPoint.y);
@@ -304,10 +315,18 @@ public class ColorPickerView extends FrameLayout {
     public void fireColorListener(int color, boolean fromUser) {
         if (colorListener != null) {
             selectedColor = color;
+            if (getAlphaSlideBar() != null) {
+                getAlphaSlideBar().notifyColor();
+                selectedColor = getAlphaSlideBar().assembleColor();
+            }
+            if (getBrightnessSlider() != null) {
+                getBrightnessSlider().notifyColor();
+                selectedColor = getBrightnessSlider().assembleColor();
+            }
             if (colorListener instanceof ColorListener) {
-                ((ColorListener) colorListener).onColorSelected(color, fromUser);
+                ((ColorListener) colorListener).onColorSelected(selectedColor, fromUser);
             } else if (colorListener instanceof ColorEnvelopeListener) {
-                ColorEnvelope envelope = new ColorEnvelope(color);
+                ColorEnvelope envelope = new ColorEnvelope(selectedColor);
                 ((ColorEnvelopeListener) colorListener).onColorSelected(envelope, fromUser);
             }
 
@@ -371,6 +390,22 @@ public class ColorPickerView extends FrameLayout {
      */
     public int getColor() {
         return selectedColor;
+    }
+
+    /**
+     * gets the selected pure color without alpha and brightness.
+     * @return the selected pure color.
+     */
+    public int getPureColor() {
+        return selectedPureColor;
+    }
+
+    /**
+     * sets the pure color.
+     * @param color the pure color.
+     */
+    public void setPureColor(int color) {
+        this.selectedPureColor = color;
     }
 
     /**
@@ -465,7 +500,7 @@ public class ColorPickerView extends FrameLayout {
      * @param x coordinate x of the selector.
      * @param y coordinate y of the selector.
      */
-    private void setCoordinate(int x, int y) {
+    public void setCoordinate(int x, int y) {
         selector.setX(x - (selector.getMeasuredWidth() / 2));
         selector.setY(y - (selector.getMeasuredHeight() / 2));
     }
@@ -574,6 +609,10 @@ public class ColorPickerView extends FrameLayout {
         this.alphaSlideBar = alphaSlideBar;
         alphaSlideBar.attachColorPickerView(this);
         alphaSlideBar.notifyColor();
+
+        if (getPreferenceName() != null) {
+            alphaSlideBar.setPreferenceName(getPreferenceName());
+        }
     }
 
     /**
@@ -594,6 +633,10 @@ public class ColorPickerView extends FrameLayout {
         this.brightnessSlider = brightnessSlider;
         brightnessSlider.attachColorPickerView(this);
         brightnessSlider.notifyColor();
+
+        if (getPreferenceName() != null) {
+            brightnessSlider.setPreferenceName(getPreferenceName());
+        }
     }
 
     /**
@@ -610,6 +653,20 @@ public class ColorPickerView extends FrameLayout {
      */
     public void setPreferenceName(String preferenceName) {
         this.preferenceName = preferenceName;
+        if (this.alphaSlideBar != null) {
+            this.alphaSlideBar.setPreferenceName(preferenceName);
+        }
+        if (this.brightnessSlider != null) {
+            this.brightnessSlider.setPreferenceName(preferenceName);
+        }
+    }
+
+    /**
+     * gets the {@link ColorPickerPreferenceManager}.
+     * @return {@link ColorPickerPreferenceManager}.
+     */
+    public ColorPickerPreferenceManager getColorPickerPreferenceManager() {
+        return ColorPickerPreferenceManager.getInstance(getContext());
     }
 
     /** Builder class for create {@link ColorPickerView}. */
