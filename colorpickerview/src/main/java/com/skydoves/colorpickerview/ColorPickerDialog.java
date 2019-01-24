@@ -78,6 +78,15 @@ public class ColorPickerDialog extends AlertDialog {
         }
 
         /**
+         * gets {@link ColorPickerView} on {@link Builder}.
+         *
+         * @return {@link ColorPickerView}.
+         */
+        public ColorPickerView getColorPickerView() {
+            return colorPickerView;
+        }
+
+        /**
          * sets {@link ColorPickerView} manually.
          *
          * @param colorPickerView {@link ColorPickerView}.
@@ -86,15 +95,6 @@ public class ColorPickerDialog extends AlertDialog {
         public Builder setColorPickerView(ColorPickerView colorPickerView) {
             this.colorPickerView = colorPickerView;
             return this;
-        }
-
-        /**
-         * gets {@link ColorPickerView} on {@link Builder}.
-         *
-         * @return {@link ColorPickerView}.
-         */
-        public ColorPickerView getColorPickerView() {
-            return colorPickerView;
         }
 
         /**

@@ -34,7 +34,8 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import com.skydoves.colorpickerview.flag.FlagMode;
 import com.skydoves.colorpickerview.flag.FlagView;
 import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener;
@@ -43,9 +44,6 @@ import com.skydoves.colorpickerview.listeners.ColorPickerViewListener;
 import com.skydoves.colorpickerview.preference.ColorPickerPreferenceManager;
 import com.skydoves.colorpickerview.sliders.AlphaSlideBar;
 import com.skydoves.colorpickerview.sliders.BrightnessSlideBar;
-
-import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 
 /**
  * ColorPickerView implements getting HSV colors, ARGB values, Hex color codes from any image
@@ -106,18 +104,21 @@ public class ColorPickerView extends FrameLayout {
         TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.ColorPickerView);
         try {
             if (a.hasValue(R.styleable.ColorPickerView_palette))
-                paletteDrawable = a.getDrawable(R.styleable.ColorPickerView_palette);
+                this.paletteDrawable = a.getDrawable(R.styleable.ColorPickerView_palette);
             if (a.hasValue(R.styleable.ColorPickerView_selector))
-                selectorDrawable = a.getDrawable(R.styleable.ColorPickerView_selector);
+                this.selectorDrawable = a.getDrawable(R.styleable.ColorPickerView_selector);
             if (a.hasValue(R.styleable.ColorPickerView_alpha_selector))
-                alpha_selector =
+                this.alpha_selector =
                         a.getFloat(R.styleable.ColorPickerView_alpha_selector, alpha_selector);
             if (a.hasValue(R.styleable.ColorPickerView_alpha_flag))
-                alpha_flag = a.getFloat(R.styleable.ColorPickerView_alpha_flag, alpha_flag);
+                this.alpha_flag = a.getFloat(R.styleable.ColorPickerView_alpha_flag, alpha_flag);
             if (a.hasValue(R.styleable.ColorPickerView_actionMode)) {
                 int actionMode = a.getInteger(R.styleable.ColorPickerView_actionMode, 0);
                 if (actionMode == 0) this.actionMode = ActionMode.ALWAYS;
                 else if (actionMode == 1) this.actionMode = ActionMode.LAST;
+            }
+            if (a.hasValue(R.styleable.ColorPickerView_preferenceName)) {
+                this.preferenceName = a.getString(R.styleable.ColorPickerView_preferenceName);
             }
         } finally {
             a.recycle();
@@ -394,6 +395,7 @@ public class ColorPickerView extends FrameLayout {
 
     /**
      * gets the selected pure color without alpha and brightness.
+     *
      * @return the selected pure color.
      */
     public int getPureColor() {
@@ -402,6 +404,7 @@ public class ColorPickerView extends FrameLayout {
 
     /**
      * sets the pure color.
+     *
      * @param color the pure color.
      */
     public void setPureColor(int color) {
@@ -641,6 +644,7 @@ public class ColorPickerView extends FrameLayout {
 
     /**
      * gets the preference name.
+     *
      * @return preference name.
      */
     public String getPreferenceName() {
@@ -649,6 +653,7 @@ public class ColorPickerView extends FrameLayout {
 
     /**
      * sets the preference name.
+     *
      * @param preferenceName preference name.
      */
     public void setPreferenceName(String preferenceName) {
@@ -663,6 +668,7 @@ public class ColorPickerView extends FrameLayout {
 
     /**
      * gets the {@link ColorPickerPreferenceManager}.
+     *
      * @return {@link ColorPickerPreferenceManager}.
      */
     public ColorPickerPreferenceManager getColorPickerPreferenceManager() {

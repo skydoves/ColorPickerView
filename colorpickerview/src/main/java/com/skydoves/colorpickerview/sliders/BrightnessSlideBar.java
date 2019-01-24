@@ -90,8 +90,9 @@ public class BrightnessSlideBar extends AbstractSlider {
     public void onInflateFinished() {
         int defaultPosition = getMeasuredWidth() - selector.getMeasuredWidth();
         if (getPreferenceName() != null) {
-            updateSelectorX(ColorPickerPreferenceManager.getInstance(
-                  getContext()).getBrightnessSliderPosition(getPreferenceName(), defaultPosition));
+            updateSelectorX(
+                    ColorPickerPreferenceManager.getInstance(getContext())
+                            .getBrightnessSliderPosition(getPreferenceName(), defaultPosition));
         } else {
             selector.setX(defaultPosition);
         }

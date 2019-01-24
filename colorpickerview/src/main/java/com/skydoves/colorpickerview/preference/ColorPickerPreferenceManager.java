@@ -1,27 +1,41 @@
+/*
+ * Copyright (C) 2017 skydoves
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 package com.skydoves.colorpickerview.preference;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Point;
-
 import com.skydoves.colorpickerview.ColorPickerView;
 
 /**
  * ColorPickerPreferenceManager implements {@link SharedPreferences}
+ *
  * <p>for {@link com.skydoves.colorpickerview.ColorPickerView}.
  */
 @SuppressWarnings({"WeakerAccess", "unused", "UnusedReturnValue"})
 public class ColorPickerPreferenceManager {
-
-    private static ColorPickerPreferenceManager colorPickerPreferenceManager;
-    private SharedPreferences sharedPreferences;
 
     protected static final String COLOR = "_COLOR";
     protected static final String SelectorX = "_SELECTOR_X";
     protected static final String SelectorY = "_SELECTOR_Y";
     protected static final String AlphaSlider = "_SLIDER_ALPHA";
     protected static final String BrightnessSlider = "_SLIDER_BRIGHTNESS";
+    private static ColorPickerPreferenceManager colorPickerPreferenceManager;
+    private SharedPreferences sharedPreferences;
 
     private ColorPickerPreferenceManager(Context context) {
         sharedPreferences =
@@ -30,16 +44,19 @@ public class ColorPickerPreferenceManager {
 
     /**
      * gets an instance of the {@link ColorPickerPreferenceManager}.
+     *
      * @param context context.
      * @return {@link ColorPickerPreferenceManager}.
      */
     public static ColorPickerPreferenceManager getInstance(Context context) {
-        if (colorPickerPreferenceManager == null) colorPickerPreferenceManager = new ColorPickerPreferenceManager(context);
+        if (colorPickerPreferenceManager == null)
+            colorPickerPreferenceManager = new ColorPickerPreferenceManager(context);
         return colorPickerPreferenceManager;
     }
 
     /**
      * saves a color on preference.
+     *
      * @param name preference name.
      * @param color preference color.
      * @return {@link ColorPickerPreferenceManager}.
@@ -51,6 +68,7 @@ public class ColorPickerPreferenceManager {
 
     /**
      * gets the saved color from preference.
+     *
      * @param name preference name.
      * @param defaultColor default preference color.
      * @return the saved color.
@@ -61,6 +79,7 @@ public class ColorPickerPreferenceManager {
 
     /**
      * clears the saved color from preference.
+     *
      * @param name preference name.
      * @return {@link ColorPickerPreferenceManager}.
      */
@@ -71,6 +90,7 @@ public class ColorPickerPreferenceManager {
 
     /**
      * saves a selector position on preference.
+     *
      * @param name preference name.
      * @param position position of the selector.
      * @return {@link ColorPickerPreferenceManager}.
@@ -83,17 +103,20 @@ public class ColorPickerPreferenceManager {
 
     /**
      * gets the saved selector position on preference.
+     *
      * @param name preference name.
      * @param defaultPoint default position of the selector.
      * @return the saved selector position.
      */
     public Point getSelectorPosition(String name, Point defaultPoint) {
-        return new Point(sharedPreferences.getInt(getSelectorXName(name), defaultPoint.x),
+        return new Point(
+                sharedPreferences.getInt(getSelectorXName(name), defaultPoint.x),
                 sharedPreferences.getInt(getSelectorYName(name), defaultPoint.y));
     }
 
     /**
      * clears the saved selector position from preference.
+     *
      * @param name preference name.
      * @return {@link ColorPickerPreferenceManager}.
      */
@@ -105,6 +128,7 @@ public class ColorPickerPreferenceManager {
 
     /**
      * sets an alpha slider position.
+     *
      * @param name preference name.
      * @param position position of the {@link com.skydoves.colorpickerview.sliders.AlphaSlideBar}.
      * @return {@link ColorPickerPreferenceManager}.
@@ -116,6 +140,7 @@ public class ColorPickerPreferenceManager {
 
     /**
      * gets the alpha slider position.
+     *
      * @param name preference name.
      * @param defaultPosition default position of alpha slider position.
      * @return {@link ColorPickerPreferenceManager}.
@@ -126,6 +151,7 @@ public class ColorPickerPreferenceManager {
 
     /**
      * clears the saved alpha slider position from preference.
+     *
      * @param name preference name.
      * @return {@link ColorPickerPreferenceManager}.
      */
@@ -136,8 +162,10 @@ public class ColorPickerPreferenceManager {
 
     /**
      * sets an brightness slider position.
+     *
      * @param name preference name.
-     * @param position position of the {@link com.skydoves.colorpickerview.sliders.BrightnessSlideBar}.
+     * @param position position of the {@link
+     *     com.skydoves.colorpickerview.sliders.BrightnessSlideBar}.
      * @return {@link ColorPickerPreferenceManager}.
      */
     public ColorPickerPreferenceManager setBrightnessSliderPosition(String name, int position) {
@@ -147,16 +175,18 @@ public class ColorPickerPreferenceManager {
 
     /**
      * gets the brightness slider position.
+     *
      * @param name preference name.
      * @param defaultPosition default position of brightness slider position.
      * @return {@link ColorPickerPreferenceManager}.
      */
     public int getBrightnessSliderPosition(String name, int defaultPosition) {
-        return sharedPreferences.getInt(getBrightnessSliderName(name),defaultPosition);
+        return sharedPreferences.getInt(getBrightnessSliderName(name), defaultPosition);
     }
 
     /**
      * clears the saved brightness slider position from preference.
+     *
      * @param name preference name.
      * @return {@link ColorPickerPreferenceManager}.
      */
@@ -167,6 +197,7 @@ public class ColorPickerPreferenceManager {
 
     /**
      * saves all data of the {@link ColorPickerView} on the preference.
+     *
      * @param colorPickerView {@link ColorPickerView}.
      */
     public void saveColorPickerData(ColorPickerView colorPickerView) {
@@ -181,20 +212,29 @@ public class ColorPickerPreferenceManager {
 
     /**
      * restores all data from the preference.
+     *
      * @param colorPickerView {@link ColorPickerView}.
      */
     public void restoreColorPickerData(ColorPickerView colorPickerView) {
         if (colorPickerView != null && colorPickerView.getPreferenceName() != null) {
             String name = colorPickerView.getPreferenceName();
             colorPickerView.setPureColor(getColor(name, -1));
-            Point defaultPoint = new Point(colorPickerView.getMeasuredWidth() / 2, colorPickerView.getMeasuredHeight() / 2);
-            colorPickerView.setCoordinate(getSelectorPosition(name, defaultPoint).x, getSelectorPosition(name, defaultPoint).y);
-            colorPickerView.setSelectorPoint(getSelectorPosition(name, defaultPoint).x, getSelectorPosition(name, defaultPoint).y);
+            Point defaultPoint =
+                    new Point(
+                            colorPickerView.getMeasuredWidth() / 2,
+                            colorPickerView.getMeasuredHeight() / 2);
+            colorPickerView.setCoordinate(
+                    getSelectorPosition(name, defaultPoint).x,
+                    getSelectorPosition(name, defaultPoint).y);
+            colorPickerView.setSelectorPoint(
+                    getSelectorPosition(name, defaultPoint).x,
+                    getSelectorPosition(name, defaultPoint).y);
         }
     }
 
     /**
      * clears all saved preference data.
+     *
      * @return {@link ColorPickerPreferenceManager}.
      */
     public ColorPickerPreferenceManager clearSavedAllData() {

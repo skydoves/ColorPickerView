@@ -25,7 +25,6 @@ import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Shader;
 import android.util.AttributeSet;
-
 import com.skydoves.colorpickerview.R;
 import com.skydoves.colorpickerview.preference.ColorPickerPreferenceManager;
 
@@ -103,8 +102,9 @@ public class AlphaSlideBar extends AbstractSlider {
     public void onInflateFinished() {
         int defaultPosition = getMeasuredWidth() - selector.getMeasuredWidth();
         if (getPreferenceName() != null) {
-            updateSelectorX(ColorPickerPreferenceManager.getInstance(
-                  getContext()).getAlphaSliderPosition(getPreferenceName(), defaultPosition));
+            updateSelectorX(
+                    ColorPickerPreferenceManager.getInstance(getContext())
+                            .getAlphaSliderPosition(getPreferenceName(), defaultPosition));
         } else {
             selector.setX(defaultPosition);
         }

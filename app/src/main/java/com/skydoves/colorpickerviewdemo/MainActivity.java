@@ -22,7 +22,8 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import com.skydoves.colorpickerview.AlphaTileView;
 import com.skydoves.colorpickerview.ColorEnvelope;
 import com.skydoves.colorpickerview.ColorPickerDialog;
@@ -34,9 +35,6 @@ import com.skydoves.colorpickerview.sliders.BrightnessSlideBar;
 import com.skydoves.powermenu.OnMenuItemClickListener;
 import com.skydoves.powermenu.PowerMenu;
 import com.skydoves.powermenu.PowerMenuItem;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 @SuppressWarnings("ConstantConditions")
 public class MainActivity extends AppCompatActivity {
@@ -74,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
         powerMenu = PowerMenuUtils.getPowerMenu(this, this, powerMenuItemClickListener);
 
         colorPickerView = findViewById(R.id.colorPickerView);
-        colorPickerView.setPreferenceName("TestName");
         colorPickerView.setFlagView(new CustomFlag(this, R.layout.layout_flag));
         colorPickerView.setColorListener(
                 new ColorEnvelopeListener() {

@@ -32,7 +32,6 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-
 import com.skydoves.colorpickerview.ActionMode;
 import com.skydoves.colorpickerview.ColorPickerView;
 
@@ -233,6 +232,7 @@ public abstract class AbstractSlider extends FrameLayout {
 
     /**
      * gets selected x coordinate.
+     *
      * @return selected x coordinate.
      */
     public int getSelectedX() {
@@ -241,6 +241,7 @@ public abstract class AbstractSlider extends FrameLayout {
 
     /**
      * gets the preference name.
+     *
      * @return preference name.
      */
     public String getPreferenceName() {
@@ -249,6 +250,7 @@ public abstract class AbstractSlider extends FrameLayout {
 
     /**
      * sets the preference name.
+     *
      * @param preferenceName preference name.
      */
     public void setPreferenceName(String preferenceName) {
