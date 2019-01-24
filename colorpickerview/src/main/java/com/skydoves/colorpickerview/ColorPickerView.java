@@ -34,8 +34,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
+
 import com.skydoves.colorpickerview.flag.FlagMode;
 import com.skydoves.colorpickerview.flag.FlagView;
 import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener;
@@ -43,6 +42,9 @@ import com.skydoves.colorpickerview.listeners.ColorListener;
 import com.skydoves.colorpickerview.listeners.ColorPickerViewListener;
 import com.skydoves.colorpickerview.sliders.AlphaSlideBar;
 import com.skydoves.colorpickerview.sliders.BrightnessSlideBar;
+
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 
 /**
  * ColorPickerView implements getting HSV colors, ARGB values, Hex color codes from any image
@@ -72,6 +74,8 @@ public class ColorPickerView extends FrameLayout {
     private float alpha_selector = 1.0f;
     private float alpha_flag = 1.0f;
     private boolean VISIBLE_FLAG = false;
+
+    private String preferenceName;
 
     public ColorPickerView(Context context) {
         super(context);
@@ -590,6 +594,22 @@ public class ColorPickerView extends FrameLayout {
         this.brightnessSlider = brightnessSlider;
         brightnessSlider.attachColorPickerView(this);
         brightnessSlider.notifyColor();
+    }
+
+    /**
+     * gets the preference name.
+     * @return preference name.
+     */
+    public String getPreferenceName() {
+        return preferenceName;
+    }
+
+    /**
+     * sets the preference name.
+     * @param preferenceName preference name.
+     */
+    public void setPreferenceName(String preferenceName) {
+        this.preferenceName = preferenceName;
     }
 
     /** Builder class for create {@link ColorPickerView}. */
