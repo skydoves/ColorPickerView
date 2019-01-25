@@ -133,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
         ColorPickerDialog.Builder builder =
                 new ColorPickerDialog.Builder(this, AlertDialog.THEME_DEVICE_DEFAULT_DARK)
                         .setTitle("ColorPicker Dialog")
+                        .setPreferenceName("Test")
                         .setPositiveButton(
                                 getString(R.string.confirm),
                                 new ColorEnvelopeListener() {
