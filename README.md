@@ -7,6 +7,7 @@
 [![Javadoc](https://img.shields.io/badge/Javadoc-ColorPickerView-yellow.svg)](https://skydoves.github.io/libraries/colorpickerview/javadoc/) <br>
 ColorPickerView implements getting HSV colors, ARGB values, Hex color codes from <br>
 any image drawables or your gallery pictures by tapping on the desired color.<br>
+Supports alpha & brightness slider bar, dialog, and auto saving & restoring selected data.<br>
 
 
 ![img0](https://user-images.githubusercontent.com/24237865/45309043-ccf51580-b55d-11e8-8985-02fc2d3a7250.jpg) 
@@ -53,6 +54,7 @@ app:selector="@drawable/wheel" // sets selector image.
 app:alpha_selector="0.8" // sets selector's alpha.
 app:alpha_flag="0.8" // sets flag's alpha.
 app:actionMode="last" // sets action mode "always" or "last".
+app:preferenceName="MyColorPicker" // sets preference name.
 ```
 
 ### ColorListener Listener
@@ -98,6 +100,7 @@ This is how to create `ColorPickerView`'s instance using `ColorPickerView.Builde
 ```java
 ColorPickerView colorPickerView = new ColorPickerView.Builder(context)
       .setColorListener(colorListener)
+      .setPreferenceName("MyColorPicker");
       .setActionMode(ActionMode.LAST)
       .setAlphaSlideBar(alphaSlideBar)
       .setBrightnessSlideBar(brightnessSlideBar)
@@ -105,6 +108,35 @@ ColorPickerView colorPickerView = new ColorPickerView.Builder(context)
       .setPaletteDrawable(ContextCompat.getDrawable(context, R.drawable.palette))
       .setSelectorDrawable(ContextCompat.getDrawable(context, R.drawable.selector))
       .build();
+```
+
+### Restore and save
+This is how to restore the status for `ColorPickerView`.<br>
+Using `setPreferenceName()` method restores all of the saved statuses automatically.
+
+```java
+colorPickerView.setPreferenceName("MyColorPicker");
+```
+
+This is how to save the status for `ColorPickerView`.<br>
+Using `setLifecycleOwner()` method saves all of the statuses when the lifecycleOwner's destroy automatically.
+```java
+colorPickerView.setLifecycleOwner(this); // this means activity or fragment.
+```
+Or we can save the status manually regardless lifecycle using below method.
+```java
+ColorPickerPreferenceManager.getInstance(this).saveColorPickerData(colorPickerView);
+```
+
+### Manipulate and clear
+We can manipulate and clear the saved statuses using `ColorPickerPreferenceManager`.
+```java
+ColorPickerPreferenceManager manager = ColorPickerPreferenceManager.getInstance(this);
+manager.setColor("MyColorPicker", Color.RED); // manipulates the saved color data.
+manager.setSelectorPosition("MyColorPicker", new Point(120, 120)); // manipulates the saved selector's position data.
+manager.clearSavedAllData(); // clears all of the statuses.
+manager.clearSavedColor("MyColorPicker"); // clears only saved color data. 
+manager.restoreColorPickerData(colorPickerView); // restores the saved statuses manually.
 ```
 
 ## AlphaSlideBar(Optional)
@@ -161,6 +193,7 @@ ColorPickerDialog extends `AlertDialog`. So we can customize themes also. <br>
 ```java
 new ColorPickerDialog.Builder(this, AlertDialog.THEME_DEVICE_DEFAULT_DARK)
       .setTitle("ColorPicker Dialog")
+      .setPreferenceName("MyColorPickerDialog")
       .setPositiveButton(getString(R.string.confirm),
           new ColorEnvelopeListener() {
               @Override
@@ -175,8 +208,8 @@ new ColorPickerDialog.Builder(this, AlertDialog.THEME_DEVICE_DEFAULT_DARK)
                   dialogInterface.dismiss();
               }
            })
-      .attachAlphaSlideBar(true)
-      .attachBrightnessSlideBar(true)
+      .attachAlphaSlideBar(true) // default is true. If false, do not show the AlphaSlideBar.
+      .attachBrightnessSlideBar(true)  // default is true. If false, do not show the BrightnessSlideBar.
       .show();
 ```
 
