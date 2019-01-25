@@ -36,6 +36,10 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.OnLifecycleEvent;
 import com.skydoves.colorpickerview.flag.FlagMode;
 import com.skydoves.colorpickerview.flag.FlagView;
 import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener;
@@ -55,9 +59,8 @@ import com.skydoves.colorpickerview.sliders.BrightnessSlideBar;
  * <p>Implements {@link FlagView}, {@link AlphaSlideBar} and {@link BrightnessSlideBar} optional.
  */
 @SuppressWarnings({"WeakerAccess", "unchecked", "unused", "IntegerDivisionInFloatingPointContext"})
-public class ColorPickerView extends FrameLayout {
+public class ColorPickerView extends FrameLayout implements LifecycleObserver {
 
-    public ColorPickerViewListener colorListener;
     private int selectedPureColor;
     private int selectedColor;
     private Point selectedPoint;
@@ -68,6 +71,7 @@ public class ColorPickerView extends FrameLayout {
     private Drawable selectorDrawable;
     private AlphaSlideBar alphaSlideBar;
     private BrightnessSlideBar brightnessSlider;
+    public ColorPickerViewListener colorListener;
 
     private ActionMode actionMode = ActionMode.ALWAYS;
 
@@ -201,6 +205,8 @@ public class ColorPickerView extends FrameLayout {
         if (builder.brightnessSlider != null) attachBrightnessSlider(builder.brightnessSlider);
         if (builder.actionMode != null) this.actionMode = builder.actionMode;
         if (builder.flagView != null) setFlagView(builder.flagView);
+        if (builder.preferenceName != null) setPreferenceName(builder.preferenceName);
+        if (builder.lifecycleOwner != null) setLifecycleOwner(builder.lifecycleOwner);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -667,12 +673,32 @@ public class ColorPickerView extends FrameLayout {
     }
 
     /**
-     * gets the {@link ColorPickerPreferenceManager}.
+     * sets the {@link LifecycleOwner}.
      *
-     * @return {@link ColorPickerPreferenceManager}.
+     * @param lifecycleOwner {@link LifecycleOwner}.
      */
-    public ColorPickerPreferenceManager getColorPickerPreferenceManager() {
-        return ColorPickerPreferenceManager.getInstance(getContext());
+    public void setLifecycleOwner(LifecycleOwner lifecycleOwner) {
+        lifecycleOwner.getLifecycle().addObserver(this);
+    }
+
+    /**
+     * removes this color picker observer from the the {@link LifecycleOwner}.
+     *
+     * @param lifecycleOwner {@link LifecycleOwner}.
+     */
+    public void removeLifecycleOwner(LifecycleOwner lifecycleOwner) {
+        lifecycleOwner.getLifecycle().removeObserver(this);
+    }
+
+    /**
+     * This method invoked by the {@link LifecycleOwner}'s life cycle.
+     *
+     * <p>OnDestroy would be called on the {@link LifecycleOwner}, all of the color picker data will
+     * be saved automatically.
+     */
+    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+    public void onDestroy() {
+        ColorPickerPreferenceManager.getInstance(getContext()).saveColorPickerData(this);
     }
 
     /** Builder class for create {@link ColorPickerView}. */
@@ -689,6 +715,8 @@ public class ColorPickerView extends FrameLayout {
         private float alpha_flag = 1.0f;
         private int width = LayoutParams.MATCH_PARENT;
         private int height = LayoutParams.MATCH_PARENT;
+        private String preferenceName;
+        private LifecycleOwner lifecycleOwner;
 
         public Builder(Context context) {
             this.context = context;
@@ -746,6 +774,16 @@ public class ColorPickerView extends FrameLayout {
 
         public Builder setHeight(int height) {
             this.height = height;
+            return this;
+        }
+
+        public Builder setPreferenceName(String preferenceName) {
+            this.preferenceName = preferenceName;
+            return this;
+        }
+
+        public Builder setLifecycleOwner(LifecycleOwner lifecycleOwner) {
+            this.lifecycleOwner = lifecycleOwner;
             return this;
         }
 

@@ -29,7 +29,6 @@ import com.skydoves.colorpickerview.ColorEnvelope;
 import com.skydoves.colorpickerview.ColorPickerDialog;
 import com.skydoves.colorpickerview.ColorPickerView;
 import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener;
-import com.skydoves.colorpickerview.preference.ColorPickerPreferenceManager;
 import com.skydoves.colorpickerview.sliders.AlphaSlideBar;
 import com.skydoves.colorpickerview.sliders.BrightnessSlideBar;
 import com.skydoves.powermenu.OnMenuItemClickListener;
@@ -88,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
         // attach brightnessSlideBar
         final BrightnessSlideBar brightnessSlideBar = findViewById(R.id.brightnessSlide);
         colorPickerView.attachBrightnessSlider(brightnessSlideBar);
+        colorPickerView.setLifecycleOwner(this);
     }
 
     /**
@@ -158,7 +158,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        ColorPickerPreferenceManager.getInstance(this).saveColorPickerData(colorPickerView);
         if (powerMenu.isShowing()) powerMenu.dismiss();
         else super.onBackPressed();
     }
