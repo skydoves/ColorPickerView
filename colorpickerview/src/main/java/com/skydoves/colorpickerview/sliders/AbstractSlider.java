@@ -43,11 +43,13 @@ public abstract class AbstractSlider extends FrameLayout {
     protected Paint colorPaint;
     protected Paint borderPaint;
     protected float selectorPosition = 1.0f;
+    protected int selectedX = 0;
     protected Drawable selectorDrawable;
     protected int borderSize = 2;
     protected int borderColor = Color.BLACK;
     protected int color = Color.WHITE;
-    private ImageView selector;
+    protected ImageView selector;
+    protected String preferenceName;
 
     public AbstractSlider(Context context) {
         super(context);
@@ -120,7 +122,7 @@ public abstract class AbstractSlider extends FrameLayout {
 
     /** called by {@link ColorPickerView} whenever {@link ColorPickerView} is triggered. */
     public void notifyColor() {
-        color = colorPickerView.getColor();
+        color = colorPickerView.getPureColor();
         updatePaint(colorPaint);
         invalidate();
     }
@@ -155,6 +157,7 @@ public abstract class AbstractSlider extends FrameLayout {
         selectorPosition = (eventX - left) / (right - left);
 
         Point snapPoint = new Point((int) event.getX(), (int) event.getY());
+        selectedX = snapPoint.x;
         selector.setX(snapPoint.x - (selector.getMeasuredWidth() / 2));
         if (colorPickerView.getActionMode() == ActionMode.LAST) {
             if (event.getAction() == MotionEvent.ACTION_UP) {
@@ -169,6 +172,18 @@ public abstract class AbstractSlider extends FrameLayout {
         if (selector.getX() <= 0) selector.setX(0);
     }
 
+    public void updateSelectorX(int x) {
+        float left = selector.getMeasuredWidth();
+        float right = getMeasuredWidth() - selector.getMeasuredWidth();
+        selectorPosition = (x - left) / (right - left);
+        selector.setX(x - (selector.getMeasuredWidth() / 2));
+        selectedX = x;
+        int maxPos = getMeasuredWidth() - selector.getMeasuredWidth();
+        if (selector.getX() >= maxPos) selector.setX(maxPos);
+        if (selector.getX() <= 0) selector.setX(0);
+        colorPickerView.fireColorListener(assembleColor(), false);
+    }
+
     private void initializeSelector() {
         getViewTreeObserver()
                 .addOnGlobalLayoutListener(
@@ -180,10 +195,13 @@ public abstract class AbstractSlider extends FrameLayout {
                                 } else {
                                     getViewTreeObserver().removeOnGlobalLayoutListener(this);
                                 }
-                                selector.setX(getMeasuredWidth() - selector.getMeasuredWidth());
+                                onInflateFinished();
                             }
                         });
     }
+
+    /** called when the inflating finished. */
+    public abstract void onInflateFinished();
 
     /**
      * gets assembled color
@@ -197,7 +215,7 @@ public abstract class AbstractSlider extends FrameLayout {
     /**
      * attaches {@link ColorPickerView} to slider.
      *
-     * @param colorPickerView {@link ColorPickerView}
+     * @param colorPickerView {@link ColorPickerView}.
      */
     public void attachColorPickerView(ColorPickerView colorPickerView) {
         this.colorPickerView = colorPickerView;
@@ -208,7 +226,34 @@ public abstract class AbstractSlider extends FrameLayout {
      *
      * @return selector's position ratio.
      */
-    public float getSelectorPosition() {
+    protected float getSelectorPosition() {
         return this.selectorPosition;
+    }
+
+    /**
+     * gets selected x coordinate.
+     *
+     * @return selected x coordinate.
+     */
+    public int getSelectedX() {
+        return this.selectedX;
+    }
+
+    /**
+     * gets the preference name.
+     *
+     * @return preference name.
+     */
+    public String getPreferenceName() {
+        return preferenceName;
+    }
+
+    /**
+     * sets the preference name.
+     *
+     * @param preferenceName preference name.
+     */
+    public void setPreferenceName(String preferenceName) {
+        this.preferenceName = preferenceName;
     }
 }

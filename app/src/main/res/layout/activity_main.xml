@@ -41,7 +41,8 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
         app:palette="@drawable/palette"
-        app:selector="@drawable/wheel" />
+        app:selector="@drawable/wheel"
+        app:preferenceName="Test2"/>
 
     <com.skydoves.colorpickerview.sliders.AlphaSlideBar
         android:id="@+id/alphaSlideBar"

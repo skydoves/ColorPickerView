@@ -87,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
         // attach brightnessSlideBar
         final BrightnessSlideBar brightnessSlideBar = findViewById(R.id.brightnessSlide);
         colorPickerView.attachBrightnessSlider(brightnessSlideBar);
+        colorPickerView.setLifecycleOwner(this);
     }
 
     /**
@@ -132,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
         ColorPickerDialog.Builder builder =
                 new ColorPickerDialog.Builder(this, AlertDialog.THEME_DEVICE_DEFAULT_DARK)
                         .setTitle("ColorPicker Dialog")
+                        .setPreferenceName("Test")
                         .setPositiveButton(
                                 getString(R.string.confirm),
                                 new ColorEnvelopeListener() {

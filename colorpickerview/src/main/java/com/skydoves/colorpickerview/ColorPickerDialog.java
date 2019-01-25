@@ -30,6 +30,7 @@ import androidx.appcompat.app.AlertDialog;
 import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener;
 import com.skydoves.colorpickerview.listeners.ColorListener;
 import com.skydoves.colorpickerview.listeners.ColorPickerViewListener;
+import com.skydoves.colorpickerview.preference.ColorPickerPreferenceManager;
 import com.skydoves.colorpickerview.sliders.AlphaSlideBar;
 import com.skydoves.colorpickerview.sliders.BrightnessSlideBar;
 
@@ -47,7 +48,7 @@ public class ColorPickerDialog extends AlertDialog {
     }
 
     /** Builder class for create {@link ColorPickerDialog}. */
-    @SuppressWarnings("ConstantConditions")
+    @SuppressWarnings({"ConstantConditions", "UnusedReturnValue"})
     public static class Builder extends AlertDialog.Builder {
         private ColorPickerView colorPickerView;
         private boolean alphaSlideBar = true;
@@ -74,7 +75,23 @@ public class ColorPickerDialog extends AlertDialog {
                     (AlphaSlideBar) parentView.findViewById(R.id.AlphaSlideBar));
             this.colorPickerView.attachBrightnessSlider(
                     (BrightnessSlideBar) parentView.findViewById(R.id.BrightnessSlideBar));
+            colorPickerView.setColorListener(
+                    new ColorEnvelopeListener() {
+                        @Override
+                        public void onColorSelected(ColorEnvelope envelope, boolean fromUser) {
+                            // nothing
+                        }
+                    });
             super.setView(parentView);
+        }
+
+        /**
+         * gets {@link ColorPickerView} on {@link Builder}.
+         *
+         * @return {@link ColorPickerView}.
+         */
+        public ColorPickerView getColorPickerView() {
+            return colorPickerView;
         }
 
         /**
@@ -86,15 +103,6 @@ public class ColorPickerDialog extends AlertDialog {
         public Builder setColorPickerView(ColorPickerView colorPickerView) {
             this.colorPickerView = colorPickerView;
             return this;
-        }
-
-        /**
-         * gets {@link ColorPickerView} on {@link Builder}.
-         *
-         * @return {@link ColorPickerView}.
-         */
-        public ColorPickerView getColorPickerView() {
-            return colorPickerView;
         }
 
         /**
@@ -116,6 +124,19 @@ public class ColorPickerDialog extends AlertDialog {
          */
         public Builder attachBrightnessSlideBar(boolean value) {
             this.brightnessSlideBar = value;
+            return this;
+        }
+
+        /**
+         * sets the preference name.
+         *
+         * @param preferenceName preference name.
+         * @return {@link Builder}.
+         */
+        public Builder setPreferenceName(String preferenceName) {
+            if (getColorPickerView() != null) {
+                getColorPickerView().setPreferenceName(preferenceName);
+            }
             return this;
         }
 
@@ -171,6 +192,10 @@ public class ColorPickerDialog extends AlertDialog {
                         ((ColorEnvelopeListener) colorListener)
                                 .onColorSelected(colorPickerView.getColorEnvelope(), true);
                     }
+                    if (getColorPickerView() != null) {
+                        ColorPickerPreferenceManager.getInstance(getContext())
+                                .saveColorPickerData(getColorPickerView());
+                    }
                 }
             };
         }
@@ -192,6 +217,8 @@ public class ColorPickerDialog extends AlertDialog {
                             parentView.findViewById(R.id.alphaSlideBarFrame);
                     alphaSlideBarFrameLayout.removeAllViews();
                     alphaSlideBarFrameLayout.addView(colorPickerView.getAlphaSlideBar());
+                    colorPickerView.attachAlphaSlider(
+                            (AlphaSlideBar) parentView.findViewById(R.id.AlphaSlideBar));
                 }
 
                 if (brightnessSlideBar && colorPickerView.getBrightnessSlider() != null) {
@@ -199,7 +226,21 @@ public class ColorPickerDialog extends AlertDialog {
                             parentView.findViewById(R.id.brightnessSlideBarFrame);
                     brightnessSlideBarFrame.removeAllViews();
                     brightnessSlideBarFrame.addView(colorPickerView.getBrightnessSlider());
+                    colorPickerView.attachBrightnessSlider(
+                            (BrightnessSlideBar) parentView.findViewById(R.id.BrightnessSlideBar));
                 }
+            }
+
+            if (!alphaSlideBar) {
+                FrameLayout alphaSlideBarFrameLayout =
+                        parentView.findViewById(R.id.alphaSlideBarFrame);
+                alphaSlideBarFrameLayout.removeAllViews();
+            }
+
+            if (!brightnessSlideBar) {
+                FrameLayout brightnessSlideBarFrame =
+                        parentView.findViewById(R.id.brightnessSlideBarFrame);
+                brightnessSlideBarFrame.removeAllViews();
             }
             super.setView(parentView);
             return super.show();
