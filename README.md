@@ -13,8 +13,10 @@ Supports alpha & brightness slider bar, dialog, and auto saving & restoring sele
 ![img0](https://user-images.githubusercontent.com/24237865/45309043-ccf51580-b55d-11e8-8985-02fc2d3a7250.jpg) 
 ![img1](https://user-images.githubusercontent.com/24237865/45308725-1db83e80-b55d-11e8-84b0-1d48c0405365.jpg)
 
-## Including in your project
-### Gradle
+## Including in your project 
+[![Download](https://api.bintray.com/packages/devmagician/maven/colorpickerview/images/download.svg) ](https://bintray.com/devmagician/maven/colorpickerview/_latestVersion)
+[![Jitpack](https://jitpack.io/v/skydoves/ColorPickerView.svg)](https://jitpack.io/#skydoves/ColorPickerView)
+### Gradle 
 Add below codes to your **root** `build.gradle` file (not your module build.gradle file).
 ```gradle
 allprojects {
