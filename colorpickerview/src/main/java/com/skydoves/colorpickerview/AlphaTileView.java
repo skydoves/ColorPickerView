@@ -36,7 +36,6 @@ public class AlphaTileView extends View {
 
     private Paint colorPaint;
     private Bitmap backgroundBitmap;
-    private AlphaTileDrawable drawable = new AlphaTileDrawable();
     private AlphaTileDrawable.Builder builder = new AlphaTileDrawable.Builder();
 
     public AlphaTileView(Context context) {
@@ -104,7 +103,7 @@ public class AlphaTileView extends View {
                                 } else {
                                     getViewTreeObserver().removeOnGlobalLayoutListener(this);
                                 }
-                                drawable = builder.build();
+                                AlphaTileDrawable drawable = builder.build();
                                 backgroundBitmap =
                                         Bitmap.createBitmap(
                                                 getMeasuredWidth(),

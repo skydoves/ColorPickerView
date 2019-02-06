@@ -369,19 +369,19 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
      * @param point a new coordinate {@link Point}.
      */
     private void notifyToFlagView(Point point) {
-        point = getCenterPoint(point.x, point.y);
+        Point centerPoint = getCenterPoint(point.x, point.y);
         if (flagView != null) {
             if (flagView.getFlagMode() == FlagMode.ALWAYS) flagView.visible();
-            int posX = point.x - flagView.getWidth() / 2 + selector.getWidth() / 2;
-            if (point.y - flagView.getHeight() > 0) {
+            int posX = centerPoint.x - flagView.getWidth() / 2 + selector.getWidth() / 2;
+            if (centerPoint.y - flagView.getHeight() > 0) {
                 flagView.setRotation(0);
                 flagView.setX(posX);
-                flagView.setY(point.y - flagView.getHeight());
+                flagView.setY(centerPoint.y - flagView.getHeight());
                 flagView.onRefresh(getColorEnvelope());
             } else if (flagView.isFlipAble()) {
                 flagView.setRotation(180);
                 flagView.setX(posX);
-                flagView.setY(point.y + flagView.getHeight() - selector.getHeight() / 2);
+                flagView.setY(centerPoint.y + flagView.getHeight() - selector.getHeight() / 2);
                 flagView.onRefresh(getColorEnvelope());
             }
             if (posX < 0) flagView.setX(0);
