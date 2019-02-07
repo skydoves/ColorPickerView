@@ -1,7 +1,8 @@
 # ColorPickerView
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![API](https://img.shields.io/badge/API-15%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=15)
-[![Build Status](https://travis-ci.org/skydoves/ColorPickerView.svg?branch=master)](https://travis-ci.org/skydoves/ColorPickerView) 
+[![Build Status](https://travis-ci.org/skydoves/ColorPickerView.svg?branch=master)](https://travis-ci.org/skydoves/ColorPickerView)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/e5d06ece54644717845a059f90632660)](https://www.codacy.com/app/skydoves/ColorPickerView?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=skydoves/ColorPickerView&amp;utm_campaign=Badge_Grade)
 [![Android Weekly](https://img.shields.io/badge/Android%20Weekly-%23316-orange.svg)](https://androidweekly.net/issues/issue-316)
 [![Javadoc](https://img.shields.io/badge/Javadoc-ColorPickerView-yellow.svg)](https://skydoves.github.io/libraries/colorpickerview/javadoc/) <br>
 ColorPickerView implements getting HSV colors, ARGB values, Hex color codes from <br>
