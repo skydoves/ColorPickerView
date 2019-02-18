@@ -34,93 +34,90 @@ import com.skydoves.colorpickerview.preference.ColorPickerPreferenceManager;
 @SuppressWarnings("unused")
 public class AlphaSlideBar extends AbstractSlider {
 
-    private Bitmap backgroundBitmap;
-    private AlphaTileDrawable drawable = new AlphaTileDrawable();
+  private Bitmap backgroundBitmap;
+  private AlphaTileDrawable drawable = new AlphaTileDrawable();
 
-    public AlphaSlideBar(Context context) {
-        super(context);
-    }
+  public AlphaSlideBar(Context context) {
+    super(context);
+  }
 
-    public AlphaSlideBar(Context context, AttributeSet attrs) {
-        super(context, attrs);
-    }
+  public AlphaSlideBar(Context context, AttributeSet attrs) {
+    super(context, attrs);
+  }
 
-    public AlphaSlideBar(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-    }
+  public AlphaSlideBar(Context context, AttributeSet attrs, int defStyleAttr) {
+    super(context, attrs, defStyleAttr);
+  }
 
-    public AlphaSlideBar(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-    }
+  public AlphaSlideBar(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    super(context, attrs, defStyleAttr, defStyleRes);
+  }
 
-    @Override
-    protected void getAttrs(AttributeSet attrs) {
-        TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.AlphaSlideBar);
-        try {
-            if (a.hasValue(R.styleable.AlphaSlideBar_selector_AlphaSlideBar))
-                selectorDrawable = a.getDrawable(R.styleable.AlphaSlideBar_selector_AlphaSlideBar);
-            if (a.hasValue(R.styleable.AlphaSlideBar_borderColor_AlphaSlideBar))
-                borderColor =
-                        a.getColor(
-                                R.styleable.AlphaSlideBar_borderColor_AlphaSlideBar, borderColor);
-            if (a.hasValue(R.styleable.AlphaSlideBar_borderSize_AlphaSlideBar))
-                borderSize =
-                        a.getInt(R.styleable.AlphaSlideBar_borderSize_AlphaSlideBar, borderSize);
-        } finally {
-            a.recycle();
-        }
+  @Override
+  protected void getAttrs(AttributeSet attrs) {
+    TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.AlphaSlideBar);
+    try {
+      if (a.hasValue(R.styleable.AlphaSlideBar_selector_AlphaSlideBar))
+        selectorDrawable = a.getDrawable(R.styleable.AlphaSlideBar_selector_AlphaSlideBar);
+      if (a.hasValue(R.styleable.AlphaSlideBar_borderColor_AlphaSlideBar))
+        borderColor = a.getColor(R.styleable.AlphaSlideBar_borderColor_AlphaSlideBar, borderColor);
+      if (a.hasValue(R.styleable.AlphaSlideBar_borderSize_AlphaSlideBar))
+        borderSize = a.getInt(R.styleable.AlphaSlideBar_borderSize_AlphaSlideBar, borderSize);
+    } finally {
+      a.recycle();
     }
+  }
 
-    @Override
-    protected void onSizeChanged(int width, int height, int oldWidth, int oldHeight) {
-        super.onSizeChanged(width, height, oldWidth, oldHeight);
-        backgroundBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-        Canvas backgroundCanvas = new Canvas(backgroundBitmap);
-        drawable.setBounds(0, 0, backgroundCanvas.getWidth(), backgroundCanvas.getHeight());
-        drawable.draw(backgroundCanvas);
-    }
+  @Override
+  protected void onSizeChanged(int width, int height, int oldWidth, int oldHeight) {
+    super.onSizeChanged(width, height, oldWidth, oldHeight);
+    backgroundBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+    Canvas backgroundCanvas = new Canvas(backgroundBitmap);
+    drawable.setBounds(0, 0, backgroundCanvas.getWidth(), backgroundCanvas.getHeight());
+    drawable.draw(backgroundCanvas);
+  }
 
-    @Override
-    public void updatePaint(Paint colorPaint) {
-        float[] hsv = new float[3];
-        Color.colorToHSV(getColor(), hsv);
-        int startColor = Color.HSVToColor(0, hsv);
-        int endColor = Color.HSVToColor(255, hsv);
-        Shader shader =
-                new LinearGradient(
-                        0,
-                        0,
-                        getMeasuredWidth(),
-                        getMeasuredHeight(),
-                        startColor,
-                        endColor,
-                        Shader.TileMode.CLAMP);
-        colorPaint.setShader(shader);
-    }
+  @Override
+  public void updatePaint(Paint colorPaint) {
+    float[] hsv = new float[3];
+    Color.colorToHSV(getColor(), hsv);
+    int startColor = Color.HSVToColor(0, hsv);
+    int endColor = Color.HSVToColor(255, hsv);
+    Shader shader =
+        new LinearGradient(
+            0,
+            0,
+            getMeasuredWidth(),
+            getMeasuredHeight(),
+            startColor,
+            endColor,
+            Shader.TileMode.CLAMP);
+    colorPaint.setShader(shader);
+  }
 
-    @Override
-    public void onInflateFinished() {
-        int defaultPosition = getMeasuredWidth() - selector.getMeasuredWidth();
-        if (getPreferenceName() != null) {
-            updateSelectorX(
-                    ColorPickerPreferenceManager.getInstance(getContext())
-                            .getAlphaSliderPosition(getPreferenceName(), defaultPosition));
-        } else {
-            selector.setX(defaultPosition);
-        }
+  @Override
+  public void onInflateFinished() {
+    int defaultPosition = getMeasuredWidth() - selector.getMeasuredWidth();
+    if (getPreferenceName() != null) {
+      updateSelectorX(
+          ColorPickerPreferenceManager.getInstance(getContext())
+              .getAlphaSliderPosition(getPreferenceName(), defaultPosition));
+    } else {
+      selector.setX(defaultPosition);
     }
+  }
 
-    @Override
-    protected void onDraw(Canvas canvas) {
-        canvas.drawBitmap(backgroundBitmap, 0, 0, null);
-        super.onDraw(canvas);
-    }
+  @Override
+  protected void onDraw(Canvas canvas) {
+    canvas.drawBitmap(backgroundBitmap, 0, 0, null);
+    super.onDraw(canvas);
+  }
 
-    @Override
-    public int assembleColor() {
-        float[] hsv = new float[3];
-        Color.colorToHSV(getColor(), hsv);
-        int alpha = (int) (selectorPosition * 255);
-        return Color.HSVToColor(alpha, hsv);
-    }
+  @Override
+  public int assembleColor() {
+    float[] hsv = new float[3];
+    Color.colorToHSV(getColor(), hsv);
+    int alpha = (int) (selectorPosition * 255);
+    return Color.HSVToColor(alpha, hsv);
+  }
 }

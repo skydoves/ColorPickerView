@@ -26,30 +26,30 @@ import com.skydoves.colorpickerview.flag.FlagView;
 @SuppressLint("ViewConstructor")
 public class CustomFlag extends FlagView {
 
-    private TextView textView;
-    private AlphaTileView alphaTileView;
+  private TextView textView;
+  private AlphaTileView alphaTileView;
 
-    /**
-     * onBind Views
-     *
-     * @param context context
-     * @param layout custom flagView's layout
-     */
-    public CustomFlag(Context context, int layout) {
-        super(context, layout);
-        textView = findViewById(R.id.flag_color_code);
-        alphaTileView = findViewById(R.id.flag_color_layout);
-    }
+  /**
+   * onBind Views
+   *
+   * @param context context
+   * @param layout custom flagView's layout
+   */
+  public CustomFlag(Context context, int layout) {
+    super(context, layout);
+    textView = findViewById(R.id.flag_color_code);
+    alphaTileView = findViewById(R.id.flag_color_layout);
+  }
 
-    /**
-     * invoked when selector moved
-     *
-     * @param colorEnvelope provide color, hexCode, argb
-     */
-    @SuppressLint("SetTextI18n")
-    @Override
-    public void onRefresh(ColorEnvelope colorEnvelope) {
-        textView.setText("#" + colorEnvelope.getHexCode());
-        alphaTileView.setPaintColor(colorEnvelope.getColor());
-    }
+  /**
+   * invoked when selector moved
+   *
+   * @param colorEnvelope provide color, hexCode, argb
+   */
+  @SuppressLint("SetTextI18n")
+  @Override
+  public void onRefresh(ColorEnvelope colorEnvelope) {
+    textView.setText("#" + colorEnvelope.getHexCode());
+    alphaTileView.setPaintColor(colorEnvelope.getColor());
+  }
 }

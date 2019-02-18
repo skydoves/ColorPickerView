@@ -21,9 +21,9 @@ package com.skydoves.colorpickerview;
  * com.skydoves.colorpickerview.listeners.ColorPickerViewListener} invoking.
  */
 public enum ActionMode {
-    /** invokes listener always by tapping or dragging. */
-    ALWAYS,
+  /** invokes listener always by tapping or dragging. */
+  ALWAYS,
 
-    /** invokes listener only when finger released. */
-    LAST
+  /** invokes listener only when finger released. */
+  LAST
 }

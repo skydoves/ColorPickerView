@@ -23,11 +23,11 @@ import com.skydoves.colorpickerview.ColorEnvelope;
  * triggered.
  */
 public interface ColorEnvelopeListener extends ColorPickerViewListener {
-    /**
-     * invoked by {@link com.skydoves.colorpickerview.ColorPickerView}.
-     *
-     * @param envelope {@link ColorEnvelope}
-     * @param fromUser triggered by the user(true) or not(false).
-     */
-    void onColorSelected(ColorEnvelope envelope, boolean fromUser);
+  /**
+   * invoked by {@link com.skydoves.colorpickerview.ColorPickerView}.
+   *
+   * @param envelope {@link ColorEnvelope}
+   * @param fromUser triggered by the user(true) or not(false).
+   */
+  void onColorSelected(ColorEnvelope envelope, boolean fromUser);
 }

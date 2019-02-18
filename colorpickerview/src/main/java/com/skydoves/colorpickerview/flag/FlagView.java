@@ -26,70 +26,70 @@ import com.skydoves.colorpickerview.ColorEnvelope;
 @SuppressWarnings("unused")
 public abstract class FlagView extends RelativeLayout {
 
-    private FlagMode flagMode = FlagMode.ALWAYS;
-    private boolean flipAble = true;
+  private FlagMode flagMode = FlagMode.ALWAYS;
+  private boolean flipAble = true;
 
-    public FlagView(Context context, int layout) {
-        super(context);
-        initializeLayout(layout);
-    }
+  public FlagView(Context context, int layout) {
+    super(context);
+    initializeLayout(layout);
+  }
 
-    /** called whenever color is changed on {@link com.skydoves.colorpickerview.ColorPickerView}. */
-    public abstract void onRefresh(ColorEnvelope colorEnvelope);
+  /** called whenever color is changed on {@link com.skydoves.colorpickerview.ColorPickerView}. */
+  public abstract void onRefresh(ColorEnvelope colorEnvelope);
 
-    private void initializeLayout(int layout) {
-        View inflated = LayoutInflater.from(getContext()).inflate(layout, this);
-        inflated.setLayoutParams(
-                new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-        inflated.measure(
-                MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED),
-                MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
-        inflated.layout(0, 0, inflated.getMeasuredWidth(), inflated.getMeasuredHeight());
-    }
+  private void initializeLayout(int layout) {
+    View inflated = LayoutInflater.from(getContext()).inflate(layout, this);
+    inflated.setLayoutParams(
+        new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+    inflated.measure(
+        MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED),
+        MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
+    inflated.layout(0, 0, inflated.getMeasuredWidth(), inflated.getMeasuredHeight());
+  }
 
-    /** makes {@link FlagView} visible. */
-    public void visible() {
-        setVisibility(View.VISIBLE);
-    }
+  /** makes {@link FlagView} visible. */
+  public void visible() {
+    setVisibility(View.VISIBLE);
+  }
 
-    /** makes {@link FlagView} invisible. */
-    public void gone() {
-        setVisibility(View.GONE);
-    }
+  /** makes {@link FlagView} invisible. */
+  public void gone() {
+    setVisibility(View.GONE);
+  }
 
-    /**
-     * gets the flag's mode of visibility action.
-     *
-     * @return {@link FlagMode}
-     */
-    public FlagMode getFlagMode() {
-        return flagMode;
-    }
+  /**
+   * gets the flag's mode of visibility action.
+   *
+   * @return {@link FlagMode}
+   */
+  public FlagMode getFlagMode() {
+    return flagMode;
+  }
 
-    /**
-     * sets the flag's mode of visibility action.
-     *
-     * @param flagMode {@link FlagMode}
-     */
-    public void setFlagMode(FlagMode flagMode) {
-        this.flagMode = flagMode;
-    }
+  /**
+   * sets the flag's mode of visibility action.
+   *
+   * @param flagMode {@link FlagMode}
+   */
+  public void setFlagMode(FlagMode flagMode) {
+    this.flagMode = flagMode;
+  }
 
-    /**
-     * gets is flag flip-able.
-     *
-     * @return true or false.
-     */
-    public boolean isFlipAble() {
-        return flipAble;
-    }
+  /**
+   * gets is flag flip-able.
+   *
+   * @return true or false.
+   */
+  public boolean isFlipAble() {
+    return flipAble;
+  }
 
-    /**
-     * sets the flag being flipped down-sided automatically.
-     *
-     * @param flipAble true or false.
-     */
-    public void setFlipAble(boolean flipAble) {
-        this.flipAble = flipAble;
-    }
+  /**
+   * sets the flag being flipped down-sided automatically.
+   *
+   * @param flipAble true or false.
+   */
+  public void setFlipAble(boolean flipAble) {
+    this.flipAble = flipAble;
+  }
 }
