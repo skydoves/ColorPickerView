@@ -141,22 +141,48 @@ manager.clearSavedColor("MyColorPicker"); // clears only saved color data.
 manager.restoreColorPickerData(colorPickerView); // restores the saved statuses manually.
 ```
 
-## AlphaSlideBar(Optional)
-![alpha_slide](https://user-images.githubusercontent.com/24237865/45362228-43058500-b60f-11e8-9b13-0b2e01a892de.jpg) <br>
-AlphaSlideBar changes the transparency of `ColorPickerView`'s the selected color. <br>
+### Pallette from Gallery
+Here is how to get bitmap drawable from the desired gallery image and set to the palette.<br><br>
+<img src="https://user-images.githubusercontent.com/24237865/52941911-313dc000-33ad-11e9-8264-6d78f4ad613a.jpg" align="left" width="35%">
 
-#### AlphaSlideBar in layout
+Firstly, declare below permission on your `AndroidManifest.xml` file.
+```gradle
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+```
+startActivityForResult for getting an image from the Gallery.
+```java
+Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+photoPickerIntent.setType("image/*");
+startActivityForResult(photoPickerIntent, REQUEST_CODE_GALLERY);
+```
+On the onActivityResult, we can get a bitmap drawable from the gallery and set it as the palette.
+```java
+try {
+  final Uri imageUri = data.getData();
+  final InputStream imageStream = getContentResolver().openInputStream(imageUri);
+  final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+  Drawable drawable = new BitmapDrawable(getResources(), selectedImage);
+  colorPickerView.setPaletteDrawable(drawable);
+} catch (FileNotFoundException e) {
+  e.printStackTrace();
+}
+```
+
+## AlphaSlideBar(Optional)
+AlphaSlideBar changes the transparency of the selected color. <br><br>
+<img src="https://user-images.githubusercontent.com/24237865/52943592-d1e1af00-33b0-11e9-9e3c-9a1190ae969e.gif" align="left" width="32%">
+
+AlphaSlideBar on xml layout
 ```xml
 <com.skydoves.colorpickerview.sliders.AlphaSlideBar
-     android:id="@+id/alphaSlideBar"
-     android:layout_width="match_parent"
-     android:layout_height="wrap_content"
-     app:selector_AlphaSlideBar="@drawable/wheel" // sets the selector's drawable.
-     app:borderColor_AlphaSlideBar="@android:color/darker_gray" // sets the border color.
-     app:borderSize_AlphaSlideBar="5" // sets the border size.
-     />
+   android:id="@+id/alphaSlideBar"
+   android:layout_width="match_parent"
+   android:layout_height="wrap_content"
+   app:selector_AlphaSlideBar="@drawable/wheel" // sets the selector drawable.
+   app:borderColor_AlphaSlideBar="@android:color/darker_gray" // sets the border color.
+   app:borderSize_AlphaSlideBar="5"/> // sets the border size.
 ```
-`attachAlphaSlider` method links the `AlphaSlideBar` to `ColorPickerView`.
+`attachAlphaSlider` method connects it to the `ColorPickerView`.
 
 ```java
 AlphaSlideBar alphaSlideBar = findViewById(R.id.alphaSlideBar);
@@ -164,21 +190,20 @@ colorPickerView.attachAlphaSlider(alphaSlideBar);
 ```
 
 ## BrightnessSlideBar(Optional)
-![brigngtness_slide](https://user-images.githubusercontent.com/24237865/45362230-439e1b80-b60f-11e8-96ec-6907ab0ef678.jpg) <br>
-BrightnessSlideBar changes the brightness of `ColorPickerView`'s the selected color. <br>
+BrightnessSlideBar changes the brightness of the selected color. <br><br>
+<img src="https://user-images.githubusercontent.com/24237865/52943593-d1e1af00-33b0-11e9-813a-557760e172ed.gif" align="left" width="32%">
 
-### BrightnessSlideBar in layout
+BrightnessSlideBar on xml layout
 ```xml
 <com.skydoves.colorpickerview.sliders.BrightnessSlideBar
-     android:id="@+id/brightnessSlide"
-     android:layout_width="match_parent"
-     android:layout_height="wrap_content"
-     android:layout_margin="15dp"
-     app:selector_BrightnessSlider="@drawable/wheel" // sets the selector drawable.
-     app:borderColor_BrightnessSlider="@android:color/darker_gray" // sets the border color.
-     app:borderSize_BrightnessSlider="5"/> // sets the border size.
+   android:id="@+id/brightnessSlide"
+   android:layout_width="match_parent"
+   android:layout_height="wrap_content"
+   app:selector_BrightnessSlider="@drawable/wheel" // sets the selector drawable.
+   app:borderColor_BrightnessSlider="@android:color/darker_gray" // sets the border color.
+   app:borderSize_BrightnessSlider="5"/> // sets the border size.
 ```
-`attachBrightnessSlider` method links the `BrightnessSlideBar` to `ColorPickerView`.
+`attachBrightnessSlider` method connects it to the `ColorPickerView`.
 
 ```java
 BrightnessSlideBar brightnessSlideBar = findViewById(R.id.brightnessSlide);
