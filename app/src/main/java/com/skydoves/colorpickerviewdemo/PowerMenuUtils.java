@@ -34,6 +34,7 @@ public class PowerMenuUtils {
     return new PowerMenu.Builder(context)
         .setHeaderView(R.layout.layout_header)
         .addItem(new PowerMenuItem("Palette", false))
+        .addItem(new PowerMenuItem("Palette(Gallery)", false))
         .addItem(new PowerMenuItem("Selector", false))
         .addItem(new PowerMenuItem("Dialog", false))
         .setLifecycleOwner(lifecycleOwner)

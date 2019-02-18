@@ -19,6 +19,12 @@ package com.skydoves.colorpickerviewdemo;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -34,6 +40,8 @@ import com.skydoves.colorpickerview.sliders.BrightnessSlideBar;
 import com.skydoves.powermenu.OnMenuItemClickListener;
 import com.skydoves.powermenu.PowerMenu;
 import com.skydoves.powermenu.PowerMenuItem;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 @SuppressWarnings("ConstantConditions")
 public class MainActivity extends AppCompatActivity {
@@ -53,9 +61,12 @@ public class MainActivity extends AppCompatActivity {
               palette();
               break;
             case 2:
-              selector();
+              paletteFromGallery();
               break;
             case 3:
+              selector();
+              break;
+            case 4:
               dialog();
               break;
           }
@@ -104,20 +115,28 @@ public class MainActivity extends AppCompatActivity {
     alphaTileView.setPaintColor(envelope.getColor());
   }
 
+  /** shows the popup menu for changing options.. */
   public void overflowMenu(View view) {
     powerMenu.showAsAnchorLeftTop(view);
   }
 
-  /** change palette drawable resource you must initialize at first in xml */
-  public void palette() {
+  /** changes palette image using drawable resource. */
+  private void palette() {
     if (FLAG_PALETTE)
       colorPickerView.setPaletteDrawable(ContextCompat.getDrawable(this, R.drawable.palette));
     else colorPickerView.setPaletteDrawable(ContextCompat.getDrawable(this, R.drawable.palettebar));
     FLAG_PALETTE = !FLAG_PALETTE;
   }
 
-  /** change selector drawable resource you must initialize at first in xml */
-  public void selector() {
+  /** changes palette image from a gallery image. */
+  private void paletteFromGallery() {
+    Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+    photoPickerIntent.setType("image/*");
+    startActivityForResult(photoPickerIntent, 1000);
+  }
+
+  /** changes selector image using drawable resource. */
+  private void selector() {
     if (FLAG_SELECTOR)
       colorPickerView.setSelectorDrawable(ContextCompat.getDrawable(this, R.drawable.wheel));
     else
@@ -125,8 +144,8 @@ public class MainActivity extends AppCompatActivity {
     FLAG_SELECTOR = !FLAG_SELECTOR;
   }
 
-  /** show ColorPickerDialog */
-  public void dialog() {
+  /** shows ColorPickerDialog */
+  private void dialog() {
     ColorPickerDialog.Builder builder =
         new ColorPickerDialog.Builder(this, AlertDialog.THEME_DEVICE_DEFAULT_DARK)
             .setTitle("ColorPicker Dialog")
@@ -150,6 +169,24 @@ public class MainActivity extends AppCompatActivity {
     ColorPickerView colorPickerView = builder.getColorPickerView();
     colorPickerView.setFlagView(new CustomFlag(this, R.layout.layout_flag));
     builder.show();
+  }
+
+  @Override
+  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+
+    // user choose a picture from gallery
+    if (requestCode == 1000 && resultCode == RESULT_OK) {
+      try {
+        final Uri imageUri = data.getData();
+        final InputStream imageStream = getContentResolver().openInputStream(imageUri);
+        final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+        Drawable drawable = new BitmapDrawable(getResources(), selectedImage);
+        colorPickerView.setPaletteDrawable(drawable);
+      } catch (FileNotFoundException e) {
+        e.printStackTrace();
+      }
+    }
   }
 
   @Override
