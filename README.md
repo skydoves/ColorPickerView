@@ -40,7 +40,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 ```
 
 ### ColorPickerView in layout
-```xml
+```gradle
 <com.skydoves.colorpickerview.ColorPickerView
      android:id="@+id/colorPickerView"
      android:layout_width="300dp"
@@ -168,9 +168,10 @@ try {
 }
 ```
 
+
 ## AlphaSlideBar(Optional)
 AlphaSlideBar changes the transparency of the selected color. <br><br>
-<img src="https://user-images.githubusercontent.com/24237865/52943592-d1e1af00-33b0-11e9-9e3c-9a1190ae969e.gif" align="left" width="30%">
+<img src="https://user-images.githubusercontent.com/24237865/52943592-d1e1af00-33b0-11e9-9e3c-9a1190ae969e.gif" align="left" width="31%">
 
 `AlphaSlideBar` on xml layout
 ```gradle
@@ -182,7 +183,7 @@ AlphaSlideBar changes the transparency of the selected color. <br><br>
    app:borderColor_AlphaSlideBar="@android:color/darker_gray" // sets the border color.
    app:borderSize_AlphaSlideBar="5"/> // sets the border size.
 ```
-`attachAlphaSlider` method connects `AlphaSlideBar` to the `ColorPickerView`.
+`attachAlphaSlider` method connects slider to the `ColorPickerView`.
 
 ```java
 AlphaSlideBar alphaSlideBar = findViewById(R.id.alphaSlideBar);
@@ -197,7 +198,7 @@ android:rotation="90"
 
 ## BrightnessSlideBar(Optional)
 BrightnessSlideBar changes the brightness of the selected color. <br><br>
-<img src="https://user-images.githubusercontent.com/24237865/52943593-d1e1af00-33b0-11e9-813a-557760e172ed.gif" align="left" width="30%">
+<img src="https://user-images.githubusercontent.com/24237865/52943593-d1e1af00-33b0-11e9-813a-557760e172ed.gif" align="left" width="31%">
 
 `BrightnessSlideBar` on xml layout
 ```gradle
@@ -209,7 +210,7 @@ BrightnessSlideBar changes the brightness of the selected color. <br><br>
    app:borderColor_BrightnessSlider="@android:color/darker_gray" // sets the border color.
    app:borderSize_BrightnessSlider="5"/> // sets the border size.
 ```
-`attachBrightnessSlider` method connects `BrightnessSlideBar` to the `ColorPickerView`.
+`attachBrightnessSlider` method connects slider to the `ColorPickerView`.
 
 ```java
 BrightnessSlideBar brightnessSlideBar = findViewById(R.id.brightnessSlide);
