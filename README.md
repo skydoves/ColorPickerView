@@ -170,10 +170,10 @@ try {
 
 ## AlphaSlideBar(Optional)
 AlphaSlideBar changes the transparency of the selected color. <br><br>
-<img src="https://user-images.githubusercontent.com/24237865/52943592-d1e1af00-33b0-11e9-9e3c-9a1190ae969e.gif" align="left" width="32%">
+<img src="https://user-images.githubusercontent.com/24237865/52943592-d1e1af00-33b0-11e9-9e3c-9a1190ae969e.gif" align="left" width="30%">
 
-AlphaSlideBar on xml layout
-```xml
+`AlphaSlideBar` on xml layout
+```gradle
 <com.skydoves.colorpickerview.sliders.AlphaSlideBar
    android:id="@+id/alphaSlideBar"
    android:layout_width="match_parent"
@@ -182,19 +182,25 @@ AlphaSlideBar on xml layout
    app:borderColor_AlphaSlideBar="@android:color/darker_gray" // sets the border color.
    app:borderSize_AlphaSlideBar="5"/> // sets the border size.
 ```
-`attachAlphaSlider` method connects it to the `ColorPickerView`.
+`attachAlphaSlider` method connects `AlphaSlideBar` to the `ColorPickerView`.
 
 ```java
 AlphaSlideBar alphaSlideBar = findViewById(R.id.alphaSlideBar);
 colorPickerView.attachAlphaSlider(alphaSlideBar);
 ```
+If you want to implement vertically, use below attributes.
+```gradle
+android:layout_width="280dp" // width should be set manually
+android:layout_height="wrap_content"
+android:rotation="90"
+```
 
 ## BrightnessSlideBar(Optional)
 BrightnessSlideBar changes the brightness of the selected color. <br><br>
-<img src="https://user-images.githubusercontent.com/24237865/52943593-d1e1af00-33b0-11e9-813a-557760e172ed.gif" align="left" width="32%">
+<img src="https://user-images.githubusercontent.com/24237865/52943593-d1e1af00-33b0-11e9-813a-557760e172ed.gif" align="left" width="30%">
 
-BrightnessSlideBar on xml layout
-```xml
+`BrightnessSlideBar` on xml layout
+```gradle
 <com.skydoves.colorpickerview.sliders.BrightnessSlideBar
    android:id="@+id/brightnessSlide"
    android:layout_width="match_parent"
@@ -203,11 +209,17 @@ BrightnessSlideBar on xml layout
    app:borderColor_BrightnessSlider="@android:color/darker_gray" // sets the border color.
    app:borderSize_BrightnessSlider="5"/> // sets the border size.
 ```
-`attachBrightnessSlider` method connects it to the `ColorPickerView`.
+`attachBrightnessSlider` method connects `BrightnessSlideBar` to the `ColorPickerView`.
 
 ```java
 BrightnessSlideBar brightnessSlideBar = findViewById(R.id.brightnessSlide);
 colorPickerView.attachBrightnessSlider(brightnessSlideBar);
+```
+If you want to implement vertically, use below attributes.
+```gradle
+android:layout_width="280dp" // width should be set manually
+android:layout_height="wrap_content"
+android:rotation="90"
 ```
 
 ## ColorPickerDialog
@@ -253,7 +265,7 @@ builder.show(); // shows the dialog
 
 FlgaView implements showing a flag above a selector. This is optional.<br><br>
 First, create a layout for `FlagView` as your taste like below. 
-```xml
+```gradle
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -324,7 +336,7 @@ colorPickerView.setFlagMode(FlagMode.LAST); // showing only when finger released
 ![alphatileview](https://user-images.githubusercontent.com/24237865/45364416-09377d00-b615-11e8-9707-b83f55053480.jpg) <br>
 AlphaTileView visualizes ARGB color on the view. If you want to visualizes ARGB color on the general view, it will not be shown accurately. because it will be mixed with the parent view's background color. so if you want to visualize ARGB color accurately, should use `AlphaTileView`.<br>
 
-```xml
+```gradle
 <com.skydoves.colorpickerview.AlphaTileView
      android:id="@+id/alphaTileView"
      android:layout_width="55dp"
