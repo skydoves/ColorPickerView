@@ -49,13 +49,13 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onItemClick(int position, PowerMenuItem item) {
           switch (position) {
-            case 0:
+            case 1:
               palette();
               break;
-            case 1:
+            case 2:
               selector();
               break;
-            case 2:
+            case 3:
               dialog();
               break;
           }
