@@ -20,11 +20,9 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.widget.ImageView;
-
+import androidx.core.widget.ImageViewCompat;
 import com.skydoves.colorpickerview.ColorEnvelope;
 import com.skydoves.colorpickerview.flag.FlagView;
-
-import androidx.core.widget.ImageViewCompat;
 
 @SuppressLint("ViewConstructor")
 public class CustomFlag extends FlagView {

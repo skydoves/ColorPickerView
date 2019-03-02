@@ -235,27 +235,27 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
    * @return notified or not.
    */
   private boolean onTouchReceived(MotionEvent event) {
-    Point snapPoint = new Point((int) event.getX(), (int) event.getY());
+    PointMapper pointMapper = new PointMapper();
+    Point snapPoint =
+        pointMapper.getColorPoint(this, new Point((int) event.getX(), (int) event.getY()));
     int pixelColor = getColorFromBitmap(snapPoint.x, snapPoint.y);
 
-    if (pixelColor != Color.TRANSPARENT) {
-      selectedPureColor = pixelColor;
-      selectedColor = pixelColor;
-      selectedPoint = new Point(snapPoint.x, snapPoint.y);
-      setCoordinate(snapPoint.x, snapPoint.y);
-      notifyToFlagView(selectedPoint);
+    selectedPureColor = pixelColor;
+    selectedColor = pixelColor;
+    selectedPoint = pointMapper.getColorPoint(this, new Point(snapPoint.x, snapPoint.y));
+    setCoordinate(snapPoint.x, snapPoint.y);
+    notifyToFlagView(selectedPoint);
 
-      if (actionMode == ActionMode.LAST) {
-        if (event.getAction() == MotionEvent.ACTION_UP) {
-          fireColorListener(getColor(), true);
-          notifyToSlideBars();
-        }
-      } else {
+    if (actionMode == ActionMode.LAST) {
+      if (event.getAction() == MotionEvent.ACTION_UP) {
         fireColorListener(getColor(), true);
         notifyToSlideBars();
       }
-      return true;
-    } else return false;
+    } else {
+      fireColorListener(getColor(), true);
+      notifyToSlideBars();
+    }
+    return true;
   }
 
   /**
@@ -265,7 +265,7 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
    * @param y coordinate y.
    * @return selected color.
    */
-  private int getColorFromBitmap(float x, float y) {
+  protected int getColorFromBitmap(float x, float y) {
     Matrix invertMatrix = new Matrix();
     palette.getImageMatrix().invert(invertMatrix);
 
