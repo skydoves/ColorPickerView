@@ -154,6 +154,7 @@ public abstract class AbstractSlider extends FrameLayout {
     if (eventX < left) eventX = left;
     if (eventX > right) eventX = right;
     selectorPosition = (eventX - left) / (right - left);
+    if (selectorPosition > 1.0f) selectorPosition = 1.0f;
 
     Point snapPoint = new Point((int) event.getX(), (int) event.getY());
     selectedX = snapPoint.x;
@@ -175,6 +176,7 @@ public abstract class AbstractSlider extends FrameLayout {
     float left = selector.getMeasuredWidth();
     float right = getMeasuredWidth() - selector.getMeasuredWidth();
     selectorPosition = (x - left) / (right - left);
+    if (selectorPosition > 1.0f) selectorPosition = 1.0f;
     selector.setX(x - (selector.getMeasuredWidth() / 2));
     selectedX = x;
     int maxPos = getMeasuredWidth() - selector.getMeasuredWidth();
