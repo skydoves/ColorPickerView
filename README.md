@@ -31,6 +31,8 @@ dependencies {
 }
 ```
 
+<img src="https://user-images.githubusercontent.com/24237865/53681142-570d8200-3d28-11e9-84a3-f08acf253c01.gif" align="right" width="30%">
+
 ## Table of Contents
 #### [1. ColorPickerView](https://github.com/skydoves/ColorPickerView#usage)
 - [ColorPickerView in layout](https://github.com/skydoves/ColorPickerView#colorpickerview-in-layout)
