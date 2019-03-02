@@ -19,11 +19,12 @@ package com.skydoves.colorpickerview;
 import android.graphics.Color;
 import android.graphics.Point;
 
+@SuppressWarnings("WeakerAccess")
 class PointMapper {
 
   private ColorPickerView colorPickerView;
 
-  Point getColorPoint(ColorPickerView colorPickerView, Point point) {
+  protected Point getColorPoint(ColorPickerView colorPickerView, Point point) {
     this.colorPickerView = colorPickerView;
     if (colorPickerView.getColorFromBitmap(point.x, point.y) != Color.TRANSPARENT) return point;
     Point center =
