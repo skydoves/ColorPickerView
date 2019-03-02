@@ -11,6 +11,7 @@
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -35,7 +36,7 @@
 
     <com.skydoves.colorpickerview.ColorPickerView
         android:id="@+id/colorPickerView"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"

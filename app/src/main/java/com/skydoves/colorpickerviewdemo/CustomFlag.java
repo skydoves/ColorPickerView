@@ -18,16 +18,18 @@ package com.skydoves.colorpickerviewdemo;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.widget.TextView;
-import com.skydoves.colorpickerview.AlphaTileView;
+import android.content.res.ColorStateList;
+import android.widget.ImageView;
+
 import com.skydoves.colorpickerview.ColorEnvelope;
 import com.skydoves.colorpickerview.flag.FlagView;
+
+import androidx.core.widget.ImageViewCompat;
 
 @SuppressLint("ViewConstructor")
 public class CustomFlag extends FlagView {
 
-  private TextView textView;
-  private AlphaTileView alphaTileView;
+  private ImageView bubble;
 
   /**
    * onBind Views
@@ -37,8 +39,7 @@ public class CustomFlag extends FlagView {
    */
   public CustomFlag(Context context, int layout) {
     super(context, layout);
-    textView = findViewById(R.id.flag_color_code);
-    alphaTileView = findViewById(R.id.flag_color_layout);
+    this.bubble = findViewById(R.id.imageView);
   }
 
   /**
@@ -46,10 +47,9 @@ public class CustomFlag extends FlagView {
    *
    * @param colorEnvelope provide color, hexCode, argb
    */
-  @SuppressLint("SetTextI18n")
   @Override
+  @SuppressLint("SetTextI18n")
   public void onRefresh(ColorEnvelope colorEnvelope) {
-    textView.setText("#" + colorEnvelope.getHexCode());
-    alphaTileView.setPaintColor(colorEnvelope.getColor());
+    ImageViewCompat.setImageTintList(bubble, ColorStateList.valueOf(colorEnvelope.getColor()));
   }
 }

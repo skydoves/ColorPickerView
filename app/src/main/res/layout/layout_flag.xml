@@ -1,32 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="122dp"
-    android:layout_height="40dp"
-    android:background="@drawable/flag"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout"
+    android:layout_width="45dp"
+    android:layout_height="50dp"
     android:orientation="horizontal">
 
-    <com.skydoves.colorpickerview.AlphaTileView
-        android:id="@+id/flag_color_layout"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="6dp"
-        android:background="@android:color/white"
-        app:tileSize="10" />
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/bubble"
+        android:rotation="180"
+        android:tint="@color/colorPrimaryDark"/>
 
-    <TextView
-        android:id="@+id/flag_color_code"
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginRight="5dp"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@android:color/white"
-        android:textSize="14dp"
-        tools:text="#ffffff" />
-</LinearLayout>
+        android:layout_centerInParent="true"
+        android:src="@drawable/bulb" />
+</RelativeLayout>

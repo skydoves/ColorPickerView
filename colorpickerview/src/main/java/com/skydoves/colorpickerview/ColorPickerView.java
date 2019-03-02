@@ -238,7 +238,7 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
     Point snapPoint = new Point((int) event.getX(), (int) event.getY());
     int pixelColor = getColorFromBitmap(snapPoint.x, snapPoint.y);
 
-    if (pixelColor != Color.TRANSPARENT && pixelColor != Color.BLACK) {
+    if (pixelColor != Color.TRANSPARENT) {
       selectedPureColor = pixelColor;
       selectedColor = pixelColor;
       selectedPoint = new Point(snapPoint.x, snapPoint.y);
