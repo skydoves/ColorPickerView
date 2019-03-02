@@ -9,7 +9,6 @@ ColorPickerView implements getting HSV colors, ARGB values, Hex color codes from
 any image drawables or your gallery pictures by tapping on the desired color.<br>
 Supports alpha & brightness slider bar, dialog, and auto saving & restoring selected data.<br>
 
-
 ![img0](https://user-images.githubusercontent.com/24237865/45309043-ccf51580-b55d-11e8-8985-02fc2d3a7250.jpg) 
 ![img1](https://user-images.githubusercontent.com/24237865/45308725-1db83e80-b55d-11e8-84b0-1d48c0405365.jpg)
 
@@ -31,7 +30,24 @@ dependencies {
     implementation "com.github.skydoves:colorpickerview:2.1.0"
 }
 ```
-    
+
+## Table of Contents
+#### [1. ColorPickerView](https://github.com/skydoves/ColorPickerView#usage)
+- [ColorPickerView in layout](https://github.com/skydoves/ColorPickerView#colorpickerview-in-layout)
+- [ColorListener](https://github.com/skydoves/ColorPickerView#colorlistener-listener)
+- [ActionMode](https://github.com/skydoves/ColorPickerView#actionmode)
+- [Create using builder](https://github.com/skydoves/ColorPickerView#create-using-builder)
+- [Restore and save](https://github.com/skydoves/ColorPickerView#restore-and-save)
+- [Pallette from Gallery](https://github.com/skydoves/ColorPickerView#pallette-from-gallery) <br>
+
+__[2. AlphaSlideBar](https://github.com/skydoves/ColorPickerView#alphaslidebaroptional)__ <br>
+__[3. BrightnessSlideBar](https://github.com/skydoves/ColorPickerView#brightnessslidebaroptional)__<br>
+__[4. ColorPickerDialog](https://github.com/skydoves/ColorPickerView#colorpickerdialog)__ <br>
+__[5. FlagView](https://github.com/skydoves/ColorPickerView#flagviewoptional)__ <br>
+__[6. AlphaTileView](https://github.com/skydoves/ColorPickerView#alphatileview)__ <br>
+__[7. ColorPickerView Methods](https://github.com/skydoves/ColorPickerView#colorpickerview-methods)__ <br>
+__[8. Other Libraries](https://github.com/skydoves/ColorPickerView#other-libraries)__ <br>
+
 ## Usage
 Add following XML namespace inside your XML layout file.
 
@@ -59,7 +75,7 @@ app:actionMode="last" // sets action mode "always" or "last".
 app:preferenceName="MyColorPicker" // sets preference name.
 ```
 
-### ColorListener Listener
+### ColorListener
 ColorListener is invoked whenever tapped by a user or selecting position manually.
 ```java
 colorPickerView.setColorListener(new ColorListener() {
@@ -373,7 +389,10 @@ At [here](https://github.com/skydoves/Multi-ColorPicker) you can get a more spec
 
 ![screenshot1128436220](https://user-images.githubusercontent.com/24237865/45586566-4614b400-b934-11e8-9098-2d4341dd695e.png)
 
-## Supports
+## Find this library useful? :heart:
+Support it by joining [stargazers](https://github.com/skydoves/ColorPickerView/stargazers) for this repository. :star:
+
+## Supports :coffee:
 If you feel like support me a coffee for my efforts, I would greatly appreciate it. <br><br>
 <a href="https://www.buymeacoffee.com/skydoves" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/purple_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
 
