@@ -29,7 +29,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import com.skydoves.colorpickerview.AlphaTileView;
 import com.skydoves.colorpickerview.ColorEnvelope;
@@ -109,9 +108,6 @@ public class MainActivity extends AppCompatActivity {
    */
   @SuppressLint("SetTextI18n")
   private void setLayoutColor(ColorEnvelope envelope) {
-    Toolbar toolbar = findViewById(R.id.toolbar);
-    toolbar.setBackgroundColor(envelope.getColor());
-
     TextView textView = findViewById(R.id.textView);
     textView.setText("#" + envelope.getHexCode());
 
