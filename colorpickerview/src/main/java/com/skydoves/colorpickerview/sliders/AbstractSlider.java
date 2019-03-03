@@ -167,6 +167,10 @@ public abstract class AbstractSlider extends FrameLayout {
       colorPickerView.fireColorListener(assembleColor(), true);
     }
 
+    if (colorPickerView.getFlagView() != null) {
+      colorPickerView.getFlagView().receiveOnTouchEvent(event);
+    }
+
     int maxPos = getMeasuredWidth() - selector.getMeasuredWidth();
     if (selector.getX() >= maxPos) selector.setX(maxPos);
     if (selector.getX() <= 0) selector.setX(0);

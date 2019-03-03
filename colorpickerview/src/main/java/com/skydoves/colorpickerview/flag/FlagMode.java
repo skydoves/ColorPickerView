@@ -22,5 +22,8 @@ public enum FlagMode {
   ALWAYS,
 
   /** showing only when finger released. */
-  LAST
+  LAST,
+
+  /** showing only when finger tapping with fadeIn-fadeOut animations. */
+  FADE
 }

@@ -56,13 +56,13 @@
            android:layout_height="0dp"
            android:layout_weight="1"
            android:layout_marginLeft="15dp"
-           android:layout_marginRight="15dp"
-           android:layout_marginTop="15dp">
+           android:layout_marginRight="15dp">
 
            <com.skydoves.colorpickerview.sliders.AlphaSlideBar
                android:id="@+id/alphaSlideBar"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
+               android:layout_gravity="center"
                app:borderColor_AlphaSlideBar="@android:color/darker_gray"
                app:borderSize_AlphaSlideBar="5"
                app:selector_AlphaSlideBar="@drawable/wheel" />
@@ -73,8 +73,7 @@
            android:layout_height="0dp"
            android:layout_weight="1"
            android:layout_marginLeft="15dp"
-           android:layout_marginRight="15dp"
-           android:layout_marginTop="15dp">
+           android:layout_marginRight="15dp">
 
            <com.skydoves.colorpickerview.sliders.BrightnessSlideBar
                android:id="@+id/brightnessSlide"

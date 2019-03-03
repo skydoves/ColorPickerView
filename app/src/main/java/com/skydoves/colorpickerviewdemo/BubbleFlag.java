@@ -25,7 +25,7 @@ import com.skydoves.colorpickerview.ColorEnvelope;
 import com.skydoves.colorpickerview.flag.FlagView;
 
 @SuppressLint("ViewConstructor")
-public class CustomFlag extends FlagView {
+public class BubbleFlag extends FlagView {
 
   private ImageView bubble;
 
@@ -35,7 +35,7 @@ public class CustomFlag extends FlagView {
    * @param context context
    * @param layout custom flagView's layout
    */
-  public CustomFlag(Context context, int layout) {
+  public BubbleFlag(Context context, int layout) {
     super(context, layout);
     this.bubble = findViewById(R.id.imageView);
   }

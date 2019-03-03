@@ -211,15 +211,9 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
   public boolean onTouchEvent(MotionEvent event) {
     switch (event.getActionMasked()) {
       case MotionEvent.ACTION_DOWN:
-        if (flagView != null && flagView.getFlagMode() == FlagMode.LAST) flagView.gone();
-        selector.setPressed(true);
-        return onTouchReceived(event);
       case MotionEvent.ACTION_MOVE:
-        if (flagView != null && flagView.getFlagMode() == FlagMode.LAST) flagView.gone();
-        selector.setPressed(true);
-        return onTouchReceived(event);
       case MotionEvent.ACTION_UP:
-        if (flagView != null && flagView.getFlagMode() == FlagMode.LAST) flagView.visible();
+        if (getFlagView() != null) getFlagView().receiveOnTouchEvent(event);
         selector.setPressed(true);
         return onTouchReceived(event);
       default:

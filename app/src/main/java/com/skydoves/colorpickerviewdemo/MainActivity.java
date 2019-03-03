@@ -34,6 +34,7 @@ import com.skydoves.colorpickerview.AlphaTileView;
 import com.skydoves.colorpickerview.ColorEnvelope;
 import com.skydoves.colorpickerview.ColorPickerDialog;
 import com.skydoves.colorpickerview.ColorPickerView;
+import com.skydoves.colorpickerview.flag.FlagMode;
 import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener;
 import com.skydoves.colorpickerview.sliders.AlphaSlideBar;
 import com.skydoves.colorpickerview.sliders.BrightnessSlideBar;
@@ -82,7 +83,9 @@ public class MainActivity extends AppCompatActivity {
     powerMenu = PowerMenuUtils.getPowerMenu(this, this, powerMenuItemClickListener);
 
     colorPickerView = findViewById(R.id.colorPickerView);
-    colorPickerView.setFlagView(new CustomFlag(this, R.layout.layout_flag));
+    BubbleFlag bubbleFlag = new BubbleFlag(this, R.layout.layout_flag);
+    bubbleFlag.setFlagMode(FlagMode.FADE);
+    colorPickerView.setFlagView(bubbleFlag);
     colorPickerView.setColorListener(
         new ColorEnvelopeListener() {
           @Override
@@ -167,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
                   }
                 });
     ColorPickerView colorPickerView = builder.getColorPickerView();
-    colorPickerView.setFlagView(new CustomFlag(this, R.layout.layout_flag));
+    colorPickerView.setFlagView(new BubbleFlag(this, R.layout.layout_flag));
     builder.show();
   }
 
