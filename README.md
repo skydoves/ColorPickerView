@@ -9,8 +9,8 @@ ColorPickerView implements getting HSV colors, ARGB values, Hex color codes from
 any image drawables or your gallery pictures by tapping on the desired color.<br>
 Supports alpha & brightness slider bar, dialog, and auto saving & restoring selected data.<br>
 
-![img0](https://user-images.githubusercontent.com/24237865/45309043-ccf51580-b55d-11e8-8985-02fc2d3a7250.jpg) 
-![img1](https://user-images.githubusercontent.com/24237865/45308725-1db83e80-b55d-11e8-84b0-1d48c0405365.jpg)
+![img0](https://user-images.githubusercontent.com/24237865/53691281-ea44c700-3dbd-11e9-96f3-7b82cb9e997e.png)
+![img1](https://user-images.githubusercontent.com/24237865/53691282-eadd5d80-3dbd-11e9-8dab-b5fe1393f040.png)
 
 ## Including in your project 
 [![Download](https://api.bintray.com/packages/devmagician/maven/colorpickerview/images/download.svg) ](https://bintray.com/devmagician/maven/colorpickerview/_latestVersion)
@@ -27,7 +27,7 @@ allprojects {
 And add a dependency code to your **module**'s `build.gradle` file.
 ```gradle
 dependencies {
-    implementation "com.github.skydoves:colorpickerview:2.1.0"
+    implementation "com.github.skydoves:colorpickerview:2.1.1"
 }
 ```
 
