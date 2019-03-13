@@ -230,7 +230,7 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
    */
   private boolean onTouchReceived(MotionEvent event) {
     Point snapPoint =
-            PointMapper.getColorPoint(this, new Point((int) event.getX(), (int) event.getY()));
+        PointMapper.getColorPoint(this, new Point((int) event.getX(), (int) event.getY()));
     int pixelColor = getColorFromBitmap(snapPoint.x, snapPoint.y);
 
     selectedPureColor = pixelColor;

@@ -21,8 +21,7 @@ import android.graphics.Point;
 
 @SuppressWarnings("WeakerAccess")
 class PointMapper {
-  private PointMapper() {
-  }
+  private PointMapper() {}
 
   protected static Point getColorPoint(ColorPickerView colorPickerView, Point point) {
     if (colorPickerView.getColorFromBitmap(point.x, point.y) != Color.TRANSPARENT) return point;
