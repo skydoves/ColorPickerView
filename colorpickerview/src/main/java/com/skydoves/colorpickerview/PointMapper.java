@@ -27,15 +27,7 @@ class PointMapper {
     if (colorPickerView.getColorFromBitmap(point.x, point.y) != Color.TRANSPARENT) return point;
     Point center =
         new Point(colorPickerView.getMeasuredWidth() / 2, colorPickerView.getMeasuredHeight() / 2);
-    if (point.x <= center.x && point.y <= center.y) {
-      return approximatedPoint(colorPickerView, point, center);
-    } else if (point.x >= center.x && point.y <= center.y) {
-      return approximatedPoint(colorPickerView, point, center);
-    } else if (point.x >= center.x) {
-      return approximatedPoint(colorPickerView, point, center);
-    } else {
-      return approximatedPoint(colorPickerView, point, center);
-    }
+    return approximatedPoint(colorPickerView, point, center);
   }
 
   private static Point approximatedPoint(ColorPickerView colorPickerView, Point start, Point end) {
