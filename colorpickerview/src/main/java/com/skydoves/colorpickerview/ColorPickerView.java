@@ -229,14 +229,13 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
    * @return notified or not.
    */
   private boolean onTouchReceived(MotionEvent event) {
-    PointMapper pointMapper = new PointMapper();
     Point snapPoint =
-        pointMapper.getColorPoint(this, new Point((int) event.getX(), (int) event.getY()));
+        PointMapper.getColorPoint(this, new Point((int) event.getX(), (int) event.getY()));
     int pixelColor = getColorFromBitmap(snapPoint.x, snapPoint.y);
 
     selectedPureColor = pixelColor;
     selectedColor = pixelColor;
-    selectedPoint = pointMapper.getColorPoint(this, new Point(snapPoint.x, snapPoint.y));
+    selectedPoint = PointMapper.getColorPoint(this, new Point(snapPoint.x, snapPoint.y));
     setCoordinate(snapPoint.x, snapPoint.y);
     notifyToFlagView(selectedPoint);
 
