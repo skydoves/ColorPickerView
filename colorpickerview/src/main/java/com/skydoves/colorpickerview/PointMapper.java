@@ -21,41 +21,39 @@ import android.graphics.Point;
 
 @SuppressWarnings("WeakerAccess")
 class PointMapper {
+  private PointMapper() {}
 
-  private ColorPickerView colorPickerView;
-
-  protected Point getColorPoint(ColorPickerView colorPickerView, Point point) {
-    this.colorPickerView = colorPickerView;
+  protected static Point getColorPoint(ColorPickerView colorPickerView, Point point) {
     if (colorPickerView.getColorFromBitmap(point.x, point.y) != Color.TRANSPARENT) return point;
     Point center =
         new Point(colorPickerView.getMeasuredWidth() / 2, colorPickerView.getMeasuredHeight() / 2);
     if (point.x <= center.x && point.y <= center.y) {
-      return approximatedPoint(point, center);
+      return approximatedPoint(colorPickerView, point, center);
     } else if (point.x >= center.x && point.y <= center.y) {
-      return approximatedPoint(point, center);
+      return approximatedPoint(colorPickerView, point, center);
     } else if (point.x >= center.x) {
-      return approximatedPoint(point, center);
+      return approximatedPoint(colorPickerView, point, center);
     } else {
-      return approximatedPoint(point, center);
+      return approximatedPoint(colorPickerView, point, center);
     }
   }
 
-  private Point approximatedPoint(Point start, Point end) {
+  private static Point approximatedPoint(ColorPickerView colorPickerView, Point start, Point end) {
     if (getDistance(start, end) <= 3) return end;
     Point center = getCenterPoint(start, end);
     int color = colorPickerView.getColorFromBitmap(center.x, center.y);
     if (color == Color.TRANSPARENT) {
-      return approximatedPoint(center, end);
+      return approximatedPoint(colorPickerView, center, end);
     } else {
-      return approximatedPoint(start, center);
+      return approximatedPoint(colorPickerView, start, center);
     }
   }
 
-  private Point getCenterPoint(Point start, Point end) {
+  private static Point getCenterPoint(Point start, Point end) {
     return new Point((end.x + start.x) / 2, (end.y + start.y) / 2);
   }
 
-  private int getDistance(Point start, Point end) {
+  private static int getDistance(Point start, Point end) {
     return (int)
         Math.sqrt(
             Math.abs(end.x - start.x) * Math.abs(end.x - start.x)
