@@ -267,18 +267,18 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
 
     if (palette.getDrawable() != null
         && palette.getDrawable() instanceof BitmapDrawable
-        && mappedPoints[0] > 0
-        && mappedPoints[1] > 0
+        && mappedPoints[0] >= 0
+        && mappedPoints[1] >= 0
         && mappedPoints[0] < palette.getDrawable().getIntrinsicWidth()
         && mappedPoints[1] < palette.getDrawable().getIntrinsicHeight()) {
 
       invalidate();
 
       Rect rect = palette.getDrawable().getBounds();
-      float scaleX = mappedPoints[0] / rect.height();
-      int x1 = (int) (scaleX * ((BitmapDrawable) palette.getDrawable()).getBitmap().getHeight());
-      float scaleY = mappedPoints[1] / rect.width();
-      int y1 = (int) (scaleY * ((BitmapDrawable) palette.getDrawable()).getBitmap().getWidth());
+      float scaleX = mappedPoints[0] / rect.width();
+      int x1 = (int) (scaleX * ((BitmapDrawable) palette.getDrawable()).getBitmap().getWidth());
+      float scaleY = mappedPoints[1] / rect.height();
+      int y1 = (int) (scaleY * ((BitmapDrawable) palette.getDrawable()).getBitmap().getHeight());
       return ((BitmapDrawable) palette.getDrawable()).getBitmap().getPixel(x1, y1);
     }
     return 0;
