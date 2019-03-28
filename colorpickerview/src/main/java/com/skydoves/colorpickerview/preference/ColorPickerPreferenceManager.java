@@ -205,8 +205,13 @@ public class ColorPickerPreferenceManager {
       String name = colorPickerView.getPreferenceName();
       setColor(name, colorPickerView.getColor());
       setSelectorPosition(name, colorPickerView.getSelectedPoint());
-      setAlphaSliderPosition(name, colorPickerView.getAlphaSlideBar().getSelectedX());
-      setBrightnessSliderPosition(name, colorPickerView.getBrightnessSlider().getSelectedX());
+
+      if (colorPickerView.getAlphaSlideBar() != null) {
+        setAlphaSliderPosition(name, colorPickerView.getAlphaSlideBar().getSelectedX());
+      }
+      if (colorPickerView.getBrightnessSlider() != null) {
+        setBrightnessSliderPosition(name, colorPickerView.getBrightnessSlider().getSelectedX());
+      }
     }
   }
 
