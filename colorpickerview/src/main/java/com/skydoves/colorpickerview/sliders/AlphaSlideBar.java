@@ -71,10 +71,12 @@ public class AlphaSlideBar extends AbstractSlider {
   @Override
   protected void onSizeChanged(int width, int height, int oldWidth, int oldHeight) {
     super.onSizeChanged(width, height, oldWidth, oldHeight);
-    backgroundBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-    Canvas backgroundCanvas = new Canvas(backgroundBitmap);
-    drawable.setBounds(0, 0, backgroundCanvas.getWidth(), backgroundCanvas.getHeight());
-    drawable.draw(backgroundCanvas);
+    if (width > 0 && height > 0) {
+      backgroundBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+      Canvas backgroundCanvas = new Canvas(backgroundBitmap);
+      drawable.setBounds(0, 0, backgroundCanvas.getWidth(), backgroundCanvas.getHeight());
+      drawable.draw(backgroundCanvas);
+    }
   }
 
   @Override
