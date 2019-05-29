@@ -58,7 +58,7 @@ import com.skydoves.colorpickerview.sliders.BrightnessSlideBar;
  *
  * <p>Implements {@link FlagView}, {@link AlphaSlideBar} and {@link BrightnessSlideBar} optional.
  */
-@SuppressWarnings({"WeakerAccess", "unchecked", "unused", "IntegerDivisionInFloatingPointContext"})
+@SuppressWarnings({"unused", "IntegerDivisionInFloatingPointContext"})
 public class ColorPickerView extends FrameLayout implements LifecycleObserver {
 
   private int selectedPureColor;
@@ -472,14 +472,15 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
    * @param y coordinate y of the selector.
    */
   public void setSelectorPoint(int x, int y) {
-    selectedColor = getColorFromBitmap(x, y);
-    if (selectedColor != Color.TRANSPARENT) {
-      selectedPoint = new Point(x, y);
-      setCoordinate(x, y);
-      fireColorListener(getColor(), false);
-      notifyToSlideBars();
-      notifyToFlagView(new Point(x, y));
-    }
+    Point mappedPoint = PointMapper.getColorPoint(this, new Point(x, y));
+    int color = getColorFromBitmap(mappedPoint.x, mappedPoint.y);
+    selectedPureColor = color;
+    selectedColor = color;
+    selectedPoint = new Point(mappedPoint.x, mappedPoint.y);
+    setCoordinate(mappedPoint.x, mappedPoint.y);
+    fireColorListener(getColor(), false);
+    notifyToFlagView(selectedPoint);
+    notifyToSlideBars();
   }
 
   /**
@@ -511,7 +512,9 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
 
     int pointX = (int) ((x + 1) * radius);
     int pointY = (int) ((1 - y) * radius);
-    setSelectorPoint(pointX, pointY);
+
+    Point mappedPoint = PointMapper.getColorPoint(this, new Point(pointX, pointY));
+    setSelectorPoint(mappedPoint.x, mappedPoint.y);
   }
 
   /**

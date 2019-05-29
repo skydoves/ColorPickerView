@@ -38,7 +38,7 @@ import com.skydoves.colorpickerview.sliders.BrightnessSlideBar;
  * ColorPickerDialog is a dialog what having {@link ColorPickerView}, {@link AlphaSlideBar} and
  * {@link BrightnessSlideBar}.
  */
-@SuppressWarnings({"WeakerAccess", "unchecked", "unused"})
+@SuppressWarnings("unused")
 public class ColorPickerDialog extends AlertDialog {
 
   private ColorPickerView colorPickerView;
@@ -48,7 +48,7 @@ public class ColorPickerDialog extends AlertDialog {
   }
 
   /** Builder class for create {@link ColorPickerDialog}. */
-  @SuppressWarnings({"ConstantConditions", "UnusedReturnValue"})
+  @SuppressWarnings("UnusedReturnValue")
   public static class Builder extends AlertDialog.Builder {
     private ColorPickerView colorPickerView;
     private boolean alphaSlideBar = true;

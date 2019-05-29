@@ -6,110 +6,110 @@
     android:background="@color/background"
     android:orientation="vertical">
 
-    <com.google.android.material.appbar.AppBarLayout
+  <com.google.android.material.appbar.AppBarLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+      <ImageView
+          android:id="@+id/overflowMenu"
+          android:layout_width="35dp"
+          android:layout_height="35dp"
+          android:layout_marginRight="10dp"
+          android:onClick="overflowMenu"
+          android:src="@drawable/ic_list_white_24dp"
+          android:tint="@android:color/white" />
 
-            <ImageView
-                android:id="@+id/overflowMenu"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_marginRight="10dp"
-                android:onClick="overflowMenu"
-                android:src="@drawable/ic_list_white_24dp"
-                android:tint="@android:color/white" />
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="ColorPickerView"
+          android:textColor="@android:color/white"
+          android:textSize="18sp"
+          android:textStyle="bold" />
+    </androidx.appcompat.widget.Toolbar>
+  </com.google.android.material.appbar.AppBarLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ColorPickerView"
-                android:textColor="@android:color/white"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-        </androidx.appcompat.widget.Toolbar>
-    </com.google.android.material.appbar.AppBarLayout>
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical"
+      android:weightSum="10">
 
-   <LinearLayout
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:orientation="vertical"
-       android:weightSum="10">
+    <com.skydoves.colorpickerview.ColorPickerView
+        android:id="@+id/colorPickerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="6"
+        app:palette="@drawable/palette"
+        app:preferenceName="Test2"
+        app:selector="@drawable/wheel" />
 
-       <com.skydoves.colorpickerview.ColorPickerView
-           android:id="@+id/colorPickerView"
-           android:layout_width="match_parent"
-           android:layout_height="0dp"
-           android:layout_weight="6"
-           android:layout_gravity="center"
-           android:layout_marginBottom="10dp"
-           app:palette="@drawable/palette"
-           app:selector="@drawable/wheel"
-           app:preferenceName="Test2"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_weight="1">
 
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:layout_height="0dp"
-           android:layout_weight="1"
-           android:layout_marginLeft="15dp"
-           android:layout_marginRight="15dp">
+      <com.skydoves.colorpickerview.sliders.AlphaSlideBar
+          android:id="@+id/alphaSlideBar"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          app:borderColor_AlphaSlideBar="@android:color/darker_gray"
+          app:borderSize_AlphaSlideBar="5"
+          app:selector_AlphaSlideBar="@drawable/wheel" />
+    </LinearLayout>
 
-           <com.skydoves.colorpickerview.sliders.AlphaSlideBar
-               android:id="@+id/alphaSlideBar"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:layout_gravity="center"
-               app:borderColor_AlphaSlideBar="@android:color/darker_gray"
-               app:borderSize_AlphaSlideBar="5"
-               app:selector_AlphaSlideBar="@drawable/wheel" />
-       </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_weight="1">
 
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:layout_height="0dp"
-           android:layout_weight="1"
-           android:layout_marginLeft="15dp"
-           android:layout_marginRight="15dp">
+      <com.skydoves.colorpickerview.sliders.BrightnessSlideBar
+          android:id="@+id/brightnessSlide"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          app:borderColor_BrightnessSlider="@android:color/darker_gray"
+          app:borderSize_BrightnessSlider="5"
+          app:selector_BrightnessSlider="@drawable/wheel" />
+    </LinearLayout>
 
-           <com.skydoves.colorpickerview.sliders.BrightnessSlideBar
-               android:id="@+id/brightnessSlide"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               app:borderColor_BrightnessSlider="@android:color/darker_gray"
-               app:borderSize_BrightnessSlider="5"
-               app:selector_BrightnessSlider="@drawable/wheel" />
-       </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="15dp"
+        android:layout_weight="2"
+        android:orientation="vertical">
 
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:layout_height="0dp"
-           android:layout_weight="2"
-           android:orientation="vertical"
-           android:layout_marginBottom="15dp">
+      <TextView
+          android:id="@+id/textView"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:text="#ffffff"
+          android:textColor="@color/colorAccent"
+          android:textSize="20sp"
+          android:textStyle="bold" />
 
-           <TextView
-               android:id="@+id/textView"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_gravity="center"
-               android:text="#ffffff"
-               android:textColor="@color/colorAccent"
-               android:textSize="20sp"
-               android:textStyle="bold" />
-
-           <com.skydoves.colorpickerview.AlphaTileView
-               android:id="@+id/alphaTileView"
-               android:layout_width="55dp"
-               android:layout_height="55dp"
-               android:layout_gravity="center"
-               android:layout_marginTop="10dp"
-               android:background="@android:color/white"
-               android:orientation="horizontal"
-               app:tileSize="20" />
-       </LinearLayout>
-   </LinearLayout>
+      <com.skydoves.colorpickerview.AlphaTileView
+          android:id="@+id/alphaTileView"
+          android:layout_width="55dp"
+          android:layout_height="55dp"
+          android:layout_gravity="center"
+          android:layout_marginTop="10dp"
+          android:background="@android:color/white"
+          android:orientation="horizontal"
+          app:tileSize="20" />
+    </LinearLayout>
+  </LinearLayout>
 </LinearLayout>

@@ -4,13 +4,13 @@
     android:layout_height="wrap_content"
     android:background="@color/colorPrimaryDark">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="@string/options"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
-        android:textSize="15sp"
-        android:padding="8dp"/>
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:gravity="center"
+      android:padding="8dp"
+      android:text="@string/options"
+      android:textColor="@android:color/white"
+      android:textSize="15sp"
+      android:textStyle="bold" />
 </LinearLayout>
