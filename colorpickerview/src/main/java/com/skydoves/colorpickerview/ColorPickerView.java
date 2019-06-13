@@ -513,8 +513,15 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
     int pointX = (int) ((x + 1) * radius);
     int pointY = (int) ((1 - y) * radius);
 
+    if (this.brightnessSlider != null) this.brightnessSlider.setSelectorPosition(hsv[2]);
     Point mappedPoint = PointMapper.getColorPoint(this, new Point(pointX, pointY));
-    setSelectorPoint(mappedPoint.x, mappedPoint.y);
+    selectedPureColor = color;
+    selectedColor = color;
+    selectedPoint = new Point(mappedPoint.x, mappedPoint.y);
+    setCoordinate(mappedPoint.x, mappedPoint.y);
+    fireColorListener(getColor(), false);
+    notifyToFlagView(selectedPoint);
+    notifyToSlideBars();
   }
 
   /**

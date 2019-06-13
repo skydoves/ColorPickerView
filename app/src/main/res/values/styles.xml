@@ -8,4 +8,5 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.DarkDialog" parent="Theme.AppCompat.DayNight.Dialog" />
 </resources>
