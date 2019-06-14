@@ -24,6 +24,7 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$versions.androidxAppcompat"
     implementation "com.google.android.material:material:$versions.googleMaterial"
     implementation "com.github.skydoves:powermenu:$versions.powermenu"
+    implementation "com.jakewharton.timber:timber:$versions.timber"
     implementation project(":colorpickerview")
 }
 

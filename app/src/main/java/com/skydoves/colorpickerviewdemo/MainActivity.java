@@ -43,6 +43,7 @@ import com.skydoves.powermenu.PowerMenu;
 import com.skydoves.powermenu.PowerMenuItem;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import timber.log.Timber;
 
 @SuppressWarnings("ConstantConditions")
 public class MainActivity extends AppCompatActivity {
@@ -90,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
         new ColorEnvelopeListener() {
           @Override
           public void onColorSelected(ColorEnvelope envelope, boolean fromUser) {
+            Timber.d(envelope.getHexCode());
             setLayoutColor(envelope);
           }
         });

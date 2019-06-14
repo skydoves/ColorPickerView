@@ -11,5 +11,6 @@ ext.versions = [
     androidxAnnotation : '1.0.2',
     androidxAppcompat  : '1.1.0-beta01',
     googleMaterial     : '1.1.0-alpha07',
-    powermenu          : '2.1.0'
+    powermenu          : '2.1.0',
+    timber             : '4.7.1'
 ]

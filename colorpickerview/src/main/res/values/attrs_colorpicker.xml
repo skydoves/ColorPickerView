@@ -3,6 +3,7 @@
     <declare-styleable name="ColorPickerView">
         <attr name="palette" format="reference" />
         <attr name="selector" format="reference" />
+        <attr name="triggerDelay" format="integer" />
         <attr name="alpha_selector" format="float" />
         <attr name="alpha_flag" format="float" />
         <attr name="preferenceName" format="string"/>

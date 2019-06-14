@@ -73,6 +73,9 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
   private BrightnessSlideBar brightnessSlider;
   public ColorPickerViewListener colorListener;
 
+  private long lastSelectedTime = System.currentTimeMillis();
+  private long triggerDelay = 150;
+
   private ActionMode actionMode = ActionMode.ALWAYS;
 
   private float alpha_selector = 1.0f;
@@ -111,6 +114,8 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
         this.paletteDrawable = a.getDrawable(R.styleable.ColorPickerView_palette);
       if (a.hasValue(R.styleable.ColorPickerView_selector))
         this.selectorDrawable = a.getDrawable(R.styleable.ColorPickerView_selector);
+      if (a.hasValue(R.styleable.ColorPickerView_triggerDelay))
+        this.triggerDelay = a.getInt(R.styleable.ColorPickerView_triggerDelay, (int) triggerDelay);
       if (a.hasValue(R.styleable.ColorPickerView_alpha_selector))
         this.alpha_selector =
             a.getFloat(R.styleable.ColorPickerView_alpha_selector, alpha_selector);
@@ -300,7 +305,8 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
    * @param fromUser triggered by user or not.
    */
   public void fireColorListener(int color, boolean fromUser) {
-    if (colorListener != null) {
+    if (colorListener != null && checkSelectedDelayTime()) {
+      lastSelectedTime = System.currentTimeMillis();
       selectedColor = color;
       if (getAlphaSlideBar() != null) {
         getAlphaSlideBar().notifyColor();
@@ -425,6 +431,10 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
     addView(flagView);
     this.flagView = flagView;
     flagView.setAlpha(alpha_flag);
+  }
+
+  public boolean checkSelectedDelayTime() {
+    return lastSelectedTime + triggerDelay < System.currentTimeMillis();
   }
 
   /**
