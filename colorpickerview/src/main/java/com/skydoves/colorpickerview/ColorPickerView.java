@@ -73,9 +73,6 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
   private BrightnessSlideBar brightnessSlider;
   public ColorPickerViewListener colorListener;
 
-  private long lastSelectedTime = System.currentTimeMillis();
-  private long triggerDelay = 150;
-
   private ActionMode actionMode = ActionMode.ALWAYS;
 
   private float alpha_selector = 1.0f;
@@ -114,8 +111,6 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
         this.paletteDrawable = a.getDrawable(R.styleable.ColorPickerView_palette);
       if (a.hasValue(R.styleable.ColorPickerView_selector))
         this.selectorDrawable = a.getDrawable(R.styleable.ColorPickerView_selector);
-      if (a.hasValue(R.styleable.ColorPickerView_triggerDelay))
-        this.triggerDelay = a.getInt(R.styleable.ColorPickerView_triggerDelay, (int) triggerDelay);
       if (a.hasValue(R.styleable.ColorPickerView_alpha_selector))
         this.alpha_selector =
             a.getFloat(R.styleable.ColorPickerView_alpha_selector, alpha_selector);
@@ -305,8 +300,7 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
    * @param fromUser triggered by user or not.
    */
   public void fireColorListener(int color, boolean fromUser) {
-    if (colorListener != null && checkSelectedDelayTime()) {
-      lastSelectedTime = System.currentTimeMillis();
+    if (colorListener != null) {
       selectedColor = color;
       if (getAlphaSlideBar() != null) {
         getAlphaSlideBar().notifyColor();
@@ -433,10 +427,6 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
     flagView.setAlpha(alpha_flag);
   }
 
-  public boolean checkSelectedDelayTime() {
-    return lastSelectedTime + triggerDelay < System.currentTimeMillis();
-  }
-
   /**
    * gets center coordinate of the selector.
    *
@@ -488,6 +478,32 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
     selectedColor = color;
     selectedPoint = new Point(mappedPoint.x, mappedPoint.y);
     setCoordinate(mappedPoint.x, mappedPoint.y);
+    fireColorListener(getColor(), false);
+    notifyToFlagView(selectedPoint);
+    notifyToSlideBars();
+  }
+
+  /**
+   * moves selector's selected point with notifies about changes manually.
+   *
+   * @param x coordinate x of the selector.
+   * @param y coordinate y of the selector.
+   */
+  public void moveSelectorPoint(int x, int y, int color) {
+    selectedPureColor = color;
+    selectedColor = color;
+
+    if (getAlphaSlideBar() != null) {
+      getAlphaSlideBar().notifyColor();
+      selectedColor = getAlphaSlideBar().assembleColor();
+    }
+    if (getBrightnessSlider() != null) {
+      getBrightnessSlider().notifyColor();
+      selectedColor = getBrightnessSlider().assembleColor();
+    }
+
+    selectedPoint = new Point(x, y);
+    setCoordinate(x, y);
     fireColorListener(getColor(), false);
     notifyToFlagView(selectedPoint);
     notifyToSlideBars();
