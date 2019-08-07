@@ -4,25 +4,28 @@ android:
   components:
     - tools
     - platform-tools
-    - build-tools-28.0.3
-    - android-28
+    - build-tools-29.0.0
+    - android-29
     - extra-android-support
     - extra-android-m2repository
     - extra-google-m2repository
-    
+
 jdk:
-  - oraclejdk8
+  - openjdk8
 
 branches:
   except:
     - gh-pages
-  
+
+licenses:
+  - '.+'
+
 notifications:
   email: false
 
 cache:
   directories:
     - $HOME/.gradle
-    
+
 script:
   - chmod +x ./gradlew

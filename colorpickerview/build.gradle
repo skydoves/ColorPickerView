@@ -4,7 +4,6 @@ apply from: '../publish.gradle'
 
 android {
     compileSdkVersion versions.compileSdk
-
     defaultConfig {
         minSdkVersion versions.minSdk
         targetSdkVersion versions.compileSdk

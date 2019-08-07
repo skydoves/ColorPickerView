@@ -4,7 +4,7 @@ publish {
     groupId = 'com.github.skydoves'
     artifactId = 'colorpickerview'
     publishVersion = versions.versionName
-    desc = 'This is ColorPickerView by skydoves'
+    desc = '🎨 Android colorpicker for getting colors from any images by tapping on the desired color.'
     website = 'https://github.com/skydoves/ColorPickerView'
     issueTracker = "${website}/issues"
     repository = "${website}.git"
