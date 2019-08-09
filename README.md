@@ -259,7 +259,7 @@ new ColorPickerDialog.Builder(this, AlertDialog.THEME_DEVICE_DEFAULT_DARK)
                   setLayoutColor(envelope);
               }
           })
-       setNegativeButton(getString(R.string.cancel),
+       .setNegativeButton(getString(R.string.cancel),
           new DialogInterface.OnClickListener() {
               @Override
               public void onClick(DialogInterface dialogInterface, int i) {
