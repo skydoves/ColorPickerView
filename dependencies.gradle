@@ -4,15 +4,14 @@ ext.versions = [
     versionoCode       : 19,
     versionName        : '2.1.5',
 
-    gradleBuildTool    : '3.4.2',
-    spotlessGradle     : '3.23.1',
+    gradleBuildTool    : '3.5.0',
+    spotlessGradle     : '3.24.2',
     bintrayRelease     : '0.9.1',
 
-    androidxAnnotation : '1.0.2',
-    androidxAppcompat  : '1.1.0-rc01',
-    googleMaterial     : '1.1.0-alpha09',
+    androidxAppcompat  : '1.1.0',
 
     // for demo
-    powermenu          : '2.1.0',
+    googleMaterial     : '1.1.0-beta01',
+    powermenu          : '2.1.2',
     timber             : '4.7.1'
 ]

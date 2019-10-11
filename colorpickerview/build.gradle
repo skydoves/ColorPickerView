@@ -13,7 +13,6 @@ android {
 }
 
 dependencies {
-    implementation "androidx.annotation:annotation:$versions.androidxAnnotation"
     implementation "androidx.appcompat:appcompat:$versions.androidxAppcompat"
 }
 
