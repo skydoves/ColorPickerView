@@ -51,6 +51,8 @@ public abstract class FlagView extends RelativeLayout {
       case MotionEvent.ACTION_UP:
         if (getFlagMode() == FlagMode.LAST) visible();
         else if (getFlagMode() == FlagMode.FADE) FadeUtils.fadeOut(this);
+      default:
+        visible();
     }
   }
 
