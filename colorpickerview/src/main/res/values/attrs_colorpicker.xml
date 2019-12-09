@@ -6,6 +6,7 @@
     <attr name="alpha_selector" format="float" />
     <attr name="alpha_flag" format="float" />
     <attr name="preferenceName" format="string" />
+    <attr name="debounceDuration" format="integer" />
     <attr name="actionMode" format="enum">
       <enum name="always" value="0" />
       <enum name="last" value="1" />

@@ -72,6 +72,8 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
   private AlphaSlideBar alphaSlideBar;
   private BrightnessSlideBar brightnessSlider;
   public ColorPickerViewListener colorListener;
+  private long debounceDuration = 100;
+  private long lastDebouncedTime = System.currentTimeMillis();
 
   private ActionMode actionMode = ActionMode.ALWAYS;
 
@@ -120,6 +122,10 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
         int actionMode = a.getInteger(R.styleable.ColorPickerView_actionMode, 0);
         if (actionMode == 0) this.actionMode = ActionMode.ALWAYS;
         else if (actionMode == 1) this.actionMode = ActionMode.LAST;
+      }
+      if (a.hasValue(R.styleable.ColorPickerView_debounceDuration)) {
+        this.debounceDuration =
+            a.getInteger(R.styleable.ColorPickerView_debounceDuration, (int) debounceDuration);
       }
       if (a.hasValue(R.styleable.ColorPickerView_preferenceName)) {
         this.preferenceName = a.getString(R.styleable.ColorPickerView_preferenceName);
@@ -195,6 +201,7 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
     this.selectorDrawable = builder.selectorDrawable;
     this.alpha_selector = builder.alpha_selector;
     this.alpha_flag = builder.alpha_flag;
+    this.debounceDuration = builder.debounceDuration;
     onCreate();
 
     if (builder.colorPickerViewListener != null) setColorListener(builder.colorPickerViewListener);
@@ -239,14 +246,18 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
     setCoordinate(snapPoint.x, snapPoint.y);
     notifyToFlagView(selectedPoint);
 
-    if (actionMode == ActionMode.LAST) {
-      if (event.getAction() == MotionEvent.ACTION_UP) {
+    long now = System.currentTimeMillis();
+    if (now >= this.lastDebouncedTime + this.debounceDuration) {
+      this.lastDebouncedTime = now;
+      if (actionMode == ActionMode.LAST) {
+        if (event.getAction() == MotionEvent.ACTION_UP) {
+          fireColorListener(getColor(), true);
+          notifyToSlideBars();
+        }
+      } else {
         fireColorListener(getColor(), true);
         notifyToSlideBars();
       }
-    } else {
-      fireColorListener(getColor(), true);
-      notifyToSlideBars();
     }
     return true;
   }
@@ -299,17 +310,18 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
    * @param color color.
    * @param fromUser triggered by user or not.
    */
-  public void fireColorListener(int color, boolean fromUser) {
-    if (colorListener != null) {
-      selectedColor = color;
+  public void fireColorListener(int color, final boolean fromUser) {
+    if (this.colorListener != null) {
+      this.selectedColor = color;
       if (getAlphaSlideBar() != null) {
         getAlphaSlideBar().notifyColor();
-        selectedColor = getAlphaSlideBar().assembleColor();
+        this.selectedColor = getAlphaSlideBar().assembleColor();
       }
       if (getBrightnessSlider() != null) {
         getBrightnessSlider().notifyColor();
-        selectedColor = getBrightnessSlider().assembleColor();
+        this.selectedColor = getBrightnessSlider().assembleColor();
       }
+
       if (colorListener instanceof ColorListener) {
         ((ColorListener) colorListener).onColorSelected(selectedColor, fromUser);
       } else if (colorListener instanceof ColorEnvelopeListener) {
@@ -317,15 +329,15 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
         ((ColorEnvelopeListener) colorListener).onColorSelected(envelope, fromUser);
       }
 
-      if (flagView != null) flagView.onRefresh(getColorEnvelope());
+      if (this.flagView != null) this.flagView.onRefresh(getColorEnvelope());
 
       if (VISIBLE_FLAG) {
         VISIBLE_FLAG = false;
-        if (selector != null) {
-          selector.setAlpha(alpha_selector);
+        if (this.selector != null) {
+          this.selector.setAlpha(alpha_selector);
         }
-        if (flagView != null) {
-          flagView.setAlpha(alpha_flag);
+        if (this.flagView != null) {
+          this.flagView.setAlpha(alpha_flag);
         }
       }
     }
@@ -502,7 +514,7 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
       selectedColor = getBrightnessSlider().assembleColor();
     }
 
-    selectedPoint = new Point(x, y);
+    this.selectedPoint = new Point(x, y);
     setCoordinate(x, y);
     fireColorListener(getColor(), false);
     notifyToFlagView(selectedPoint);
@@ -720,6 +732,7 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
   public static class Builder {
     private Context context;
     private ColorPickerViewListener colorPickerViewListener;
+    private int debounceDuration = 100;
     private FlagView flagView;
     private Drawable paletteDrawable;
     private Drawable selectorDrawable;
@@ -739,6 +752,11 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
 
     public Builder setColorListener(ColorPickerViewListener colorPickerViewListener) {
       this.colorPickerViewListener = colorPickerViewListener;
+      return this;
+    }
+
+    public Builder setDebounceDuration(int debounceDuration) {
+      this.debounceDuration = debounceDuration;
       return this;
     }
 
