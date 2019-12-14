@@ -27,7 +27,7 @@ allprojects {
 And add a dependency code to your **module**'s `build.gradle` file.
 ```gradle
 dependencies {
-    implementation "com.github.skydoves:colorpickerview:2.1.5"
+    implementation "com.github.skydoves:colorpickerview:2.1.6"
 }
 ```
 
@@ -36,8 +36,9 @@ dependencies {
 ## Table of Contents
 #### [1. ColorPickerView](https://github.com/skydoves/ColorPickerView#usage)
 - [ColorPickerView in layout](https://github.com/skydoves/ColorPickerView#colorpickerview-in-layout)
-- [ColorListener](https://github.com/skydoves/ColorPickerView#colorlistener-listener)
+- [ColorListener](https://github.com/skydoves/ColorPickerView#colorlistener)
 - [ActionMode](https://github.com/skydoves/ColorPickerView#actionmode)
+- [Debounce](https://github.com/skydoves/ColorPickerView#debounce)
 - [Create using builder](https://github.com/skydoves/ColorPickerView#create-using-builder)
 - [Restore and save](https://github.com/skydoves/ColorPickerView#restore-and-save)
 - [Pallette from Gallery](https://github.com/skydoves/ColorPickerView#pallette-from-gallery) <br>
@@ -60,11 +61,11 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 ### ColorPickerView in layout
 ```gradle
 <com.skydoves.colorpickerview.ColorPickerView
-     android:id="@+id/colorPickerView"
-     android:layout_width="300dp"
-     android:layout_height="300dp"
-     app:palette="@drawable/palette"
-     app:selector="@drawable/wheel" />
+   android:id="@+id/colorPickerView"
+   android:layout_width="300dp"
+   android:layout_height="300dp"
+   app:palette="@drawable/palette"
+   app:selector="@drawable/wheel" />
 ```
 
 ### Attribute descriptions
@@ -113,6 +114,18 @@ colorEnvelope.getArgb() // returns a argb integer array.
 ActionMode controls an action about `ColorListener` invoking.
 ```java
 colorPickerView.setActionMode(ActionMode.LAST); // the listener will be invoked only when finger released.
+```
+
+### Debounce
+Only emit a color to the listener if a particular timespan has passed without it emitting using `debounceDuration` attribute.
+
+We can set the `debounceDuration` on our xml layout file.
+```xml
+app:debounceDuration="150"  
+```
+Or we can set set programmatically.
+```java
+colorPickerView.setDebounceDuration(150);
 ```
 
 ### Create using builder

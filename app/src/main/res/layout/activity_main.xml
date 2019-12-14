@@ -50,8 +50,7 @@
       android:layout_weight="6"
       app:palette="@drawable/palette"
       app:preferenceName="Test2"
-      app:selector="@drawable/wheel"
-      app:debounceDuration="150" />
+      app:selector="@drawable/wheel" />
 
     <LinearLayout
       android:layout_width="match_parent"

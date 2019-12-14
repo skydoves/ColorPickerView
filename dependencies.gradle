@@ -1,17 +1,17 @@
 ext.versions = [
     minSdk             : 15,
     compileSdk         : 29,
-    versionoCode       : 19,
-    versionName        : '2.1.5',
+    versionoCode       : 20,
+    versionName        : '2.1.6',
 
-    gradleBuildTool    : '3.5.0',
+    gradleBuildTool    : '3.5.1',
     spotlessGradle     : '3.26.0',
     bintrayRelease     : '0.9.1',
 
     androidxAppcompat  : '1.1.0',
 
     // for demo
-    googleMaterial     : '1.1.0-beta01',
+    googleMaterial     : '1.2.0-alpha02',
     powermenu          : '2.1.2',
     timber             : '4.7.1'
 ]
