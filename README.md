@@ -118,12 +118,11 @@ colorPickerView.setActionMode(ActionMode.LAST); // the listener will be invoked 
 
 ### Debounce
 Only emit a color to the listener if a particular timespan has passed without it emitting using `debounceDuration` attribute.
-
 We can set the `debounceDuration` on our xml layout file.
 ```xml
 app:debounceDuration="150"  
 ```
-Or we can set set programmatically.
+Or we can set it programmatically.
 ```java
 colorPickerView.setDebounceDuration(150);
 ```
