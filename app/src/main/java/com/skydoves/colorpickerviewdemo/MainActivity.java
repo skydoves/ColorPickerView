@@ -17,7 +17,6 @@
 package com.skydoves.colorpickerviewdemo;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -127,9 +126,11 @@ public class MainActivity extends AppCompatActivity {
 
   /** changes palette image using drawable resource. */
   private void palette() {
-    if (FLAG_PALETTE)
+    if (FLAG_PALETTE) {
       colorPickerView.setPaletteDrawable(ContextCompat.getDrawable(this, R.drawable.palette));
-    else colorPickerView.setPaletteDrawable(ContextCompat.getDrawable(this, R.drawable.palettebar));
+    } else {
+      colorPickerView.setPaletteDrawable(ContextCompat.getDrawable(this, R.drawable.palettebar));
+    }
     FLAG_PALETTE = !FLAG_PALETTE;
   }
 
@@ -142,17 +143,18 @@ public class MainActivity extends AppCompatActivity {
 
   /** changes selector image using drawable resource. */
   private void selector() {
-    if (FLAG_SELECTOR)
+    if (FLAG_SELECTOR) {
       colorPickerView.setSelectorDrawable(ContextCompat.getDrawable(this, R.drawable.wheel));
-    else
+    } else {
       colorPickerView.setSelectorDrawable(ContextCompat.getDrawable(this, R.drawable.wheel_dark));
+    }
     FLAG_SELECTOR = !FLAG_SELECTOR;
   }
 
   /** shows ColorPickerDialog */
   private void dialog() {
     ColorPickerDialog.Builder builder =
-        new ColorPickerDialog.Builder(this, AlertDialog.THEME_DEVICE_DEFAULT_DARK)
+        new ColorPickerDialog.Builder(this, R.style.DarkDialog)
             .setTitle("ColorPicker Dialog")
             .setPreferenceName("Test")
             .setPositiveButton(
@@ -196,7 +198,10 @@ public class MainActivity extends AppCompatActivity {
 
   @Override
   public void onBackPressed() {
-    if (powerMenu.isShowing()) powerMenu.dismiss();
-    else super.onBackPressed();
+    if (powerMenu.isShowing()) {
+      powerMenu.dismiss();
+    } else {
+      super.onBackPressed();
+    }
   }
 }

@@ -69,6 +69,7 @@ public class ColorPickerDialog extends AlertDialog {
     private void onCreate() {
       LayoutInflater layoutInflater =
           (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+      assert layoutInflater != null;
       this.parentView = layoutInflater.inflate(R.layout.layout_dialog_colorpicker, null);
       this.colorPickerView = parentView.findViewById(R.id.ColorPickerView);
       this.colorPickerView.attachAlphaSlider(

@@ -2,21 +2,21 @@ apply plugin: 'com.android.application'
 apply from: '../dependencies.gradle'
 
 android {
-    compileSdkVersion versions.compileSdk
-    defaultConfig {
-        applicationId "com.skydoves.colorpickerviewdemo"
-        minSdkVersion versions.minSdk
-        targetSdkVersion versions.compileSdk
-        versionCode versions.versionCode
-        versionName versions.versionName
-    }
+  compileSdkVersion versions.compileSdk
+  defaultConfig {
+    applicationId "com.skydoves.colorpickerviewdemo"
+    minSdkVersion versions.minSdk
+    targetSdkVersion versions.compileSdk
+    versionCode versions.versionCode
+    versionName versions.versionName
+  }
 }
 
 dependencies {
-    implementation "com.google.android.material:material:$versions.googleMaterial"
-    implementation "com.github.skydoves:powermenu:$versions.powermenu"
-    implementation "com.jakewharton.timber:timber:$versions.timber"
-    implementation project(":colorpickerview")
+  implementation "com.google.android.material:material:$versions.googleMaterial"
+  implementation "com.github.skydoves:powermenu:$versions.powermenu"
+  implementation "com.jakewharton.timber:timber:$versions.timber"
+  implementation project(":colorpickerview")
 }
 
 apply from: '../spotless.gradle'
