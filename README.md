@@ -1,16 +1,24 @@
-# ColorPickerView <a href="https://github.com/skydoves"><img alt="License" src="https://img.shields.io/static/v1?label=GitHub&message=skydoves&color=C51162"/></a>
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![API](https://img.shields.io/badge/API-15%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=15)
-[![Build Status](https://travis-ci.org/skydoves/ColorPickerView.svg?branch=master)](https://travis-ci.org/skydoves/ColorPickerView)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/e5d06ece54644717845a059f90632660)](https://www.codacy.com/app/skydoves/ColorPickerView?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=skydoves/ColorPickerView&amp;utm_campaign=Badge_Grade)
-[![Android Weekly](https://img.shields.io/badge/Android%20Weekly-%23316-orange.svg)](https://androidweekly.net/issues/issue-316)
-[![Javadoc](https://img.shields.io/badge/Javadoc-ColorPickerView-yellow.svg)](https://skydoves.github.io/libraries/colorpickerview/javadoc/) <br>
-ColorPickerView implements getting HSV colors, ARGB values, Hex color codes from <br>
+<h1 align="center">ColorPickerView</h1></br>
+<p align="center">
+🎨 ColorPickerView implements getting HSV colors, ARGB values, Hex color codes from <br>
 any image drawables or your gallery pictures by tapping on the desired color.<br>
-Supports alpha & brightness slider bar, dialog, and auto saving & restoring selected data.<br>
+Supports alpha & brightness slider bar, dialog, and saving & restoring selected data.
+</p>
+<br>
 
-![img0](https://user-images.githubusercontent.com/24237865/53691281-ea44c700-3dbd-11e9-96f3-7b82cb9e997e.png)
-![img1](https://user-images.githubusercontent.com/24237865/53691282-eadd5d80-3dbd-11e9-8dab-b5fe1393f040.png)
+<p align="center">
+  <a href="https://opensource.org/licenses/Apache-2.0"><img alt="License" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg"/></a>
+  <a href="https://android-arsenal.com/api?level=15"><img alt="API" src="https://img.shields.io/badge/API-15%2B-brightgreen.svg?style=flat"/></a>
+  <a href="https://github.com/skydoves/ColorPickerView/actions"><img alt="Build Status" src="https://github.com/skydoves/ColorPickerView/workflows/Android%20CI/badge.svg"/></a>
+  <a href="https://www.codacy.com/app/skydoves/ColorPickerView?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=skydoves/ColorPickerView&amp;utm_campaign=Badge_Grade"><img alt="Codacy" src="https://api.codacy.com/project/badge/Grade/e5d06ece54644717845a059f90632660"/></a>
+  <a href="https://androidweekly.net/issues/issue-316"><img alt="Android Weekly" src="https://skydoves.github.io/badges/android-weekly.svg"/></a>
+  <a href="https://skydoves.github.io/libraries/colorpickerview/javadoc/"><img alt="Javadoc" src="https://skydoves.github.io/badges/javadoc-colorpicker.svg"/></a>
+</p> <br>
+
+<p align="center">
+<img src="https://user-images.githubusercontent.com/24237865/53691281-ea44c700-3dbd-11e9-96f3-7b82cb9e997e.png" width="33%"/>
+<img src="https://user-images.githubusercontent.com/24237865/53691282-eadd5d80-3dbd-11e9-8dab-b5fe1393f040.png" width="33%"/>
+</p>
 
 ## Including in your project 
 [![Download](https://api.bintray.com/packages/devmagician/maven/colorpickerview/images/download.svg) ](https://bintray.com/devmagician/maven/colorpickerview/_latestVersion)
@@ -24,7 +32,7 @@ allprojects {
     }
 }
 ```
-And add a dependency code to your **module**'s `build.gradle` file.
+And add below dependency code to your **module**'s `build.gradle` file.
 ```gradle
 dependencies {
     implementation "com.github.skydoves:colorpickerview:2.1.6"
@@ -404,11 +412,8 @@ At [here](https://github.com/skydoves/Multi-ColorPicker) you can get a more spec
 ![screenshot1128436220](https://user-images.githubusercontent.com/24237865/45586566-4614b400-b934-11e8-9098-2d4341dd695e.png)
 
 ## Find this library useful? :heart:
-Support it by joining [stargazers](https://github.com/skydoves/ColorPickerView/stargazers) for this repository. :star:
-
-## Supports :coffee:
-If you feel like support me a coffee for my efforts, I would greatly appreciate it. <br><br>
-<a href="https://www.buymeacoffee.com/skydoves" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/purple_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
+Support it by joining [stargazers](https://github.com/skydoves/ColorPickerView/stargazers) for this repository. :star: <br>
+And __[follow](https://github.com/skydoves)__ me for my next creations! 🤩
 
 # License
 ```xml
