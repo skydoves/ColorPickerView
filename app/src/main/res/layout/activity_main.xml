@@ -15,11 +15,12 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content">
 
-      <ImageView
+      <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/overflowMenu"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:onClick="overflowMenu"
         android:src="@drawable/ic_list_white_24dp"
         android:tint="@android:color/white" />
@@ -31,7 +32,9 @@
         android:textColor="@android:color/white"
         android:textSize="18sp"
         android:textStyle="bold" />
+
     </androidx.appcompat.widget.Toolbar>
+
   </com.google.android.material.appbar.AppBarLayout>
 
   <LinearLayout
@@ -111,6 +114,9 @@
         android:background="@android:color/white"
         android:orientation="horizontal"
         app:tileSize="20" />
+
     </LinearLayout>
+
   </LinearLayout>
+
 </LinearLayout>
