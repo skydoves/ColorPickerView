@@ -28,25 +28,25 @@ import com.skydoves.powermenu.PowerMenuItem;
 @SuppressWarnings("WeakerAccess")
 public class PowerMenuUtils {
   public static PowerMenu getPowerMenu(
-    Context context,
-    LifecycleOwner lifecycleOwner,
-    OnMenuItemClickListener<PowerMenuItem> onMenuItemClickListener) {
+      Context context,
+      LifecycleOwner lifecycleOwner,
+      OnMenuItemClickListener<PowerMenuItem> onMenuItemClickListener) {
     return new PowerMenu.Builder(context)
-      .setHeaderView(R.layout.layout_header)
-      .addItem(new PowerMenuItem("Palette", false))
-      .addItem(new PowerMenuItem("Palette(Gallery)", false))
-      .addItem(new PowerMenuItem("Selector", false))
-      .addItem(new PowerMenuItem("Dialog", false))
-      .setLifecycleOwner(lifecycleOwner)
-      .setAnimation(MenuAnimation.SHOWUP_TOP_LEFT)
-      .setCircularEffect(CircularEffect.BODY)
-      .setMenuRadius(10f)
-      .setMenuShadow(10f)
-      .setTextColor(context.getResources().getColor(R.color.md_grey_800))
-      .setSelectedEffect(false)
-      .setShowBackground(false)
-      .setMenuColor(Color.WHITE)
-      .setOnMenuItemClickListener(onMenuItemClickListener)
-      .build();
+        .setHeaderView(R.layout.layout_header)
+        .addItem(new PowerMenuItem("Palette", false))
+        .addItem(new PowerMenuItem("Palette(Gallery)", false))
+        .addItem(new PowerMenuItem("Selector", false))
+        .addItem(new PowerMenuItem("Dialog", false))
+        .setLifecycleOwner(lifecycleOwner)
+        .setAnimation(MenuAnimation.SHOWUP_TOP_LEFT)
+        .setCircularEffect(CircularEffect.BODY)
+        .setMenuRadius(10f)
+        .setMenuShadow(10f)
+        .setTextColor(context.getResources().getColor(R.color.md_grey_800))
+        .setSelectedEffect(false)
+        .setShowBackground(false)
+        .setMenuColor(Color.WHITE)
+        .setOnMenuItemClickListener(onMenuItemClickListener)
+        .build();
   }
 }

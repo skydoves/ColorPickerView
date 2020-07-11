@@ -26,6 +26,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ListAdapter;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener;
 import com.skydoves.colorpickerview.listeners.ColorListener;
@@ -204,7 +205,8 @@ public class ColorPickerDialog extends AlertDialog {
      * @return {@link AlertDialog}.
      */
     @Override
-    public AlertDialog show() {
+    @NonNull
+    public AlertDialog create() {
       if (colorPickerView != null) {
         FrameLayout frameLayout = parentView.findViewById(R.id.colorPickerViewFrame);
         frameLayout.removeAllViews();
@@ -238,7 +240,7 @@ public class ColorPickerDialog extends AlertDialog {
         brightnessSlideBarFrame.removeAllViews();
       }
       super.setView(parentView);
-      return super.show();
+      return super.create();
     }
 
     @Override

@@ -17,7 +17,6 @@
 package com.skydoves.colorpickerviewdemo;
 
 import android.annotation.SuppressLint;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -87,13 +86,11 @@ public class MainActivity extends AppCompatActivity {
     bubbleFlag.setFlagMode(FlagMode.FADE);
     colorPickerView.setFlagView(bubbleFlag);
     colorPickerView.setColorListener(
-        new ColorEnvelopeListener() {
-          @Override
-          public void onColorSelected(ColorEnvelope envelope, boolean fromUser) {
-            Timber.d(envelope.getHexCode());
-            setLayoutColor(envelope);
-          }
-        });
+        (ColorEnvelopeListener)
+            (envelope, fromUser) -> {
+              Timber.d(envelope.getHexCode());
+              setLayoutColor(envelope);
+            });
 
     // attach alphaSlideBar
     final AlphaSlideBar alphaSlideBar = findViewById(R.id.alphaSlideBar);
@@ -159,22 +156,10 @@ public class MainActivity extends AppCompatActivity {
             .setPreferenceName("Test")
             .setPositiveButton(
                 getString(R.string.confirm),
-                new ColorEnvelopeListener() {
-                  @Override
-                  public void onColorSelected(ColorEnvelope envelope, boolean fromUser) {
-                    setLayoutColor(envelope);
-                  }
-                })
+                (ColorEnvelopeListener) (envelope, fromUser) -> setLayoutColor(envelope))
             .setNegativeButton(
-                getString(R.string.cancel),
-                new DialogInterface.OnClickListener() {
-                  @Override
-                  public void onClick(DialogInterface dialogInterface, int i) {
-                    dialogInterface.dismiss();
-                  }
-                });
-    ColorPickerView colorPickerView = builder.getColorPickerView();
-    colorPickerView.setFlagView(new BubbleFlag(this, R.layout.layout_flag));
+                getString(R.string.cancel), (dialogInterface, i) -> dialogInterface.dismiss());
+    builder.getColorPickerView().setFlagView(new BubbleFlag(this, R.layout.layout_flag));
     builder.show();
   }
 
