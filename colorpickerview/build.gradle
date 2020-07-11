@@ -19,4 +19,6 @@ dependencies {
   implementation "androidx.appcompat:appcompat:$versions.androidxAppcompat"
 }
 
+tasks.withType(Javadoc).all { enabled = false }
+
 apply from: '../spotless.gradle'
