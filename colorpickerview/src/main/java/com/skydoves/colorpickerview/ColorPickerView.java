@@ -783,7 +783,7 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
   public static class Builder {
     private Context context;
     private ColorPickerViewListener colorPickerViewListener;
-    private int debounceDuration = 100;
+    private int debounceDuration = 0;
     private FlagView flagView;
     private Drawable paletteDrawable;
     private Drawable selectorDrawable;
