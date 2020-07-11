@@ -35,7 +35,7 @@ allprojects {
 And add below dependency code to your **module**'s `build.gradle` file.
 ```gradle
 dependencies {
-    implementation "com.github.skydoves:colorpickerview:2.1.6"
+    implementation "com.github.skydoves:colorpickerview:2.1.7"
 }
 ```
 
@@ -288,6 +288,7 @@ new ColorPickerDialog.Builder(this, AlertDialog.THEME_DEVICE_DEFAULT_DARK)
            })
       .attachAlphaSlideBar(true) // default is true. If false, do not show the AlphaSlideBar.
       .attachBrightnessSlideBar(true)  // default is true. If false, do not show the BrightnessSlideBar.
+      .setBottomSpace(12) // set bottom space between the last slidebar and buttons. 
       .show();
 ```
 
