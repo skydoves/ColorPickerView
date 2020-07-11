@@ -24,6 +24,7 @@ import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 
 /**
@@ -116,20 +117,20 @@ public class AlphaTileDrawable extends Drawable {
       return this;
     }
 
-    public int getTileOddColor() {
+    public @ColorInt int getTileOddColor() {
       return tileOddColor;
     }
 
-    public Builder setTileOddColor(int color) {
+    public Builder setTileOddColor(@ColorInt int color) {
       this.tileOddColor = color;
       return this;
     }
 
-    public int getTileEvenColor() {
+    public @ColorInt int getTileEvenColor() {
       return tileEvenColor;
     }
 
-    public Builder setTileEvenColor(int color) {
+    public Builder setTileEvenColor(@ColorInt int color) {
       this.tileEvenColor = color;
       return this;
     }

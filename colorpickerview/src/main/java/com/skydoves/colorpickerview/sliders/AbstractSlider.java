@@ -32,6 +32,8 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import androidx.annotation.ColorInt;
+import androidx.annotation.FloatRange;
 import com.skydoves.colorpickerview.ActionMode;
 import com.skydoves.colorpickerview.ColorPickerView;
 
@@ -86,7 +88,7 @@ public abstract class AbstractSlider extends FrameLayout {
    *
    * @return assembled color.
    */
-  public abstract int assembleColor();
+  public abstract @ColorInt int assembleColor();
 
   private void onCreate() {
     this.colorPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -144,7 +146,9 @@ public abstract class AbstractSlider extends FrameLayout {
           selector.setPressed(false);
           return false;
       }
-    } else return false;
+    } else {
+      return false;
+    }
   }
 
   private void onTouchReceived(MotionEvent event) {
@@ -189,9 +193,8 @@ public abstract class AbstractSlider extends FrameLayout {
     colorPickerView.fireColorListener(assembleColor(), false);
   }
 
-  public void setSelectorPosition(float selectorPosition) {
-    if (selectorPosition > 1.0f) this.selectorPosition = 1.0f;
-    else this.selectorPosition = selectorPosition;
+  public void setSelectorPosition(@FloatRange(from = 0.0, to = 1.0) float selectorPosition) {
+    this.selectorPosition = Math.min(selectorPosition, 1.0f);
     float x =
         (getMeasuredWidth() * selectorPosition)
             - (selector.getMeasuredWidth() / 2)

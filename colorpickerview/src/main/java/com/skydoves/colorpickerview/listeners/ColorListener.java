@@ -16,6 +16,8 @@
 
 package com.skydoves.colorpickerview.listeners;
 
+import androidx.annotation.ColorInt;
+
 /**
  * ColorListener is invoked whenever {@link com.skydoves.colorpickerview.ColorPickerView} is
  * triggered.
@@ -27,5 +29,5 @@ public interface ColorListener extends ColorPickerViewListener {
    * @param color the last selected color.
    * @param fromUser triggered by the user(true) or not(false).
    */
-  void onColorSelected(int color, boolean fromUser);
+  void onColorSelected(@ColorInt int color, boolean fromUser);
 }

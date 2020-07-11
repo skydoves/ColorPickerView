@@ -23,6 +23,7 @@ import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Shader;
 import android.util.AttributeSet;
+import androidx.annotation.ColorInt;
 import com.skydoves.colorpickerview.R;
 import com.skydoves.colorpickerview.preference.ColorPickerPreferenceManager;
 
@@ -54,14 +55,17 @@ public class BrightnessSlideBar extends AbstractSlider {
   protected void getAttrs(AttributeSet attrs) {
     TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.BrightnessSlideBar);
     try {
-      if (a.hasValue(R.styleable.BrightnessSlideBar_selector_BrightnessSlider))
+      if (a.hasValue(R.styleable.BrightnessSlideBar_selector_BrightnessSlider)) {
         selectorDrawable = a.getDrawable(R.styleable.BrightnessSlideBar_selector_BrightnessSlider);
-      if (a.hasValue(R.styleable.BrightnessSlideBar_borderColor_BrightnessSlider))
+      }
+      if (a.hasValue(R.styleable.BrightnessSlideBar_borderColor_BrightnessSlider)) {
         borderColor =
             a.getColor(R.styleable.BrightnessSlideBar_borderColor_BrightnessSlider, borderColor);
-      if (a.hasValue(R.styleable.BrightnessSlideBar_borderSize_BrightnessSlider))
+      }
+      if (a.hasValue(R.styleable.BrightnessSlideBar_borderSize_BrightnessSlider)) {
         borderSize =
             a.getInt(R.styleable.BrightnessSlideBar_borderSize_BrightnessSlider, borderSize);
+      }
     } finally {
       a.recycle();
     }
@@ -94,7 +98,7 @@ public class BrightnessSlideBar extends AbstractSlider {
   }
 
   @Override
-  public int assembleColor() {
+  public @ColorInt int assembleColor() {
     float[] hsv = new float[3];
     Color.colorToHSV(getColor(), hsv);
     hsv[2] = selectorPosition;

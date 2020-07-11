@@ -25,6 +25,7 @@ import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Shader;
 import android.util.AttributeSet;
+import androidx.annotation.ColorInt;
 import com.skydoves.colorpickerview.R;
 import com.skydoves.colorpickerview.preference.ColorPickerPreferenceManager;
 
@@ -116,7 +117,7 @@ public class AlphaSlideBar extends AbstractSlider {
   }
 
   @Override
-  public int assembleColor() {
+  public @ColorInt int assembleColor() {
     float[] hsv = new float[3];
     Color.colorToHSV(getColor(), hsv);
     int alpha = (int) (selectorPosition * 255);
