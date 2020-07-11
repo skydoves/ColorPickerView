@@ -15,7 +15,7 @@
       android:layout_height="wrap_content">
 
       <com.skydoves.colorpickerview.ColorPickerView
-        android:id="@+id/ColorPickerView"
+        android:id="@+id/colorPickerView"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_margin="20dp"
@@ -30,7 +30,7 @@
       android:layout_height="wrap_content">
 
       <com.skydoves.colorpickerview.sliders.AlphaSlideBar
-        android:id="@+id/AlphaSlideBar"
+        android:id="@+id/alphaSlideBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
@@ -46,7 +46,7 @@
       android:layout_height="wrap_content">
 
       <com.skydoves.colorpickerview.sliders.BrightnessSlideBar
-        android:id="@+id/BrightnessSlideBar"
+        android:id="@+id/brightnessSlideBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"

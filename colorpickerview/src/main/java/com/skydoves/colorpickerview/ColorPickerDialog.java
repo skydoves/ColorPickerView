@@ -24,10 +24,10 @@ import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.FrameLayout;
 import android.widget.ListAdapter;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import com.skydoves.colorpickerview.databinding.LayoutDialogColorpickerBinding;
 import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener;
 import com.skydoves.colorpickerview.listeners.ColorListener;
 import com.skydoves.colorpickerview.listeners.ColorPickerViewListener;
@@ -51,10 +51,10 @@ public class ColorPickerDialog extends AlertDialog {
   /** Builder class for create {@link ColorPickerDialog}. */
   @SuppressWarnings("UnusedReturnValue")
   public static class Builder extends AlertDialog.Builder {
+    private LayoutDialogColorpickerBinding dialogBinding;
     private ColorPickerView colorPickerView;
-    private boolean alphaSlideBar = true;
-    private boolean brightnessSlideBar = true;
-    private View parentView;
+    private boolean shouldAttachAlphaSlideBar = true;
+    private boolean shouldAttachBrightnessSlideBar = true;
 
     public Builder(Context context) {
       super(context);
@@ -68,23 +68,19 @@ public class ColorPickerDialog extends AlertDialog {
 
     @SuppressLint("InflateParams")
     private void onCreate() {
-      LayoutInflater layoutInflater =
-          (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-      assert layoutInflater != null;
-      this.parentView = layoutInflater.inflate(R.layout.layout_dialog_colorpicker, null);
-      this.colorPickerView = parentView.findViewById(R.id.ColorPickerView);
-      this.colorPickerView.attachAlphaSlider(
-          (AlphaSlideBar) parentView.findViewById(R.id.AlphaSlideBar));
-      this.colorPickerView.attachBrightnessSlider(
-          (BrightnessSlideBar) parentView.findViewById(R.id.BrightnessSlideBar));
-      colorPickerView.setColorListener(
+      LayoutInflater layoutInflater = LayoutInflater.from(getContext());
+      this.dialogBinding = LayoutDialogColorpickerBinding.inflate(layoutInflater, null, false);
+      this.colorPickerView = dialogBinding.colorPickerView;
+      this.colorPickerView.attachAlphaSlider(dialogBinding.alphaSlideBar);
+      this.colorPickerView.attachBrightnessSlider(dialogBinding.brightnessSlideBar);
+      this.colorPickerView.setColorListener(
           new ColorEnvelopeListener() {
             @Override
             public void onColorSelected(ColorEnvelope envelope, boolean fromUser) {
-              // nothing
+              // no stubs
             }
           });
-      super.setView(parentView);
+      super.setView(dialogBinding.getRoot());
     }
 
     /**
@@ -103,7 +99,8 @@ public class ColorPickerDialog extends AlertDialog {
      * @return {@link Builder}.
      */
     public Builder setColorPickerView(ColorPickerView colorPickerView) {
-      this.colorPickerView = colorPickerView;
+      this.dialogBinding.colorPickerViewFrame.removeAllViews();
+      this.dialogBinding.colorPickerViewFrame.addView(colorPickerView);
       return this;
     }
 
@@ -114,7 +111,7 @@ public class ColorPickerDialog extends AlertDialog {
      * @return {@link Builder}.
      */
     public Builder attachAlphaSlideBar(boolean value) {
-      this.alphaSlideBar = value;
+      this.shouldAttachAlphaSlideBar = value;
       return this;
     }
 
@@ -125,7 +122,7 @@ public class ColorPickerDialog extends AlertDialog {
      * @return {@link Builder}.
      */
     public Builder attachBrightnessSlideBar(boolean value) {
-      this.brightnessSlideBar = value;
+      this.shouldAttachBrightnessSlideBar = value;
       return this;
     }
 
@@ -186,10 +183,10 @@ public class ColorPickerDialog extends AlertDialog {
         @Override
         public void onClick(DialogInterface dialogInterface, int i) {
           if (colorListener instanceof ColorListener) {
-            ((ColorListener) colorListener).onColorSelected(colorPickerView.getColor(), true);
+            ((ColorListener) colorListener).onColorSelected(getColorPickerView().getColor(), true);
           } else if (colorListener instanceof ColorEnvelopeListener) {
             ((ColorEnvelopeListener) colorListener)
-                .onColorSelected(colorPickerView.getColorEnvelope(), true);
+                .onColorSelected(getColorPickerView().getColorEnvelope(), true);
           }
           if (getColorPickerView() != null) {
             ColorPickerPreferenceManager.getInstance(getContext())
@@ -207,39 +204,30 @@ public class ColorPickerDialog extends AlertDialog {
     @Override
     @NonNull
     public AlertDialog create() {
-      if (colorPickerView != null) {
-        FrameLayout frameLayout = parentView.findViewById(R.id.colorPickerViewFrame);
-        frameLayout.removeAllViews();
-        frameLayout.addView(colorPickerView);
+      if (getColorPickerView() != null) {
+        this.dialogBinding.colorPickerViewFrame.removeAllViews();
+        this.dialogBinding.colorPickerViewFrame.addView(getColorPickerView());
 
-        if (alphaSlideBar && colorPickerView.getAlphaSlideBar() != null) {
-          FrameLayout alphaSlideBarFrameLayout = parentView.findViewById(R.id.alphaSlideBarFrame);
-          alphaSlideBarFrameLayout.removeAllViews();
-          alphaSlideBarFrameLayout.addView(colorPickerView.getAlphaSlideBar());
-          colorPickerView.attachAlphaSlider(
-              (AlphaSlideBar) parentView.findViewById(R.id.AlphaSlideBar));
+        AlphaSlideBar alphaSlideBar = getColorPickerView().getAlphaSlideBar();
+        if (shouldAttachAlphaSlideBar && alphaSlideBar != null) {
+          this.dialogBinding.alphaSlideBarFrame.removeAllViews();
+          this.dialogBinding.alphaSlideBarFrame.addView(alphaSlideBar);
+          this.getColorPickerView().attachAlphaSlider(alphaSlideBar);
+        } else if (!shouldAttachAlphaSlideBar) {
+          this.dialogBinding.alphaSlideBarFrame.removeAllViews();
         }
 
-        if (brightnessSlideBar && colorPickerView.getBrightnessSlider() != null) {
-          FrameLayout brightnessSlideBarFrame =
-              parentView.findViewById(R.id.brightnessSlideBarFrame);
-          brightnessSlideBarFrame.removeAllViews();
-          brightnessSlideBarFrame.addView(colorPickerView.getBrightnessSlider());
-          colorPickerView.attachBrightnessSlider(
-              (BrightnessSlideBar) parentView.findViewById(R.id.BrightnessSlideBar));
+        BrightnessSlideBar brightnessSlideBar = getColorPickerView().getBrightnessSlider();
+        if (shouldAttachBrightnessSlideBar && brightnessSlideBar != null) {
+          this.dialogBinding.brightnessSlideBarFrame.removeAllViews();
+          this.dialogBinding.brightnessSlideBarFrame.addView(brightnessSlideBar);
+          this.getColorPickerView().attachBrightnessSlider(brightnessSlideBar);
+        } else if (!shouldAttachBrightnessSlideBar) {
+          this.dialogBinding.brightnessSlideBarFrame.removeAllViews();
         }
       }
 
-      if (!alphaSlideBar) {
-        FrameLayout alphaSlideBarFrameLayout = parentView.findViewById(R.id.alphaSlideBarFrame);
-        alphaSlideBarFrameLayout.removeAllViews();
-      }
-
-      if (!brightnessSlideBar) {
-        FrameLayout brightnessSlideBarFrame = parentView.findViewById(R.id.brightnessSlideBarFrame);
-        brightnessSlideBarFrame.removeAllViews();
-      }
-      super.setView(parentView);
+      super.setView(dialogBinding.getRoot());
       return super.create();
     }
 
