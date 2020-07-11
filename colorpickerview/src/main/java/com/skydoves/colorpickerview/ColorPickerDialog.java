@@ -55,6 +55,7 @@ public class ColorPickerDialog extends AlertDialog {
     private ColorPickerView colorPickerView;
     private boolean shouldAttachAlphaSlideBar = true;
     private boolean shouldAttachBrightnessSlideBar = true;
+    private int bottomSpace = SizeUtils.dp2Px(getContext(), 10);
 
     public Builder(Context context) {
       super(context);
@@ -136,6 +137,18 @@ public class ColorPickerDialog extends AlertDialog {
       if (getColorPickerView() != null) {
         getColorPickerView().setPreferenceName(preferenceName);
       }
+      return this;
+    }
+
+    /**
+     * sets the margin of the bottom. this space visible when {@link AlphaSlideBar} or {@link
+     * BrightnessSlideBar} is attached.
+     *
+     * @param bottomSpace space of the bottom.
+     * @return {@link Builder}.
+     */
+    public Builder setBottomSpace(int bottomSpace) {
+      this.bottomSpace = SizeUtils.dp2Px(getContext(), bottomSpace);
       return this;
     }
 
@@ -224,6 +237,13 @@ public class ColorPickerDialog extends AlertDialog {
           this.getColorPickerView().attachBrightnessSlider(brightnessSlideBar);
         } else if (!shouldAttachBrightnessSlideBar) {
           this.dialogBinding.brightnessSlideBarFrame.removeAllViews();
+        }
+
+        if (!shouldAttachAlphaSlideBar && !shouldAttachBrightnessSlideBar) {
+          this.dialogBinding.spaceBottom.setVisibility(View.GONE);
+        } else {
+          this.dialogBinding.spaceBottom.setVisibility(View.VISIBLE);
+          this.dialogBinding.spaceBottom.getLayoutParams().height = bottomSpace;
         }
       }
 

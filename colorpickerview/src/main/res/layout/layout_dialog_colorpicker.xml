@@ -57,6 +57,7 @@
     </FrameLayout>
 
     <Space
+      android:id="@+id/space_bottom"
       android:layout_width="match_parent"
       android:layout_height="10dp" />
 
