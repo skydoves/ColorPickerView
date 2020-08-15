@@ -2,7 +2,7 @@
 <resources>
   <declare-styleable name="ColorPickerView">
     <attr name="palette" format="reference" />
-    <attr name="selector" format="reference" />
+    <attr name="selector" format="integer" />
     <attr name="alpha_selector" format="float" />
     <attr name="alpha_flag" format="float" />
     <attr name="preferenceName" format="string" />
@@ -13,12 +13,12 @@
     </attr>
   </declare-styleable>
   <declare-styleable name="AlphaSlideBar">
-    <attr name="selector_AlphaSlideBar" format="reference" />
+    <attr name="selector_AlphaSlideBar" format="integer" />
     <attr name="borderColor_AlphaSlideBar" format="color" />
     <attr name="borderSize_AlphaSlideBar" format="integer" />
   </declare-styleable>
   <declare-styleable name="BrightnessSlideBar">
-    <attr name="selector_BrightnessSlider" format="reference" />
+    <attr name="selector_BrightnessSlider" format="integer" />
     <attr name="borderColor_BrightnessSlider" format="color" />
     <attr name="borderSize_BrightnessSlider" format="integer" />
   </declare-styleable>

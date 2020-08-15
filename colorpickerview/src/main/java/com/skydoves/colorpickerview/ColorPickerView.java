@@ -40,6 +40,7 @@ import androidx.annotation.FloatRange;
 import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
@@ -122,7 +123,10 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
         this.paletteDrawable = a.getDrawable(R.styleable.ColorPickerView_palette);
       }
       if (a.hasValue(R.styleable.ColorPickerView_selector)) {
-        this.selectorDrawable = a.getDrawable(R.styleable.ColorPickerView_selector);
+        int resourceId = a.getResourceId(R.styleable.ColorPickerView_selector, -1);
+        if (resourceId != -1) {
+          this.selectorDrawable = AppCompatResources.getDrawable(getContext(), resourceId);
+        }
       }
       if (a.hasValue(R.styleable.ColorPickerView_alpha_selector)) {
         this.alpha_selector =

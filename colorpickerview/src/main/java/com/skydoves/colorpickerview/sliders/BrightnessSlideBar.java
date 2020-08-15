@@ -24,6 +24,7 @@ import android.graphics.Paint;
 import android.graphics.Shader;
 import android.util.AttributeSet;
 import androidx.annotation.ColorInt;
+import androidx.appcompat.content.res.AppCompatResources;
 import com.skydoves.colorpickerview.R;
 import com.skydoves.colorpickerview.preference.ColorPickerPreferenceManager;
 
@@ -56,7 +57,11 @@ public class BrightnessSlideBar extends AbstractSlider {
     TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.BrightnessSlideBar);
     try {
       if (a.hasValue(R.styleable.BrightnessSlideBar_selector_BrightnessSlider)) {
-        selectorDrawable = a.getDrawable(R.styleable.BrightnessSlideBar_selector_BrightnessSlider);
+        int resourceId =
+            a.getResourceId(R.styleable.BrightnessSlideBar_selector_BrightnessSlider, -1);
+        if (resourceId != -1) {
+          selectorDrawable = AppCompatResources.getDrawable(getContext(), resourceId);
+        }
       }
       if (a.hasValue(R.styleable.BrightnessSlideBar_borderColor_BrightnessSlider)) {
         borderColor =
