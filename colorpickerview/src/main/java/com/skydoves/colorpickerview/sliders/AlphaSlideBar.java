@@ -62,7 +62,7 @@ public class AlphaSlideBar extends AbstractSlider {
       if (a.hasValue(R.styleable.AlphaSlideBar_selector_AlphaSlideBar)) {
         int resourceId = a.getResourceId(R.styleable.AlphaSlideBar_selector_AlphaSlideBar, -1);
         if (resourceId != -1) {
-          selectorDrawable = AppCompatResources.getDrawable(getContext(), -1);
+          selectorDrawable = AppCompatResources.getDrawable(getContext(), resourceId);
         }
       }
       if (a.hasValue(R.styleable.AlphaSlideBar_borderColor_AlphaSlideBar)) {
@@ -94,14 +94,14 @@ public class AlphaSlideBar extends AbstractSlider {
     int startColor = Color.HSVToColor(0, hsv);
     int endColor = Color.HSVToColor(255, hsv);
     Shader shader =
-        new LinearGradient(
-            0,
-            0,
-            getMeasuredWidth(),
-            getMeasuredHeight(),
-            startColor,
-            endColor,
-            Shader.TileMode.CLAMP);
+      new LinearGradient(
+        0,
+        0,
+        getMeasuredWidth(),
+        getMeasuredHeight(),
+        startColor,
+        endColor,
+        Shader.TileMode.CLAMP);
     colorPaint.setShader(shader);
   }
 
@@ -110,8 +110,8 @@ public class AlphaSlideBar extends AbstractSlider {
     int defaultPosition = getMeasuredWidth() - selector.getMeasuredWidth();
     if (getPreferenceName() != null) {
       updateSelectorX(
-          ColorPickerPreferenceManager.getInstance(getContext())
-              .getAlphaSliderPosition(getPreferenceName(), defaultPosition));
+        ColorPickerPreferenceManager.getInstance(getContext())
+          .getAlphaSliderPosition(getPreferenceName(), defaultPosition));
     } else {
       selector.setX(defaultPosition);
     }
