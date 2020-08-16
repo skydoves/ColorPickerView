@@ -40,6 +40,7 @@ import androidx.annotation.FloatRange;
 import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.Px;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Lifecycle;
@@ -89,6 +90,8 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
   @FloatRange(from = 0.0, to = 1.0)
   private float alpha_flag = 1.0f;
 
+  @Px private int selectorSize = 0;
+
   private boolean VISIBLE_FLAG = false;
 
   private String preferenceName;
@@ -132,6 +135,10 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
         this.alpha_selector =
             a.getFloat(R.styleable.ColorPickerView_alpha_selector, alpha_selector);
       }
+      if (a.hasValue(R.styleable.ColorPickerView_selector_size)) {
+        this.selectorSize =
+            a.getDimensionPixelSize(R.styleable.ColorPickerView_selector_size, selectorSize);
+      }
       if (a.hasValue(R.styleable.ColorPickerView_alpha_flag)) {
         this.alpha_flag = a.getFloat(R.styleable.ColorPickerView_alpha_flag, alpha_flag);
       }
@@ -173,9 +180,12 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
     } else {
       selector.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.wheel));
     }
-
     FrameLayout.LayoutParams selectorParam =
         new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+    if (selectorSize != 0) {
+      selectorParam.width = selectorSize;
+      selectorParam.height = selectorSize;
+    }
     selectorParam.gravity = Gravity.CENTER;
     addView(selector, selectorParam);
     selector.setAlpha(alpha_selector);
@@ -219,6 +229,7 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
     this.selectorDrawable = builder.selectorDrawable;
     this.alpha_selector = builder.alpha_selector;
     this.alpha_flag = builder.alpha_flag;
+    this.selectorSize = builder.selectorSize;
     this.debounceDuration = builder.debounceDuration;
     onCreate();
 
@@ -796,6 +807,7 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
     private ActionMode actionMode = ActionMode.ALWAYS;
     private float alpha_selector = 1.0f;
     private float alpha_flag = 1.0f;
+    private int selectorSize = 0;
     private int width = LayoutParams.MATCH_PARENT;
     private int height = LayoutParams.MATCH_PARENT;
     private String preferenceName;
@@ -852,6 +864,11 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
 
     public Builder setFlagAlpha(@FloatRange(from = 0.0, to = 1.0) float alpha) {
       this.alpha_flag = alpha;
+      return this;
+    }
+
+    public Builder setSelectorSize(@Dp int size) {
+      this.selectorSize = SizeUtils.dp2Px(context, size);
       return this;
     }
 
