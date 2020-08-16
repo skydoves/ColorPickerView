@@ -35,7 +35,7 @@ allprojects {
 And add below dependency code to your **module**'s `build.gradle` file.
 ```gradle
 dependencies {
-    implementation "com.github.skydoves:colorpickerview:2.1.7"
+    implementation "com.github.skydoves:colorpickerview:2.1.8"
 }
 ```
 
@@ -80,6 +80,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 ```gradle
 app:palette="@drawable/palette" // sets palette image.
 app:selector="@drawable/wheel" // sets selector image.
+app:selector_size="32dp" // sets a width/height size of the selector.
 app:alpha_selector="0.8" // sets selector's alpha.
 app:alpha_flag="0.8" // sets flag's alpha.
 app:actionMode="last" // sets action mode "always" or "last".
