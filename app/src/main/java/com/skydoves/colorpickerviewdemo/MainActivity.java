@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
   /** changes palette image using drawable resource. */
   private void palette() {
     if (FLAG_PALETTE) {
-      colorPickerView.setPaletteDrawable(ContextCompat.getDrawable(this, R.drawable.palette));
+      colorPickerView.setHsvPaletteDrawable();
     } else {
       colorPickerView.setPaletteDrawable(ContextCompat.getDrawable(this, R.drawable.palettebar));
     }

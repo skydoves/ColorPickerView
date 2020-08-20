@@ -37,6 +37,7 @@ import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
 import androidx.annotation.FloatRange;
 import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
@@ -629,7 +630,7 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
    *
    * @param color color.
    */
-  public void selectByHsv(@ColorInt int color) {
+  public void selectByHsvColor(@ColorInt int color) {
     int radius = getMeasuredWidth() / 2;
 
     float[] hsv = new float[3];
@@ -650,6 +651,26 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
     fireColorListener(getColor(), false);
     notifyToFlagView(selectedPoint);
     notifyToSlideBars();
+  }
+
+  /**
+   * changes selector's selected point by a specific color resource.
+   *
+   * <p>It may not work properly if change the default palette drawable.
+   *
+   * @param resource a color resource.
+   */
+  public void selectByHsvColorRes(@ColorRes int resource) {
+    selectByHsvColor(ContextCompat.getColor(getContext(), resource));
+  }
+
+  /**
+   * The default palette drawable is {@link ColorHsvPalette} if not set the palette. This method can
+   * be used for changing as {@link ColorHsvPalette} from another palette drawable.
+   */
+  public void setHsvPaletteDrawable() {
+    Bitmap bitmap = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.ARGB_8888);
+    setPaletteDrawable(new ColorHsvPalette(getResources(), bitmap));
   }
 
   /**

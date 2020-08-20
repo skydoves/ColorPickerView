@@ -16,10 +16,9 @@
 
       <com.skydoves.colorpickerview.ColorPickerView
         android:id="@+id/colorPickerView"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_width="360dp"
+        android:layout_height="360dp"
         android:layout_margin="20dp"
-        app:palette="@drawable/palette"
         app:selector="@drawable/wheel" />
 
     </FrameLayout>

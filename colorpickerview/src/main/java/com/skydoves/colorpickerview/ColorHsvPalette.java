@@ -31,7 +31,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 /**
- * ColorHuePalette is an default drawable palette build by HSV (hue, saturation ,value) color model
+ * ColorHuePalette is a default drawable palette build by HSV (hue, saturation, value) color model
  * for alternating representations of the RGB color model.
  */
 public class ColorHsvPalette extends BitmapDrawable {
