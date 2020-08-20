@@ -631,16 +631,14 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
    * @param color color.
    */
   public void selectByHsvColor(@ColorInt int color) {
-    int radius = getMeasuredWidth() / 2;
-
     float[] hsv = new float[3];
     Color.colorToHSV(color, hsv);
 
-    double x = hsv[1] * Math.cos(Math.toRadians(hsv[0]));
-    double y = hsv[1] * Math.sin(Math.toRadians(hsv[0]));
-
-    int pointX = (int) ((x + 1) * radius);
-    int pointY = (int) ((1 - y) * radius);
+    float centerX = getWidth() * 0.5f;
+    float centerY = getHeight() * 0.5f;
+    float radius = hsv[1] * Math.min(centerX, centerY);
+    int pointX = (int) (radius * Math.cos(Math.toRadians(hsv[0])) + centerX);
+    int pointY = (int) (-radius * Math.sin(Math.toRadians(hsv[0])) + centerY);
 
     if (this.brightnessSlider != null) this.brightnessSlider.setSelectorPosition(hsv[2]);
     Point mappedPoint = PointMapper.getColorPoint(this, new Point(pointX, pointY));
