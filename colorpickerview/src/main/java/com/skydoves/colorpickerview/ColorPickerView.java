@@ -20,6 +20,7 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Point;
@@ -165,8 +166,6 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
     palette = new ImageView(getContext());
     if (paletteDrawable != null) {
       palette.setImageDrawable(paletteDrawable);
-    } else {
-      palette.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.palette));
     }
 
     FrameLayout.LayoutParams paletteParam =
@@ -203,6 +202,16 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
                 onFinishInflated();
               }
             });
+  }
+
+  @Override
+  protected void onSizeChanged(int width, int height, int oldWidth, int oldHeight) {
+    super.onSizeChanged(width, height, oldWidth, oldHeight);
+
+    if (palette.getDrawable() == null) {
+      Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+      palette.setImageDrawable(new ColorHsvPalette(getResources(), bitmap));
+    }
   }
 
   private void onFinishInflated() {
@@ -285,6 +294,10 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
     return true;
   }
 
+  public boolean isHuePalette() {
+    return palette.getDrawable() != null && palette.getDrawable() instanceof ColorHsvPalette;
+  }
+
   /**
    * notifies color changes to {@link ColorListener}, {@link FlagView}. {@link AlphaSlideBar},
    * {@link BrightnessSlideBar} with the debounce duration.
@@ -326,12 +339,23 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
 
       invalidate();
 
-      Rect rect = palette.getDrawable().getBounds();
-      float scaleX = mappedPoints[0] / rect.width();
-      int x1 = (int) (scaleX * ((BitmapDrawable) palette.getDrawable()).getBitmap().getWidth());
-      float scaleY = mappedPoints[1] / rect.height();
-      int y1 = (int) (scaleY * ((BitmapDrawable) palette.getDrawable()).getBitmap().getHeight());
-      return ((BitmapDrawable) palette.getDrawable()).getBitmap().getPixel(x1, y1);
+      if (palette.getDrawable() instanceof ColorHsvPalette) {
+        x = x - getWidth() / 2;
+        y = y - getHeight() / 2;
+        double r = Math.sqrt(x * x + y * y);
+        float radius = Math.min(getWidth(), getHeight()) * 0.5f;
+        float[] hsv = {0, 0, 1};
+        hsv[0] = (float) (Math.atan2(y, -x) / Math.PI * 180f) + 180;
+        hsv[1] = Math.max(0f, Math.min(1f, (float) (r / radius)));
+        return Color.HSVToColor(hsv);
+      } else {
+        Rect rect = palette.getDrawable().getBounds();
+        float scaleX = mappedPoints[0] / rect.width();
+        int x1 = (int) (scaleX * ((BitmapDrawable) palette.getDrawable()).getBitmap().getWidth());
+        float scaleY = mappedPoints[1] / rect.height();
+        int y1 = (int) (scaleY * ((BitmapDrawable) palette.getDrawable()).getBitmap().getHeight());
+        return ((BitmapDrawable) palette.getDrawable()).getBitmap().getPixel(x1, y1);
+      }
     }
     return 0;
   }

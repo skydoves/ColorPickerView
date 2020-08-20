@@ -24,9 +24,9 @@ class PointMapper {
   private PointMapper() {}
 
   protected static Point getColorPoint(ColorPickerView colorPickerView, Point point) {
-    if (colorPickerView.getColorFromBitmap(point.x, point.y) != Color.TRANSPARENT) return point;
     Point center =
         new Point(colorPickerView.getMeasuredWidth() / 2, colorPickerView.getMeasuredHeight() / 2);
+    if (colorPickerView.isHuePalette()) return getHuePoint(colorPickerView, point);
     return approximatedPoint(colorPickerView, point, center);
   }
 
@@ -39,6 +39,20 @@ class PointMapper {
     } else {
       return approximatedPoint(colorPickerView, start, center);
     }
+  }
+
+  private static Point getHuePoint(ColorPickerView colorPickerView, Point point) {
+    float centerX = colorPickerView.getWidth() * 0.5f;
+    float centerY = colorPickerView.getHeight() * 0.5f;
+    float x = point.x - centerX;
+    float y = point.y - centerY;
+    float radius = Math.min(centerX, centerY);
+    double r = Math.sqrt(x * x + y * y);
+    if (r > radius) {
+      x *= radius / r;
+      y *= radius / r;
+    }
+    return new Point((int) (x + centerX), (int) (y + centerY));
   }
 
   private static Point getCenterPoint(Point start, Point end) {
