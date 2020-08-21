@@ -630,25 +630,31 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
    *
    * @param color color.
    */
-  public void selectByHsvColor(@ColorInt int color) {
-    float[] hsv = new float[3];
-    Color.colorToHSV(color, hsv);
+  public void selectByHsvColor(@ColorInt int color) throws IllegalAccessException {
+    if (palette.getDrawable() instanceof ColorHsvPalette) {
+      float[] hsv = new float[3];
+      Color.colorToHSV(color, hsv);
 
-    float centerX = getWidth() * 0.5f;
-    float centerY = getHeight() * 0.5f;
-    float radius = hsv[1] * Math.min(centerX, centerY);
-    int pointX = (int) (radius * Math.cos(Math.toRadians(hsv[0])) + centerX);
-    int pointY = (int) (-radius * Math.sin(Math.toRadians(hsv[0])) + centerY);
+      float centerX = getWidth() * 0.5f;
+      float centerY = getHeight() * 0.5f;
+      float radius = hsv[1] * Math.min(centerX, centerY);
+      int pointX = (int) (radius * Math.cos(Math.toRadians(hsv[0])) + centerX);
+      int pointY = (int) (-radius * Math.sin(Math.toRadians(hsv[0])) + centerY);
 
-    if (this.brightnessSlider != null) this.brightnessSlider.setSelectorPosition(hsv[2]);
-    Point mappedPoint = PointMapper.getColorPoint(this, new Point(pointX, pointY));
-    selectedPureColor = color;
-    selectedColor = color;
-    selectedPoint = new Point(mappedPoint.x, mappedPoint.y);
-    setCoordinate(mappedPoint.x, mappedPoint.y);
-    fireColorListener(getColor(), false);
-    notifyToFlagView(selectedPoint);
-    notifyToSlideBars();
+      if (this.brightnessSlider != null) this.brightnessSlider.setSelectorPosition(hsv[2]);
+      Point mappedPoint = PointMapper.getColorPoint(this, new Point(pointX, pointY));
+      selectedPureColor = color;
+      selectedColor = color;
+      selectedPoint = new Point(mappedPoint.x, mappedPoint.y);
+      setCoordinate(mappedPoint.x, mappedPoint.y);
+      fireColorListener(getColor(), false);
+      notifyToFlagView(selectedPoint);
+      notifyToSlideBars();
+    } else {
+      throw new IllegalAccessException(
+          "selectByHsvColor(@ColorInt int color) can be called only "
+              + "when the palette is an instance of ColorHsvPalette. Use setHsvPaletteDrawable();");
+    }
   }
 
   /**
@@ -658,7 +664,7 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
    *
    * @param resource a color resource.
    */
-  public void selectByHsvColorRes(@ColorRes int resource) {
+  public void selectByHsvColorRes(@ColorRes int resource) throws IllegalAccessException {
     selectByHsvColor(ContextCompat.getColor(getContext(), resource));
   }
 
