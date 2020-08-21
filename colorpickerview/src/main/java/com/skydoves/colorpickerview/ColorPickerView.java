@@ -395,7 +395,10 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
         ((ColorEnvelopeListener) colorListener).onColorSelected(envelope, fromUser);
       }
 
-      if (this.flagView != null) this.flagView.onRefresh(getColorEnvelope());
+      if (this.flagView != null) {
+        this.flagView.onRefresh(getColorEnvelope());
+        invalidate();
+      }
 
       if (VISIBLE_FLAG) {
         VISIBLE_FLAG = false;

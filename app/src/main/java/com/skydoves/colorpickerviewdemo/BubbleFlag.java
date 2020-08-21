@@ -46,7 +46,6 @@ public class BubbleFlag extends FlagView {
    * @param colorEnvelope provide color, hexCode, argb
    */
   @Override
-  @SuppressLint("SetTextI18n")
   public void onRefresh(ColorEnvelope colorEnvelope) {
     ImageViewCompat.setImageTintList(bubble, ColorStateList.valueOf(colorEnvelope.getColor()));
   }
