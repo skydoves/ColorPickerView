@@ -134,9 +134,6 @@ public abstract class AbstractSlider extends FrameLayout {
     if (colorPickerView != null) {
       switch (event.getActionMasked()) {
         case MotionEvent.ACTION_UP:
-          selector.setPressed(true);
-          onTouchReceived(event);
-          return true;
         case MotionEvent.ACTION_DOWN:
         case MotionEvent.ACTION_MOVE:
           selector.setPressed(true);

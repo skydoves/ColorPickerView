@@ -26,7 +26,7 @@ import com.skydoves.colorpickerview.ColorPickerView;
  *
  * <p>for {@link com.skydoves.colorpickerview.ColorPickerView}.
  */
-@SuppressWarnings({"WeakerAccess", "unused", "UnusedReturnValue"})
+@SuppressWarnings({"unused", "UnusedReturnValue"})
 public class ColorPickerPreferenceManager {
 
   protected static final String COLOR = "_COLOR";

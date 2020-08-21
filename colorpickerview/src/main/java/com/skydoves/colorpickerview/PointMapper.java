@@ -19,7 +19,6 @@ package com.skydoves.colorpickerview;
 import android.graphics.Color;
 import android.graphics.Point;
 
-@SuppressWarnings("WeakerAccess")
 class PointMapper {
   private PointMapper() {}
 

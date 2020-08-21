@@ -19,7 +19,7 @@ package com.skydoves.colorpickerview;
 import androidx.annotation.ColorInt;
 
 /** ColorEnvelope is a wrapper class of colors for provide various forms of color. */
-@SuppressWarnings({"WeakerAccess", "unused"})
+@SuppressWarnings("unused")
 public class ColorEnvelope {
 
   @ColorInt private int color;
