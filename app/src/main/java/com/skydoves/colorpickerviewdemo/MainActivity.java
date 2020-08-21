@@ -32,6 +32,7 @@ import com.skydoves.colorpickerview.AlphaTileView;
 import com.skydoves.colorpickerview.ColorEnvelope;
 import com.skydoves.colorpickerview.ColorPickerDialog;
 import com.skydoves.colorpickerview.ColorPickerView;
+import com.skydoves.colorpickerview.flag.BubbleFlag;
 import com.skydoves.colorpickerview.flag.FlagMode;
 import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener;
 import com.skydoves.colorpickerview.sliders.AlphaSlideBar;
@@ -83,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
     powerMenu = PowerMenuUtils.getPowerMenu(this, this, powerMenuItemClickListener);
 
     colorPickerView = findViewById(R.id.colorPickerView);
-    BubbleFlag bubbleFlag = new BubbleFlag(this, R.layout.layout_flag);
+    BubbleFlag bubbleFlag = new BubbleFlag(this);
     bubbleFlag.setFlagMode(FlagMode.FADE);
     colorPickerView.setFlagView(bubbleFlag);
     colorPickerView.setColorListener(
@@ -160,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
                 (ColorEnvelopeListener) (envelope, fromUser) -> setLayoutColor(envelope))
             .setNegativeButton(
                 getString(R.string.cancel), (dialogInterface, i) -> dialogInterface.dismiss());
-    builder.getColorPickerView().setFlagView(new BubbleFlag(this, R.layout.layout_flag));
+    builder.getColorPickerView().setFlagView(new BubbleFlag(this));
     builder.show();
   }
 

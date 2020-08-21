@@ -14,36 +14,28 @@
  * limitations under the License.
  */
 
-package com.skydoves.colorpickerviewdemo;
+package com.skydoves.colorpickerview.flag;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.ColorStateList;
-import android.widget.ImageView;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.widget.ImageViewCompat;
 import com.skydoves.colorpickerview.ColorEnvelope;
-import com.skydoves.colorpickerview.flag.FlagView;
+import com.skydoves.colorpickerview.R;
 
-@SuppressLint("ViewConstructor")
 public class BubbleFlag extends FlagView {
 
-  private ImageView bubble;
+  private AppCompatImageView bubble;
 
-  /**
-   * onBind Views
-   *
-   * @param context context
-   * @param layout custom flagView's layout
-   */
-  public BubbleFlag(Context context, int layout) {
-    super(context, layout);
-    this.bubble = findViewById(R.id.imageView);
+  public BubbleFlag(Context context) {
+    super(context, R.layout.flag_bubble);
+    this.bubble = findViewById(R.id.bubble);
   }
 
   /**
-   * invoked when selector moved
+   * invoked when selector is moved.
    *
-   * @param colorEnvelope provide color, hexCode, argb
+   * @param colorEnvelope provide hsv color, hexCode, argb
    */
   @Override
   public void onRefresh(ColorEnvelope colorEnvelope) {
