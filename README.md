@@ -52,10 +52,10 @@ dependencies {
 - [Restore and save state](https://github.com/skydoves/ColorPickerView#restore-and-save)
 - [Palette from Gallery](https://github.com/skydoves/ColorPickerView#palette-from-gallery) <br>
 
-__[2. AlphaSlideBar](https://github.com/skydoves/ColorPickerView#alphaslidebaroptional)__ <br>
-__[3. BrightnessSlideBar](https://github.com/skydoves/ColorPickerView#brightnessslidebaroptional)__<br>
+__[2. AlphaSlideBar](https://github.com/skydoves/ColorPickerView#alphaslidebar)__ <br>
+__[3. BrightnessSlideBar](https://github.com/skydoves/ColorPickerView#brightnessslidebar)__<br>
 __[4. ColorPickerDialog](https://github.com/skydoves/ColorPickerView#colorpickerdialog)__ <br>
-__[5. FlagView](https://github.com/skydoves/ColorPickerView#flagviewoptional)__ <br>
+__[5. FlagView](https://github.com/skydoves/ColorPickerView#flagview)__ <br>
 __[6. AlphaTileView](https://github.com/skydoves/ColorPickerView#alphatileview)__ <br>
 __[7. ColorPickerView Methods](https://github.com/skydoves/ColorPickerView#colorpickerview-methods)__ <br>
 __[8. Other Libraries](https://github.com/skydoves/ColorPickerView#other-libraries)__ <br>
