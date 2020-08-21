@@ -695,6 +695,9 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
     removeView(selector);
     addView(selector);
 
+    selectedPureColor = Color.WHITE;
+    notifyToSlideBars();
+
     if (flagView != null) {
       removeView(flagView);
       addView(flagView);
