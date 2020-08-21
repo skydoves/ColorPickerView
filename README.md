@@ -16,8 +16,8 @@ Supports alpha & brightness slider bar, dialog, and saving & restoring selected 
 </p> <br>
 
 <p align="center">
-<img src="https://user-images.githubusercontent.com/24237865/53691281-ea44c700-3dbd-11e9-96f3-7b82cb9e997e.png" width="33%"/>
-<img src="https://user-images.githubusercontent.com/24237865/53691282-eadd5d80-3dbd-11e9-8dab-b5fe1393f040.png" width="33%"/>
+<img src="/art/art0.gif" width="31%"/>
+<img src="/art/art1.gif" width="31%"/>
 </p>
 
 ## Including in your project 
