@@ -629,7 +629,7 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
   /**
    * changes selector's selected point by a specific color.
    *
-   * <p>It may not work properly if change the default palette drawable.
+   * <p>It will throw an exception if the default palette drawable is not {@link ColorHsvPalette}.
    *
    * @param color color.
    */
@@ -672,8 +672,9 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
   }
 
   /**
-   * The default palette drawable is {@link ColorHsvPalette} if not set the palette. This method can
-   * be used for changing as {@link ColorHsvPalette} from another palette drawable.
+   * The default palette drawable is {@link ColorHsvPalette} if not be set the palette drawable
+   * manually. This method can be used for changing as {@link ColorHsvPalette} from another palette
+   * drawable.
    */
   public void setHsvPaletteDrawable() {
     Bitmap bitmap = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.ARGB_8888);
