@@ -321,10 +321,20 @@ builder.show(); // shows the dialog
 ```
 
 ## FlagView
+We can implement showing a `FlagView` above and below on the selector.<br>
+This library provides `BubbleFlagView` by default as we can see the [previews](https://github.com/skydoves/ColorPickerView#colorpickerview).<br>
+Here is the example code for implementing it.
+
+```java
+BubbleFlag bubbleFlag = new BubbleFlag(this);
+bubbleFlag.setFlagMode(FlagMode.FADE);
+colorPickerView.setFlagView(bubbleFlag);
+```
+
+We can also fully customize the `FlagView` like below.<br>
 ![flag0](https://user-images.githubusercontent.com/24237865/45364191-75fe4780-b614-11e8-81a5-04690a4392db.jpg) 
 ![flag1](https://user-images.githubusercontent.com/24237865/45364194-75fe4780-b614-11e8-844c-136d14c91560.jpg) <br>
 
-We can implement showing a `FlagView` above/below on the selector.<br><br>
 First, We need a customized layout like below.
 ```gradle
 <?xml version="1.0" encoding="utf-8"?>
