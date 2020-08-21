@@ -215,8 +215,7 @@ Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
 photoPickerIntent.setType("image/*");
 startActivityForResult(photoPickerIntent, REQUEST_CODE_GALLERY);
 ```
-In the `onActivityResult`, we can get a bitmap drawable from the gallery and set it as the palette.<br>
-And We can change the palette image of the `ColorPickerView` using the `setPaletteDrawable` method.
+In the `onActivityResult`, we can get a bitmap drawable from the gallery and set it as the palette. And We can change the palette image of the `ColorPickerView` using the `setPaletteDrawable` method.
 ```java
 try {
   final Uri imageUri = data.getData();
@@ -231,7 +230,7 @@ try {
 
 ## AlphaSlideBar
 AlphaSlideBar changes the transparency of the selected color. <br><br>
-<img src="https://user-images.githubusercontent.com/24237865/52943592-d1e1af00-33b0-11e9-9e3c-9a1190ae969e.gif" align="left" width="31%">
+<img src="https://user-images.githubusercontent.com/24237865/90913596-6ea66200-e417-11ea-893a-467e93189c2b.gif" align="left" width="31%">
 
 `AlphaSlideBar` in XML layout
 ```gradle
@@ -258,7 +257,7 @@ android:rotation="90"
 
 ## BrightnessSlideBar
 BrightnessSlideBar changes the brightness of the selected color. <br><br>
-<img src="https://user-images.githubusercontent.com/24237865/52943593-d1e1af00-33b0-11e9-813a-557760e172ed.gif" align="left" width="31%">
+<img src="https://user-images.githubusercontent.com/24237865/90913583-6c440800-e417-11ea-8645-c5f6d1bf97df.gif" align="left" width="31%">
 
 `BrightnessSlideBar` in XML layout
 ```gradle
