@@ -45,6 +45,7 @@ dependencies {
 #### [1. ColorPickerView](https://github.com/skydoves/ColorPickerView#usage)
 - [ColorPickerView in layout](https://github.com/skydoves/ColorPickerView#colorpickerview-in-xml-layout)
 - [ColorListener](https://github.com/skydoves/ColorPickerView#colorlistener)
+- [Palette](https://github.com/skydoves/ColorPickerView#palette)
 - [ActionMode](https://github.com/skydoves/ColorPickerView#actionmode)
 - [Debounce](https://github.com/skydoves/ColorPickerView#debounce)
 - [Create using builder](https://github.com/skydoves/ColorPickerView#create-using-builder)
