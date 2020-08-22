@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
   /** shows ColorPickerDialog */
   private void dialog() {
     ColorPickerDialog.Builder builder =
-        new ColorPickerDialog.Builder(this, R.style.DarkDialog)
+        new ColorPickerDialog.Builder(this)
             .setTitle("ColorPicker Dialog")
             .setPreferenceName("Test")
             .setPositiveButton(
