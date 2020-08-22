@@ -25,7 +25,6 @@ import com.skydoves.powermenu.OnMenuItemClickListener;
 import com.skydoves.powermenu.PowerMenu;
 import com.skydoves.powermenu.PowerMenuItem;
 
-@SuppressWarnings("WeakerAccess")
 public class PowerMenuUtils {
   public static PowerMenu getPowerMenu(
       Context context,

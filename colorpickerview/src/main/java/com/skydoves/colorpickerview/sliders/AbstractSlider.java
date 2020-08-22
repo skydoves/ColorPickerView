@@ -38,7 +38,6 @@ import com.skydoves.colorpickerview.ActionMode;
 import com.skydoves.colorpickerview.ColorPickerView;
 
 /** AbstractSlider is the abstract class for implementing sliders. */
-@SuppressWarnings("IntegerDivisionInFloatingPointContext")
 public abstract class AbstractSlider extends FrameLayout {
 
   public ColorPickerView colorPickerView;
@@ -159,7 +158,7 @@ public abstract class AbstractSlider extends FrameLayout {
 
     Point snapPoint = new Point((int) event.getX(), (int) event.getY());
     selectedX = snapPoint.x;
-    selector.setX(snapPoint.x - (selector.getMeasuredWidth() / 2));
+    selector.setX(snapPoint.x - (selector.getMeasuredWidth() * 0.5f));
     if (colorPickerView.getActionMode() == ActionMode.LAST) {
       if (event.getAction() == MotionEvent.ACTION_UP) {
         colorPickerView.fireColorListener(assembleColor(), true);
@@ -182,7 +181,7 @@ public abstract class AbstractSlider extends FrameLayout {
     float right = getMeasuredWidth() - selector.getMeasuredWidth();
     selectorPosition = (x - left) / (right - left);
     if (selectorPosition > 1.0f) selectorPosition = 1.0f;
-    selector.setX(x - (selector.getMeasuredWidth() / 2));
+    selector.setX(x - (selector.getMeasuredWidth() * 0.5f));
     selectedX = x;
     int maxPos = getMeasuredWidth() - selector.getMeasuredWidth();
     if (selector.getX() >= maxPos) selector.setX(maxPos);
@@ -194,8 +193,8 @@ public abstract class AbstractSlider extends FrameLayout {
     this.selectorPosition = Math.min(selectorPosition, 1.0f);
     float x =
         (getMeasuredWidth() * selectorPosition)
-            - (selector.getMeasuredWidth() / 2)
-            - (borderSize / 2);
+            - (selector.getMeasuredWidth() * 0.5f)
+            - (borderSize * 0.5f);
     selectedX = (int) x;
     selector.setX(x);
   }

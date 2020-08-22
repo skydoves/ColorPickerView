@@ -44,7 +44,6 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import timber.log.Timber;
 
-@SuppressWarnings("ConstantConditions")
 public class MainActivity extends AppCompatActivity {
 
   private ColorPickerView colorPickerView;
@@ -173,10 +172,12 @@ public class MainActivity extends AppCompatActivity {
     if (requestCode == 1000 && resultCode == RESULT_OK) {
       try {
         final Uri imageUri = data.getData();
-        final InputStream imageStream = getContentResolver().openInputStream(imageUri);
-        final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-        Drawable drawable = new BitmapDrawable(getResources(), selectedImage);
-        colorPickerView.setPaletteDrawable(drawable);
+        if (imageUri != null) {
+          final InputStream imageStream = getContentResolver().openInputStream(imageUri);
+          final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+          Drawable drawable = new BitmapDrawable(getResources(), selectedImage);
+          colorPickerView.setPaletteDrawable(drawable);
+        }
       } catch (FileNotFoundException e) {
         e.printStackTrace();
       }

@@ -67,7 +67,7 @@ import com.skydoves.colorpickerview.sliders.BrightnessSlideBar;
  *
  * <p>Implements {@link FlagView}, {@link AlphaSlideBar} and {@link BrightnessSlideBar} optional.
  */
-@SuppressWarnings({"unused", "IntegerDivisionInFloatingPointContext"})
+@SuppressWarnings("unused")
 public class ColorPickerView extends FrameLayout implements LifecycleObserver {
 
   @ColorInt private int selectedPureColor;
@@ -341,8 +341,8 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
       invalidate();
 
       if (palette.getDrawable() instanceof ColorHsvPalette) {
-        x = x - getWidth() / 2;
-        y = y - getHeight() / 2;
+        x = x - getWidth() * 0.5f;
+        y = y - getHeight() * 0.5f;
         double r = Math.sqrt(x * x + y * y);
         float radius = Math.min(getWidth(), getHeight()) * 0.5f;
         float[] hsv = {0, 0, 1};
@@ -442,7 +442,7 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
       } else if (flagView.isFlipAble()) {
         flagView.setRotation(180);
         flagView.setX(posX);
-        flagView.setY(centerPoint.y + flagView.getHeight() - selector.getHeight() / 2);
+        flagView.setY(centerPoint.y + flagView.getHeight() - selector.getHeight() * 0.5f);
         flagView.onRefresh(getColorEnvelope());
       }
       if (posX < 0) flagView.setX(0);
@@ -550,7 +550,7 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
    * @return a selected coordinate x.
    */
   public float getSelectorX() {
-    return selector.getX() - (selector.getMeasuredWidth() / 2);
+    return selector.getX() - (selector.getMeasuredWidth() * 0.5f);
   }
 
   /**
@@ -559,7 +559,7 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
    * @return a selected coordinate y.
    */
   public float getSelectorY() {
-    return selector.getY() - (selector.getMeasuredHeight() / 2);
+    return selector.getY() - (selector.getMeasuredHeight() * 0.5f);
   }
 
   /**
@@ -622,8 +622,8 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
    * @param y coordinate y of the selector.
    */
   public void setCoordinate(int x, int y) {
-    selector.setX(x - (selector.getMeasuredWidth() / 2));
-    selector.setY(y - (selector.getMeasuredHeight() / 2));
+    selector.setX(x - (selector.getMeasuredWidth() * 0.5f));
+    selector.setY(y - (selector.getMeasuredHeight() * 0.5f));
   }
 
   /**
@@ -686,7 +686,7 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
    *
    * @param drawable palette drawable.
    */
-  public void setPaletteDrawable(@NonNull Drawable drawable) {
+  public void setPaletteDrawable(Drawable drawable) {
     removeView(palette);
     palette = new ImageView(getContext());
     paletteDrawable = drawable;
@@ -722,7 +722,7 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
    *
    * @param drawable selector drawable.
    */
-  public void setSelectorDrawable(@NonNull Drawable drawable) {
+  public void setSelectorDrawable(Drawable drawable) {
     selector.setImageDrawable(drawable);
   }
 

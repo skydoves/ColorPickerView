@@ -31,7 +31,6 @@ import androidx.annotation.NonNull;
  * AlphaTileDrawable visualizes ARGB color on the {@link
  * com.skydoves.colorpickerview.AlphaTileView}.
  */
-@SuppressWarnings({"WeakerAccess", "unused"})
 public class AlphaTileDrawable extends Drawable {
 
   private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);

@@ -16,7 +16,6 @@
 
 package com.skydoves.colorpickerview;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
@@ -49,7 +48,6 @@ public class ColorPickerDialog extends AlertDialog {
   }
 
   /** Builder class for create {@link ColorPickerDialog}. */
-  @SuppressWarnings("UnusedReturnValue")
   public static class Builder extends AlertDialog.Builder {
     private DialogColorpickerBinding dialogBinding;
     private ColorPickerView colorPickerView;
@@ -67,7 +65,6 @@ public class ColorPickerDialog extends AlertDialog {
       onCreate();
     }
 
-    @SuppressLint("InflateParams")
     private void onCreate() {
       LayoutInflater layoutInflater = LayoutInflater.from(getContext());
       this.dialogBinding = DialogColorpickerBinding.inflate(layoutInflater, null, false);
@@ -159,7 +156,6 @@ public class ColorPickerDialog extends AlertDialog {
      * @param colorListener {@link ColorListener}.
      * @return {@link Builder}.
      */
-    @SuppressWarnings("UnusedReturnValue")
     public Builder setPositiveButton(int textId, final ColorPickerViewListener colorListener) {
       super.setPositiveButton(textId, getOnClickListener(colorListener));
       return this;
@@ -172,7 +168,6 @@ public class ColorPickerDialog extends AlertDialog {
      * @param colorListener {@link ColorListener}.
      * @return {@link Builder}.
      */
-    @SuppressWarnings("UnusedReturnValue")
     public Builder setPositiveButton(
         CharSequence text, final ColorPickerViewListener colorListener) {
       super.setPositiveButton(text, getOnClickListener(colorListener));
