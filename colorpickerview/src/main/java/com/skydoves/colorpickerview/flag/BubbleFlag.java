@@ -23,6 +23,7 @@ import androidx.core.widget.ImageViewCompat;
 import com.skydoves.colorpickerview.ColorEnvelope;
 import com.skydoves.colorpickerview.R;
 
+/** BubbleFlag is a supported {@link FlagView} by the library. */
 public class BubbleFlag extends FlagView {
 
   private AppCompatImageView bubble;

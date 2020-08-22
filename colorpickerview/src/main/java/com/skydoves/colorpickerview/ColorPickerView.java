@@ -183,8 +183,8 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
     FrameLayout.LayoutParams selectorParam =
         new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
     if (selectorSize != 0) {
-      selectorParam.width = selectorSize;
-      selectorParam.height = selectorSize;
+      selectorParam.width = SizeUtils.dp2Px(getContext(), selectorSize);
+      selectorParam.height = SizeUtils.dp2Px(getContext(), selectorSize);
     }
     selectorParam.gravity = Gravity.CENTER;
     addView(selector, selectorParam);
@@ -861,11 +861,16 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
     private AlphaSlideBar alphaSlideBar;
     private BrightnessSlideBar brightnessSlider;
     private ActionMode actionMode = ActionMode.ALWAYS;
+
+    @FloatRange(from = 0.0, to = 1.0)
     private float alpha_selector = 1.0f;
+
+    @FloatRange(from = 0.0, to = 1.0)
     private float alpha_flag = 1.0f;
-    private int selectorSize = 0;
-    private int width = LayoutParams.MATCH_PARENT;
-    private int height = LayoutParams.MATCH_PARENT;
+
+    @Dp private int selectorSize = 0;
+    @Dp private int width = LayoutParams.MATCH_PARENT;
+    @Dp private int height = LayoutParams.MATCH_PARENT;
     private String preferenceName;
     private LifecycleOwner lifecycleOwner;
 
@@ -924,16 +929,16 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
     }
 
     public Builder setSelectorSize(@Dp int size) {
-      this.selectorSize = SizeUtils.dp2Px(context, size);
+      this.selectorSize = size;
       return this;
     }
 
-    public Builder setWidth(int width) {
+    public Builder setWidth(@Dp int width) {
       this.width = width;
       return this;
     }
 
-    public Builder setHeight(int height) {
+    public Builder setHeight(@Dp int height) {
       this.height = height;
       return this;
     }
