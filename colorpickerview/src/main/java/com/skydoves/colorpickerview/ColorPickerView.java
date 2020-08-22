@@ -216,6 +216,10 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
   }
 
   private void onFinishInflated() {
+    if (getParent() != null && getParent() instanceof ViewGroup) {
+      ((ViewGroup) getParent()).setClipChildren(false);
+    }
+
     if (getPreferenceName() != null) {
       ColorPickerPreferenceManager.getInstance(getContext()).restoreColorPickerData(this);
     } else {
