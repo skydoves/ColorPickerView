@@ -137,6 +137,9 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
         this.alpha_selector =
             a.getFloat(R.styleable.ColorPickerView_alpha_selector, alpha_selector);
       }
+      if (a.hasValue(R.styleable.ColorPickerView_initialColor)) {
+        setInitialColor(a.getColor(R.styleable.ColorPickerView_initialColor, Color.WHITE));
+      }
       if (a.hasValue(R.styleable.ColorPickerView_selector_size)) {
         this.selectorSize =
             a.getDimensionPixelSize(R.styleable.ColorPickerView_selector_size, selectorSize);
@@ -253,6 +256,7 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
     if (builder.actionMode != null) this.actionMode = builder.actionMode;
     if (builder.flagView != null) setFlagView(builder.flagView);
     if (builder.preferenceName != null) setPreferenceName(builder.preferenceName);
+    if (builder.initialColor != 0) setInitialColor(builder.initialColor);
     if (builder.lifecycleOwner != null) setLifecycleOwner(builder.lifecycleOwner);
   }
 
@@ -631,6 +635,36 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
   }
 
   /**
+   * select a point by a specific color. this method will not work if the default palette drawable
+   * is not {@link ColorHsvPalette}.
+   *
+   * @param color a starting color.
+   */
+  public void setInitialColor(@ColorInt final int color) {
+    post(
+        new Runnable() {
+          @Override
+          public void run() {
+            try {
+              selectByHsvColor(color);
+            } catch (IllegalAccessException e) {
+              e.printStackTrace();
+            }
+          }
+        });
+  }
+
+  /**
+   * select a point by a specific color resource. this method will not work if the default palette
+   * drawable is not {@link ColorHsvPalette}.
+   *
+   * @param colorRes a starting color resource.
+   */
+  public void setInitialColorRes(@ColorRes final int colorRes) {
+    setInitialColor(ContextCompat.getColor(getContext(), colorRes));
+  }
+
+  /**
    * changes selector's selected point by a specific color.
    *
    * <p>It will throw an exception if the default palette drawable is not {@link ColorHsvPalette}.
@@ -865,6 +899,7 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
     private AlphaSlideBar alphaSlideBar;
     private BrightnessSlideBar brightnessSlider;
     private ActionMode actionMode = ActionMode.ALWAYS;
+    @ColorInt private int initialColor = 0;
 
     @FloatRange(from = 0.0, to = 1.0)
     private float alpha_selector = 1.0f;
@@ -944,6 +979,16 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
 
     public Builder setHeight(@Dp int height) {
       this.height = height;
+      return this;
+    }
+
+    public Builder setInitialColor(@ColorInt int initialColor) {
+      this.initialColor = initialColor;
+      return this;
+    }
+
+    public Builder setInitialColorRes(@ColorRes int initialColorRes) {
+      this.initialColor = ContextCompat.getColor(context, initialColorRes);
       return this;
     }
 

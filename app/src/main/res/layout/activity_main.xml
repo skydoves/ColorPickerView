@@ -51,6 +51,7 @@
       android:layout_marginTop="20dp"
       android:layout_marginBottom="10dp"
       android:layout_weight="6"
+      app:initialColor="@color/yellow"
       app:preferenceName="Test2"
       app:selector="@drawable/wheel" />
 
