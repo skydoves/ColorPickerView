@@ -1,32 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <declare-styleable name="ColorPickerView">
+    <!-- sets a drawable of the palette. the default palette is HSV drawable palette built by HSV (hue, saturation, value) color model. -->
     <attr name="palette" format="reference" />
+    <!-- sets a drawable of the selector. -->
     <attr name="selector" format="integer" />
+    <!-- sets a width/height square size of the selector. -->
     <attr name="selector_size" format="dimension" />
+    <!-- sets an alpha of thr selector. -->
     <attr name="alpha_selector" format="float" />
+    <!-- sets an alpha of the flag. -->
     <attr name="alpha_flag" format="float" />
+    <!-- sets a preference name for persisting and restoring status of the selector and slideBars. -->
     <attr name="preferenceName" format="string" />
+    <!-- sets a debounce duration of the invoking color listener. -->
     <attr name="debounceDuration" format="integer" />
+    <!-- set an initial position of the selector using a specific color. This attribute will work with only a default HSV palette. -->
     <attr name="initialColor" format="color" />
+    <!-- sets the color listener's trigger action mode. -->
     <attr name="actionMode" format="enum">
+      <!-- trigger the listener always when tapped by a user.  -->
       <enum name="always" value="0" />
+      <!-- trigger the listener only the last color when user release tapping. -->
       <enum name="last" value="1" />
     </attr>
   </declare-styleable>
   <declare-styleable name="AlphaSlideBar">
+    <!-- sets a customized selector drawable. -->
     <attr name="selector_AlphaSlideBar" format="integer" />
+    <!-- sets a color of the border. -->
     <attr name="borderColor_AlphaSlideBar" format="color" />
+    <!-- sets a size of the border. -->
     <attr name="borderSize_AlphaSlideBar" format="integer" />
   </declare-styleable>
   <declare-styleable name="BrightnessSlideBar">
+    <!-- sets a customized selector drawable. -->
     <attr name="selector_BrightnessSlider" format="integer" />
+    <!-- sets a color of the border. -->
     <attr name="borderColor_BrightnessSlider" format="color" />
+    <!-- sets a size of the border. -->
     <attr name="borderSize_BrightnessSlider" format="integer" />
   </declare-styleable>
   <declare-styleable name="AlphaTileView">
+    <!-- sets width/height square size of the title. -->
     <attr name="tileSize" format="integer" />
+    <!-- a color of the odd location in patterns. -->
     <attr name="tileOddColor" format="color" />
+    <!-- a color of the even location in patterns. -->
     <attr name="tileEvenColor" format="color" />
   </declare-styleable>
 </resources>
