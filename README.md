@@ -444,6 +444,8 @@ selectByHsvColor(@ColorInt int color) | void | changes selector's selected point
 selectByHsvColorRes(@ColorRes int resource) | void | changes selector's selected point by a specific color using a color resource.
 setHsvPaletteDrawable() | void | changes the palette drawable as the default drawable (ColorHsvPalette).
 selectCenter() | void | selects the center of the palette manually.
+setInitialColor(@ColorInt int color) | void | changes selector's selected point by a specific color initially.
+setInitialColorRes(@ColorRes int resource) | void | changes selector's selected point by a specific color initially using a color resource.
 setActionMode(ActionMode) | void | sets the color listener's trigger action mode.
 setFlagView(FlagView flagView) | void | sets `FlagView` on `ColorPickerView`.
 attachAlphaSlider | void | linking an `AlphaSlideBar` on the `ColorPickerView`.
