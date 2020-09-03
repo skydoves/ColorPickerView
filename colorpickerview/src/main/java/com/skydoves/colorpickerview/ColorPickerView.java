@@ -97,6 +97,8 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
   private boolean VISIBLE_FLAG = false;
 
   private String preferenceName;
+  private ColorPickerPreferenceManager preferenceManager =
+      ColorPickerPreferenceManager.getInstance(getContext());
 
   public ColorPickerView(Context context) {
     super(context);
@@ -224,7 +226,7 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
     }
 
     if (getPreferenceName() != null) {
-      ColorPickerPreferenceManager.getInstance(getContext()).restoreColorPickerData(this);
+      preferenceManager.restoreColorPickerData(this);
     } else {
       selectCenter();
     }
@@ -628,7 +630,9 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
    * @param color a starting color.
    */
   public void setInitialColor(@ColorInt final int color) {
-    if (getPreferenceName() == null) {
+    if (getPreferenceName() == null
+        || (getPreferenceName() != null)
+            && preferenceManager.getColor(getPreferenceName(), -1) == -1) {
       post(
           new Runnable() {
             @Override
@@ -873,7 +877,7 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
    */
   @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
   public void onDestroy() {
-    ColorPickerPreferenceManager.getInstance(getContext()).saveColorPickerData(this);
+    preferenceManager.saveColorPickerData(this);
   }
 
   /** Builder class for create {@link ColorPickerView}. */
