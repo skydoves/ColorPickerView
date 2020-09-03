@@ -471,6 +471,15 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
   }
 
   /**
+   * gets an alpha value from the selected color.
+   *
+   * @return alpha from the selected color.
+   */
+  public @FloatRange(from = 0.0, to = 1.0) float getAlpha() {
+    return Color.alpha(getColor()) / 255f;
+  }
+
+  /**
    * gets the selected pure color without alpha and brightness.
    *
    * @return the selected pure color.
@@ -675,11 +684,12 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
       int pointX = (int) (radius * Math.cos(Math.toRadians(hsv[0])) + centerX);
       int pointY = (int) (-radius * Math.sin(Math.toRadians(hsv[0])) + centerY);
 
-      if (this.brightnessSlider != null) this.brightnessSlider.setSelectorPosition(hsv[2]);
       Point mappedPoint = PointMapper.getColorPoint(this, new Point(pointX, pointY));
       selectedPureColor = color;
       selectedColor = color;
       selectedPoint = new Point(mappedPoint.x, mappedPoint.y);
+      if (getAlphaSlideBar() != null) getAlphaSlideBar().setSelectorPosition(getAlpha());
+      if (getBrightnessSlider() != null) getBrightnessSlider().setSelectorPosition(hsv[2]);
       setCoordinate(mappedPoint.x, mappedPoint.y);
       fireColorListener(getColor(), false);
       notifyToFlagView(selectedPoint);

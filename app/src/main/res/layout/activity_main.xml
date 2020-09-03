@@ -48,10 +48,11 @@
       android:layout_width="match_parent"
       android:layout_height="0dp"
       android:layout_gravity="center"
+      android:layout_margin="16dp"
       android:layout_marginTop="20dp"
       android:layout_marginBottom="10dp"
       android:layout_weight="6"
-      app:initialColor="@color/md_deep_orange_900"
+      app:initialColor="@color/colorPrimary"
       app:preferenceName="Test2"
       app:selector="@drawable/wheel" />
 
