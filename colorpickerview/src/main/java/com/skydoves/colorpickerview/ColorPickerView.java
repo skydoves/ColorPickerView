@@ -319,7 +319,6 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
           public void run() {
             fireColorListener(getColor(), true);
             notifyToFlagView(selectedPoint);
-            notifyToSlideBars();
           }
         };
     this.debounceHandler.postDelayed(debounceRunnable, this.debounceDuration);
@@ -594,7 +593,6 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
     setCoordinate(mappedPoint.x, mappedPoint.y);
     fireColorListener(getColor(), false);
     notifyToFlagView(selectedPoint);
-    notifyToSlideBars();
   }
 
   /**
@@ -606,21 +604,10 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
   public void moveSelectorPoint(int x, int y, @ColorInt int color) {
     selectedPureColor = color;
     selectedColor = color;
-
-    if (getAlphaSlideBar() != null) {
-      getAlphaSlideBar().notifyColor();
-      selectedColor = getAlphaSlideBar().assembleColor();
-    }
-    if (getBrightnessSlider() != null) {
-      getBrightnessSlider().notifyColor();
-      selectedColor = getBrightnessSlider().assembleColor();
-    }
-
-    this.selectedPoint = new Point(x, y);
+    selectedPoint = new Point(x, y);
     setCoordinate(x, y);
     fireColorListener(getColor(), false);
     notifyToFlagView(selectedPoint);
-    notifyToSlideBars();
   }
 
   /**
@@ -690,7 +677,6 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
       setCoordinate(mappedPoint.x, mappedPoint.y);
       fireColorListener(getColor(), false);
       notifyToFlagView(selectedPoint);
-      notifyToSlideBars();
     } else {
       throw new IllegalAccessException(
           "selectByHsvColor(@ColorInt int color) can be called only "
