@@ -181,11 +181,8 @@ public abstract class AbstractSlider extends FrameLayout {
     float right = getMeasuredWidth() - selector.getMeasuredWidth();
     selectorPosition = (x - left) / (right - left);
     if (selectorPosition > 1.0f) selectorPosition = 1.0f;
-    selector.setX(x - (selector.getMeasuredWidth() * 0.5f));
-    selectedX = x;
-    int maxPos = getMeasuredWidth() - selector.getMeasuredWidth();
-    if (selector.getX() >= maxPos) selector.setX(maxPos);
-    if (selector.getX() <= 0) selector.setX(0);
+    selectedX = (int) getBoundaryX(x);
+    selector.setX(selectedX);
     colorPickerView.fireColorListener(assembleColor(), false);
   }
 
@@ -195,8 +192,15 @@ public abstract class AbstractSlider extends FrameLayout {
         (getMeasuredWidth() * selectorPosition)
             - (selector.getMeasuredWidth() * 0.5f)
             - (borderSize * 0.5f);
-    selectedX = (int) x;
-    selector.setX(x);
+    selectedX = (int) getBoundaryX(x);
+    selector.setX(selectedX);
+  }
+
+  private float getBoundaryX(float x) {
+    int maxPos = getMeasuredWidth() - selector.getMeasuredWidth();
+    if (x >= maxPos) return maxPos;
+    if (x <= 0) return 0;
+    return x - (selector.getMeasuredWidth() * 0.5f);
   }
 
   private void initializeSelector() {

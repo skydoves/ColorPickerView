@@ -107,7 +107,7 @@ public class AlphaSlideBar extends AbstractSlider {
 
   @Override
   public void onInflateFinished() {
-    int defaultPosition = getMeasuredWidth() - selector.getMeasuredWidth();
+    int defaultPosition = getMeasuredWidth();
     if (getPreferenceName() != null) {
       updateSelectorX(
           ColorPickerPreferenceManager.getInstance(getContext())
