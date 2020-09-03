@@ -35,7 +35,7 @@ allprojects {
 And add below dependency code to your **module**'s `build.gradle` file.
 ```gradle
 dependencies {
-    implementation "com.github.skydoves:colorpickerview:2.1.9"
+    implementation "com.github.skydoves:colorpickerview:2.2.0"
 }
 ```
 
@@ -86,6 +86,8 @@ app:selector_size="32dp" // sets a width & height size of the selector.
 app:alpha_selector="0.8" // sets an alpha of thr selector.
 app:alpha_flag="0.8" // sets an alpha of the flag.
 app:actionMode="last" // sets action mode 'always' or 'last'.
+// set an initial position of the selector using a specific color. This attribute will work with only a default HSV palette.
+app:initialColor="@color/colorPrimary"
 app:preferenceName="MyColorPicker" // sets a preference name.
 app:debounceDuration="200" // sets a debounce duration of the invoking color listener.
 ```
@@ -170,6 +172,19 @@ ColorPickerView colorPickerView = new ColorPickerView.Builder(context)
       .setPaletteDrawable(ContextCompat.getDrawable(context, R.drawable.palette))
       .setSelectorDrawable(ContextCompat.getDrawable(context, R.drawable.selector))
       .build();
+```
+
+### Initial color
+We can set an initial color and set positions of selector and slideBars based on the initial color.<br>
+This function will work only with a default HSV palette.<br>
+If we set preference name using the `setPreferenceName` method,  this function will work only once.
+```gradle
+app:initialColor="@color/colorPrimary"
+```
+Or we can use this method programmatically.
+```java
+.setInitialColor(color);
+.setInitialColorRes(R.color.colorPrimary);
 ```
 
 ### Restore and save
