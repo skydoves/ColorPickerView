@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
     colorPickerView.setColorListener(
         (ColorEnvelopeListener)
             (envelope, fromUser) -> {
-              Timber.d(envelope.getHexCode());
+              Timber.d("color: %s", envelope.getHexCode());
               setLayoutColor(envelope);
             });
 

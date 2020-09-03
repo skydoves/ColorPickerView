@@ -137,9 +137,6 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
         this.alpha_selector =
             a.getFloat(R.styleable.ColorPickerView_alpha_selector, alpha_selector);
       }
-      if (a.hasValue(R.styleable.ColorPickerView_initialColor)) {
-        setInitialColor(a.getColor(R.styleable.ColorPickerView_initialColor, Color.WHITE));
-      }
       if (a.hasValue(R.styleable.ColorPickerView_selector_size)) {
         this.selectorSize =
             a.getDimensionPixelSize(R.styleable.ColorPickerView_selector_size, selectorSize);
@@ -159,6 +156,9 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
       }
       if (a.hasValue(R.styleable.ColorPickerView_preferenceName)) {
         this.preferenceName = a.getString(R.styleable.ColorPickerView_preferenceName);
+      }
+      if (a.hasValue(R.styleable.ColorPickerView_initialColor)) {
+        setInitialColor(a.getColor(R.styleable.ColorPickerView_initialColor, Color.WHITE));
       }
     } finally {
       a.recycle();
@@ -628,17 +628,19 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
    * @param color a starting color.
    */
   public void setInitialColor(@ColorInt final int color) {
-    post(
-        new Runnable() {
-          @Override
-          public void run() {
-            try {
-              selectByHsvColor(color);
-            } catch (IllegalAccessException e) {
-              e.printStackTrace();
+    if (getPreferenceName() == null) {
+      post(
+          new Runnable() {
+            @Override
+            public void run() {
+              try {
+                selectByHsvColor(color);
+              } catch (IllegalAccessException e) {
+                e.printStackTrace();
+              }
             }
-          }
-        });
+          });
+    }
   }
 
   /**
