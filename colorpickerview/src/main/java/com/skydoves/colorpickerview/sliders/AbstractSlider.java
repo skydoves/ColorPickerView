@@ -105,13 +105,7 @@ public abstract class AbstractSlider extends FrameLayout {
 
     selector = new ImageView(getContext());
     if (selectorDrawable != null) {
-      selector.setImageDrawable(selectorDrawable);
-
-      FrameLayout.LayoutParams thumbParams =
-          new LayoutParams(
-              ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-      thumbParams.gravity = Gravity.CENTER_VERTICAL;
-      addView(selector, thumbParams);
+      setSelectorDrawable(selectorDrawable);
     }
 
     initializeSelector();
@@ -231,8 +225,13 @@ public abstract class AbstractSlider extends FrameLayout {
    * @param drawable drawable of the selector.
    */
   public void setSelectorDrawable(Drawable drawable) {
+    removeView(selector);
     this.selectorDrawable = drawable;
     this.selector.setImageDrawable(drawable);
+    FrameLayout.LayoutParams thumbParams =
+        new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+    thumbParams.gravity = Gravity.CENTER_VERTICAL;
+    addView(selector, thumbParams);
   }
 
   /**
