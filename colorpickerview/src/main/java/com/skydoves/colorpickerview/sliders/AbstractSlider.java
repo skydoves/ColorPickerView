@@ -33,11 +33,17 @@ import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
+import androidx.annotation.DimenRes;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.FloatRange;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 import com.skydoves.colorpickerview.ActionMode;
 import com.skydoves.colorpickerview.ColorPickerView;
 
 /** AbstractSlider is the abstract class for implementing sliders. */
+@SuppressWarnings("unused")
 public abstract class AbstractSlider extends FrameLayout {
 
   public ColorPickerView colorPickerView;
@@ -217,6 +223,68 @@ public abstract class AbstractSlider extends FrameLayout {
                 onInflateFinished();
               }
             });
+  }
+
+  /**
+   * sets a drawable of the selector.
+   *
+   * @param drawable drawable of the selector.
+   */
+  public void setSelectorDrawable(Drawable drawable) {
+    this.selectorDrawable = drawable;
+    this.selector.setImageDrawable(drawable);
+  }
+
+  /**
+   * sets a drawable resource of the selector.
+   *
+   * @param resource a drawable resource of the selector.
+   */
+  public void setSelectorDrawableRes(@DrawableRes int resource) {
+    Drawable drawable = ResourcesCompat.getDrawable(getContext().getResources(), resource, null);
+    setSelectorDrawable(drawable);
+  }
+
+  /**
+   * sets a color of the slider border.
+   *
+   * @param color color of the slider border.
+   */
+  public void setBorderColor(@ColorInt int color) {
+    this.borderColor = color;
+    this.borderPaint.setColor(color);
+    invalidate();
+  }
+
+  /**
+   * sets a color resource of the slider border.
+   *
+   * @param resource color resource of the slider border.
+   */
+  public void setBorderColorRes(@ColorRes int resource) {
+    int color = ContextCompat.getColor(getContext(), resource);
+    setBorderColor(color);
+  }
+
+  /**
+   * sets a size of the slide border.
+   *
+   * @param borderSize ize of the slide border.
+   */
+  public void setBorderSize(int borderSize) {
+    this.borderSize = borderSize;
+    this.borderPaint.setStrokeWidth(borderSize);
+    invalidate();
+  }
+
+  /**
+   * sets a size of the slide border using dimension resource.
+   *
+   * @param resource a size of the slide border.
+   */
+  public void setBorderSizeRes(@DimenRes int resource) {
+    int borderSize = (int) getContext().getResources().getDimension(resource);
+    setBorderSize(borderSize);
   }
 
   /** called when the inflating finished. */
