@@ -82,7 +82,7 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
   private BrightnessSlideBar brightnessSlider;
   public ColorPickerViewListener colorListener;
   private long debounceDuration = 0;
-  private Handler debounceHandler = new Handler();
+  private final Handler debounceHandler = new Handler();
 
   private ActionMode actionMode = ActionMode.ALWAYS;
 
@@ -97,7 +97,7 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
   private boolean VISIBLE_FLAG = false;
 
   private String preferenceName;
-  private ColorPickerPreferenceManager preferenceManager =
+  private final ColorPickerPreferenceManager preferenceManager =
       ColorPickerPreferenceManager.getInstance(getContext());
 
   public ColorPickerView(Context context) {

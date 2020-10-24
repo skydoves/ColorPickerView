@@ -8,7 +8,7 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:$versions.gradleBuildTool"
         classpath "com.diffplug.spotless:spotless-plugin-gradle:$versions.spotlessGradle"
-        classpath "com.novoda:bintray-release:$versions.bintrayRelease"
+        classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:$versions.bintrayPlugin"
     }
 }
 
