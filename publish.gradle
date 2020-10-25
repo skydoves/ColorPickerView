@@ -70,7 +70,7 @@ afterEvaluate {
                     developers {
                         developer {
                             id = "skydoves"
-                            name = "Jaewgoon Eum"
+                            name = "Jaewoong Eum"
                         }
                     }
                     scm {
