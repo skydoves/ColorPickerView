@@ -66,8 +66,8 @@ public abstract class AbstractSlider extends FrameLayout {
   @Override
   public void setEnabled(boolean enabled) {
     super.setEnabled(enabled);
-    selector.setVisibility( enabled ? VISIBLE : INVISIBLE );
-    this.setClickable( enabled);
+    selector.setVisibility(enabled ? VISIBLE : INVISIBLE);
+    this.setClickable(enabled);
   }
 
   public AbstractSlider(Context context, AttributeSet attrs) {
@@ -137,7 +137,7 @@ public abstract class AbstractSlider extends FrameLayout {
   @SuppressLint("ClickableViewAccessibility")
   @Override
   public boolean onTouchEvent(MotionEvent event) {
-    if( !this.isEnabled() ) {
+    if (!this.isEnabled()) {
       return false;
     }
 
