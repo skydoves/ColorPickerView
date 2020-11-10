@@ -11,7 +11,8 @@ android {
     versionName versions.versionName
   }
   buildFeatures {
-    viewBinding = true
+    buildConfig false
+    viewBinding true
   }
 }
 
