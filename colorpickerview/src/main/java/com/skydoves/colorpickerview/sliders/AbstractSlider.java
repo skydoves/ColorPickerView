@@ -44,7 +44,7 @@ import com.skydoves.colorpickerview.ColorPickerView;
 
 /** AbstractSlider is the abstract class for implementing sliders. */
 @SuppressWarnings("unused")
-public abstract class AbstractSlider extends FrameLayout {
+abstract class AbstractSlider extends FrameLayout {
 
   public ColorPickerView colorPickerView;
   protected Paint colorPaint;

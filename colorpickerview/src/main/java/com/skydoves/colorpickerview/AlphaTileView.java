@@ -35,7 +35,7 @@ public class AlphaTileView extends View {
 
   private Paint colorPaint;
   private Bitmap backgroundBitmap;
-  private AlphaTileDrawable.Builder builder = new AlphaTileDrawable.Builder();
+  private final AlphaTileDrawable.Builder builder = new AlphaTileDrawable.Builder();
 
   public AlphaTileView(Context context) {
     super(context);

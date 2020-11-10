@@ -29,4 +29,4 @@ import java.lang.annotation.Target;
 @Target({PARAMETER, FIELD})
 @Retention(RUNTIME)
 @Dimension(unit = Dimension.DP)
-public @interface Dp {}
+@interface Dp {}
