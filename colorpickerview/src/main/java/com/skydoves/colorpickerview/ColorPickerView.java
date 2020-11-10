@@ -117,17 +117,19 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
   }
 
   @Override
-  public boolean isEnabled() {
-    return super.isEnabled();
-  }
-
-  @Override
   public void setEnabled(boolean enabled) {
     super.setEnabled(enabled);
 
     selector.setVisibility(enabled ? VISIBLE : INVISIBLE);
-    alphaSlideBar.setEnabled(enabled);
-    brightnessSlider.setEnabled(enabled);
+
+    if (getAlphaSlideBar() != null) {
+      getAlphaSlideBar().setEnabled(enabled);
+    }
+
+    if (getBrightnessSlider() != null) {
+      getBrightnessSlider().setEnabled(enabled);
+    }
+
     if (enabled) {
       palette.clearColorFilter();
     } else {
