@@ -168,8 +168,8 @@ abstract class AbstractSlider extends FrameLayout {
     if (selectorPosition > 1.0f) selectorPosition = 1.0f;
 
     Point snapPoint = new Point((int) event.getX(), (int) event.getY());
-    selectedX = snapPoint.x;
-    selector.setX(snapPoint.x - (selector.getMeasuredWidth() * 0.5f));
+    selectedX = (int) getBoundaryX(snapPoint.x);
+    selector.setX(getBoundaryX(snapPoint.x));
     if (colorPickerView.getActionMode() == ActionMode.LAST) {
       if (event.getAction() == MotionEvent.ACTION_UP) {
         colorPickerView.fireColorListener(assembleColor(), true);
@@ -199,10 +199,7 @@ abstract class AbstractSlider extends FrameLayout {
 
   public void setSelectorPosition(@FloatRange(from = 0.0, to = 1.0) float selectorPosition) {
     this.selectorPosition = Math.min(selectorPosition, 1.0f);
-    float x =
-        (getMeasuredWidth() * selectorPosition)
-            - (selector.getMeasuredWidth() * 0.5f)
-            - (borderSize * 0.5f);
+    float x = (getMeasuredWidth() * selectorPosition) - getSelectorHalfSize() - getBorderHalfSize();
     selectedX = (int) getBoundaryX(x);
     selector.setX(selectedX);
   }
@@ -210,8 +207,16 @@ abstract class AbstractSlider extends FrameLayout {
   private float getBoundaryX(float x) {
     int maxPos = getMeasuredWidth() - selector.getMeasuredWidth();
     if (x >= maxPos) return maxPos;
-    if (x <= 0) return 0;
-    return x - (selector.getMeasuredWidth() * 0.5f);
+    if (x <= getBorderHalfSize()) return getBorderHalfSize();
+    return x - getSelectorHalfSize();
+  }
+
+  protected int getSelectorHalfSize() {
+    return (int) (selector.getMeasuredWidth() * 0.5f);
+  }
+
+  protected int getBorderHalfSize() {
+    return (int) (borderSize * 0.5f);
   }
 
   private void initializeSelector() {

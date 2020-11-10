@@ -111,7 +111,8 @@ public class AlphaSlideBar extends AbstractSlider {
     if (getPreferenceName() != null) {
       updateSelectorX(
           ColorPickerPreferenceManager.getInstance(getContext())
-              .getAlphaSliderPosition(getPreferenceName(), defaultPosition));
+                  .getAlphaSliderPosition(getPreferenceName(), defaultPosition)
+              + getSelectorHalfSize());
     } else {
       selector.setX(defaultPosition);
     }
