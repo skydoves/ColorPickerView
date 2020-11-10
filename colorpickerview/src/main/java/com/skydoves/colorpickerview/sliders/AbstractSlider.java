@@ -63,6 +63,13 @@ public abstract class AbstractSlider extends FrameLayout {
     onCreate();
   }
 
+  @Override
+  public void setEnabled(boolean enabled) {
+    super.setEnabled(enabled);
+    selector.setVisibility(enabled ? VISIBLE : INVISIBLE);
+    this.setClickable(enabled);
+  }
+
   public AbstractSlider(Context context, AttributeSet attrs) {
     super(context, attrs);
     getAttrs(attrs);
@@ -130,6 +137,10 @@ public abstract class AbstractSlider extends FrameLayout {
   @SuppressLint("ClickableViewAccessibility")
   @Override
   public boolean onTouchEvent(MotionEvent event) {
+    if (!this.isEnabled()) {
+      return false;
+    }
+
     if (colorPickerView != null) {
       switch (event.getActionMasked()) {
         case MotionEvent.ACTION_UP:

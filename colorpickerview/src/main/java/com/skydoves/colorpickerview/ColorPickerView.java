@@ -116,6 +116,28 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
     onCreate();
   }
 
+  @Override
+  public void setEnabled(boolean enabled) {
+    super.setEnabled(enabled);
+
+    selector.setVisibility(enabled ? VISIBLE : INVISIBLE);
+
+    if (getAlphaSlideBar() != null) {
+      getAlphaSlideBar().setEnabled(enabled);
+    }
+
+    if (getBrightnessSlider() != null) {
+      getBrightnessSlider().setEnabled(enabled);
+    }
+
+    if (enabled) {
+      palette.clearColorFilter();
+    } else {
+      int color = Color.argb(70, 255, 255, 255);
+      palette.setColorFilter(color);
+    }
+  }
+
   @TargetApi(Build.VERSION_CODES.LOLLIPOP)
   public ColorPickerView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
     super(context, attrs, defStyleAttr, defStyleRes);
@@ -265,6 +287,9 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
   @SuppressLint("ClickableViewAccessibility")
   @Override
   public boolean onTouchEvent(MotionEvent event) {
+    if (!this.isEnabled()) {
+      return false;
+    }
     switch (event.getActionMasked()) {
       case MotionEvent.ACTION_DOWN:
       case MotionEvent.ACTION_MOVE:
