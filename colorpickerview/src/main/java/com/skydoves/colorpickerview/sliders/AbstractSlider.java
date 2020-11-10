@@ -169,7 +169,7 @@ abstract class AbstractSlider extends FrameLayout {
 
     Point snapPoint = new Point((int) event.getX(), (int) event.getY());
     selectedX = (int) getBoundaryX(snapPoint.x);
-    selector.setX(getBoundaryX(snapPoint.x));
+    selector.setX(selectedX);
     if (colorPickerView.getActionMode() == ActionMode.LAST) {
       if (event.getAction() == MotionEvent.ACTION_UP) {
         colorPickerView.fireColorListener(assembleColor(), true);
@@ -207,12 +207,12 @@ abstract class AbstractSlider extends FrameLayout {
   private float getBoundaryX(float x) {
     int maxPos = getMeasuredWidth() - selector.getMeasuredWidth();
     if (x >= maxPos) return maxPos;
-    if (x <= getBorderHalfSize()) return getBorderHalfSize();
+    if (x <= getSelectorHalfSize()) return 0;
     return x - getSelectorHalfSize();
   }
 
   protected int getSelectorHalfSize() {
-    return (int) (selector.getMeasuredWidth() * 0.5f);
+    return (int) (selector.getMeasuredWidth());
   }
 
   protected int getBorderHalfSize() {
