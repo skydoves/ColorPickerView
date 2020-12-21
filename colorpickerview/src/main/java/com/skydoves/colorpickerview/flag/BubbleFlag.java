@@ -29,7 +29,7 @@ public class BubbleFlag extends FlagView {
   private AppCompatImageView bubble;
 
   public BubbleFlag(Context context) {
-    super(context, R.layout.flag_bubble);
+    super(context, R.layout.flag_bubble_colorpickerview_skydoves);
     this.bubble = findViewById(R.id.bubble);
   }
 

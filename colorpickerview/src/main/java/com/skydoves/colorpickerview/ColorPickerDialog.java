@@ -26,7 +26,7 @@ import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import com.skydoves.colorpickerview.databinding.DialogColorpickerBinding;
+import com.skydoves.colorpickerview.databinding.DialogColorpickerColorpickerviewSkydovesBinding;
 import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener;
 import com.skydoves.colorpickerview.listeners.ColorListener;
 import com.skydoves.colorpickerview.listeners.ColorPickerViewListener;
@@ -49,7 +49,7 @@ public class ColorPickerDialog extends AlertDialog {
 
   /** Builder class for create {@link ColorPickerDialog}. */
   public static class Builder extends AlertDialog.Builder {
-    private DialogColorpickerBinding dialogBinding;
+    private DialogColorpickerColorpickerviewSkydovesBinding dialogBinding;
     private ColorPickerView colorPickerView;
     private boolean shouldAttachAlphaSlideBar = true;
     private boolean shouldAttachBrightnessSlideBar = true;
@@ -67,7 +67,8 @@ public class ColorPickerDialog extends AlertDialog {
 
     private void onCreate() {
       LayoutInflater layoutInflater = LayoutInflater.from(getContext());
-      this.dialogBinding = DialogColorpickerBinding.inflate(layoutInflater, null, false);
+      this.dialogBinding =
+          DialogColorpickerColorpickerviewSkydovesBinding.inflate(layoutInflater, null, false);
       this.colorPickerView = dialogBinding.colorPickerView;
       this.colorPickerView.attachAlphaSlider(dialogBinding.alphaSlideBar);
       this.colorPickerView.attachBrightnessSlider(dialogBinding.brightnessSlideBar);
