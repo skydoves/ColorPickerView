@@ -38,6 +38,4 @@ dependencies {
   implementation project(":colorpickerview")
 }
 
-tasks.withType(Javadoc).all { enabled = false }
-
 apply from: "$rootDir/spotless.gradle"
