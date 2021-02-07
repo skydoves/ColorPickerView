@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
   private boolean FLAG_SELECTOR = false;
 
   private PowerMenu powerMenu;
-  private OnMenuItemClickListener<PowerMenuItem> powerMenuItemClickListener =
+  private final OnMenuItemClickListener<PowerMenuItem> powerMenuItemClickListener =
       new OnMenuItemClickListener<PowerMenuItem>() {
         @Override
         public void onItemClick(int position, PowerMenuItem item) {
