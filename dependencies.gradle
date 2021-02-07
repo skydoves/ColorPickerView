@@ -18,10 +18,13 @@ ext.versions = [
     versionoCode     : 26,
     versionName      : '2.2.2',
 
-    gradleBuildTool  : '4.1.0',
-    spotlessGradle   : '5.8.0',
-    bintrayPlugin    : '1.8.5',
+    gradleBuildTool  : '4.1.1',
+    spotlessGradle   : '5.9.0',
+    ktlintGradle     : '0.40.0',
+    dokkaGradle      : '1.4.20',
+    mavenPublish     : '0.13.0',
 
+    kotlin           : '1.4.20',
     androidxAppcompat: '1.2.0',
 
     // for demo

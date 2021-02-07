@@ -16,18 +16,22 @@ buildscript {
     apply from: "$rootDir/dependencies.gradle"
     repositories {
         jcenter()
+        mavenCentral()
         google()
     }
     dependencies {
         classpath "com.android.tools.build:gradle:$versions.gradleBuildTool"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
         classpath "com.diffplug.spotless:spotless-plugin-gradle:$versions.spotlessGradle"
-        classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:$versions.bintrayPlugin"
+        classpath "com.vanniktech:gradle-maven-publish-plugin:$versions.mavenPublish"
+        classpath "org.jetbrains.dokka:dokka-gradle-plugin:$versions.dokkaGradle"
     }
 }
 
 allprojects {
     repositories {
         jcenter()
+        mavenCentral()
         google()
     }
 }

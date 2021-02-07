@@ -13,8 +13,8 @@
 // limitations under the License.
 
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 apply from: "$rootDir/dependencies.gradle"
-apply from: "$rootDir/publish.gradle"
 
 android {
   compileSdkVersion versions.compileSdk
