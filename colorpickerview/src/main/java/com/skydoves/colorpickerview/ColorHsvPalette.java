@@ -36,8 +36,8 @@ import androidx.annotation.Nullable;
  */
 public class ColorHsvPalette extends BitmapDrawable {
 
-  private Paint huePaint;
-  private Paint saturationPaint;
+  private final Paint huePaint;
+  private final Paint saturationPaint;
 
   public ColorHsvPalette(Resources resources, Bitmap bitmap) {
     super(resources, bitmap);

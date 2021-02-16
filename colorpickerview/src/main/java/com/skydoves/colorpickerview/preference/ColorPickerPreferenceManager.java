@@ -35,7 +35,7 @@ public class ColorPickerPreferenceManager {
   protected static final String AlphaSlider = "_SLIDER_ALPHA";
   protected static final String BrightnessSlider = "_SLIDER_BRIGHTNESS";
   private static ColorPickerPreferenceManager colorPickerPreferenceManager;
-  private SharedPreferences sharedPreferences;
+  private final SharedPreferences sharedPreferences;
 
   private ColorPickerPreferenceManager(Context context) {
     sharedPreferences =
@@ -49,8 +49,9 @@ public class ColorPickerPreferenceManager {
    * @return {@link ColorPickerPreferenceManager}.
    */
   public static ColorPickerPreferenceManager getInstance(Context context) {
-    if (colorPickerPreferenceManager == null)
+    if (colorPickerPreferenceManager == null) {
       colorPickerPreferenceManager = new ColorPickerPreferenceManager(context);
+    }
     return colorPickerPreferenceManager;
   }
 

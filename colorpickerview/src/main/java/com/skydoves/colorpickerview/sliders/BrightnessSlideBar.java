@@ -97,7 +97,7 @@ public class BrightnessSlideBar extends AbstractSlider {
       updateSelectorX(
           ColorPickerPreferenceManager.getInstance(getContext())
                   .getBrightnessSliderPosition(getPreferenceName(), defaultPosition)
-              + getSelectorHalfSize());
+              + getSelectorSize());
     } else {
       selector.setX(defaultPosition);
     }

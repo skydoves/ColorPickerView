@@ -37,7 +37,7 @@ import com.skydoves.colorpickerview.preference.ColorPickerPreferenceManager;
 public class AlphaSlideBar extends AbstractSlider {
 
   private Bitmap backgroundBitmap;
-  private AlphaTileDrawable drawable = new AlphaTileDrawable();
+  private final AlphaTileDrawable drawable = new AlphaTileDrawable();
 
   public AlphaSlideBar(Context context) {
     super(context);
@@ -112,7 +112,7 @@ public class AlphaSlideBar extends AbstractSlider {
       updateSelectorX(
           ColorPickerPreferenceManager.getInstance(getContext())
                   .getAlphaSliderPosition(getPreferenceName(), defaultPosition)
-              + getSelectorHalfSize());
+              + getSelectorSize());
     } else {
       selector.setX(defaultPosition);
     }

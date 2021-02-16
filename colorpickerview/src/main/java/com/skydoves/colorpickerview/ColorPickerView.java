@@ -227,6 +227,20 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
 
     if (getPreferenceName() != null) {
       preferenceManager.restoreColorPickerData(this);
+      final int persisted = preferenceManager.getColor(getPreferenceName(), -1);
+      if (palette.getDrawable() instanceof ColorHsvPalette && persisted != -1) {
+        post(
+            new Runnable() {
+              @Override
+              public void run() {
+                try {
+                  selectByHsvColor(persisted);
+                } catch (IllegalAccessException e) {
+                  e.printStackTrace();
+                }
+              }
+            });
+      }
     } else {
       selectCenter();
     }
@@ -643,8 +657,8 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
    */
   public void setInitialColor(@ColorInt final int color) {
     if (getPreferenceName() == null
-        || (getPreferenceName() != null)
-            && preferenceManager.getColor(getPreferenceName(), -1) == -1) {
+        || (getPreferenceName() != null
+            && preferenceManager.getColor(getPreferenceName(), -1) == -1)) {
       post(
           new Runnable() {
             @Override
@@ -691,8 +705,12 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
       selectedPureColor = color;
       selectedColor = color;
       selectedPoint = new Point(mappedPoint.x, mappedPoint.y);
-      if (getAlphaSlideBar() != null) getAlphaSlideBar().setSelectorPosition(getAlpha());
-      if (getBrightnessSlider() != null) getBrightnessSlider().setSelectorPosition(hsv[2]);
+      if (getAlphaSlideBar() != null) {
+        getAlphaSlideBar().setSelectorByHalfSelectorPosition(getAlpha());
+      }
+      if (getBrightnessSlider() != null) {
+        getBrightnessSlider().setSelectorByHalfSelectorPosition(hsv[2]);
+      }
       setCoordinate(mappedPoint.x, mappedPoint.y);
       fireColorListener(getColor(), false);
       notifyToFlagView(selectedPoint);

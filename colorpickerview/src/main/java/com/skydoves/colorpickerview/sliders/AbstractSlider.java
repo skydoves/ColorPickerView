@@ -199,7 +199,16 @@ abstract class AbstractSlider extends FrameLayout {
 
   public void setSelectorPosition(@FloatRange(from = 0.0, to = 1.0) float selectorPosition) {
     this.selectorPosition = Math.min(selectorPosition, 1.0f);
-    float x = (getMeasuredWidth() * selectorPosition) - getSelectorHalfSize() - getBorderHalfSize();
+    float x = (getMeasuredWidth() * selectorPosition) - getSelectorSize() - getBorderHalfSize();
+    selectedX = (int) getBoundaryX(x);
+    selector.setX(selectedX);
+  }
+
+  public void setSelectorByHalfSelectorPosition(
+      @FloatRange(from = 0.0, to = 1.0) float selectorPosition) {
+    this.selectorPosition = Math.min(selectorPosition, 1.0f);
+    float x =
+        (getMeasuredWidth() * selectorPosition) - (getSelectorSize() * 0.5f) - getBorderHalfSize();
     selectedX = (int) getBoundaryX(x);
     selector.setX(selectedX);
   }
@@ -207,11 +216,11 @@ abstract class AbstractSlider extends FrameLayout {
   private float getBoundaryX(float x) {
     int maxPos = getMeasuredWidth() - selector.getMeasuredWidth();
     if (x >= maxPos) return maxPos;
-    if (x <= getSelectorHalfSize()) return 0;
-    return x - getSelectorHalfSize();
+    if (x <= getSelectorSize()) return 0;
+    return x - getSelectorSize();
   }
 
-  protected int getSelectorHalfSize() {
+  protected int getSelectorSize() {
     return (int) (selector.getMeasuredWidth());
   }
 
