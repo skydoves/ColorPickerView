@@ -28,7 +28,7 @@ internal annotation class ColorPickerDsl
  * @param block lambda scope for receiving [ColorPickerDialog.Builder].
  * @return new instance of [ColorPickerDialog].
  */
-@ColorPickerDsl
 @JvmSynthetic
-fun Context.colorPickerDialog(block: ColorPickerDialog.Builder.() -> Unit) =
+@ColorPickerDsl
+inline fun Context.colorPickerDialog(block: ColorPickerDialog.Builder.() -> Unit) =
   ColorPickerDialog.Builder(this).apply(block)
