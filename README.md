@@ -39,6 +39,17 @@ dependencies {
 }
 ```
 
+## SNAPSHOT 
+[![ColorPickerView](https://img.shields.io/static/v1?label=snapshot&message=ColorPickerView&logo=apache%20maven&color=C71A36)](https://oss.sonatype.org/content/repositories/snapshots/com/github/skydoves/colorpickerview/) <br>
+Snapshots of the current development version of ColorPickerView are available, which track [the latest versions](https://oss.sonatype.org/content/repositories/snapshots/com/github/skydoves/colorpickerview/).
+```Gradle
+repositories {
+   maven {
+     url 'https://oss.sonatype.org/content/repositories/snapshots/'
+   }
+}
+```
+
 <img src="https://user-images.githubusercontent.com/24237865/53681606-38f75000-3d2f-11e9-8586-848d638f23b1.gif" align="right" width="30%">
 
 ## Table of Contents
