@@ -460,15 +460,22 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
     if (flagView != null) {
       if (flagView.getFlagMode() == FlagMode.ALWAYS) flagView.visible();
       int posX = centerPoint.x - flagView.getWidth() / 2 + selector.getWidth() / 2;
-      if (centerPoint.y - flagView.getHeight() > 0) {
+      if (flagView.isFlipAble()) {
+        if (centerPoint.y - flagView.getHeight() > 0) {
+          flagView.setRotation(0);
+          flagView.setX(posX);
+          flagView.setY(centerPoint.y - flagView.getHeight());
+          flagView.onRefresh(getColorEnvelope());
+        } else {
+          flagView.setRotation(180);
+          flagView.setX(posX);
+          flagView.setY(centerPoint.y + flagView.getHeight() - selector.getHeight() * 0.5f);
+          flagView.onRefresh(getColorEnvelope());
+        }
+      } else {
         flagView.setRotation(0);
         flagView.setX(posX);
         flagView.setY(centerPoint.y - flagView.getHeight());
-        flagView.onRefresh(getColorEnvelope());
-      } else if (flagView.isFlipAble()) {
-        flagView.setRotation(180);
-        flagView.setX(posX);
-        flagView.setY(centerPoint.y + flagView.getHeight() - selector.getHeight() * 0.5f);
         flagView.onRefresh(getColorEnvelope());
       }
       if (posX < 0) flagView.setX(0);
