@@ -92,6 +92,8 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
   @FloatRange(from = 0.0, to = 1.0)
   private float flag_alpha = 1.0f;
 
+  private boolean flag_isFlipAble = true;
+
   @Px private int selectorSize = 0;
 
   private boolean VISIBLE_FLAG = false;
@@ -145,6 +147,10 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
       }
       if (a.hasValue(R.styleable.ColorPickerView_flag_alpha)) {
         this.flag_alpha = a.getFloat(R.styleable.ColorPickerView_flag_alpha, flag_alpha);
+      }
+      if (a.hasValue(R.styleable.ColorPickerView_flag_isFlipAble)) {
+        this.flag_isFlipAble =
+            a.getBoolean(R.styleable.ColorPickerView_flag_isFlipAble, flag_isFlipAble);
       }
       if (a.hasValue(R.styleable.ColorPickerView_actionMode)) {
         int actionMode = a.getInteger(R.styleable.ColorPickerView_actionMode, 0);
@@ -260,8 +266,8 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
 
     this.paletteDrawable = builder.paletteDrawable;
     this.selectorDrawable = builder.selectorDrawable;
-    this.selector_alpha = builder.alpha_selector;
-    this.flag_alpha = builder.alpha_flag;
+    this.selector_alpha = builder.selector_alpha;
+    this.flag_alpha = builder.flag_alpha;
     this.selectorSize = builder.selectorSize;
     this.debounceDuration = builder.debounceDuration;
     onCreate();
@@ -549,6 +555,7 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
     addView(flagView);
     this.flagView = flagView;
     flagView.setAlpha(flag_alpha);
+    flagView.setFlipAble(flag_isFlipAble);
   }
 
   /**
@@ -959,10 +966,12 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
     @ColorInt private int initialColor = 0;
 
     @FloatRange(from = 0.0, to = 1.0)
-    private float alpha_selector = 1.0f;
+    private float selector_alpha = 1.0f;
 
     @FloatRange(from = 0.0, to = 1.0)
-    private float alpha_flag = 1.0f;
+    private float flag_alpha = 1.0f;
+
+    private boolean flag_isFlipAble = false;
 
     @Dp private int selectorSize = 0;
     @Dp private int width = LayoutParams.MATCH_PARENT;
@@ -1015,12 +1024,17 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
     }
 
     public Builder setSelectorAlpha(@FloatRange(from = 0.0, to = 1.0) float alpha) {
-      this.alpha_selector = alpha;
+      this.selector_alpha = alpha;
       return this;
     }
 
     public Builder setFlagAlpha(@FloatRange(from = 0.0, to = 1.0) float alpha) {
-      this.alpha_flag = alpha;
+      this.flag_alpha = alpha;
+      return this;
+    }
+
+    public Builder setFlagIsFlipAble(boolean isFlipAble) {
+      this.flag_isFlipAble = isFlipAble;
       return this;
     }
 
