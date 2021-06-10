@@ -8,9 +8,11 @@
     <!-- sets a width/height square size of the selector. -->
     <attr name="selector_size" format="dimension" />
     <!-- sets an alpha of thr selector. -->
-    <attr name="alpha_selector" format="float" />
+    <attr name="selector_alpha" format="float" />
     <!-- sets an alpha of the flag. -->
-    <attr name="alpha_flag" format="float" />
+    <attr name="flag_alpha" format="float" />
+    <!-- sets a is flip-able or not of the flag. -->
+    <attr name="flag_isFlipAble" format="boolean" />
     <!-- sets a preference name for persisting and restoring status of the selector and slideBars. -->
     <attr name="preferenceName" format="string" />
     <!-- sets a debounce duration of the invoking color listener. -->
