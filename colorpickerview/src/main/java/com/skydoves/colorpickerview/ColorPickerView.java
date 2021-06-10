@@ -109,7 +109,9 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
     getAttrs(attrs);
     onCreate();
   }
-
+  public ImageView getSelector(){
+    return this.selector;
+  }
   public ColorPickerView(Context context, AttributeSet attrs, int defStyleAttr) {
     super(context, attrs, defStyleAttr);
     getAttrs(attrs);
