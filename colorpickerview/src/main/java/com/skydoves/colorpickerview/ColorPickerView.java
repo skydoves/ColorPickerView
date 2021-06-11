@@ -593,7 +593,7 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
     return new Point(x - (selector.getMeasuredWidth() / 2), y - (selector.getMeasuredHeight() / 2));
   }
   /**
-   * gets selector.
+   * gets a selector.
    *
    * @return selector.
    */
