@@ -578,7 +578,14 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
   private Point getCenterPoint(int x, int y) {
     return new Point(x - (selector.getMeasuredWidth() / 2), y - (selector.getMeasuredHeight() / 2));
   }
-
+  /**
+   * gets selector.
+   *
+   * @return selector.
+   */
+  public ImageView getSelector() {
+    return this.selector;
+  }
   /**
    * gets a selector's selected coordinate x.
    *
