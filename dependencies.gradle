@@ -29,6 +29,6 @@ ext.versions = [
 
     // for demo
     googleMaterial   : '1.3.0-alpha02',
-    powermenu        : '2.1.3',
+    powermenu        : '2.1.9',
     timber           : '4.7.1'
 ]
