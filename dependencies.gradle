@@ -14,13 +14,13 @@
 
 ext.versions = [
     minSdk           : 15,
-    compileSdk       : 30,
+    compileSdk       : 31,
     versionoCode     : 28,
     versionName      : '2.2.4',
 
-    gradleBuildTool  : '4.1.3',
-    spotlessGradle   : '5.12.4',
-    ktlintGradle     : '0.40.0',
+    gradleBuildTool  : '7.0.2',
+    spotlessGradle   : '5.15.0',
+    ktlintGradle     : '0.41.0',
     dokkaGradle      : '1.4.32',
     mavenPublish     : '0.15.1',
 
