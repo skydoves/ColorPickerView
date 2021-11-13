@@ -236,14 +236,11 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
       final int persisted = preferenceManager.getColor(getPreferenceName(), -1);
       if (palette.getDrawable() instanceof ColorHsvPalette && persisted != -1) {
         post(
-            new Runnable() {
-              @Override
-              public void run() {
-                try {
-                  selectByHsvColor(persisted);
-                } catch (IllegalAccessException e) {
-                  e.printStackTrace();
-                }
+            () -> {
+              try {
+                selectByHsvColor(persisted);
+              } catch (IllegalAccessException e) {
+                e.printStackTrace();
               }
             });
       }
@@ -339,12 +336,9 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
   private void notifyColorChanged() {
     this.debounceHandler.removeCallbacksAndMessages(null);
     Runnable debounceRunnable =
-        new Runnable() {
-          @Override
-          public void run() {
-            fireColorListener(getColor(), true);
-            notifyToFlagView(selectedPoint);
-          }
+        () -> {
+          fireColorListener(getColor(), true);
+          notifyToFlagView(selectedPoint);
         };
     this.debounceHandler.postDelayed(debounceRunnable, this.debounceDuration);
   }
@@ -471,19 +465,17 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
           flagView.setRotation(0);
           flagView.setX(posX);
           flagView.setY(centerPoint.y - flagView.getHeight());
-          flagView.onRefresh(getColorEnvelope());
         } else {
           flagView.setRotation(180);
           flagView.setX(posX);
           flagView.setY(centerPoint.y + flagView.getHeight() - selector.getHeight() * 0.5f);
-          flagView.onRefresh(getColorEnvelope());
         }
       } else {
         flagView.setRotation(0);
         flagView.setX(posX);
         flagView.setY(centerPoint.y - flagView.getHeight());
-        flagView.onRefresh(getColorEnvelope());
       }
+      flagView.onRefresh(getColorEnvelope());
       if (posX < 0) flagView.setX(0);
       if (posX + flagView.getMeasuredWidth() > getMeasuredWidth()) {
         flagView.setX(getMeasuredWidth() - flagView.getMeasuredWidth());
@@ -592,6 +584,7 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
   private Point getCenterPoint(int x, int y) {
     return new Point(x - (selector.getMeasuredWidth() / 2), y - (selector.getMeasuredHeight() / 2));
   }
+
   /**
    * gets a selector.
    *
@@ -600,6 +593,7 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
   public ImageView getSelector() {
     return this.selector;
   }
+
   /**
    * gets a selector's selected coordinate x.
    *
@@ -681,14 +675,11 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
         || (getPreferenceName() != null
             && preferenceManager.getColor(getPreferenceName(), -1) == -1)) {
       post(
-          new Runnable() {
-            @Override
-            public void run() {
-              try {
-                selectByHsvColor(color);
-              } catch (IllegalAccessException e) {
-                e.printStackTrace();
-              }
+          () -> {
+            try {
+              selectByHsvColor(color);
+            } catch (IllegalAccessException e) {
+              e.printStackTrace();
             }
           });
     }
@@ -961,7 +952,7 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
 
   /** Builder class for create {@link ColorPickerView}. */
   public static class Builder {
-    private Context context;
+    private final Context context;
     private ColorPickerViewListener colorPickerViewListener;
     private int debounceDuration = 0;
     private FlagView flagView;
