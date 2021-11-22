@@ -316,6 +316,7 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
     setCoordinate(snapPoint.x, snapPoint.y);
 
     if (actionMode == ActionMode.LAST) {
+      notifyToFlagView(this.selectedPoint);
       if (event.getAction() == MotionEvent.ACTION_UP) {
         notifyColorChanged();
       }
