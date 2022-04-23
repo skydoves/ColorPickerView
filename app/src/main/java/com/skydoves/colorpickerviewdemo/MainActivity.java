@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
   private PowerMenu powerMenu;
   private final OnMenuItemClickListener<PowerMenuItem> powerMenuItemClickListener =
-      new OnMenuItemClickListener<PowerMenuItem>() {
+      new OnMenuItemClickListener<>() {
         @Override
         public void onItemClick(int position, PowerMenuItem item) {
           switch (position) {
