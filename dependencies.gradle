@@ -1,4 +1,4 @@
-// Designed and developed by 2019 skydoves (Jaewoong Eum)
+// Designed and developed by 2017 skydoves (Jaewoong Eum)
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -28,6 +28,6 @@ ext.versions = [
 
     // for demo
     googleMaterial   : '1.5.0',
-    powermenu        : '2.1.9',
+    powermenu        : '2.2.0',
     timber           : '5.0.1'
 ]
