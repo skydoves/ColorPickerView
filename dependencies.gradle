@@ -19,13 +19,12 @@ ext.versions = [
     versionName      : '2.2.4',
 
     gradleBuildTool  : '7.1.2',
-    spotlessGradle   : '6.2.1',
-    ktlintGradle     : '0.41.0',
+    spotlessGradle   : '6.3.0',
     dokkaGradle      : '1.4.32',
     mavenPublish     : '0.18.0',
 
     kotlin           : '1.5.32',
-    androidxAppcompat: '1.2.0',
+    androidxAppcompat: '1.4.0',
 
     // for demo
     googleMaterial   : '1.5.0',
