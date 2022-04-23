@@ -1,8 +1,6 @@
 <h1 align="center">ColorPickerView</h1></br>
 <p align="center">
-🎨 ColorPickerView implements getting HSV colors, ARGB values, Hex color codes from <br>
-any image drawables or your gallery pictures by tapping on the desired color.<br>
-Supports alpha & brightness slider bar, dialog, and saving & restoring selected data.
+🎨 ColorPickerView implements getting HSV colors, ARGB values, Hex color codes from any image drawables or your gallery pictures by tapping on the desired color. It also supports alpha & brightness slider bar, dialog, and saving & restoring selected data.
 </p>
 <br>
 
@@ -22,7 +20,7 @@ Supports alpha & brightness slider bar, dialog, and saving & restoring selected 
 
 ## Including in your project 
 [![Maven Central](https://img.shields.io/maven-central/v/com.github.skydoves/colorpickerview.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.github.skydoves%22%20AND%20a:%22colorpickerview%22)
-[![Jitpack](https://jitpack.io/v/skydoves/ColorPickerView.svg)](https://jitpack.io/#skydoves/ColorPickerView)
+
 ### Gradle 
 Add below codes to your **root** `build.gradle` file (not your module build.gradle file).
 ```gradle
