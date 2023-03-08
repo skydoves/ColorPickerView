@@ -1,0 +1,4 @@
+jdk:
+  - openjdk11
+install:
+  - ./gradlew :colorpickerview:assembleRelease :colorpickerview:publishToMavenLocal
