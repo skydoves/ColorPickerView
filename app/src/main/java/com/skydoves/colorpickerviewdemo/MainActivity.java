@@ -57,16 +57,20 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onItemClick(int position, PowerMenuItem item) {
           switch (position) {
-            case 1:
+            case 0:
+            {
               palette();
               break;
-            case 2:
+            }
+            case 1:
+            {
               paletteFromGallery();
               break;
-            case 3:
+            }
+            case 2:
               selector();
               break;
-            case 4:
+            case 3:
               dialog();
               break;
           }
