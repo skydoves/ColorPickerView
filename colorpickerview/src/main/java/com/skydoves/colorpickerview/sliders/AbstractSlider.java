@@ -121,7 +121,7 @@ abstract class AbstractSlider extends FrameLayout {
   @Override
   protected void onDraw(Canvas canvas) {
     super.onDraw(canvas);
-    float width = getMeasuredWidth();
+    float width = getWidth();
     float height = getMeasuredHeight();
     canvas.drawRect(0, 0, width, height, colorPaint);
     canvas.drawRect(0, 0, width, height, borderPaint);
@@ -147,8 +147,13 @@ abstract class AbstractSlider extends FrameLayout {
         case MotionEvent.ACTION_DOWN:
         case MotionEvent.ACTION_MOVE:
           selector.setPressed(true);
-          onTouchReceived(event);
-          return true;
+          if (event.getX() > getWidth() || event.getX() < 0) {
+            return false;
+          }
+          else {
+            onTouchReceived(event);
+            return true;
+          }
         default:
           selector.setPressed(false);
           return false;
@@ -160,13 +165,12 @@ abstract class AbstractSlider extends FrameLayout {
 
   private void onTouchReceived(MotionEvent event) {
     float eventX = event.getX();
-    float left = selector.getMeasuredWidth();
-    float right = getMeasuredWidth() - selector.getMeasuredWidth();
-    if (eventX < left) eventX = left;
+    float left = selector.getWidth() / 2f;
+    float right = getWidth() - left;
     if (eventX > right) eventX = right;
     selectorPosition = (eventX - left) / (right - left);
+    if (selectorPosition < 0) selectorPosition = 0;
     if (selectorPosition > 1.0f) selectorPosition = 1.0f;
-
     Point snapPoint = new Point((int) event.getX(), (int) event.getY());
     selectedX = (int) getBoundaryX(snapPoint.x);
     selector.setX(selectedX);
@@ -182,15 +186,16 @@ abstract class AbstractSlider extends FrameLayout {
       colorPickerView.getFlagView().receiveOnTouchEvent(event);
     }
 
-    int maxPos = getMeasuredWidth() - selector.getMeasuredWidth();
+    int maxPos = getWidth() - selector.getWidth();
     if (selector.getX() >= maxPos) selector.setX(maxPos);
     if (selector.getX() <= 0) selector.setX(0);
   }
 
   public void updateSelectorX(int x) {
-    float left = selector.getMeasuredWidth();
-    float right = getMeasuredWidth() - selector.getMeasuredWidth();
+    float left = selector.getWidth() / 2f;
+    float right = getWidth() - left;
     selectorPosition = (x - left) / (right - left);
+    if (selectorPosition < 0) selectorPosition = 0;
     if (selectorPosition > 1.0f) selectorPosition = 1.0f;
     selectedX = (int) getBoundaryX(x);
     selector.setX(selectedX);
@@ -199,7 +204,7 @@ abstract class AbstractSlider extends FrameLayout {
 
   public void setSelectorPosition(@FloatRange(from = 0.0, to = 1.0) float selectorPosition) {
     this.selectorPosition = Math.min(selectorPosition, 1.0f);
-    float x = (getMeasuredWidth() * selectorPosition) - getSelectorSize() - getBorderHalfSize();
+    float x = (getWidth() * selectorPosition) - getSelectorSize() - getBorderHalfSize();
     selectedX = (int) getBoundaryX(x);
     selector.setX(selectedX);
   }
@@ -208,20 +213,20 @@ abstract class AbstractSlider extends FrameLayout {
       @FloatRange(from = 0.0, to = 1.0) float selectorPosition) {
     this.selectorPosition = Math.min(selectorPosition, 1.0f);
     float x =
-        (getMeasuredWidth() * selectorPosition) - (getSelectorSize() * 0.5f) - getBorderHalfSize();
+        (getWidth() * selectorPosition) - (getSelectorSize() * 0.5f) - getBorderHalfSize();
     selectedX = (int) getBoundaryX(x);
     selector.setX(selectedX);
   }
 
   private float getBoundaryX(float x) {
-    int maxPos = getMeasuredWidth() - selector.getMeasuredWidth();
+    int maxPos = getWidth() - selector.getWidth() / 2;
     if (x >= maxPos) return maxPos;
-    if (x <= getSelectorSize()) return 0;
-    return x - getSelectorSize();
+    if (x <= getSelectorSize() / 2f) return 0;
+    return x - getSelectorSize() / 2f;
   }
 
   protected int getSelectorSize() {
-    return (int) (selector.getMeasuredWidth());
+    return (int) (selector.getWidth());
   }
 
   protected int getBorderHalfSize() {
@@ -255,7 +260,7 @@ abstract class AbstractSlider extends FrameLayout {
     this.selector.setImageDrawable(drawable);
     FrameLayout.LayoutParams thumbParams =
         new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-    thumbParams.gravity = Gravity.CENTER_VERTICAL;
+    thumbParams.gravity = Gravity.CENTER;
     addView(selector, thumbParams);
   }
 
