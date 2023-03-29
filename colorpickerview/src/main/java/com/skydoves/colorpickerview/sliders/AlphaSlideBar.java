@@ -107,12 +107,12 @@ public class AlphaSlideBar extends AbstractSlider {
 
   @Override
   public void onInflateFinished() {
-    int defaultPosition = getWidth();
+    int defaultPosition = getWidth() - selector.getWidth();
     if (getPreferenceName() != null) {
       updateSelectorX(
           ColorPickerPreferenceManager.getInstance(getContext())
                   .getAlphaSliderPosition(getPreferenceName(), defaultPosition)
-              + getSelectorSize());
+              + getSelectorSize() / 2);
     } else {
       selector.setX(defaultPosition);
     }
