@@ -13,7 +13,7 @@
 // limitations under the License.
 
 ext.versions = [
-    minSdk           : 15,
+    minSdk           : 17,
     compileSdk       : 31,
     versionoCode     : 28,
     versionName      : '2.2.4',
