@@ -149,8 +149,7 @@ abstract class AbstractSlider extends FrameLayout {
           selector.setPressed(true);
           if (event.getX() > getWidth() || event.getX() < 0) {
             return false;
-          }
-          else {
+          } else {
             onTouchReceived(event);
             return true;
           }
@@ -212,8 +211,7 @@ abstract class AbstractSlider extends FrameLayout {
   public void setSelectorByHalfSelectorPosition(
       @FloatRange(from = 0.0, to = 1.0) float selectorPosition) {
     this.selectorPosition = Math.min(selectorPosition, 1.0f);
-    float x =
-        (getWidth() * selectorPosition) - (getSelectorSize() * 0.5f) - getBorderHalfSize();
+    float x = (getWidth() * selectorPosition) - (getSelectorSize() * 0.5f) - getBorderHalfSize();
     selectedX = (int) getBoundaryX(x);
     selector.setX(selectedX);
   }

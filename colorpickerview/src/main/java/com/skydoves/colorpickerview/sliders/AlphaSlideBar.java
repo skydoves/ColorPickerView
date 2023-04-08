@@ -95,13 +95,7 @@ public class AlphaSlideBar extends AbstractSlider {
     int endColor = Color.HSVToColor(255, hsv);
     Shader shader =
         new LinearGradient(
-            0,
-            0,
-            getWidth(),
-            getMeasuredHeight(),
-            startColor,
-            endColor,
-            Shader.TileMode.CLAMP);
+            0, 0, getWidth(), getMeasuredHeight(), startColor, endColor, Shader.TileMode.CLAMP);
     colorPaint.setShader(shader);
   }
 
