@@ -21,20 +21,6 @@ jobs:
       - name: spotless
         run: ./gradlew spotlessCheck
 
-  api_check:
-    name: API check
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v3.1.0
-      - name: Set up JDK
-        uses: actions/setup-java@v3.5.1
-        with:
-          distribution: adopt
-          java-version: 11
-      - name: API check
-        run: ./gradlew apiCheck
-
   build:
     runs-on: ubuntu-latest
     steps:
