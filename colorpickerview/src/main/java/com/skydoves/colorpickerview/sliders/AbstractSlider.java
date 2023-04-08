@@ -237,11 +237,7 @@ abstract class AbstractSlider extends FrameLayout {
             new ViewTreeObserver.OnGlobalLayoutListener() {
               @Override
               public void onGlobalLayout() {
-                if (Build.VERSION.SDK_INT < 16) {
-                  getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                } else {
-                  getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                }
+                getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 onInflateFinished();
               }
             });
