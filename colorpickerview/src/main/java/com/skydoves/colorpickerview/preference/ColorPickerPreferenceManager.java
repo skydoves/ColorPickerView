@@ -227,7 +227,7 @@ public class ColorPickerPreferenceManager {
       colorPickerView.setPureColor(getColor(name, -1));
       Point defaultPoint =
           new Point(
-              colorPickerView.getMeasuredWidth() / 2, colorPickerView.getMeasuredHeight() / 2);
+              colorPickerView.getWidth() / 2, colorPickerView.getMeasuredHeight() / 2);
       colorPickerView.moveSelectorPoint(
           getSelectorPosition(name, defaultPoint).x,
           getSelectorPosition(name, defaultPoint).y,

@@ -97,7 +97,7 @@ public class AlphaSlideBar extends AbstractSlider {
         new LinearGradient(
             0,
             0,
-            getMeasuredWidth(),
+            getWidth(),
             getMeasuredHeight(),
             startColor,
             endColor,
@@ -107,12 +107,12 @@ public class AlphaSlideBar extends AbstractSlider {
 
   @Override
   public void onInflateFinished() {
-    int defaultPosition = getMeasuredWidth();
+    int defaultPosition = getWidth() - selector.getWidth();
     if (getPreferenceName() != null) {
       updateSelectorX(
           ColorPickerPreferenceManager.getInstance(getContext())
                   .getAlphaSliderPosition(getPreferenceName(), defaultPosition)
-              + getSelectorSize());
+              + getSelectorSize() / 2);
     } else {
       selector.setX(defaultPosition);
     }

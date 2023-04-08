@@ -102,7 +102,7 @@ public class AlphaTileView extends View {
   protected void onDraw(Canvas canvas) {
     super.onDraw(canvas);
     canvas.drawBitmap(backgroundBitmap, 0, 0, null);
-    canvas.drawRect(0, 0, getMeasuredWidth(), getMeasuredHeight(), colorPaint);
+    canvas.drawRect(0, 0, getWidth(), getMeasuredHeight(), colorPaint);
   }
 
   public void setPaintColor(int color) {
