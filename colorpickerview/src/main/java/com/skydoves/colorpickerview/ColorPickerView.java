@@ -266,7 +266,7 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
     this.selectorDrawable = builder.selectorDrawable;
     this.selector_alpha = builder.selector_alpha;
     this.flag_alpha = builder.flag_alpha;
-    this.selectorSize = builder.selectorSize;
+    this.selectorSize = SizeUtils.dp2Px(getContext(), builder.selectorSize);
     this.debounceDuration = builder.debounceDuration;
     onCreate();
 
