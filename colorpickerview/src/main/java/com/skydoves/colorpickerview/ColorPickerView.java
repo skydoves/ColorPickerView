@@ -36,6 +36,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.FloatRange;
@@ -49,6 +50,7 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.OnLifecycleEvent;
+
 import com.skydoves.colorpickerview.flag.FlagMode;
 import com.skydoves.colorpickerview.flag.FlagView;
 import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener;
@@ -70,8 +72,10 @@ import com.skydoves.colorpickerview.sliders.BrightnessSlideBar;
 @SuppressWarnings("unused")
 public class ColorPickerView extends FrameLayout implements LifecycleObserver {
 
-  @ColorInt private int selectedPureColor;
-  @ColorInt private int selectedColor;
+  @ColorInt
+  private int selectedPureColor;
+  @ColorInt
+  private int selectedColor;
   private Point selectedPoint;
   private ImageView palette;
   private ImageView selector;
@@ -94,13 +98,14 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
 
   private boolean flag_isFlipAble = true;
 
-  @Px private int selectorSize = 0;
+  @Px
+  private int selectorSize = 0;
 
   private boolean VISIBLE_FLAG = false;
 
   private String preferenceName;
   private final ColorPickerPreferenceManager preferenceManager =
-      ColorPickerPreferenceManager.getInstance(getContext());
+    ColorPickerPreferenceManager.getInstance(getContext());
 
   public ColorPickerView(Context context) {
     super(context);
@@ -139,18 +144,18 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
       }
       if (a.hasValue(R.styleable.ColorPickerView_selector_alpha)) {
         this.selector_alpha =
-            a.getFloat(R.styleable.ColorPickerView_selector_alpha, selector_alpha);
+          a.getFloat(R.styleable.ColorPickerView_selector_alpha, selector_alpha);
       }
       if (a.hasValue(R.styleable.ColorPickerView_selector_size)) {
         this.selectorSize =
-            a.getDimensionPixelSize(R.styleable.ColorPickerView_selector_size, selectorSize);
+          a.getDimensionPixelSize(R.styleable.ColorPickerView_selector_size, selectorSize);
       }
       if (a.hasValue(R.styleable.ColorPickerView_flag_alpha)) {
         this.flag_alpha = a.getFloat(R.styleable.ColorPickerView_flag_alpha, flag_alpha);
       }
       if (a.hasValue(R.styleable.ColorPickerView_flag_isFlipAble)) {
         this.flag_isFlipAble =
-            a.getBoolean(R.styleable.ColorPickerView_flag_isFlipAble, flag_isFlipAble);
+          a.getBoolean(R.styleable.ColorPickerView_flag_isFlipAble, flag_isFlipAble);
       }
       if (a.hasValue(R.styleable.ColorPickerView_actionMode)) {
         int actionMode = a.getInteger(R.styleable.ColorPickerView_actionMode, 0);
@@ -160,7 +165,7 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
       }
       if (a.hasValue(R.styleable.ColorPickerView_debounceDuration)) {
         this.debounceDuration =
-            a.getInteger(R.styleable.ColorPickerView_debounceDuration, (int) debounceDuration);
+          a.getInteger(R.styleable.ColorPickerView_debounceDuration, (int) debounceDuration);
       }
       if (a.hasValue(R.styleable.ColorPickerView_preferenceName)) {
         this.preferenceName = a.getString(R.styleable.ColorPickerView_preferenceName);
@@ -181,7 +186,7 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
     }
 
     FrameLayout.LayoutParams paletteParam =
-        new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+      new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
     paletteParam.gravity = Gravity.CENTER;
     addView(palette, paletteParam);
 
@@ -192,7 +197,7 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
       selector.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.wheel));
     }
     FrameLayout.LayoutParams selectorParam =
-        new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+      new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
     if (selectorSize != 0) {
       selectorParam.width = SizeUtils.dp2Px(getContext(), selectorSize);
       selectorParam.height = SizeUtils.dp2Px(getContext(), selectorSize);
@@ -202,14 +207,14 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
     selector.setAlpha(selector_alpha);
 
     getViewTreeObserver()
-        .addOnGlobalLayoutListener(
-            new ViewTreeObserver.OnGlobalLayoutListener() {
-              @Override
-              public void onGlobalLayout() {
-                getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                onFinishInflated();
-              }
-            });
+      .addOnGlobalLayoutListener(
+        new ViewTreeObserver.OnGlobalLayoutListener() {
+          @Override
+          public void onGlobalLayout() {
+            getViewTreeObserver().removeOnGlobalLayoutListener(this);
+            onFinishInflated();
+          }
+        });
   }
 
   @Override
@@ -232,13 +237,13 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
       final int persisted = preferenceManager.getColor(getPreferenceName(), -1);
       if (palette.getDrawable() instanceof ColorHsvPalette && persisted != -1) {
         post(
-            () -> {
-              try {
-                selectByHsvColor(persisted);
-              } catch (IllegalAccessException e) {
-                e.printStackTrace();
-              }
-            });
+          () -> {
+            try {
+              selectByHsvColor(persisted);
+            } catch (IllegalAccessException e) {
+              e.printStackTrace();
+            }
+          });
       }
     } else {
       selectCenter();
@@ -252,9 +257,9 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
    */
   protected void onCreateByBuilder(Builder builder) {
     FrameLayout.LayoutParams params =
-        new FrameLayout.LayoutParams(
-            SizeUtils.dp2Px(getContext(), builder.width),
-            SizeUtils.dp2Px(getContext(), builder.height));
+      new FrameLayout.LayoutParams(
+        SizeUtils.dp2Px(getContext(), builder.width),
+        SizeUtils.dp2Px(getContext(), builder.height));
     setLayoutParams(params);
 
     this.paletteDrawable = builder.paletteDrawable;
@@ -303,7 +308,7 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
   @MainThread
   private boolean onTouchReceived(final MotionEvent event) {
     Point snapPoint =
-        PointMapper.getColorPoint(this, new Point((int) event.getX(), (int) event.getY()));
+      PointMapper.getColorPoint(this, new Point((int) event.getX(), (int) event.getY()));
     int pixelColor = getColorFromBitmap(snapPoint.x, snapPoint.y);
 
     this.selectedPureColor = pixelColor;
@@ -333,10 +338,10 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
   private void notifyColorChanged() {
     this.debounceHandler.removeCallbacksAndMessages(null);
     Runnable debounceRunnable =
-        () -> {
-          fireColorListener(getColor(), true);
-          notifyToFlagView(selectedPoint);
-        };
+      () -> {
+        fireColorListener(getColor(), true);
+        notifyToFlagView(selectedPoint);
+      };
     this.debounceHandler.postDelayed(debounceRunnable, this.debounceDuration);
   }
 
@@ -351,15 +356,15 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
     Matrix invertMatrix = new Matrix();
     palette.getImageMatrix().invert(invertMatrix);
 
-    float[] mappedPoints = new float[] {x, y};
+    float[] mappedPoints = new float[]{x, y};
     invertMatrix.mapPoints(mappedPoints);
 
     if (palette.getDrawable() != null
-        && palette.getDrawable() instanceof BitmapDrawable
-        && mappedPoints[0] >= 0
-        && mappedPoints[1] >= 0
-        && mappedPoints[0] < palette.getDrawable().getIntrinsicWidth()
-        && mappedPoints[1] < palette.getDrawable().getIntrinsicHeight()) {
+      && palette.getDrawable() instanceof BitmapDrawable
+      && mappedPoints[0] >= 0
+      && mappedPoints[1] >= 0
+      && mappedPoints[0] < palette.getDrawable().getIntrinsicWidth()
+      && mappedPoints[1] < palette.getDrawable().getIntrinsicHeight()) {
 
       invalidate();
 
@@ -396,46 +401,48 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
   /**
    * invokes {@link ColorListener} or {@link ColorEnvelopeListener} with a color value.
    *
-   * @param color color.
+   * @param color    color.
    * @param fromUser triggered by user or not.
    */
   public void fireColorListener(@ColorInt int color, final boolean fromUser) {
-    if (this.colorListener != null) {
-      this.selectedColor = color;
-      if (getAlphaSlideBar() != null) {
-        getAlphaSlideBar().notifyColor();
-        this.selectedColor = getAlphaSlideBar().assembleColor();
-      }
-      if (getBrightnessSlider() != null) {
-        getBrightnessSlider().notifyColor();
-        this.selectedColor = getBrightnessSlider().assembleColor();
-      }
+    this.selectedColor = color;
+    if (getAlphaSlideBar() != null) {
+      getAlphaSlideBar().notifyColor();
+      this.selectedColor = getAlphaSlideBar().assembleColor();
+    }
+    if (getBrightnessSlider() != null) {
+      getBrightnessSlider().notifyColor();
+      this.selectedColor = getBrightnessSlider().assembleColor();
+    }
 
+    if (this.colorListener != null) {
       if (colorListener instanceof ColorListener) {
         ((ColorListener) colorListener).onColorSelected(selectedColor, fromUser);
       } else if (colorListener instanceof ColorEnvelopeListener) {
         ColorEnvelope envelope = new ColorEnvelope(selectedColor);
         ((ColorEnvelopeListener) colorListener).onColorSelected(envelope, fromUser);
       }
+    }
 
-      if (this.flagView != null) {
-        this.flagView.onRefresh(getColorEnvelope());
-        invalidate();
+    if (this.flagView != null) {
+      this.flagView.onRefresh(getColorEnvelope());
+      invalidate();
+    }
+
+    if (VISIBLE_FLAG) {
+      VISIBLE_FLAG = false;
+      if (this.selector != null) {
+        this.selector.setAlpha(selector_alpha);
       }
-
-      if (VISIBLE_FLAG) {
-        VISIBLE_FLAG = false;
-        if (this.selector != null) {
-          this.selector.setAlpha(selector_alpha);
-        }
-        if (this.flagView != null) {
-          this.flagView.setAlpha(flag_alpha);
-        }
+      if (this.flagView != null) {
+        this.flagView.setAlpha(flag_alpha);
       }
     }
   }
 
-  /** notify to sliders about a new trigger. */
+  /**
+   * notify to sliders about a new trigger.
+   */
   private void notifyToSlideBars() {
     if (alphaSlideBar != null) alphaSlideBar.notifyColor();
     if (brightnessSlider != null) {
@@ -669,16 +676,16 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
    */
   public void setInitialColor(@ColorInt final int color) {
     if (getPreferenceName() == null
-        || (getPreferenceName() != null
-            && preferenceManager.getColor(getPreferenceName(), -1) == -1)) {
+      || (getPreferenceName() != null
+      && preferenceManager.getColor(getPreferenceName(), -1) == -1)) {
       post(
-          () -> {
-            try {
-              selectByHsvColor(color);
-            } catch (IllegalAccessException e) {
-              e.printStackTrace();
-            }
-          });
+        () -> {
+          try {
+            selectByHsvColor(color);
+          } catch (IllegalAccessException e) {
+            e.printStackTrace();
+          }
+        });
     }
   }
 
@@ -725,8 +732,8 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
       notifyToFlagView(selectedPoint);
     } else {
       throw new IllegalAccessException(
-          "selectByHsvColor(@ColorInt int color) can be called only "
-              + "when the palette is an instance of ColorHsvPalette. Use setHsvPaletteDrawable();");
+        "selectByHsvColor(@ColorInt int color) can be called only "
+          + "when the palette is an instance of ColorHsvPalette. Use setHsvPaletteDrawable();");
     }
   }
 
@@ -796,7 +803,9 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
     selector.setImageDrawable(drawable);
   }
 
-  /** selects the center of the palette manually. */
+  /**
+   * selects the center of the palette manually.
+   */
   public void selectCenter() {
     setSelectorPoint(getWidth() / 2, getMeasuredHeight() / 2);
   }
@@ -947,7 +956,9 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
     preferenceManager.saveColorPickerData(this);
   }
 
-  /** Builder class for create {@link ColorPickerView}. */
+  /**
+   * Builder class for create {@link ColorPickerView}.
+   */
   public static class Builder {
     private final Context context;
     private ColorPickerViewListener colorPickerViewListener;
@@ -958,7 +969,8 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
     private AlphaSlideBar alphaSlideBar;
     private BrightnessSlideBar brightnessSlider;
     private ActionMode actionMode = ActionMode.ALWAYS;
-    @ColorInt private int initialColor = 0;
+    @ColorInt
+    private int initialColor = 0;
 
     @FloatRange(from = 0.0, to = 1.0)
     private float selector_alpha = 1.0f;
@@ -968,9 +980,12 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
 
     private boolean flag_isFlipAble = false;
 
-    @Dp private int selectorSize = 0;
-    @Dp private int width = LayoutParams.MATCH_PARENT;
-    @Dp private int height = LayoutParams.MATCH_PARENT;
+    @Dp
+    private int selectorSize = 0;
+    @Dp
+    private int width = LayoutParams.MATCH_PARENT;
+    @Dp
+    private int height = LayoutParams.MATCH_PARENT;
     private String preferenceName;
     private LifecycleOwner lifecycleOwner;
 
