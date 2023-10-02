@@ -193,7 +193,7 @@ public class com/skydoves/colorpickerview/FadeUtils {
 	public static fun fadeOut (Landroid/view/View;)V
 }
 
-public final class com/skydoves/colorpickerview/databinding/DialogColorpickerColorpickerviewSkydovesBinding : androidx/viewbinding/ViewBinding {
+public final class com/skydoves/colorpickerview/databinding/ColorpickerviewDialogColorpickerBinding : androidx/viewbinding/ViewBinding {
 	public final field alphaSlideBar Lcom/skydoves/colorpickerview/sliders/AlphaSlideBar;
 	public final field alphaSlideBarFrame Landroid/widget/FrameLayout;
 	public final field brightnessSlideBar Lcom/skydoves/colorpickerview/sliders/BrightnessSlideBar;
@@ -201,21 +201,21 @@ public final class com/skydoves/colorpickerview/databinding/DialogColorpickerCol
 	public final field colorPickerView Lcom/skydoves/colorpickerview/ColorPickerView;
 	public final field colorPickerViewFrame Landroid/widget/FrameLayout;
 	public final field spaceBottom Landroid/widget/Space;
-	public static fun bind (Landroid/view/View;)Lcom/skydoves/colorpickerview/databinding/DialogColorpickerColorpickerviewSkydovesBinding;
+	public static fun bind (Landroid/view/View;)Lcom/skydoves/colorpickerview/databinding/ColorpickerviewDialogColorpickerBinding;
 	public synthetic fun getRoot ()Landroid/view/View;
 	public fun getRoot ()Landroid/widget/ScrollView;
-	public static fun inflate (Landroid/view/LayoutInflater;)Lcom/skydoves/colorpickerview/databinding/DialogColorpickerColorpickerviewSkydovesBinding;
-	public static fun inflate (Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Z)Lcom/skydoves/colorpickerview/databinding/DialogColorpickerColorpickerviewSkydovesBinding;
+	public static fun inflate (Landroid/view/LayoutInflater;)Lcom/skydoves/colorpickerview/databinding/ColorpickerviewDialogColorpickerBinding;
+	public static fun inflate (Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Z)Lcom/skydoves/colorpickerview/databinding/ColorpickerviewDialogColorpickerBinding;
 }
 
-public final class com/skydoves/colorpickerview/databinding/FlagBubbleColorpickerviewSkydovesBinding : androidx/viewbinding/ViewBinding {
+public final class com/skydoves/colorpickerview/databinding/ColorpickerviewFlagBubbleBinding : androidx/viewbinding/ViewBinding {
 	public final field bubble Landroidx/appcompat/widget/AppCompatImageView;
 	public final field layout Landroid/widget/FrameLayout;
-	public static fun bind (Landroid/view/View;)Lcom/skydoves/colorpickerview/databinding/FlagBubbleColorpickerviewSkydovesBinding;
+	public static fun bind (Landroid/view/View;)Lcom/skydoves/colorpickerview/databinding/ColorpickerviewFlagBubbleBinding;
 	public synthetic fun getRoot ()Landroid/view/View;
 	public fun getRoot ()Landroid/widget/FrameLayout;
-	public static fun inflate (Landroid/view/LayoutInflater;)Lcom/skydoves/colorpickerview/databinding/FlagBubbleColorpickerviewSkydovesBinding;
-	public static fun inflate (Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Z)Lcom/skydoves/colorpickerview/databinding/FlagBubbleColorpickerviewSkydovesBinding;
+	public static fun inflate (Landroid/view/LayoutInflater;)Lcom/skydoves/colorpickerview/databinding/ColorpickerviewFlagBubbleBinding;
+	public static fun inflate (Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Z)Lcom/skydoves/colorpickerview/databinding/ColorpickerviewFlagBubbleBinding;
 }
 
 public class com/skydoves/colorpickerview/flag/BubbleFlag : com/skydoves/colorpickerview/flag/FlagView {

@@ -26,8 +26,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+
 import com.skydoves.colorpickerview.AlphaTileView;
 import com.skydoves.colorpickerview.ColorEnvelope;
 import com.skydoves.colorpickerview.ColorPickerDialog;
@@ -40,8 +42,10 @@ import com.skydoves.colorpickerview.sliders.BrightnessSlideBar;
 import com.skydoves.powermenu.OnMenuItemClickListener;
 import com.skydoves.powermenu.PowerMenu;
 import com.skydoves.powermenu.PowerMenuItem;
+
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+
 import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
@@ -53,30 +57,28 @@ public class MainActivity extends AppCompatActivity {
 
   private PowerMenu powerMenu;
   private final OnMenuItemClickListener<PowerMenuItem> powerMenuItemClickListener =
-      new OnMenuItemClickListener<>() {
-        @Override
-        public void onItemClick(int position, PowerMenuItem item) {
-          switch (position) {
-            case 0:
-              {
-                palette();
-                break;
-              }
-            case 1:
-              {
-                paletteFromGallery();
-                break;
-              }
-            case 2:
-              selector();
-              break;
-            case 3:
-              dialog();
-              break;
+    new OnMenuItemClickListener<>() {
+      @Override
+      public void onItemClick(int position, PowerMenuItem item) {
+        switch (position) {
+          case 0: {
+            palette();
+            break;
           }
-          powerMenu.dismiss();
+          case 1: {
+            paletteFromGallery();
+            break;
+          }
+          case 2:
+            selector();
+            break;
+          case 3:
+            dialog();
+            break;
         }
-      };
+        powerMenu.dismiss();
+      }
+    };
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -90,11 +92,11 @@ public class MainActivity extends AppCompatActivity {
     bubbleFlag.setFlagMode(FlagMode.FADE);
     colorPickerView.setFlagView(bubbleFlag);
     colorPickerView.setColorListener(
-        (ColorEnvelopeListener)
-            (envelope, fromUser) -> {
-              Timber.d("color: %s", envelope.getHexCode());
-              setLayoutColor(envelope);
-            });
+      (ColorEnvelopeListener)
+        (envelope, fromUser) -> {
+          Timber.d("color: %s", envelope.getHexCode());
+          setLayoutColor(envelope);
+        });
 
     // attach alphaSlideBar
     final AlphaSlideBar alphaSlideBar = findViewById(R.id.alphaSlideBar);
@@ -120,12 +122,16 @@ public class MainActivity extends AppCompatActivity {
     alphaTileView.setPaintColor(envelope.getColor());
   }
 
-  /** shows the popup menu for changing options.. */
+  /**
+   * shows the popup menu for changing options..
+   */
   public void overflowMenu(View view) {
     powerMenu.showAsAnchorLeftTop(view);
   }
 
-  /** changes palette image using drawable resource. */
+  /**
+   * changes palette image using drawable resource.
+   */
   private void palette() {
     if (FLAG_PALETTE) {
       colorPickerView.setHsvPaletteDrawable();
@@ -135,34 +141,40 @@ public class MainActivity extends AppCompatActivity {
     FLAG_PALETTE = !FLAG_PALETTE;
   }
 
-  /** changes palette image from a gallery image. */
+  /**
+   * changes palette image from a gallery image.
+   */
   private void paletteFromGallery() {
     Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
     photoPickerIntent.setType("image/*");
     startActivityForResult(photoPickerIntent, 1000);
   }
 
-  /** changes selector image using drawable resource. */
+  /**
+   * changes selector image using drawable resource.
+   */
   private void selector() {
     if (FLAG_SELECTOR) {
-      colorPickerView.setSelectorDrawable(ContextCompat.getDrawable(this, R.drawable.wheel));
+      colorPickerView.setSelectorDrawable(ContextCompat.getDrawable(this, com.skydoves.colorpickerview.R.drawable.colorpickerview_wheel));
     } else {
       colorPickerView.setSelectorDrawable(ContextCompat.getDrawable(this, R.drawable.wheel_dark));
     }
     FLAG_SELECTOR = !FLAG_SELECTOR;
   }
 
-  /** shows ColorPickerDialog */
+  /**
+   * shows ColorPickerDialog
+   */
   private void dialog() {
     ColorPickerDialog.Builder builder =
-        new ColorPickerDialog.Builder(this)
-            .setTitle("ColorPicker Dialog")
-            .setPreferenceName("Test")
-            .setPositiveButton(
-                getString(R.string.confirm),
-                (ColorEnvelopeListener) (envelope, fromUser) -> setLayoutColor(envelope))
-            .setNegativeButton(
-                getString(R.string.cancel), (dialogInterface, i) -> dialogInterface.dismiss());
+      new ColorPickerDialog.Builder(this)
+        .setTitle("ColorPicker Dialog")
+        .setPreferenceName("Test")
+        .setPositiveButton(
+          getString(R.string.confirm),
+          (ColorEnvelopeListener) (envelope, fromUser) -> setLayoutColor(envelope))
+        .setNegativeButton(
+          getString(R.string.cancel), (dialogInterface, i) -> dialogInterface.dismiss());
     builder.getColorPickerView().setFlagView(new BubbleFlag(this));
     builder.show();
   }

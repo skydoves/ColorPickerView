@@ -69,7 +69,7 @@
       android:layout_weight="6"
       app:initialColor="@color/colorPrimary"
       app:preferenceName="Test2"
-      app:selector="@drawable/wheel" />
+      app:selector="@drawable/colorpickerview_wheel" />
 
     <LinearLayout
       android:layout_width="match_parent"
@@ -85,7 +85,7 @@
         android:layout_gravity="center"
         app:borderColor_AlphaSlideBar="@android:color/darker_gray"
         app:borderSize_AlphaSlideBar="5"
-        app:selector_AlphaSlideBar="@drawable/wheel" />
+        app:selector_AlphaSlideBar="@drawable/colorpickerview_wheel" />
     </LinearLayout>
 
     <LinearLayout
@@ -101,7 +101,7 @@
         android:layout_height="wrap_content"
         app:borderColor_BrightnessSlider="@android:color/darker_gray"
         app:borderSize_BrightnessSlider="5"
-        app:selector_BrightnessSlider="@drawable/wheel" />
+        app:selector_BrightnessSlider="@drawable/colorpickerview_wheel" />
     </LinearLayout>
 
     <LinearLayout

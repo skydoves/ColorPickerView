@@ -14,7 +14,7 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 -->
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="ResourceName">
   <declare-styleable name="ColorPickerView">
     <!-- sets a drawable of the palette. the default palette is HSV drawable palette built by HSV (hue, saturation, value) color model. -->
     <attr name="palette" format="reference" />
