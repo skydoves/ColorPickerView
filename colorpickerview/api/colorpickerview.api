@@ -1,0 +1,367 @@
+public final class com/skydoves/colorpickerview/ActionMode : java/lang/Enum {
+	public static final field ALWAYS Lcom/skydoves/colorpickerview/ActionMode;
+	public static final field LAST Lcom/skydoves/colorpickerview/ActionMode;
+	public static fun valueOf (Ljava/lang/String;)Lcom/skydoves/colorpickerview/ActionMode;
+	public static fun values ()[Lcom/skydoves/colorpickerview/ActionMode;
+}
+
+public class com/skydoves/colorpickerview/AlphaTileView : android/view/View {
+	public fun <init> (Landroid/content/Context;)V
+	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;)V
+	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;I)V
+	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;II)V
+	protected fun onDraw (Landroid/graphics/Canvas;)V
+	protected fun onSizeChanged (IIII)V
+	public fun setBackgroundColor (I)V
+	public fun setPaintColor (I)V
+}
+
+public class com/skydoves/colorpickerview/ColorEnvelope {
+	public fun <init> (I)V
+	public fun getArgb ()[I
+	public fun getColor ()I
+	public fun getHexCode ()Ljava/lang/String;
+}
+
+public class com/skydoves/colorpickerview/ColorHsvPalette : android/graphics/drawable/BitmapDrawable {
+	public fun <init> (Landroid/content/res/Resources;Landroid/graphics/Bitmap;)V
+	public fun draw (Landroid/graphics/Canvas;)V
+	public fun getOpacity ()I
+	public fun setAlpha (I)V
+	public fun setColorFilter (Landroid/graphics/ColorFilter;)V
+}
+
+public class com/skydoves/colorpickerview/ColorPickerDialog : androidx/appcompat/app/AlertDialog {
+	public fun <init> (Landroid/content/Context;)V
+}
+
+public class com/skydoves/colorpickerview/ColorPickerDialog$Builder : androidx/appcompat/app/AlertDialog$Builder {
+	public fun <init> (Landroid/content/Context;)V
+	public fun <init> (Landroid/content/Context;I)V
+	public fun attachAlphaSlideBar (Z)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
+	public fun attachBrightnessSlideBar (Z)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
+	public fun create ()Landroidx/appcompat/app/AlertDialog;
+	public fun getColorPickerView ()Lcom/skydoves/colorpickerview/ColorPickerView;
+	public synthetic fun setAdapter (Landroid/widget/ListAdapter;Landroid/content/DialogInterface$OnClickListener;)Landroidx/appcompat/app/AlertDialog$Builder;
+	public fun setAdapter (Landroid/widget/ListAdapter;Landroid/content/DialogInterface$OnClickListener;)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
+	public fun setBottomSpace (I)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
+	public synthetic fun setCancelable (Z)Landroidx/appcompat/app/AlertDialog$Builder;
+	public fun setCancelable (Z)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
+	public fun setColorPickerView (Lcom/skydoves/colorpickerview/ColorPickerView;)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
+	public synthetic fun setCursor (Landroid/database/Cursor;Landroid/content/DialogInterface$OnClickListener;Ljava/lang/String;)Landroidx/appcompat/app/AlertDialog$Builder;
+	public fun setCursor (Landroid/database/Cursor;Landroid/content/DialogInterface$OnClickListener;Ljava/lang/String;)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
+	public synthetic fun setCustomTitle (Landroid/view/View;)Landroidx/appcompat/app/AlertDialog$Builder;
+	public fun setCustomTitle (Landroid/view/View;)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
+	public synthetic fun setIcon (I)Landroidx/appcompat/app/AlertDialog$Builder;
+	public fun setIcon (I)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
+	public synthetic fun setIcon (Landroid/graphics/drawable/Drawable;)Landroidx/appcompat/app/AlertDialog$Builder;
+	public fun setIcon (Landroid/graphics/drawable/Drawable;)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
+	public synthetic fun setIconAttribute (I)Landroidx/appcompat/app/AlertDialog$Builder;
+	public fun setIconAttribute (I)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
+	public synthetic fun setItems (ILandroid/content/DialogInterface$OnClickListener;)Landroidx/appcompat/app/AlertDialog$Builder;
+	public fun setItems (ILandroid/content/DialogInterface$OnClickListener;)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
+	public synthetic fun setItems ([Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroidx/appcompat/app/AlertDialog$Builder;
+	public fun setItems ([Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
+	public synthetic fun setMessage (I)Landroidx/appcompat/app/AlertDialog$Builder;
+	public fun setMessage (I)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
+	public synthetic fun setMessage (Ljava/lang/CharSequence;)Landroidx/appcompat/app/AlertDialog$Builder;
+	public fun setMessage (Ljava/lang/CharSequence;)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
+	public synthetic fun setMultiChoiceItems (I[ZLandroid/content/DialogInterface$OnMultiChoiceClickListener;)Landroidx/appcompat/app/AlertDialog$Builder;
+	public fun setMultiChoiceItems (I[ZLandroid/content/DialogInterface$OnMultiChoiceClickListener;)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
+	public synthetic fun setMultiChoiceItems (Landroid/database/Cursor;Ljava/lang/String;Ljava/lang/String;Landroid/content/DialogInterface$OnMultiChoiceClickListener;)Landroidx/appcompat/app/AlertDialog$Builder;
+	public fun setMultiChoiceItems (Landroid/database/Cursor;Ljava/lang/String;Ljava/lang/String;Landroid/content/DialogInterface$OnMultiChoiceClickListener;)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
+	public synthetic fun setMultiChoiceItems ([Ljava/lang/CharSequence;[ZLandroid/content/DialogInterface$OnMultiChoiceClickListener;)Landroidx/appcompat/app/AlertDialog$Builder;
+	public fun setMultiChoiceItems ([Ljava/lang/CharSequence;[ZLandroid/content/DialogInterface$OnMultiChoiceClickListener;)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
+	public synthetic fun setNegativeButton (ILandroid/content/DialogInterface$OnClickListener;)Landroidx/appcompat/app/AlertDialog$Builder;
+	public fun setNegativeButton (ILandroid/content/DialogInterface$OnClickListener;)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
+	public synthetic fun setNegativeButton (Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroidx/appcompat/app/AlertDialog$Builder;
+	public fun setNegativeButton (Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
+	public synthetic fun setNeutralButton (ILandroid/content/DialogInterface$OnClickListener;)Landroidx/appcompat/app/AlertDialog$Builder;
+	public fun setNeutralButton (ILandroid/content/DialogInterface$OnClickListener;)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
+	public synthetic fun setNeutralButton (Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroidx/appcompat/app/AlertDialog$Builder;
+	public fun setNeutralButton (Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
+	public synthetic fun setOnCancelListener (Landroid/content/DialogInterface$OnCancelListener;)Landroidx/appcompat/app/AlertDialog$Builder;
+	public fun setOnCancelListener (Landroid/content/DialogInterface$OnCancelListener;)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
+	public synthetic fun setOnDismissListener (Landroid/content/DialogInterface$OnDismissListener;)Landroidx/appcompat/app/AlertDialog$Builder;
+	public fun setOnDismissListener (Landroid/content/DialogInterface$OnDismissListener;)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
+	public synthetic fun setOnItemSelectedListener (Landroid/widget/AdapterView$OnItemSelectedListener;)Landroidx/appcompat/app/AlertDialog$Builder;
+	public fun setOnItemSelectedListener (Landroid/widget/AdapterView$OnItemSelectedListener;)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
+	public synthetic fun setOnKeyListener (Landroid/content/DialogInterface$OnKeyListener;)Landroidx/appcompat/app/AlertDialog$Builder;
+	public fun setOnKeyListener (Landroid/content/DialogInterface$OnKeyListener;)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
+	public synthetic fun setPositiveButton (ILandroid/content/DialogInterface$OnClickListener;)Landroidx/appcompat/app/AlertDialog$Builder;
+	public fun setPositiveButton (ILandroid/content/DialogInterface$OnClickListener;)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
+	public fun setPositiveButton (ILcom/skydoves/colorpickerview/listeners/ColorPickerViewListener;)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
+	public synthetic fun setPositiveButton (Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroidx/appcompat/app/AlertDialog$Builder;
+	public fun setPositiveButton (Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
+	public fun setPositiveButton (Ljava/lang/CharSequence;Lcom/skydoves/colorpickerview/listeners/ColorPickerViewListener;)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
+	public fun setPreferenceName (Ljava/lang/String;)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
+	public synthetic fun setSingleChoiceItems (IILandroid/content/DialogInterface$OnClickListener;)Landroidx/appcompat/app/AlertDialog$Builder;
+	public fun setSingleChoiceItems (IILandroid/content/DialogInterface$OnClickListener;)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
+	public synthetic fun setSingleChoiceItems (Landroid/database/Cursor;ILjava/lang/String;Landroid/content/DialogInterface$OnClickListener;)Landroidx/appcompat/app/AlertDialog$Builder;
+	public fun setSingleChoiceItems (Landroid/database/Cursor;ILjava/lang/String;Landroid/content/DialogInterface$OnClickListener;)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
+	public synthetic fun setSingleChoiceItems (Landroid/widget/ListAdapter;ILandroid/content/DialogInterface$OnClickListener;)Landroidx/appcompat/app/AlertDialog$Builder;
+	public fun setSingleChoiceItems (Landroid/widget/ListAdapter;ILandroid/content/DialogInterface$OnClickListener;)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
+	public synthetic fun setSingleChoiceItems ([Ljava/lang/CharSequence;ILandroid/content/DialogInterface$OnClickListener;)Landroidx/appcompat/app/AlertDialog$Builder;
+	public fun setSingleChoiceItems ([Ljava/lang/CharSequence;ILandroid/content/DialogInterface$OnClickListener;)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
+	public synthetic fun setTitle (I)Landroidx/appcompat/app/AlertDialog$Builder;
+	public fun setTitle (I)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
+	public synthetic fun setTitle (Ljava/lang/CharSequence;)Landroidx/appcompat/app/AlertDialog$Builder;
+	public fun setTitle (Ljava/lang/CharSequence;)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
+	public synthetic fun setView (I)Landroidx/appcompat/app/AlertDialog$Builder;
+	public fun setView (I)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
+	public synthetic fun setView (Landroid/view/View;)Landroidx/appcompat/app/AlertDialog$Builder;
+	public fun setView (Landroid/view/View;)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
+}
+
+public class com/skydoves/colorpickerview/ColorPickerView : android/widget/FrameLayout, androidx/lifecycle/LifecycleObserver {
+	public field colorListener Lcom/skydoves/colorpickerview/listeners/ColorPickerViewListener;
+	public fun <init> (Landroid/content/Context;)V
+	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;)V
+	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;I)V
+	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;II)V
+	public fun attachAlphaSlider (Lcom/skydoves/colorpickerview/sliders/AlphaSlideBar;)V
+	public fun attachBrightnessSlider (Lcom/skydoves/colorpickerview/sliders/BrightnessSlideBar;)V
+	public fun fireColorListener (IZ)V
+	public fun getActionMode ()Lcom/skydoves/colorpickerview/ActionMode;
+	public fun getAlpha ()F
+	public fun getAlphaSlideBar ()Lcom/skydoves/colorpickerview/sliders/AlphaSlideBar;
+	public fun getBrightnessSlider ()Lcom/skydoves/colorpickerview/sliders/BrightnessSlideBar;
+	public fun getColor ()I
+	public fun getColorEnvelope ()Lcom/skydoves/colorpickerview/ColorEnvelope;
+	protected fun getColorFromBitmap (FF)I
+	public fun getDebounceDuration ()J
+	public fun getFlagView ()Lcom/skydoves/colorpickerview/flag/FlagView;
+	public fun getPreferenceName ()Ljava/lang/String;
+	public fun getPureColor ()I
+	public fun getSelectedPoint ()Landroid/graphics/Point;
+	public fun getSelector ()Landroid/widget/ImageView;
+	public fun getSelectorX ()F
+	public fun getSelectorY ()F
+	public fun isHuePalette ()Z
+	public fun moveSelectorPoint (III)V
+	protected fun onCreateByBuilder (Lcom/skydoves/colorpickerview/ColorPickerView$Builder;)V
+	public fun onDestroy ()V
+	protected fun onSizeChanged (IIII)V
+	public fun onTouchEvent (Landroid/view/MotionEvent;)Z
+	public fun removeLifecycleOwner (Landroidx/lifecycle/LifecycleOwner;)V
+	public fun selectByHsvColor (I)V
+	public fun selectByHsvColorRes (I)V
+	public fun selectCenter ()V
+	public fun setActionMode (Lcom/skydoves/colorpickerview/ActionMode;)V
+	public fun setColorListener (Lcom/skydoves/colorpickerview/listeners/ColorPickerViewListener;)V
+	public fun setCoordinate (II)V
+	public fun setDebounceDuration (J)V
+	public fun setEnabled (Z)V
+	public fun setFlagView (Lcom/skydoves/colorpickerview/flag/FlagView;)V
+	public fun setHsvPaletteDrawable ()V
+	public fun setInitialColor (I)V
+	public fun setInitialColorRes (I)V
+	public fun setLifecycleOwner (Landroidx/lifecycle/LifecycleOwner;)V
+	public fun setPaletteDrawable (Landroid/graphics/drawable/Drawable;)V
+	public fun setPreferenceName (Ljava/lang/String;)V
+	public fun setPureColor (I)V
+	public fun setSelectorDrawable (Landroid/graphics/drawable/Drawable;)V
+	public fun setSelectorPoint (II)V
+}
+
+public class com/skydoves/colorpickerview/ColorPickerView$Builder {
+	public fun <init> (Landroid/content/Context;)V
+	public fun build ()Lcom/skydoves/colorpickerview/ColorPickerView;
+	public fun setActionMode (Lcom/skydoves/colorpickerview/ActionMode;)Lcom/skydoves/colorpickerview/ColorPickerView$Builder;
+	public fun setAlphaSlideBar (Lcom/skydoves/colorpickerview/sliders/AlphaSlideBar;)Lcom/skydoves/colorpickerview/ColorPickerView$Builder;
+	public fun setBrightnessSlideBar (Lcom/skydoves/colorpickerview/sliders/BrightnessSlideBar;)Lcom/skydoves/colorpickerview/ColorPickerView$Builder;
+	public fun setColorListener (Lcom/skydoves/colorpickerview/listeners/ColorPickerViewListener;)Lcom/skydoves/colorpickerview/ColorPickerView$Builder;
+	public fun setDebounceDuration (I)Lcom/skydoves/colorpickerview/ColorPickerView$Builder;
+	public fun setFlagAlpha (F)Lcom/skydoves/colorpickerview/ColorPickerView$Builder;
+	public fun setFlagIsFlipAble (Z)Lcom/skydoves/colorpickerview/ColorPickerView$Builder;
+	public fun setFlagView (Lcom/skydoves/colorpickerview/flag/FlagView;)Lcom/skydoves/colorpickerview/ColorPickerView$Builder;
+	public fun setHeight (I)Lcom/skydoves/colorpickerview/ColorPickerView$Builder;
+	public fun setInitialColor (I)Lcom/skydoves/colorpickerview/ColorPickerView$Builder;
+	public fun setInitialColorRes (I)Lcom/skydoves/colorpickerview/ColorPickerView$Builder;
+	public fun setLifecycleOwner (Landroidx/lifecycle/LifecycleOwner;)Lcom/skydoves/colorpickerview/ColorPickerView$Builder;
+	public fun setPaletteDrawable (Landroid/graphics/drawable/Drawable;)Lcom/skydoves/colorpickerview/ColorPickerView$Builder;
+	public fun setPreferenceName (Ljava/lang/String;)Lcom/skydoves/colorpickerview/ColorPickerView$Builder;
+	public fun setSelectorAlpha (F)Lcom/skydoves/colorpickerview/ColorPickerView$Builder;
+	public fun setSelectorDrawable (Landroid/graphics/drawable/Drawable;)Lcom/skydoves/colorpickerview/ColorPickerView$Builder;
+	public fun setSelectorSize (I)Lcom/skydoves/colorpickerview/ColorPickerView$Builder;
+	public fun setWidth (I)Lcom/skydoves/colorpickerview/ColorPickerView$Builder;
+}
+
+public class com/skydoves/colorpickerview/FadeUtils {
+	public fun <init> ()V
+	public static fun fadeIn (Landroid/view/View;)V
+	public static fun fadeOut (Landroid/view/View;)V
+}
+
+public final class com/skydoves/colorpickerview/databinding/DialogColorpickerColorpickerviewSkydovesBinding : androidx/viewbinding/ViewBinding {
+	public final field alphaSlideBar Lcom/skydoves/colorpickerview/sliders/AlphaSlideBar;
+	public final field alphaSlideBarFrame Landroid/widget/FrameLayout;
+	public final field brightnessSlideBar Lcom/skydoves/colorpickerview/sliders/BrightnessSlideBar;
+	public final field brightnessSlideBarFrame Landroid/widget/FrameLayout;
+	public final field colorPickerView Lcom/skydoves/colorpickerview/ColorPickerView;
+	public final field colorPickerViewFrame Landroid/widget/FrameLayout;
+	public final field spaceBottom Landroid/widget/Space;
+	public static fun bind (Landroid/view/View;)Lcom/skydoves/colorpickerview/databinding/DialogColorpickerColorpickerviewSkydovesBinding;
+	public synthetic fun getRoot ()Landroid/view/View;
+	public fun getRoot ()Landroid/widget/ScrollView;
+	public static fun inflate (Landroid/view/LayoutInflater;)Lcom/skydoves/colorpickerview/databinding/DialogColorpickerColorpickerviewSkydovesBinding;
+	public static fun inflate (Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Z)Lcom/skydoves/colorpickerview/databinding/DialogColorpickerColorpickerviewSkydovesBinding;
+}
+
+public final class com/skydoves/colorpickerview/databinding/FlagBubbleColorpickerviewSkydovesBinding : androidx/viewbinding/ViewBinding {
+	public final field bubble Landroidx/appcompat/widget/AppCompatImageView;
+	public final field layout Landroid/widget/FrameLayout;
+	public static fun bind (Landroid/view/View;)Lcom/skydoves/colorpickerview/databinding/FlagBubbleColorpickerviewSkydovesBinding;
+	public synthetic fun getRoot ()Landroid/view/View;
+	public fun getRoot ()Landroid/widget/FrameLayout;
+	public static fun inflate (Landroid/view/LayoutInflater;)Lcom/skydoves/colorpickerview/databinding/FlagBubbleColorpickerviewSkydovesBinding;
+	public static fun inflate (Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Z)Lcom/skydoves/colorpickerview/databinding/FlagBubbleColorpickerviewSkydovesBinding;
+}
+
+public class com/skydoves/colorpickerview/flag/BubbleFlag : com/skydoves/colorpickerview/flag/FlagView {
+	public fun <init> (Landroid/content/Context;)V
+	public fun onRefresh (Lcom/skydoves/colorpickerview/ColorEnvelope;)V
+}
+
+public final class com/skydoves/colorpickerview/flag/FlagMode : java/lang/Enum {
+	public static final field ALWAYS Lcom/skydoves/colorpickerview/flag/FlagMode;
+	public static final field FADE Lcom/skydoves/colorpickerview/flag/FlagMode;
+	public static final field LAST Lcom/skydoves/colorpickerview/flag/FlagMode;
+	public static fun valueOf (Ljava/lang/String;)Lcom/skydoves/colorpickerview/flag/FlagMode;
+	public static fun values ()[Lcom/skydoves/colorpickerview/flag/FlagMode;
+}
+
+public abstract class com/skydoves/colorpickerview/flag/FlagView : android/widget/RelativeLayout {
+	public fun <init> (Landroid/content/Context;I)V
+	public fun getFlagMode ()Lcom/skydoves/colorpickerview/flag/FlagMode;
+	public fun gone ()V
+	public fun isFlipAble ()Z
+	public abstract fun onRefresh (Lcom/skydoves/colorpickerview/ColorEnvelope;)V
+	public fun receiveOnTouchEvent (Landroid/view/MotionEvent;)V
+	public fun setFlagMode (Lcom/skydoves/colorpickerview/flag/FlagMode;)V
+	public fun setFlipAble (Z)V
+	public fun visible ()V
+}
+
+public final class com/skydoves/colorpickerview/kotlin/ColorPickerDialogExtensionKt {
+	public static final synthetic fun colorPickerDialog (Landroid/content/Context;Lkotlin/jvm/functions/Function1;)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
+}
+
+public abstract interface class com/skydoves/colorpickerview/listeners/ColorEnvelopeListener : com/skydoves/colorpickerview/listeners/ColorPickerViewListener {
+	public abstract fun onColorSelected (Lcom/skydoves/colorpickerview/ColorEnvelope;Z)V
+}
+
+public abstract interface class com/skydoves/colorpickerview/listeners/ColorListener : com/skydoves/colorpickerview/listeners/ColorPickerViewListener {
+	public abstract fun onColorSelected (IZ)V
+}
+
+public abstract interface class com/skydoves/colorpickerview/listeners/ColorPickerViewListener {
+}
+
+public class com/skydoves/colorpickerview/preference/ColorPickerPreferenceManager {
+	protected static final field AlphaSlider Ljava/lang/String;
+	protected static final field BrightnessSlider Ljava/lang/String;
+	protected static final field COLOR Ljava/lang/String;
+	protected static final field SelectorX Ljava/lang/String;
+	protected static final field SelectorY Ljava/lang/String;
+	public fun clearSavedAllData ()Lcom/skydoves/colorpickerview/preference/ColorPickerPreferenceManager;
+	public fun clearSavedAlphaSliderPosition (Ljava/lang/String;)Lcom/skydoves/colorpickerview/preference/ColorPickerPreferenceManager;
+	public fun clearSavedBrightnessSlider (Ljava/lang/String;)Lcom/skydoves/colorpickerview/preference/ColorPickerPreferenceManager;
+	public fun clearSavedColor (Ljava/lang/String;)Lcom/skydoves/colorpickerview/preference/ColorPickerPreferenceManager;
+	public fun clearSavedSelectorPosition (Ljava/lang/String;)Lcom/skydoves/colorpickerview/preference/ColorPickerPreferenceManager;
+	protected fun getAlphaSliderName (Ljava/lang/String;)Ljava/lang/String;
+	public fun getAlphaSliderPosition (Ljava/lang/String;I)I
+	protected fun getBrightnessSliderName (Ljava/lang/String;)Ljava/lang/String;
+	public fun getBrightnessSliderPosition (Ljava/lang/String;I)I
+	public fun getColor (Ljava/lang/String;I)I
+	protected fun getColorName (Ljava/lang/String;)Ljava/lang/String;
+	public static fun getInstance (Landroid/content/Context;)Lcom/skydoves/colorpickerview/preference/ColorPickerPreferenceManager;
+	public fun getSelectorPosition (Ljava/lang/String;Landroid/graphics/Point;)Landroid/graphics/Point;
+	protected fun getSelectorXName (Ljava/lang/String;)Ljava/lang/String;
+	protected fun getSelectorYName (Ljava/lang/String;)Ljava/lang/String;
+	public fun restoreColorPickerData (Lcom/skydoves/colorpickerview/ColorPickerView;)V
+	public fun saveColorPickerData (Lcom/skydoves/colorpickerview/ColorPickerView;)V
+	public fun setAlphaSliderPosition (Ljava/lang/String;I)Lcom/skydoves/colorpickerview/preference/ColorPickerPreferenceManager;
+	public fun setBrightnessSliderPosition (Ljava/lang/String;I)Lcom/skydoves/colorpickerview/preference/ColorPickerPreferenceManager;
+	public fun setColor (Ljava/lang/String;I)Lcom/skydoves/colorpickerview/preference/ColorPickerPreferenceManager;
+	public fun setSelectorPosition (Ljava/lang/String;Landroid/graphics/Point;)Lcom/skydoves/colorpickerview/preference/ColorPickerPreferenceManager;
+}
+
+public class com/skydoves/colorpickerview/sliders/AlphaSlideBar {
+	public fun <init> (Landroid/content/Context;)V
+	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;)V
+	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;I)V
+	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;II)V
+	public fun assembleColor ()I
+	public synthetic fun attachColorPickerView (Lcom/skydoves/colorpickerview/ColorPickerView;)V
+	protected fun getAttrs (Landroid/util/AttributeSet;)V
+	public synthetic fun getColor ()I
+	public synthetic fun getPreferenceName ()Ljava/lang/String;
+	public synthetic fun getSelectedX ()I
+	public synthetic fun notifyColor ()V
+	protected fun onDraw (Landroid/graphics/Canvas;)V
+	public fun onInflateFinished ()V
+	protected fun onSizeChanged (IIII)V
+	public synthetic fun onTouchEvent (Landroid/view/MotionEvent;)Z
+	public synthetic fun setBorderColor (I)V
+	public synthetic fun setBorderColorRes (I)V
+	public synthetic fun setBorderSize (I)V
+	public synthetic fun setBorderSizeRes (I)V
+	public synthetic fun setEnabled (Z)V
+	public synthetic fun setPreferenceName (Ljava/lang/String;)V
+	public synthetic fun setSelectorByHalfSelectorPosition (F)V
+	public synthetic fun setSelectorDrawable (Landroid/graphics/drawable/Drawable;)V
+	public synthetic fun setSelectorDrawableRes (I)V
+	public synthetic fun setSelectorPosition (F)V
+	public fun updatePaint (Landroid/graphics/Paint;)V
+	public synthetic fun updateSelectorX (I)V
+}
+
+public class com/skydoves/colorpickerview/sliders/AlphaTileDrawable : android/graphics/drawable/Drawable {
+	public fun <init> ()V
+	public fun <init> (Lcom/skydoves/colorpickerview/sliders/AlphaTileDrawable$Builder;)V
+	public fun draw (Landroid/graphics/Canvas;)V
+	public fun getOpacity ()I
+	public fun setAlpha (I)V
+	public fun setColorFilter (Landroid/graphics/ColorFilter;)V
+}
+
+public class com/skydoves/colorpickerview/sliders/AlphaTileDrawable$Builder {
+	public fun <init> ()V
+	public fun build ()Lcom/skydoves/colorpickerview/sliders/AlphaTileDrawable;
+	public fun getTileEvenColor ()I
+	public fun getTileOddColor ()I
+	public fun getTileSize ()I
+	public fun setTileEvenColor (I)Lcom/skydoves/colorpickerview/sliders/AlphaTileDrawable$Builder;
+	public fun setTileOddColor (I)Lcom/skydoves/colorpickerview/sliders/AlphaTileDrawable$Builder;
+	public fun setTileSize (I)Lcom/skydoves/colorpickerview/sliders/AlphaTileDrawable$Builder;
+}
+
+public class com/skydoves/colorpickerview/sliders/BrightnessSlideBar {
+	public fun <init> (Landroid/content/Context;)V
+	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;)V
+	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;I)V
+	public fun <init> (Landroid/content/Context;Landroid/util/AttributeSet;II)V
+	public fun assembleColor ()I
+	public synthetic fun attachColorPickerView (Lcom/skydoves/colorpickerview/ColorPickerView;)V
+	protected fun getAttrs (Landroid/util/AttributeSet;)V
+	public synthetic fun getColor ()I
+	public synthetic fun getPreferenceName ()Ljava/lang/String;
+	public synthetic fun getSelectedX ()I
+	public synthetic fun notifyColor ()V
+	public fun onInflateFinished ()V
+	public synthetic fun onTouchEvent (Landroid/view/MotionEvent;)Z
+	public synthetic fun setBorderColor (I)V
+	public synthetic fun setBorderColorRes (I)V
+	public synthetic fun setBorderSize (I)V
+	public synthetic fun setBorderSizeRes (I)V
+	public synthetic fun setEnabled (Z)V
+	public synthetic fun setPreferenceName (Ljava/lang/String;)V
+	public synthetic fun setSelectorByHalfSelectorPosition (F)V
+	public synthetic fun setSelectorDrawable (Landroid/graphics/drawable/Drawable;)V
+	public synthetic fun setSelectorDrawableRes (I)V
+	public synthetic fun setSelectorPosition (F)V
+	protected fun updatePaint (Landroid/graphics/Paint;)V
+	public synthetic fun updateSelectorX (I)V
+}
+
