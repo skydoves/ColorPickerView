@@ -17,6 +17,7 @@ apply plugin: 'kotlin-android'
 apply from: "$rootDir/dependencies.gradle"
 
 android {
+  namespace "com.skydoves.colorpickerviewdemo"
   compileSdkVersion versions.compileSdk
   defaultConfig {
     applicationId "com.skydoves.colorpickerviewdemo"
