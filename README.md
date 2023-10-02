@@ -18,6 +18,10 @@
 <img src="/art/art1.gif" width="31%"/>
 </p>
 
+## ColorPicker Compose
+
+If you're looking to implement a color picker in your Compose project, you can use [colorpicker-compose](https://github.com/skydoves/colorpicker-compose) instead.
+
 ## Including in your project 
 [![Maven Central](https://img.shields.io/maven-central/v/com.github.skydoves/colorpickerview.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.github.skydoves%22%20AND%20a:%22colorpickerview%22)
 
