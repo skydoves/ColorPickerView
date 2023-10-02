@@ -24,9 +24,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListAdapter;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import com.skydoves.colorpickerview.databinding.DialogColorpickerColorpickerviewSkydovesBinding;
+
+import com.skydoves.colorpickerview.databinding.ColorpickerviewDialogColorpickerBinding;
 import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener;
 import com.skydoves.colorpickerview.listeners.ColorListener;
 import com.skydoves.colorpickerview.listeners.ColorPickerViewListener;
@@ -47,9 +49,11 @@ public class ColorPickerDialog extends AlertDialog {
     super(context);
   }
 
-  /** Builder class for create {@link ColorPickerDialog}. */
+  /**
+   * Builder class for create {@link ColorPickerDialog}.
+   */
   public static class Builder extends AlertDialog.Builder {
-    private DialogColorpickerColorpickerviewSkydovesBinding dialogBinding;
+    private ColorpickerviewDialogColorpickerBinding dialogBinding;
     private ColorPickerView colorPickerView;
     private boolean shouldAttachAlphaSlideBar = true;
     private boolean shouldAttachBrightnessSlideBar = true;
@@ -68,17 +72,17 @@ public class ColorPickerDialog extends AlertDialog {
     private void onCreate() {
       LayoutInflater layoutInflater = LayoutInflater.from(getContext());
       this.dialogBinding =
-          DialogColorpickerColorpickerviewSkydovesBinding.inflate(layoutInflater, null, false);
+        ColorpickerviewDialogColorpickerBinding.inflate(layoutInflater, null, false);
       this.colorPickerView = dialogBinding.colorPickerView;
       this.colorPickerView.attachAlphaSlider(dialogBinding.alphaSlideBar);
       this.colorPickerView.attachBrightnessSlider(dialogBinding.brightnessSlideBar);
       this.colorPickerView.setColorListener(
-          new ColorEnvelopeListener() {
-            @Override
-            public void onColorSelected(ColorEnvelope envelope, boolean fromUser) {
-              // no stubs
-            }
-          });
+        new ColorEnvelopeListener() {
+          @Override
+          public void onColorSelected(ColorEnvelope envelope, boolean fromUser) {
+            // no stubs
+          }
+        });
       super.setView(dialogBinding.getRoot());
     }
 
@@ -153,7 +157,7 @@ public class ColorPickerDialog extends AlertDialog {
     /**
      * sets positive button with {@link ColorPickerViewListener} on the {@link ColorPickerDialog}.
      *
-     * @param textId string resource integer id.
+     * @param textId        string resource integer id.
      * @param colorListener {@link ColorListener}.
      * @return {@link Builder}.
      */
@@ -165,12 +169,12 @@ public class ColorPickerDialog extends AlertDialog {
     /**
      * sets positive button with {@link ColorPickerViewListener} on the {@link ColorPickerDialog}.
      *
-     * @param text string text value.
+     * @param text          string text value.
      * @param colorListener {@link ColorListener}.
      * @return {@link Builder}.
      */
     public Builder setPositiveButton(
-        CharSequence text, final ColorPickerViewListener colorListener) {
+      CharSequence text, final ColorPickerViewListener colorListener) {
       super.setPositiveButton(text, getOnClickListener(colorListener));
       return this;
     }
@@ -195,11 +199,11 @@ public class ColorPickerDialog extends AlertDialog {
             ((ColorListener) colorListener).onColorSelected(getColorPickerView().getColor(), true);
           } else if (colorListener instanceof ColorEnvelopeListener) {
             ((ColorEnvelopeListener) colorListener)
-                .onColorSelected(getColorPickerView().getColorEnvelope(), true);
+              .onColorSelected(getColorPickerView().getColorEnvelope(), true);
           }
           if (getColorPickerView() != null) {
             ColorPickerPreferenceManager.getInstance(getContext())
-                .saveColorPickerData(getColorPickerView());
+              .saveColorPickerData(getColorPickerView());
           }
         }
       };
@@ -369,24 +373,24 @@ public class ColorPickerDialog extends AlertDialog {
 
     @Override
     public Builder setMultiChoiceItems(
-        int itemsId, boolean[] checkedItems, OnMultiChoiceClickListener listener) {
+      int itemsId, boolean[] checkedItems, OnMultiChoiceClickListener listener) {
       super.setMultiChoiceItems(itemsId, checkedItems, listener);
       return this;
     }
 
     @Override
     public Builder setMultiChoiceItems(
-        CharSequence[] items, boolean[] checkedItems, OnMultiChoiceClickListener listener) {
+      CharSequence[] items, boolean[] checkedItems, OnMultiChoiceClickListener listener) {
       super.setMultiChoiceItems(items, checkedItems, listener);
       return this;
     }
 
     @Override
     public Builder setMultiChoiceItems(
-        Cursor cursor,
-        String isCheckedColumn,
-        String labelColumn,
-        OnMultiChoiceClickListener listener) {
+      Cursor cursor,
+      String isCheckedColumn,
+      String labelColumn,
+      OnMultiChoiceClickListener listener) {
       super.setMultiChoiceItems(cursor, isCheckedColumn, labelColumn, listener);
       return this;
     }
@@ -399,21 +403,21 @@ public class ColorPickerDialog extends AlertDialog {
 
     @Override
     public Builder setSingleChoiceItems(
-        Cursor cursor, int checkedItem, String labelColumn, OnClickListener listener) {
+      Cursor cursor, int checkedItem, String labelColumn, OnClickListener listener) {
       super.setSingleChoiceItems(cursor, checkedItem, labelColumn, listener);
       return this;
     }
 
     @Override
     public Builder setSingleChoiceItems(
-        CharSequence[] items, int checkedItem, OnClickListener listener) {
+      CharSequence[] items, int checkedItem, OnClickListener listener) {
       super.setSingleChoiceItems(items, checkedItem, listener);
       return this;
     }
 
     @Override
     public Builder setSingleChoiceItems(
-        ListAdapter adapter, int checkedItem, OnClickListener listener) {
+      ListAdapter adapter, int checkedItem, OnClickListener listener) {
       super.setSingleChoiceItems(adapter, checkedItem, listener);
       return this;
     }

@@ -28,14 +28,14 @@ public class FadeUtils {
 
   public static void fadeIn(View view) {
     Animation fadeIn =
-        AnimationUtils.loadAnimation(view.getContext(), R.anim.fade_in_colorpickerview_skydoves);
+        AnimationUtils.loadAnimation(view.getContext(), R.anim.colorpickerview_fade_in);
     fadeIn.setFillAfter(true);
     view.startAnimation(fadeIn);
   }
 
   public static void fadeOut(View view) {
     Animation fadeOut =
-        AnimationUtils.loadAnimation(view.getContext(), R.anim.fade_out_colorpickerview_skydoves);
+        AnimationUtils.loadAnimation(view.getContext(), R.anim.colorpickerview_fade_out);
     fadeOut.setFillAfter(true);
     view.startAnimation(fadeOut);
   }

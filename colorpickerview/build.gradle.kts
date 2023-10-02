@@ -63,6 +63,8 @@ android {
   kotlinOptions {
     jvmTarget = libs.versions.jvmTarget.get()
   }
+
+  resourcePrefix = "colorpickerview"
 }
 
 dependencies {
