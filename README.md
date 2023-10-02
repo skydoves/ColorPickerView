@@ -358,7 +358,8 @@ We can also fully customize the `FlagView` like below.<br>
 ![flag0](https://user-images.githubusercontent.com/24237865/45364191-75fe4780-b614-11e8-81a5-04690a4392db.jpg) 
 ![flag1](https://user-images.githubusercontent.com/24237865/45364194-75fe4780-b614-11e8-844c-136d14c91560.jpg) <br>
 
-First, We need a customized layout like below.
+First, create a custom XML layout like the example below: 
+
 ```gradle
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -368,7 +369,7 @@ First, We need a customized layout like below.
     android:background="@drawable/flag"
     android:orientation="horizontal">
 
-    <LinearLayout
+    <com.skydoves.colorpickerview.AlphaTileView
         android:id="@+id/flag_color_layout"
         android:layout_width="20dp"
         android:layout_height="20dp"
@@ -392,7 +393,8 @@ First, We need a customized layout like below.
 </LinearLayout>
 ```
 
-Second, we need to create a class that extends `FlagView`. Here is an example code.
+Next, you should create a class that extends `FlagView`:
+
 ```java
 public class CustomFlag extends FlagView {
 
@@ -413,7 +415,7 @@ public class CustomFlag extends FlagView {
 }
 ```
 
-And last, set the `FlagView` to the `ColorPickerView` using the `setFlagView` method.
+As you can see in the above code, you can observe and update the layout inside the `onRefresh` method. Lastly, set the `FlagView` to the `ColorPickerView` using the `setFlagView` method:
 
 ```java
 colorPickerView.setFlagView(new CustomFlag(this, R.layout.layout_flag));
@@ -421,6 +423,7 @@ colorPickerView.setFlagView(new CustomFlag(this, R.layout.layout_flag));
 
 ### FlagMode
 `FlagMode` is an option to decides the visibility action of the `FlagView`.
+
 ```java
 colorPickerView.setFlagMode(FlagMode.ALWAYS); // showing always by tapping and dragging.
 colorPickerView.setFlagMode(FlagMode.LAST); // showing only when finger released.

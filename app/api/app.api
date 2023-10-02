@@ -1,3 +1,9 @@
+public class com/skydoves/colorpickerviewdemo/CustomFlagView : com/skydoves/colorpickerview/flag/FlagView {
+	public fun <init> (Landroid/content/Context;I)V
+	public fun onFlipped (Ljava/lang/Boolean;)V
+	public fun onRefresh (Lcom/skydoves/colorpickerview/ColorEnvelope;)V
+}
+
 public class com/skydoves/colorpickerviewdemo/MainActivity : androidx/appcompat/app/AppCompatActivity {
 	public fun <init> ()V
 	protected fun onActivityResult (IILandroid/content/Intent;)V

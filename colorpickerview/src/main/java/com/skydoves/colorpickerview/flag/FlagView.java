@@ -21,10 +21,13 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
+
 import com.skydoves.colorpickerview.ColorEnvelope;
 import com.skydoves.colorpickerview.FadeUtils;
 
-/** FlaView implements showing a flag above a selector. */
+/**
+ * FlaView implements showing a flag above a selector.
+ */
 @SuppressWarnings("unused")
 public abstract class FlagView extends RelativeLayout {
 
@@ -36,8 +39,15 @@ public abstract class FlagView extends RelativeLayout {
     initializeLayout(layout);
   }
 
-  /** called whenever color is changed on {@link com.skydoves.colorpickerview.ColorPickerView}. */
+  /**
+   * called whenever color is changed on {@link com.skydoves.colorpickerview.ColorPickerView}.
+   */
   public abstract void onRefresh(ColorEnvelope colorEnvelope);
+
+  /**
+   * This method will be invoked when the this FlagView should be flipped.
+   */
+  public abstract void onFlipped(Boolean isFlipped);
 
   public void receiveOnTouchEvent(MotionEvent event) {
     switch (event.getActionMasked()) {
@@ -59,19 +69,23 @@ public abstract class FlagView extends RelativeLayout {
   private void initializeLayout(int layout) {
     View inflated = LayoutInflater.from(getContext()).inflate(layout, this);
     inflated.setLayoutParams(
-        new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+      new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
     inflated.measure(
-        MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED),
-        MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
+      MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED),
+      MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
     inflated.layout(0, 0, inflated.getWidth(), inflated.getMeasuredHeight());
   }
 
-  /** makes {@link FlagView} visible. */
+  /**
+   * makes {@link FlagView} visible.
+   */
   public void visible() {
     setVisibility(View.VISIBLE);
   }
 
-  /** makes {@link FlagView} invisible. */
+  /**
+   * makes {@link FlagView} invisible.
+   */
   public void gone() {
     setVisibility(View.GONE);
   }
