@@ -31,7 +31,7 @@ Add the dependency below to your module's `build.gradle` file:
 
 ```gradle
 dependencies {
-    implementation "com.github.skydoves:colorpickerview:2.2.4"
+    implementation "com.github.skydoves:colorpickerview:2.3.0"
 }
 ```
 
