@@ -14,40 +14,38 @@
  * limitations under the License.
  */
 
-package com.skydoves.colorpickerview.flag;
+package com.skydoves.colorpickerviewdemo;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
+import android.widget.TextView;
 
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.core.widget.ImageViewCompat;
-
+import com.skydoves.colorpickerview.AlphaTileView;
 import com.skydoves.colorpickerview.ColorEnvelope;
-import com.skydoves.colorpickerview.R;
+import com.skydoves.colorpickerview.flag.FlagView;
 
-/**
- * BubbleFlag is a supported {@link FlagView} by the library.
- */
-public class BubbleFlag extends FlagView {
+public class CustomFlagView extends FlagView {
 
-  private final AppCompatImageView bubble;
+  private TextView textView;
+  private AlphaTileView alphaTileView;
 
-  public BubbleFlag(Context context) {
-    super(context, R.layout.colorpickerview_flag_bubble);
-    this.bubble = findViewById(R.id.bubble);
+  public CustomFlagView(Context context, int layout) {
+    super(context, layout);
+    textView = findViewById(R.id.flag_color_code);
+    alphaTileView = findViewById(R.id.flag_color_layout);
   }
 
-  /**
-   * invoked when selector is moved.
-   *
-   * @param colorEnvelope provide hsv color, hexCode, argb
-   */
   @Override
   public void onRefresh(ColorEnvelope colorEnvelope) {
-    ImageViewCompat.setImageTintList(bubble, ColorStateList.valueOf(colorEnvelope.getColor()));
+    textView.setText("#" + colorEnvelope.getHexCode());
+    alphaTileView.setPaintColor(colorEnvelope.getColor());
   }
 
   @Override
   public void onFlipped(Boolean isFlipped) {
+    if (isFlipped) {
+      textView.setRotation(180f);
+    } else {
+      textView.setRotation(0f);
+    }
   }
 }

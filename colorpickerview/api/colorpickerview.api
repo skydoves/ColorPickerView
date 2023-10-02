@@ -220,6 +220,7 @@ public final class com/skydoves/colorpickerview/databinding/ColorpickerviewFlagB
 
 public class com/skydoves/colorpickerview/flag/BubbleFlag : com/skydoves/colorpickerview/flag/FlagView {
 	public fun <init> (Landroid/content/Context;)V
+	public fun onFlipped (Ljava/lang/Boolean;)V
 	public fun onRefresh (Lcom/skydoves/colorpickerview/ColorEnvelope;)V
 }
 
@@ -236,6 +237,7 @@ public abstract class com/skydoves/colorpickerview/flag/FlagView : android/widge
 	public fun getFlagMode ()Lcom/skydoves/colorpickerview/flag/FlagMode;
 	public fun gone ()V
 	public fun isFlipAble ()Z
+	public abstract fun onFlipped (Ljava/lang/Boolean;)V
 	public abstract fun onRefresh (Lcom/skydoves/colorpickerview/ColorEnvelope;)V
 	public fun receiveOnTouchEvent (Landroid/view/MotionEvent;)V
 	public fun setFlagMode (Lcom/skydoves/colorpickerview/flag/FlagMode;)V
