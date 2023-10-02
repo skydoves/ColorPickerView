@@ -14,6 +14,8 @@ uiAutomator = "2.3.0-alpha04"
 spotless = "6.21.0"
 powerMenu = "2.2.4"
 timber = "5.0.1"
+junit = "1.1.5"
+espresso-core = "3.5.1"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -37,3 +39,5 @@ androidx-test-runner = { group = "androidx.test", name = "runner", version.ref =
 androidx-profileinstaller = { module = "androidx.profileinstaller:profileinstaller", version.ref = "baselineProfiles" }
 androidx-benchmark-macro = { module = "androidx.benchmark:benchmark-macro-junit4", version.ref = "androidxMacroBenchmark" }
 androidx-test-uiautomator = { module = "androidx.test.uiautomator:uiautomator", version.ref = "uiAutomator" }
+junit = { group = "androidx.test.ext", name = "junit", version.ref = "junit" }
+espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }

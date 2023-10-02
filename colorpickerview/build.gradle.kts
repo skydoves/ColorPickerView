@@ -38,6 +38,12 @@ mavenPublishing {
   }
 }
 
+baselineProfile {
+  filter {
+    include("com.skydoves.colorpickerview.**")
+  }
+}
+
 android {
   namespace = "com.skydoves.colorpickerview"
   compileSdk = Configuration.compileSdk
@@ -61,4 +67,6 @@ android {
 
 dependencies {
   implementation(libs.androidx.appcompat)
+
+  baselineProfile(project(":benchmark"))
 }

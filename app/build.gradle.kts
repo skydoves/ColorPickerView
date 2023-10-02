@@ -44,6 +44,14 @@ android {
   lint {
     abortOnError = false
   }
+  buildTypes {
+    create("benchmark") {
+      initWith(buildTypes.getByName("release"))
+      signingConfig = signingConfigs.getByName("debug")
+      matchingFallbacks += listOf("release")
+      isDebuggable = false
+    }
+  }
 }
 
 dependencies {
@@ -52,4 +60,6 @@ dependencies {
   implementation(libs.androidx.material)
   implementation(libs.timber)
   implementation(libs.powermenu)
+
+  baselineProfile(project(":benchmark"))
 }
