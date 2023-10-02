@@ -12,22 +12,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-ext.versions = [
-    minSdk           : 17,
-    compileSdk       : 34,
-    versionoCode     : 28,
-    versionName      : '2.2.4',
+pluginManagement {
+  repositories {
+    gradlePluginPortal()
+    google()
+    mavenCentral()
+  }
+}
+dependencyResolutionManagement {
+  repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+  repositories {
+    google()
+    mavenCentral()
+  }
+}
 
-    gradleBuildTool  : '8.1.2',
-    spotlessGradle   : '6.7.0',
-    dokkaGradle      : '1.9.0',
-    mavenPublish     : '0.18.0',
-
-    kotlin           : '1.9.10',
-    androidxAppcompat: '1.6.1',
-
-    // for demo
-    googleMaterial   : '1.9.0',
-    powermenu        : '2.2.4',
-    timber           : '5.0.1'
-]
+include(":app")
+include(":colorpickerview")
