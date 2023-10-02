@@ -57,16 +57,20 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onItemClick(int position, PowerMenuItem item) {
           switch (position) {
+            case 0:
+              {
+                palette();
+                break;
+              }
             case 1:
-              palette();
-              break;
+              {
+                paletteFromGallery();
+                break;
+              }
             case 2:
-              paletteFromGallery();
-              break;
-            case 3:
               selector();
               break;
-            case 4:
+            case 3:
               dialog();
               break;
           }
@@ -78,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    Timber.plant(new Timber.DebugTree());
 
     powerMenu = PowerMenuUtils.getPowerMenu(this, this, powerMenuItemClickListener);
 

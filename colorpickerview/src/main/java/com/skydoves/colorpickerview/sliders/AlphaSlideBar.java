@@ -95,24 +95,18 @@ public class AlphaSlideBar extends AbstractSlider {
     int endColor = Color.HSVToColor(255, hsv);
     Shader shader =
         new LinearGradient(
-            0,
-            0,
-            getMeasuredWidth(),
-            getMeasuredHeight(),
-            startColor,
-            endColor,
-            Shader.TileMode.CLAMP);
+            0, 0, getWidth(), getMeasuredHeight(), startColor, endColor, Shader.TileMode.CLAMP);
     colorPaint.setShader(shader);
   }
 
   @Override
   public void onInflateFinished() {
-    int defaultPosition = getMeasuredWidth();
+    int defaultPosition = getWidth() - selector.getWidth();
     if (getPreferenceName() != null) {
       updateSelectorX(
           ColorPickerPreferenceManager.getInstance(getContext())
                   .getAlphaSliderPosition(getPreferenceName(), defaultPosition)
-              + getSelectorSize());
+              + getSelectorSize() / 2);
     } else {
       selector.setX(defaultPosition);
     }

@@ -63,7 +63,7 @@ public abstract class FlagView extends RelativeLayout {
     inflated.measure(
         MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED),
         MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
-    inflated.layout(0, 0, inflated.getMeasuredWidth(), inflated.getMeasuredHeight());
+    inflated.layout(0, 0, inflated.getWidth(), inflated.getMeasuredHeight());
   }
 
   /** makes {@link FlagView} visible. */

@@ -206,11 +206,7 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
             new ViewTreeObserver.OnGlobalLayoutListener() {
               @Override
               public void onGlobalLayout() {
-                if (Build.VERSION.SDK_INT < 16) {
-                  getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                } else {
-                  getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                }
+                getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 onFinishInflated();
               }
             });
@@ -478,8 +474,8 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
       }
       flagView.onRefresh(getColorEnvelope());
       if (posX < 0) flagView.setX(0);
-      if (posX + flagView.getMeasuredWidth() > getMeasuredWidth()) {
-        flagView.setX(getMeasuredWidth() - flagView.getMeasuredWidth());
+      if (posX + flagView.getWidth() > getWidth()) {
+        flagView.setX(getWidth() - flagView.getWidth());
       }
     }
   }
@@ -583,7 +579,7 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
    * @return the center coordinate of the selector.
    */
   private Point getCenterPoint(int x, int y) {
-    return new Point(x - (selector.getMeasuredWidth() / 2), y - (selector.getMeasuredHeight() / 2));
+    return new Point(x - (selector.getWidth() / 2), y - (selector.getMeasuredHeight() / 2));
   }
 
   /**
@@ -601,7 +597,7 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
    * @return a selected coordinate x.
    */
   public float getSelectorX() {
-    return selector.getX() - (selector.getMeasuredWidth() * 0.5f);
+    return selector.getX() - (selector.getWidth() * 0.5f);
   }
 
   /**
@@ -661,7 +657,7 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
    * @param y coordinate y of the selector.
    */
   public void setCoordinate(int x, int y) {
-    selector.setX(x - (selector.getMeasuredWidth() * 0.5f));
+    selector.setX(x - (selector.getWidth() * 0.5f));
     selector.setY(y - (selector.getMeasuredHeight() * 0.5f));
   }
 
@@ -802,7 +798,7 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
 
   /** selects the center of the palette manually. */
   public void selectCenter() {
-    setSelectorPoint(getMeasuredWidth() / 2, getMeasuredHeight() / 2);
+    setSelectorPoint(getWidth() / 2, getMeasuredHeight() / 2);
   }
 
   /**
