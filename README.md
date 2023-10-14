@@ -92,7 +92,7 @@ You can customize the palette image and selector or various options using the be
 
 ```gradle
 app:palette="@drawable/palette" // sets a custom palette image.
-app:selector="@drawable/wheel" // sets a custom selector image.
+app:selector="@drawable/colorpickerview_wheel" // sets a custom selector image.
 app:selector_size="32dp" // sets a width & height size of the selector.
 app:alpha_selector="0.8" // sets an alpha of thr selector.
 app:alpha_flag="0.8" // sets an alpha of the flag.
@@ -290,7 +290,7 @@ try {
    android:id="@+id/alphaSlideBar"
    android:layout_width="match_parent"
    android:layout_height="wrap_content"
-   app:selector_AlphaSlideBar="@drawable/wheel" // sets a customized selector drawable.
+   app:selector_AlphaSlideBar="@drawable/colorpickerview_wheel" // sets a customized selector drawable.
    app:borderColor_AlphaSlideBar="@android:color/darker_gray" // sets a color of the border.
    app:borderSize_AlphaSlideBar="5"/> // sets a size of the border.
 ```
@@ -321,7 +321,7 @@ android:rotation="90"
    android:id="@+id/brightnessSlide"
    android:layout_width="match_parent"
    android:layout_height="wrap_content"
-   app:selector_BrightnessSlider="@drawable/wheel" // sets a customized selector drawable.
+   app:selector_BrightnessSlider="@drawable/colorpickerview_wheel" // sets a customized selector drawable.
    app:borderColor_BrightnessSlider="@android:color/darker_gray" // sets a color of the border.
    app:borderSize_BrightnessSlider="5"/> // sets a size of the border.
 ```
