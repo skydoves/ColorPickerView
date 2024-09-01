@@ -15,7 +15,7 @@ spotless = "6.21.0"
 powerMenu = "2.2.4"
 timber = "5.0.1"
 junit = "1.1.5"
-espresso-core = "3.5.1"
+espresso-core = "3.6.1"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
