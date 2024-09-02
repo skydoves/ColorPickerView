@@ -15,8 +15,10 @@
 
 <p align="center">
 <img src="/art/art0.gif" width="31%"/>
-<img src="/art/art1.gif" width="31%"/>
+<img src="/art/art1.gif" width="31%"/> 
 </p>
+<input type="color" id="colorPicker" value="#0000ff"> <!-- Changed to default blue color -->
+
 
 ## ColorPicker Compose
 
