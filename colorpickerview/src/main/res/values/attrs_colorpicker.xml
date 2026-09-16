@@ -47,6 +47,10 @@
     <attr name="resetBrightnessOnLowSaturation" format="boolean" />
     <!-- when enabled, moves the alpha and the brightness slide bars to the alpha and the brightness of a pixel, which is picked from a bitmap palette. this attribute doesn't affect the default HSV palette. -->
     <attr name="syncSlidersWithPaletteColor" format="boolean" />
+    <!-- when enabled, a pinch gesture zooms the palette in and out and a two finger drag moves the zoomed palette. this attribute works with only a bitmap palette. -->
+    <attr name="zoomEnabled" format="boolean" />
+    <!-- sets the maximum scale of the zoom gesture. -->
+    <attr name="maxZoom" format="float" />
   </declare-styleable>
   <declare-styleable name="AlphaSlideBar">
     <!-- sets a customized selector drawable. -->
@@ -71,5 +75,9 @@
     <attr name="tileOddColor" format="color" />
     <!-- a color of the even location in patterns. -->
     <attr name="tileEvenColor" format="color" />
+    <!-- a color of the stroke, which is drawn on the edge of the view. -->
+    <attr name="tileStrokeColor" format="color" />
+    <!-- a size of the stroke, which is drawn on the edge of the view. -->
+    <attr name="tileStrokeSize" format="dimension" />
   </declare-styleable>
 </resources>
