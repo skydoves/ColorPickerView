@@ -37,7 +37,7 @@ Add the dependency below to your module's `build.gradle` file:
 
     ```groovy
     dependencies {
-        implementation("com.github.skydoves:colorpickerview:2.4.0")
+        implementation("com.github.skydoves:colorpickerview:2.5.0")
     }
     ```
 
@@ -45,7 +45,7 @@ Add the dependency below to your module's `build.gradle` file:
 
     ```kotlin
     dependencies {
-        implementation("com.github.skydoves:colorpickerview:2.4.0")
+        implementation("com.github.skydoves:colorpickerview:2.5.0")
     }
     ```
 
