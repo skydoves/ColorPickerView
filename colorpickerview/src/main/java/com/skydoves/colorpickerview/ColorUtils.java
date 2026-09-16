@@ -22,13 +22,21 @@ import java.util.Locale;
 
 /** ColorUtils a util class for changing the form of colors. */
 class ColorUtils {
-  /** changes color to string hex code. */
+  /** changes color to string hex code, which is formatted as AARRGGBB. */
   public static String getHexCode(@ColorInt int color) {
     int a = Color.alpha(color);
     int r = Color.red(color);
     int g = Color.green(color);
     int b = Color.blue(color);
-    return String.format(Locale.getDefault(), "%02X%02X%02X%02X", a, r, g, b);
+    return String.format(Locale.ROOT, "%02X%02X%02X%02X", a, r, g, b);
+  }
+
+  /** changes color to string hex code without the alpha channel, which is formatted as RRGGBB. */
+  public static String getRgbHexCode(@ColorInt int color) {
+    int r = Color.red(color);
+    int g = Color.green(color);
+    int b = Color.blue(color);
+    return String.format(Locale.ROOT, "%02X%02X%02X", r, g, b);
   }
 
   /** changes color to argb integer array. */
