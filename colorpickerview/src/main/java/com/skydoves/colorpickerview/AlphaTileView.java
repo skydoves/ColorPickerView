@@ -89,9 +89,14 @@ public class AlphaTileView extends View {
   @Override
   protected void onSizeChanged(int width, int height, int oldWidth, int oldHeight) {
     super.onSizeChanged(width, height, oldWidth, oldHeight);
+    if (width <= 0 || height <= 0) {
+      backgroundBitmap = null;
+      return;
+    }
+
     AlphaTileDrawable drawable = builder.build();
     backgroundBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-    if (backgroundBitmap != null && !backgroundBitmap.isRecycled()) {
+    if (!backgroundBitmap.isRecycled()) {
       Canvas backgroundCanvas = new Canvas(backgroundBitmap);
       drawable.setBounds(0, 0, backgroundCanvas.getWidth(), backgroundCanvas.getHeight());
       drawable.draw(backgroundCanvas);
@@ -101,7 +106,9 @@ public class AlphaTileView extends View {
   @Override
   protected void onDraw(Canvas canvas) {
     super.onDraw(canvas);
-    canvas.drawBitmap(backgroundBitmap, 0, 0, null);
+    if (backgroundBitmap != null && !backgroundBitmap.isRecycled()) {
+      canvas.drawBitmap(backgroundBitmap, 0, 0, null);
+    }
     canvas.drawRect(0, 0, getWidth(), getMeasuredHeight(), colorPaint);
   }
 

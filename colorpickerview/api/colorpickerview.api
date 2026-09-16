@@ -21,6 +21,7 @@ public class com/skydoves/colorpickerview/ColorEnvelope {
 	public fun getArgb ()[I
 	public fun getColor ()I
 	public fun getHexCode ()Ljava/lang/String;
+	public fun getRgbHexCode ()Ljava/lang/String;
 }
 
 public class com/skydoves/colorpickerview/ColorHsvPalette : android/graphics/drawable/BitmapDrawable {
@@ -138,6 +139,9 @@ public class com/skydoves/colorpickerview/ColorPickerView : android/widget/Frame
 	public fun getSelectorX ()F
 	public fun getSelectorY ()F
 	public fun isHuePalette ()Z
+	public fun isResetBrightnessOnLowSaturationEnabled ()Z
+	public fun isSelectorPointValidationEnabled ()Z
+	public fun isSyncSlidersWithPaletteColorEnabled ()Z
 	public fun moveSelectorPoint (III)V
 	protected fun onCreateByBuilder (Lcom/skydoves/colorpickerview/ColorPickerView$Builder;)V
 	public fun onDestroy ()V
@@ -147,6 +151,7 @@ public class com/skydoves/colorpickerview/ColorPickerView : android/widget/Frame
 	public fun selectByHsvColor (I)V
 	public fun selectByHsvColorRes (I)V
 	public fun selectCenter ()V
+	public fun selectWhite ()V
 	public fun setActionMode (Lcom/skydoves/colorpickerview/ActionMode;)V
 	public fun setColorListener (Lcom/skydoves/colorpickerview/listeners/ColorPickerViewListener;)V
 	public fun setCoordinate (II)V
@@ -160,8 +165,11 @@ public class com/skydoves/colorpickerview/ColorPickerView : android/widget/Frame
 	public fun setPaletteDrawable (Landroid/graphics/drawable/Drawable;)V
 	public fun setPreferenceName (Ljava/lang/String;)V
 	public fun setPureColor (I)V
+	public fun setResetBrightnessOnLowSaturation (Z)V
 	public fun setSelectorDrawable (Landroid/graphics/drawable/Drawable;)V
 	public fun setSelectorPoint (II)V
+	public fun setSelectorPointValidation (Z)V
+	public fun setSyncSlidersWithPaletteColor (Z)V
 }
 
 public class com/skydoves/colorpickerview/ColorPickerView$Builder {
@@ -181,9 +189,12 @@ public class com/skydoves/colorpickerview/ColorPickerView$Builder {
 	public fun setLifecycleOwner (Landroidx/lifecycle/LifecycleOwner;)Lcom/skydoves/colorpickerview/ColorPickerView$Builder;
 	public fun setPaletteDrawable (Landroid/graphics/drawable/Drawable;)Lcom/skydoves/colorpickerview/ColorPickerView$Builder;
 	public fun setPreferenceName (Ljava/lang/String;)Lcom/skydoves/colorpickerview/ColorPickerView$Builder;
+	public fun setResetBrightnessOnLowSaturation (Z)Lcom/skydoves/colorpickerview/ColorPickerView$Builder;
 	public fun setSelectorAlpha (F)Lcom/skydoves/colorpickerview/ColorPickerView$Builder;
 	public fun setSelectorDrawable (Landroid/graphics/drawable/Drawable;)Lcom/skydoves/colorpickerview/ColorPickerView$Builder;
+	public fun setSelectorPointValidation (Z)Lcom/skydoves/colorpickerview/ColorPickerView$Builder;
 	public fun setSelectorSize (I)Lcom/skydoves/colorpickerview/ColorPickerView$Builder;
+	public fun setSyncSlidersWithPaletteColor (Z)Lcom/skydoves/colorpickerview/ColorPickerView$Builder;
 	public fun setWidth (I)Lcom/skydoves/colorpickerview/ColorPickerView$Builder;
 }
 
@@ -278,15 +289,18 @@ public class com/skydoves/colorpickerview/preference/ColorPickerPreferenceManage
 	public fun getColor (Ljava/lang/String;I)I
 	protected fun getColorName (Ljava/lang/String;)Ljava/lang/String;
 	public static fun getInstance (Landroid/content/Context;)Lcom/skydoves/colorpickerview/preference/ColorPickerPreferenceManager;
+	public static fun getInstance (Landroid/content/Context;Ljava/lang/String;)Lcom/skydoves/colorpickerview/preference/ColorPickerPreferenceManager;
 	public fun getSelectorPosition (Ljava/lang/String;Landroid/graphics/Point;)Landroid/graphics/Point;
 	protected fun getSelectorXName (Ljava/lang/String;)Ljava/lang/String;
 	protected fun getSelectorYName (Ljava/lang/String;)Ljava/lang/String;
+	public fun getSharedPreferences ()Landroid/content/SharedPreferences;
 	public fun restoreColorPickerData (Lcom/skydoves/colorpickerview/ColorPickerView;)V
 	public fun saveColorPickerData (Lcom/skydoves/colorpickerview/ColorPickerView;)V
 	public fun setAlphaSliderPosition (Ljava/lang/String;I)Lcom/skydoves/colorpickerview/preference/ColorPickerPreferenceManager;
 	public fun setBrightnessSliderPosition (Ljava/lang/String;I)Lcom/skydoves/colorpickerview/preference/ColorPickerPreferenceManager;
 	public fun setColor (Ljava/lang/String;I)Lcom/skydoves/colorpickerview/preference/ColorPickerPreferenceManager;
 	public fun setSelectorPosition (Ljava/lang/String;Landroid/graphics/Point;)Lcom/skydoves/colorpickerview/preference/ColorPickerPreferenceManager;
+	public fun setSharedPreferenceName (Landroid/content/Context;Ljava/lang/String;)Lcom/skydoves/colorpickerview/preference/ColorPickerPreferenceManager;
 }
 
 public class com/skydoves/colorpickerview/sliders/AlphaSlideBar {
