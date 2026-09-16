@@ -45,6 +45,8 @@
     <attr name="selectorPointValidation" format="boolean" />
     <!-- when enabled, automatically resets brightness slider to maximum when selecting colors with low saturation (near center of HSV palette), allowing easy selection of white. -->
     <attr name="resetBrightnessOnLowSaturation" format="boolean" />
+    <!-- when enabled, moves the alpha and the brightness slide bars to the alpha and the brightness of a pixel, which is picked from a bitmap palette. this attribute doesn't affect the default HSV palette. -->
+    <attr name="syncSlidersWithPaletteColor" format="boolean" />
   </declare-styleable>
   <declare-styleable name="AlphaSlideBar">
     <!-- sets a customized selector drawable. -->
