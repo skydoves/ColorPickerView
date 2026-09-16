@@ -36,6 +36,7 @@ public class PowerMenuUtils {
         .addItem(new PowerMenuItem("Palette(Gallery)", false))
         .addItem(new PowerMenuItem("Selector", false))
         .addItem(new PowerMenuItem("Dialog", false))
+        .addItem(new PowerMenuItem("Zoom", false))
         .setLifecycleOwner(lifecycleOwner)
         .setAnimation(MenuAnimation.SHOWUP_TOP_LEFT)
         .setCircularEffect(CircularEffect.BODY)
