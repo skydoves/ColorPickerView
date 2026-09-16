@@ -26,7 +26,7 @@ android {
   namespace = "com.skydoves.colorpickerviewdemo"
   defaultConfig {
     applicationId = "com.skydoves.colorpickerviewdemo"
-    minSdk = Configuration.minSdk
+    minSdk = Configuration.minSdkDemo
     targetSdk = Configuration.targetSdk
     versionCode = Configuration.versionCode
     versionName = Configuration.versionName
