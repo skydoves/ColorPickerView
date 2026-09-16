@@ -89,6 +89,8 @@ app:actionMode="last" // sets action mode 'always' or 'last'.
 app:initialColor="@color/colorPrimary"
 app:preferenceName="MyColorPicker" // sets a preference name.
 app:debounceDuration="200" // sets a debounce duration of the invoking color listener.
+app:zoomEnabled="true" // enables the pinch zoom gesture. This attribute will work with only a bitmap palette.
+app:maxZoom="5.0" // sets the maximum scale of the zoom gesture.
 ```
 
 ### ColorListener

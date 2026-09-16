@@ -25,6 +25,7 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -32,6 +33,7 @@ import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
@@ -72,6 +74,9 @@ import com.skydoves.colorpickerview.sliders.BrightnessSlideBar;
 @SuppressWarnings("unused")
 public class ColorPickerView extends FrameLayout implements LifecycleObserver {
 
+  private static final float MIN_ZOOM = 1.0f;
+  private static final float DEFAULT_MAX_ZOOM = 3.0f;
+
   @ColorInt
   private int selectedPureColor;
   @ColorInt
@@ -107,6 +112,15 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
   private boolean selectorPointValidation = true;
   private boolean resetBrightnessOnLowSaturation = true;
   private boolean syncSlidersWithPaletteColor = true;
+  private boolean zoomEnabled = false;
+  private float maxZoom = DEFAULT_MAX_ZOOM;
+  private float zoomScale = MIN_ZOOM;
+  private final Matrix paletteFitMatrix = new Matrix();
+  private final Matrix paletteZoomMatrix = new Matrix();
+  private ScaleGestureDetector zoomGestureDetector;
+  private boolean multiTouching = false;
+  private float lastFocusX;
+  private float lastFocusY;
   private final ColorPickerPreferenceManager preferenceManager =
     ColorPickerPreferenceManager.getInstance(getContext());
 
@@ -188,6 +202,12 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
         this.syncSlidersWithPaletteColor =
           a.getBoolean(R.styleable.ColorPickerView_syncSlidersWithPaletteColor, syncSlidersWithPaletteColor);
       }
+      if (a.hasValue(R.styleable.ColorPickerView_zoomEnabled)) {
+        this.zoomEnabled = a.getBoolean(R.styleable.ColorPickerView_zoomEnabled, zoomEnabled);
+      }
+      if (a.hasValue(R.styleable.ColorPickerView_maxZoom)) {
+        setMaxZoom(a.getFloat(R.styleable.ColorPickerView_maxZoom, maxZoom));
+      }
     } finally {
       a.recycle();
     }
@@ -221,6 +241,17 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
     addView(selector, selectorParam);
     selector.setAlpha(selector_alpha);
 
+    zoomGestureDetector =
+      new ScaleGestureDetector(
+        getContext(),
+        new ScaleGestureDetector.SimpleOnScaleGestureListener() {
+          @Override
+          public boolean onScale(@NonNull ScaleGestureDetector detector) {
+            zoomPalette(detector.getScaleFactor(), detector.getFocusX(), detector.getFocusY());
+            return true;
+          }
+        });
+
     getViewTreeObserver()
       .addOnGlobalLayoutListener(
         new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -236,10 +267,12 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
   protected void onSizeChanged(int width, int height, int oldWidth, int oldHeight) {
     super.onSizeChanged(width, height, oldWidth, oldHeight);
 
-    if (palette.getDrawable() == null) {
+    if (palette.getDrawable() == null && width > 0 && height > 0) {
       Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
       palette.setImageDrawable(new ColorHsvPalette(getResources(), bitmap));
     }
+
+    updatePaletteZoom();
   }
 
   private void onFinishInflated() {
@@ -296,6 +329,8 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
     this.selectorPointValidation = builder.selectorPointValidation;
     this.resetBrightnessOnLowSaturation = builder.resetBrightnessOnLowSaturation;
     this.syncSlidersWithPaletteColor = builder.syncSlidersWithPaletteColor;
+    this.zoomEnabled = builder.zoomEnabled;
+    setMaxZoom(builder.maxZoom);
   }
 
   @SuppressLint("ClickableViewAccessibility")
@@ -304,6 +339,10 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
     if (!this.isEnabled()) {
       return false;
     }
+    if (isZoomable() && onZoomTouchReceived(event)) {
+      return true;
+    }
+
     switch (event.getActionMasked()) {
       case MotionEvent.ACTION_DOWN:
       case MotionEvent.ACTION_MOVE:
@@ -355,6 +394,209 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
       notifyColorChanged();
     }
     return true;
+  }
+
+  /**
+   * handles a multi touch event for zooming and moving the palette.
+   *
+   * @param event {@link MotionEvent}.
+   * @return the event is consumed by the zoom gesture or not.
+   */
+  private boolean onZoomTouchReceived(MotionEvent event) {
+    zoomGestureDetector.onTouchEvent(event);
+
+    switch (event.getActionMasked()) {
+      case MotionEvent.ACTION_DOWN:
+        multiTouching = false;
+        break;
+      case MotionEvent.ACTION_POINTER_DOWN:
+        multiTouching = true;
+        selector.setPressed(false);
+        updateLastFocus(event, -1);
+        break;
+      case MotionEvent.ACTION_MOVE:
+        if (multiTouching && event.getPointerCount() > 1) {
+          float focusX = getFocus(event, -1, true);
+          float focusY = getFocus(event, -1, false);
+          movePalette(focusX - lastFocusX, focusY - lastFocusY);
+          lastFocusX = focusX;
+          lastFocusY = focusY;
+        }
+        break;
+      case MotionEvent.ACTION_POINTER_UP:
+        // recalculates the focus without the released pointer to avoid jumping of the palette.
+        updateLastFocus(event, event.getActionIndex());
+        break;
+      case MotionEvent.ACTION_UP:
+      case MotionEvent.ACTION_CANCEL:
+        boolean consumed = multiTouching;
+        multiTouching = false;
+        return consumed;
+      default:
+        break;
+    }
+    return multiTouching;
+  }
+
+  private void updateLastFocus(MotionEvent event, int excludedPointerIndex) {
+    lastFocusX = getFocus(event, excludedPointerIndex, true);
+    lastFocusY = getFocus(event, excludedPointerIndex, false);
+  }
+
+  /** gets the center coordinate of the pointers, which is used as a focus of the zoom gesture. */
+  private float getFocus(MotionEvent event, int excludedPointerIndex, boolean isXAxis) {
+    float sum = 0;
+    int count = 0;
+    for (int index = 0; index < event.getPointerCount(); index++) {
+      if (index == excludedPointerIndex) continue;
+      sum += isXAxis ? event.getX(index) : event.getY(index);
+      count++;
+    }
+    return count == 0 ? 0 : sum / count;
+  }
+
+  /** zooms the palette by the given scale factor based on the focus of the gesture. */
+  private void zoomPalette(float scaleFactor, float focusX, float focusY) {
+    float scale = zoomScale * scaleFactor;
+    if (scale < MIN_ZOOM) {
+      scaleFactor = MIN_ZOOM / zoomScale;
+    } else if (scale > maxZoom) {
+      scaleFactor = maxZoom / zoomScale;
+    }
+    if (scaleFactor == 1.0f) return;
+
+    Matrix delta = new Matrix();
+    delta.setScale(scaleFactor, scaleFactor, focusX, focusY);
+    transformPalette(delta);
+  }
+
+  /** moves the zoomed palette by the given distances. */
+  private void movePalette(float dx, float dy) {
+    if (dx == 0 && dy == 0) return;
+
+    Matrix delta = new Matrix();
+    delta.setTranslate(dx, dy);
+    transformPalette(delta);
+  }
+
+  /** applies the given transformation to the palette and the selector together. */
+  private void transformPalette(Matrix delta) {
+    paletteZoomMatrix.postConcat(delta);
+
+    Matrix boundary = getPaletteBoundaryMatrix();
+    if (boundary != null) {
+      paletteZoomMatrix.postConcat(boundary);
+      delta.postConcat(boundary);
+    }
+
+    float[] values = new float[9];
+    paletteZoomMatrix.getValues(values);
+    zoomScale = values[Matrix.MSCALE_X];
+
+    applyPaletteMatrix();
+    moveSelectorByMatrix(delta);
+  }
+
+  /**
+   * gets a translation matrix, which keeps the zoomed palette covering the view. returns null if
+   * the palette is already in the boundary.
+   */
+  private @Nullable Matrix getPaletteBoundaryMatrix() {
+    Drawable drawable = palette.getDrawable();
+    if (drawable == null) return null;
+
+    Matrix matrix = new Matrix(paletteFitMatrix);
+    matrix.postConcat(paletteZoomMatrix);
+    RectF rect = new RectF(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+    matrix.mapRect(rect);
+
+    float dx = 0;
+    if (rect.width() <= getWidth()) {
+      dx = (getWidth() - rect.width()) * 0.5f - rect.left;
+    } else if (rect.left > 0) {
+      dx = -rect.left;
+    } else if (rect.right < getWidth()) {
+      dx = getWidth() - rect.right;
+    }
+
+    float dy = 0;
+    if (rect.height() <= getHeight()) {
+      dy = (getHeight() - rect.height()) * 0.5f - rect.top;
+    } else if (rect.top > 0) {
+      dy = -rect.top;
+    } else if (rect.bottom < getHeight()) {
+      dy = getHeight() - rect.bottom;
+    }
+
+    if (dx == 0 && dy == 0) return null;
+
+    Matrix boundary = new Matrix();
+    boundary.setTranslate(dx, dy);
+    return boundary;
+  }
+
+  /** keeps the selector on the same position of the palette after the palette is transformed. */
+  private void moveSelectorByMatrix(Matrix delta) {
+    if (selectedPoint == null) return;
+
+    float[] points = new float[] {selectedPoint.x, selectedPoint.y};
+    delta.mapPoints(points);
+    selectedPoint = new Point((int) points[0], (int) points[1]);
+    setCoordinate(selectedPoint.x, selectedPoint.y);
+    notifyToFlagView(selectedPoint);
+  }
+
+  private void applyPaletteMatrix() {
+    Matrix matrix = new Matrix(paletteFitMatrix);
+    matrix.postConcat(paletteZoomMatrix);
+    palette.setScaleType(ImageView.ScaleType.MATRIX);
+    palette.setImageMatrix(matrix);
+  }
+
+  /**
+   * calculates the matrix, which draws the palette drawable as the {@link
+   * ImageView.ScaleType#FIT_CENTER} does.
+   *
+   * @return the matrix is calculated or not.
+   */
+  private boolean updatePaletteFitMatrix() {
+    Drawable drawable = palette.getDrawable();
+    if (drawable == null || getWidth() == 0 || getHeight() == 0) return false;
+
+    float width = drawable.getIntrinsicWidth();
+    float height = drawable.getIntrinsicHeight();
+    if (width <= 0 || height <= 0) return false;
+
+    float scale = Math.min(getWidth() / width, getHeight() / height);
+    paletteFitMatrix.setScale(scale, scale);
+    paletteFitMatrix.postTranslate(
+      (getWidth() - width * scale) * 0.5f, (getHeight() - height * scale) * 0.5f);
+    return true;
+  }
+
+  /** restores the zoom state whenever the palette drawable or the size of the view is changed. */
+  private void updatePaletteZoom() {
+    if (!zoomEnabled || palette == null) return;
+
+    if (isZoomable() && updatePaletteFitMatrix()) {
+      paletteZoomMatrix.reset();
+      zoomScale = MIN_ZOOM;
+      applyPaletteMatrix();
+    } else {
+      restorePaletteScaleType();
+    }
+  }
+
+  private void restorePaletteScaleType() {
+    paletteZoomMatrix.reset();
+    zoomScale = MIN_ZOOM;
+    palette.setScaleType(ImageView.ScaleType.FIT_CENTER);
+    palette.setImageMatrix(new Matrix());
+  }
+
+  /** the zoom gesture works only with a bitmap palette, not with the default HSV palette. */
+  private boolean isZoomable() {
+    return zoomEnabled && palette.getDrawable() != null && !isHuePalette();
   }
 
   /**
@@ -831,6 +1073,7 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
 
     selectedPureColor = Color.WHITE;
     notifyToSlideBars();
+    updatePaletteZoom();
 
     if (flagView != null) {
       removeView(flagView);
@@ -1093,6 +1336,79 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
   }
 
   /**
+   * Returns whether the palette can be zoomed by a pinch gesture.
+   *
+   * @return true if the zoom gesture is enabled, false otherwise.
+   */
+  public boolean isZoomEnabled() {
+    return zoomEnabled;
+  }
+
+  /**
+   * Sets whether the palette can be zoomed by a pinch gesture.
+   *
+   * <p>When enabled, a pinch gesture zooms the palette in and out, and a two finger drag moves the
+   * zoomed palette. A single touch still selects a color, so tiny color spots of an image can be
+   * picked more precisely.
+   *
+   * <p>The zoom gesture works only with a bitmap palette, which is set by {@link
+   * #setPaletteDrawable(Drawable)}. It does not affect the default HSV palette.
+   *
+   * @param enabled true to enable the zoom gesture, false to disable.
+   */
+  public void setZoomEnabled(boolean enabled) {
+    if (this.zoomEnabled == enabled) return;
+
+    this.zoomEnabled = enabled;
+    if (palette == null) return;
+
+    if (enabled) {
+      updatePaletteZoom();
+    } else {
+      restorePaletteScaleType();
+    }
+  }
+
+  /**
+   * gets the maximum scale of the zoom gesture.
+   *
+   * @return the maximum scale of the zoom gesture.
+   */
+  public float getMaxZoom() {
+    return maxZoom;
+  }
+
+  /**
+   * sets the maximum scale of the zoom gesture, which should be bigger than 1.0.
+   *
+   * @param maxZoom the maximum scale of the zoom gesture.
+   */
+  public void setMaxZoom(float maxZoom) {
+    this.maxZoom = Math.max(MIN_ZOOM, maxZoom);
+  }
+
+  /**
+   * gets the current scale of the zoomed palette.
+   *
+   * @return the current scale of the zoomed palette.
+   */
+  public float getZoomScale() {
+    return zoomScale;
+  }
+
+  /** restores the zoomed palette to its original scale and position. */
+  public void resetZoom() {
+    if (!isZoomable()) return;
+
+    Matrix delta = new Matrix();
+    if (paletteZoomMatrix.invert(delta)) {
+      transformPalette(delta);
+    } else {
+      updatePaletteZoom();
+    }
+  }
+
+  /**
    * sets the {@link LifecycleOwner}.
    *
    * @param lifecycleOwner {@link LifecycleOwner}.
@@ -1156,6 +1472,8 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
     private boolean selectorPointValidation = true;
     private boolean resetBrightnessOnLowSaturation = true;
     private boolean syncSlidersWithPaletteColor = true;
+    private boolean zoomEnabled = false;
+    private float maxZoom = DEFAULT_MAX_ZOOM;
 
     public Builder(Context context) {
       this.context = context;
@@ -1263,6 +1581,16 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
 
     public Builder setSyncSlidersWithPaletteColor(boolean enabled) {
       this.syncSlidersWithPaletteColor = enabled;
+      return this;
+    }
+
+    public Builder setZoomEnabled(boolean enabled) {
+      this.zoomEnabled = enabled;
+      return this;
+    }
+
+    public Builder setMaxZoom(float maxZoom) {
+      this.maxZoom = maxZoom;
       return this;
     }
 

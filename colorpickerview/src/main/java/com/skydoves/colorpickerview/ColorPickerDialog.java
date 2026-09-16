@@ -23,10 +23,14 @@ import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListAdapter;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 
 import com.skydoves.colorpickerview.databinding.ColorpickerviewDialogColorpickerBinding;
 import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener;
@@ -58,6 +62,9 @@ public class ColorPickerDialog extends AlertDialog {
     private boolean shouldAttachAlphaSlideBar = true;
     private boolean shouldAttachBrightnessSlideBar = true;
     private int bottomSpace = SizeUtils.dp2Px(getContext(), 10);
+    private Integer positiveButtonTextColor;
+    private Integer negativeButtonTextColor;
+    private Integer neutralButtonTextColor;
 
     public Builder(Context context) {
       super(context);
@@ -155,6 +162,69 @@ public class ColorPickerDialog extends AlertDialog {
     }
 
     /**
+     * sets a text color of the positive button.
+     *
+     * @param color a text color of the positive button.
+     * @return {@link Builder}.
+     */
+    public Builder setPositiveButtonTextColor(@ColorInt int color) {
+      this.positiveButtonTextColor = color;
+      return this;
+    }
+
+    /**
+     * sets a text color resource of the positive button.
+     *
+     * @param resource a text color resource of the positive button.
+     * @return {@link Builder}.
+     */
+    public Builder setPositiveButtonTextColorRes(@ColorRes int resource) {
+      return setPositiveButtonTextColor(ContextCompat.getColor(getContext(), resource));
+    }
+
+    /**
+     * sets a text color of the negative button.
+     *
+     * @param color a text color of the negative button.
+     * @return {@link Builder}.
+     */
+    public Builder setNegativeButtonTextColor(@ColorInt int color) {
+      this.negativeButtonTextColor = color;
+      return this;
+    }
+
+    /**
+     * sets a text color resource of the negative button.
+     *
+     * @param resource a text color resource of the negative button.
+     * @return {@link Builder}.
+     */
+    public Builder setNegativeButtonTextColorRes(@ColorRes int resource) {
+      return setNegativeButtonTextColor(ContextCompat.getColor(getContext(), resource));
+    }
+
+    /**
+     * sets a text color of the neutral button.
+     *
+     * @param color a text color of the neutral button.
+     * @return {@link Builder}.
+     */
+    public Builder setNeutralButtonTextColor(@ColorInt int color) {
+      this.neutralButtonTextColor = color;
+      return this;
+    }
+
+    /**
+     * sets a text color resource of the neutral button.
+     *
+     * @param resource a text color resource of the neutral button.
+     * @return {@link Builder}.
+     */
+    public Builder setNeutralButtonTextColorRes(@ColorRes int resource) {
+      return setNeutralButtonTextColor(ContextCompat.getColor(getContext(), resource));
+    }
+
+    /**
      * sets positive button with {@link ColorPickerViewListener} on the {@link ColorPickerDialog}.
      *
      * @param textId        string resource integer id.
@@ -248,7 +318,35 @@ public class ColorPickerDialog extends AlertDialog {
       }
 
       super.setView(dialogBinding.getRoot());
-      return super.create();
+
+      AlertDialog dialog = super.create();
+      applyButtonTextColors(dialog);
+      return dialog;
+    }
+
+    /** the buttons are created when the dialog is shown, so the colors are applied on showing. */
+    private void applyButtonTextColors(AlertDialog dialog) {
+      if (positiveButtonTextColor == null
+        && negativeButtonTextColor == null
+        && neutralButtonTextColor == null) {
+        return;
+      }
+
+      dialog.setOnShowListener(
+        dialogInterface -> {
+          setButtonTextColor(dialog, AlertDialog.BUTTON_POSITIVE, positiveButtonTextColor);
+          setButtonTextColor(dialog, AlertDialog.BUTTON_NEGATIVE, negativeButtonTextColor);
+          setButtonTextColor(dialog, AlertDialog.BUTTON_NEUTRAL, neutralButtonTextColor);
+        });
+    }
+
+    private void setButtonTextColor(AlertDialog dialog, int whichButton, Integer color) {
+      if (color == null) return;
+
+      Button button = dialog.getButton(whichButton);
+      if (button != null) {
+        button.setTextColor(color);
+      }
     }
 
     @Override

@@ -99,7 +99,8 @@ You can simply use `ColorPickerView` by defining it in your XML layout files. Th
 
 ```kotlin
 envelope.color    // returns an integer color
-envelope.hexCode  // returns a hex code string (e.g., "FF5722")
+envelope.hexCode  // returns an ARGB hex code string (e.g., "FFFF5722")
+envelope.rgbHexCode // returns an RGB hex code string without the alpha (e.g., "FF5722")
 envelope.argb     // returns an ARGB integer array [alpha, red, green, blue]
 ```
 
@@ -120,7 +121,9 @@ You can customize the palette image, selector, and various options using XML att
     app:actionMode="last"
     app:initialColor="@color/colorPrimary"
     app:preferenceName="MyColorPicker"
-    app:debounceDuration="200" />
+    app:debounceDuration="200"
+    app:zoomEnabled="true"
+    app:maxZoom="5.0" />
 ```
 
 | Attribute | Description |
@@ -134,6 +137,11 @@ You can customize the palette image, selector, and various options using XML att
 | `initialColor` | Sets an initial position using a specific color |
 | `preferenceName` | Sets a preference name for state persistence |
 | `debounceDuration` | Sets debounce duration in milliseconds |
+| `selectorPointValidation` | Approximates the selected point to the nearest valid color |
+| `resetBrightnessOnLowSaturation` | Resets the brightness slider on a low saturation color |
+| `syncSlidersWithPaletteColor` | Moves the sliders to the alpha and the brightness of a picked pixel |
+| `zoomEnabled` | Enables the pinch zoom gesture for a bitmap palette |
+| `maxZoom` | Sets the maximum scale of the zoom gesture |
 
 ## Create using Builder
 

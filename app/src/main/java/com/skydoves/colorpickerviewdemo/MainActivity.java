@@ -25,20 +25,17 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import com.skydoves.colorpickerview.AlphaTileView;
 import com.skydoves.colorpickerview.ColorEnvelope;
 import com.skydoves.colorpickerview.ColorPickerDialog;
 import com.skydoves.colorpickerview.ColorPickerView;
 import com.skydoves.colorpickerview.flag.BubbleFlag;
 import com.skydoves.colorpickerview.flag.FlagMode;
 import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener;
-import com.skydoves.colorpickerview.sliders.AlphaSlideBar;
-import com.skydoves.colorpickerview.sliders.BrightnessSlideBar;
+import com.skydoves.colorpickerviewdemo.databinding.ActivityMainBinding;
 import com.skydoves.powermenu.OnMenuItemClickListener;
 import com.skydoves.powermenu.PowerMenu;
 import com.skydoves.powermenu.PowerMenuItem;
@@ -50,6 +47,7 @@ import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
 
+  private ActivityMainBinding binding;
   private ColorPickerView colorPickerView;
 
   private boolean FLAG_PALETTE = false;
@@ -75,6 +73,9 @@ public class MainActivity extends AppCompatActivity {
           case 3:
             dialog();
             break;
+          case 4:
+            zoom();
+            break;
         }
         powerMenu.dismiss();
       }
@@ -83,11 +84,12 @@ public class MainActivity extends AppCompatActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
+    binding = ActivityMainBinding.inflate(getLayoutInflater());
+    setContentView(binding.getRoot());
 
     powerMenu = PowerMenuUtils.getPowerMenu(this, this, powerMenuItemClickListener);
 
-    colorPickerView = findViewById(R.id.colorPickerView);
+    colorPickerView = binding.colorPickerView;
     BubbleFlag bubbleFlag = new BubbleFlag(this);
     bubbleFlag.setFlagMode(FlagMode.FADE);
     colorPickerView.setFlagView(bubbleFlag);
@@ -99,12 +101,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
     // attach alphaSlideBar
-    final AlphaSlideBar alphaSlideBar = findViewById(R.id.alphaSlideBar);
-    colorPickerView.attachAlphaSlider(alphaSlideBar);
+    colorPickerView.attachAlphaSlider(binding.alphaSlideBar);
 
     // attach brightnessSlideBar
-    final BrightnessSlideBar brightnessSlideBar = findViewById(R.id.brightnessSlide);
-    colorPickerView.attachBrightnessSlider(brightnessSlideBar);
+    colorPickerView.attachBrightnessSlider(binding.brightnessSlide);
     colorPickerView.setLifecycleOwner(this);
   }
 
@@ -115,11 +115,8 @@ public class MainActivity extends AppCompatActivity {
    */
   @SuppressLint("SetTextI18n")
   private void setLayoutColor(ColorEnvelope envelope) {
-    TextView textView = findViewById(R.id.textView);
-    textView.setText("#" + envelope.getHexCode());
-
-    AlphaTileView alphaTileView = findViewById(R.id.alphaTileView);
-    alphaTileView.setPaintColor(envelope.getColor());
+    binding.textView.setText("#" + envelope.getHexCode());
+    binding.alphaTileView.setPaintColor(envelope.getColor());
   }
 
   /**
@@ -160,6 +157,16 @@ public class MainActivity extends AppCompatActivity {
       colorPickerView.setSelectorDrawable(ContextCompat.getDrawable(this, R.drawable.wheel_dark));
     }
     FLAG_SELECTOR = !FLAG_SELECTOR;
+  }
+
+  /**
+   * enables or disables the pinch zoom gesture of the palette. the zoom gesture works with only a
+   * bitmap palette, which can be changed by the Palette menu.
+   */
+  private void zoom() {
+    boolean enabled = !colorPickerView.isZoomEnabled();
+    colorPickerView.setZoomEnabled(enabled);
+    Timber.d("zoom enabled: %s", enabled);
   }
 
   /**

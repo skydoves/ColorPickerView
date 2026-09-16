@@ -14,6 +14,10 @@ public class com/skydoves/colorpickerview/AlphaTileView : android/view/View {
 	protected fun onSizeChanged (IIII)V
 	public fun setBackgroundColor (I)V
 	public fun setPaintColor (I)V
+	public fun setStrokeColor (I)V
+	public fun setStrokeColorRes (I)V
+	public fun setStrokeSize (F)V
+	public fun setStrokeSizeRes (I)V
 }
 
 public class com/skydoves/colorpickerview/ColorEnvelope {
@@ -77,10 +81,14 @@ public class com/skydoves/colorpickerview/ColorPickerDialog$Builder : androidx/a
 	public fun setNegativeButton (ILandroid/content/DialogInterface$OnClickListener;)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
 	public synthetic fun setNegativeButton (Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroidx/appcompat/app/AlertDialog$Builder;
 	public fun setNegativeButton (Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
+	public fun setNegativeButtonTextColor (I)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
+	public fun setNegativeButtonTextColorRes (I)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
 	public synthetic fun setNeutralButton (ILandroid/content/DialogInterface$OnClickListener;)Landroidx/appcompat/app/AlertDialog$Builder;
 	public fun setNeutralButton (ILandroid/content/DialogInterface$OnClickListener;)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
 	public synthetic fun setNeutralButton (Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroidx/appcompat/app/AlertDialog$Builder;
 	public fun setNeutralButton (Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
+	public fun setNeutralButtonTextColor (I)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
+	public fun setNeutralButtonTextColorRes (I)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
 	public synthetic fun setOnCancelListener (Landroid/content/DialogInterface$OnCancelListener;)Landroidx/appcompat/app/AlertDialog$Builder;
 	public fun setOnCancelListener (Landroid/content/DialogInterface$OnCancelListener;)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
 	public synthetic fun setOnDismissListener (Landroid/content/DialogInterface$OnDismissListener;)Landroidx/appcompat/app/AlertDialog$Builder;
@@ -95,6 +103,8 @@ public class com/skydoves/colorpickerview/ColorPickerDialog$Builder : androidx/a
 	public synthetic fun setPositiveButton (Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroidx/appcompat/app/AlertDialog$Builder;
 	public fun setPositiveButton (Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
 	public fun setPositiveButton (Ljava/lang/CharSequence;Lcom/skydoves/colorpickerview/listeners/ColorPickerViewListener;)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
+	public fun setPositiveButtonTextColor (I)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
+	public fun setPositiveButtonTextColorRes (I)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
 	public fun setPreferenceName (Ljava/lang/String;)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
 	public synthetic fun setSingleChoiceItems (IILandroid/content/DialogInterface$OnClickListener;)Landroidx/appcompat/app/AlertDialog$Builder;
 	public fun setSingleChoiceItems (IILandroid/content/DialogInterface$OnClickListener;)Lcom/skydoves/colorpickerview/ColorPickerDialog$Builder;
@@ -132,22 +142,26 @@ public class com/skydoves/colorpickerview/ColorPickerView : android/widget/Frame
 	protected fun getColorFromBitmap (FF)I
 	public fun getDebounceDuration ()J
 	public fun getFlagView ()Lcom/skydoves/colorpickerview/flag/FlagView;
+	public fun getMaxZoom ()F
 	public fun getPreferenceName ()Ljava/lang/String;
 	public fun getPureColor ()I
 	public fun getSelectedPoint ()Landroid/graphics/Point;
 	public fun getSelector ()Landroid/widget/ImageView;
 	public fun getSelectorX ()F
 	public fun getSelectorY ()F
+	public fun getZoomScale ()F
 	public fun isHuePalette ()Z
 	public fun isResetBrightnessOnLowSaturationEnabled ()Z
 	public fun isSelectorPointValidationEnabled ()Z
 	public fun isSyncSlidersWithPaletteColorEnabled ()Z
+	public fun isZoomEnabled ()Z
 	public fun moveSelectorPoint (III)V
 	protected fun onCreateByBuilder (Lcom/skydoves/colorpickerview/ColorPickerView$Builder;)V
 	public fun onDestroy ()V
 	protected fun onSizeChanged (IIII)V
 	public fun onTouchEvent (Landroid/view/MotionEvent;)Z
 	public fun removeLifecycleOwner (Landroidx/lifecycle/LifecycleOwner;)V
+	public fun resetZoom ()V
 	public fun selectByHsvColor (I)V
 	public fun selectByHsvColorRes (I)V
 	public fun selectCenter ()V
@@ -162,6 +176,7 @@ public class com/skydoves/colorpickerview/ColorPickerView : android/widget/Frame
 	public fun setInitialColor (I)V
 	public fun setInitialColorRes (I)V
 	public fun setLifecycleOwner (Landroidx/lifecycle/LifecycleOwner;)V
+	public fun setMaxZoom (F)V
 	public fun setPaletteDrawable (Landroid/graphics/drawable/Drawable;)V
 	public fun setPreferenceName (Ljava/lang/String;)V
 	public fun setPureColor (I)V
@@ -170,6 +185,7 @@ public class com/skydoves/colorpickerview/ColorPickerView : android/widget/Frame
 	public fun setSelectorPoint (II)V
 	public fun setSelectorPointValidation (Z)V
 	public fun setSyncSlidersWithPaletteColor (Z)V
+	public fun setZoomEnabled (Z)V
 }
 
 public class com/skydoves/colorpickerview/ColorPickerView$Builder {
@@ -187,6 +203,7 @@ public class com/skydoves/colorpickerview/ColorPickerView$Builder {
 	public fun setInitialColor (I)Lcom/skydoves/colorpickerview/ColorPickerView$Builder;
 	public fun setInitialColorRes (I)Lcom/skydoves/colorpickerview/ColorPickerView$Builder;
 	public fun setLifecycleOwner (Landroidx/lifecycle/LifecycleOwner;)Lcom/skydoves/colorpickerview/ColorPickerView$Builder;
+	public fun setMaxZoom (F)Lcom/skydoves/colorpickerview/ColorPickerView$Builder;
 	public fun setPaletteDrawable (Landroid/graphics/drawable/Drawable;)Lcom/skydoves/colorpickerview/ColorPickerView$Builder;
 	public fun setPreferenceName (Ljava/lang/String;)Lcom/skydoves/colorpickerview/ColorPickerView$Builder;
 	public fun setResetBrightnessOnLowSaturation (Z)Lcom/skydoves/colorpickerview/ColorPickerView$Builder;
@@ -196,6 +213,7 @@ public class com/skydoves/colorpickerview/ColorPickerView$Builder {
 	public fun setSelectorSize (I)Lcom/skydoves/colorpickerview/ColorPickerView$Builder;
 	public fun setSyncSlidersWithPaletteColor (Z)Lcom/skydoves/colorpickerview/ColorPickerView$Builder;
 	public fun setWidth (I)Lcom/skydoves/colorpickerview/ColorPickerView$Builder;
+	public fun setZoomEnabled (Z)Lcom/skydoves/colorpickerview/ColorPickerView$Builder;
 }
 
 public class com/skydoves/colorpickerview/FadeUtils {
