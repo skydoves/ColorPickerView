@@ -129,6 +129,30 @@ Or select the center of the palette:
 colorPickerView.selectCenter()
 ```
 
+## Zoom
+
+A bitmap palette can be zoomed by a pinch gesture, which helps to pick tiny color spots of an image.
+The gesture is disabled by default and it doesn't affect the default HSV palette.
+
+=== "Kotlin"
+
+    ```kotlin
+    colorPickerView.setPaletteDrawable(drawable)
+    colorPickerView.isZoomEnabled = true
+    colorPickerView.maxZoom = 5.0f // the default value is 3.0f.
+    ```
+
+=== "Java"
+
+    ```java
+    colorPickerView.setPaletteDrawable(drawable);
+    colorPickerView.setZoomEnabled(true);
+    colorPickerView.setMaxZoom(5.0f); // the default value is 3.0f.
+    ```
+
+A pinch gesture zooms the palette in and out and a two finger drag moves the zoomed palette,
+while a single touch still selects a color. `resetZoom()` restores the original scale and position.
+
 ## Methods Reference
 
 | Method | Return | Description |
@@ -150,6 +174,13 @@ colorPickerView.selectCenter()
 | `attachBrightnessSlider(BrightnessSlideBar)` | `void` | Links a BrightnessSlideBar |
 | `setEnabled(Boolean)` | `void` | Enables or disables the color picker |
 | `setDebounceDuration(Long)` | `void` | Sets the debounce duration in milliseconds |
+| `setSelectorPointValidation(Boolean)` | `void` | Approximates the selected point to the nearest valid color (default: true) |
+| `setResetBrightnessOnLowSaturation(Boolean)` | `void` | Resets the brightness slider on a low saturation color (default: true) |
+| `setSyncSlidersWithPaletteColor(Boolean)` | `void` | Moves the sliders to the alpha and the brightness of a picked pixel (default: true) |
+| `setZoomEnabled(Boolean)` | `void` | Enables the pinch zoom gesture for a bitmap palette (default: false) |
+| `setMaxZoom(Float)` | `void` | Sets the maximum scale of the zoom gesture (default: 3.0) |
+| `getZoomScale()` | `Float` | Gets the current scale of the zoomed palette |
+| `resetZoom()` | `void` | Restores the zoomed palette to its original scale and position |
 
 ## Lifecycle Management
 

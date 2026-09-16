@@ -64,6 +64,9 @@
 | `attachAlphaSlideBar(Boolean)` | Attaches an alpha slider (default: true) |
 | `attachBrightnessSlideBar(Boolean)` | Attaches a brightness slider (default: true) |
 | `setBottomSpace(Int)` | Sets bottom space between the last slider and buttons |
+| `setPositiveButtonTextColor(Int)` | Sets a text color of the positive button |
+| `setNegativeButtonTextColor(Int)` | Sets a text color of the negative button |
+| `setNeutralButtonTextColor(Int)` | Sets a text color of the neutral button |
 
 ## Customizing the ColorPickerView
 

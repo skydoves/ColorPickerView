@@ -31,6 +31,8 @@ When displaying colors with transparency on a regular view, the alpha channel mi
 | `tileSize` | The size of each repeating tile in dp | 10 |
 | `tileEvenColor` | The color of even tiles | White |
 | `tileOddColor` | The color of odd tiles | Light Gray |
+| `tileStrokeColor` | The color of the stroke, which is drawn on the edge | Transparent |
+| `tileStrokeSize` | The size of the stroke, which is drawn on the edge | 0dp |
 
 ## Setting the Color
 
@@ -48,6 +50,24 @@ Set the display color programmatically:
     ```java
     AlphaTileView alphaTileView = findViewById(R.id.alphaTileView);
     alphaTileView.setPaintColor(Color.argb(128, 255, 0, 0)); // Semi-transparent red
+    ```
+
+## Stroke
+
+A stroke separates the painted color from the background when both of them have the same color:
+
+=== "Kotlin"
+
+    ```kotlin
+    alphaTileView.setStrokeColor(Color.DKGRAY)
+    alphaTileView.setStrokeSize(4f) // in pixels, setStrokeSizeRes takes a dimension resource.
+    ```
+
+=== "Java"
+
+    ```java
+    alphaTileView.setStrokeColor(Color.DKGRAY);
+    alphaTileView.setStrokeSize(4f); // in pixels, setStrokeSizeRes takes a dimension resource.
     ```
 
 ## With ColorEnvelope
