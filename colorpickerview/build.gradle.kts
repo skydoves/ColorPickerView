@@ -68,9 +68,10 @@ kotlin {
     jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
   }
 
+  // calling this block enables the ABI validation for the main variant.
   @OptIn(org.jetbrains.kotlin.gradle.dsl.abi.ExperimentalAbiValidation::class)
   abiValidation {
-    enabled.set(true)
+    referenceDumpDir.set(layout.projectDirectory.dir("api"))
   }
 }
 

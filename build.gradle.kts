@@ -29,14 +29,14 @@ subprojects {
   configure<com.diffplug.gradle.spotless.SpotlessExtension> {
     java {
       target("**/*.java")
-      targetExclude("$buildDir/**/*.java")
+      targetExclude("${layout.buildDirectory.get().asFile.path}/**/*.java")
       licenseHeaderFile(rootProject.file("spotless/copyright.kt"))
       trimTrailingWhitespace()
       endWithNewline()
     }
     kotlin {
       target("**/*.kt")
-      targetExclude("$buildDir/**/*.kt")
+      targetExclude("${layout.buildDirectory.get().asFile.path}/**/*.kt")
       ktlint().editorConfigOverride(
         mapOf(
           "indent_size" to "2",
