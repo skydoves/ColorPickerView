@@ -220,10 +220,13 @@ abstract class AbstractSlider extends FrameLayout {
   }
 
   private float getBoundaryX(float x) {
-    int maxPos = getWidth() - selector.getWidth() / 2;
-    if (x >= maxPos) return maxPos;
-    if (x <= getSelectorSize() / 2f) return 0;
-    return x - getSelectorSize() / 2f;
+    // the given x is the center of the selector, but the returned value is used as the left
+    // position of the selector. So the selector should not be placed over both edges of the slider.
+    float maxPos = Math.max(0, getWidth() - getSelectorSize());
+    float left = x - getSelectorSize() * 0.5f;
+    if (left >= maxPos) return maxPos;
+    if (left <= 0) return 0;
+    return left;
   }
 
   protected int getSelectorSize() {

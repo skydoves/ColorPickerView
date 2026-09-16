@@ -106,6 +106,7 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
   private String preferenceName;
   private boolean selectorPointValidation = true;
   private boolean resetBrightnessOnLowSaturation = true;
+  private boolean syncSlidersWithPaletteColor = true;
   private final ColorPickerPreferenceManager preferenceManager =
     ColorPickerPreferenceManager.getInstance(getContext());
 
@@ -182,6 +183,10 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
       if (a.hasValue(R.styleable.ColorPickerView_resetBrightnessOnLowSaturation)) {
         this.resetBrightnessOnLowSaturation =
           a.getBoolean(R.styleable.ColorPickerView_resetBrightnessOnLowSaturation, resetBrightnessOnLowSaturation);
+      }
+      if (a.hasValue(R.styleable.ColorPickerView_syncSlidersWithPaletteColor)) {
+        this.syncSlidersWithPaletteColor =
+          a.getBoolean(R.styleable.ColorPickerView_syncSlidersWithPaletteColor, syncSlidersWithPaletteColor);
       }
     } finally {
       a.recycle();
@@ -290,6 +295,7 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
     if (builder.lifecycleOwner != null) setLifecycleOwner(builder.lifecycleOwner);
     this.selectorPointValidation = builder.selectorPointValidation;
     this.resetBrightnessOnLowSaturation = builder.resetBrightnessOnLowSaturation;
+    this.syncSlidersWithPaletteColor = builder.syncSlidersWithPaletteColor;
   }
 
   @SuppressLint("ClickableViewAccessibility")
@@ -338,6 +344,8 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
       }
     }
 
+    syncSlidersWithPaletteColor(pixelColor);
+
     if (actionMode == ActionMode.LAST) {
       notifyToFlagView(this.selectedPoint);
       if (event.getAction() == MotionEvent.ACTION_UP) {
@@ -347,6 +355,29 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
       notifyColorChanged();
     }
     return true;
+  }
+
+  /**
+   * synchronizes the {@link AlphaSlideBar} and the {@link BrightnessSlideBar} with a color, which
+   * is picked from a bitmap palette.
+   *
+   * <p>A pixel of a bitmap palette already contains its own brightness and alpha, but the slide
+   * bars keep their own positions. So the notified color would lose the brightness and the alpha
+   * of the picked pixel without this synchronization.
+   *
+   * @param color the picked color from the palette.
+   */
+  private void syncSlidersWithPaletteColor(@ColorInt int color) {
+    if (!syncSlidersWithPaletteColor || isHuePalette()) return;
+
+    float[] hsv = new float[3];
+    Color.colorToHSV(color, hsv);
+    if (brightnessSlider != null) {
+      brightnessSlider.setSelectorByHalfSelectorPosition(hsv[2]);
+    }
+    if (alphaSlideBar != null) {
+      alphaSlideBar.setSelectorByHalfSelectorPosition(Color.alpha(color) / 255f);
+    }
   }
 
   public boolean isHuePalette() {
@@ -662,6 +693,7 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
     selectedColor = color;
     selectedPoint = new Point(mappedPoint.x, mappedPoint.y);
     setCoordinate(mappedPoint.x, mappedPoint.y);
+    syncSlidersWithPaletteColor(color);
     fireColorListener(getColor(), false);
     notifyToFlagView(selectedPoint);
   }
@@ -1036,6 +1068,31 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
   }
 
   /**
+   * Returns whether the slide bars are synchronized with a color picked from a bitmap palette.
+   *
+   * @return true if the synchronization is enabled, false otherwise.
+   */
+  public boolean isSyncSlidersWithPaletteColorEnabled() {
+    return syncSlidersWithPaletteColor;
+  }
+
+  /**
+   * Sets whether the slide bars are synchronized with a color picked from a bitmap palette.
+   *
+   * <p>When enabled (default), picking a pixel from a bitmap palette moves the brightness and the
+   * alpha slide bars to the brightness and the alpha of that pixel, so the notified color is the
+   * same as the picked pixel. When disabled, the slide bars keep their positions and they are
+   * applied to the picked color, as the previous versions did.
+   *
+   * <p>This option does not affect the default HSV palette.
+   *
+   * @param enabled true to enable the synchronization, false to disable.
+   */
+  public void setSyncSlidersWithPaletteColor(boolean enabled) {
+    this.syncSlidersWithPaletteColor = enabled;
+  }
+
+  /**
    * sets the {@link LifecycleOwner}.
    *
    * @param lifecycleOwner {@link LifecycleOwner}.
@@ -1098,6 +1155,7 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
     private LifecycleOwner lifecycleOwner;
     private boolean selectorPointValidation = true;
     private boolean resetBrightnessOnLowSaturation = true;
+    private boolean syncSlidersWithPaletteColor = true;
 
     public Builder(Context context) {
       this.context = context;
@@ -1200,6 +1258,11 @@ public class ColorPickerView extends FrameLayout implements LifecycleObserver {
 
     public Builder setResetBrightnessOnLowSaturation(boolean enabled) {
       this.resetBrightnessOnLowSaturation = enabled;
+      return this;
+    }
+
+    public Builder setSyncSlidersWithPaletteColor(boolean enabled) {
+      this.syncSlidersWithPaletteColor = enabled;
       return this;
     }
 

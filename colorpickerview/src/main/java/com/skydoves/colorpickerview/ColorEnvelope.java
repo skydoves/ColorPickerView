@@ -24,11 +24,13 @@ public class ColorEnvelope {
 
   @ColorInt private int color;
   private String hexCode;
+  private String rgbHexCode;
   private int[] argb;
 
   public ColorEnvelope(@ColorInt int color) {
     this.color = color;
     this.hexCode = ColorUtils.getHexCode(color);
+    this.rgbHexCode = ColorUtils.getRgbHexCode(color);
     this.argb = ColorUtils.getColorARGB(color);
   }
 
@@ -42,12 +44,27 @@ public class ColorEnvelope {
   }
 
   /**
-   * gets envelope's hex code value.
+   * gets envelope's hex code value, which is formatted as AARRGGBB (alpha, red, green, blue).
+   *
+   * <p>For example, an opaque red color returns FFFF0000. Use {@link #getRgbHexCode()} if the
+   * alpha channel is not needed.
    *
    * @return hex code.
    */
   public String getHexCode() {
     return hexCode;
+  }
+
+  /**
+   * gets envelope's hex code value without the alpha channel, which is formatted as RRGGBB (red,
+   * green, blue).
+   *
+   * <p>For example, an opaque red color returns FF0000.
+   *
+   * @return hex code without the alpha channel.
+   */
+  public String getRgbHexCode() {
+    return rgbHexCode;
   }
 
   /**
