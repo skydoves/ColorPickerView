@@ -1,0 +1,1268 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="ColorPickerView enables you to obtain HSV colors, ARGB values, and Hex color codes from image drawables or gallery pictures with a simple tap on Android.">
+      
+      
+        <meta name="author" content="Jaewoong (skydoves)">
+      
+      
+        <link rel="canonical" href="https://github.com/skydoves/ColorPickerView/colorpickerview/">
+      
+      
+        <link rel="prev" href="../getting-started/">
+      
+      
+        <link rel="next" href="../sliders/alpha-slidebar/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>ColorPickerView - ColorPickerView</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-1SBY14Q79E"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-1SBY14Q79E",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-1SBY14Q79E",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#colorpickerview" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="ColorPickerView" class="md-header__button md-logo" aria-label="ColorPickerView" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.5 12a1.5 1.5 0 0 1-1.5-1.5A1.5 1.5 0 0 1 17.5 9a1.5 1.5 0 0 1 1.5 1.5 1.5 1.5 0 0 1-1.5 1.5m-3-4A1.5 1.5 0 0 1 13 6.5 1.5 1.5 0 0 1 14.5 5 1.5 1.5 0 0 1 16 6.5 1.5 1.5 0 0 1 14.5 8m-5 0A1.5 1.5 0 0 1 8 6.5 1.5 1.5 0 0 1 9.5 5 1.5 1.5 0 0 1 11 6.5 1.5 1.5 0 0 1 9.5 8m-3 4A1.5 1.5 0 0 1 5 10.5 1.5 1.5 0 0 1 6.5 9 1.5 1.5 0 0 1 8 10.5 1.5 1.5 0 0 1 6.5 12M12 3a9 9 0 0 0-9 9 9 9 0 0 0 9 9 1.5 1.5 0 0 0 1.5-1.5c0-.39-.15-.74-.39-1-.23-.27-.38-.62-.38-1a1.5 1.5 0 0 1 1.5-1.5H16a5 5 0 0 0 5-5c0-4.42-4.03-8-9-8"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ColorPickerView
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              ColorPickerView
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/skydoves/ColorPickerView" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ColorPickerView
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="ColorPickerView" class="md-nav__button md-logo" aria-label="ColorPickerView" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.5 12a1.5 1.5 0 0 1-1.5-1.5A1.5 1.5 0 0 1 17.5 9a1.5 1.5 0 0 1 1.5 1.5 1.5 1.5 0 0 1-1.5 1.5m-3-4A1.5 1.5 0 0 1 13 6.5 1.5 1.5 0 0 1 14.5 5 1.5 1.5 0 0 1 16 6.5 1.5 1.5 0 0 1 14.5 8m-5 0A1.5 1.5 0 0 1 8 6.5 1.5 1.5 0 0 1 9.5 5 1.5 1.5 0 0 1 11 6.5 1.5 1.5 0 0 1 9.5 8m-3 4A1.5 1.5 0 0 1 5 10.5 1.5 1.5 0 0 1 6.5 9 1.5 1.5 0 0 1 8 10.5 1.5 1.5 0 0 1 6.5 12M12 3a9 9 0 0 0-9 9 9 9 0 0 0 9 9 1.5 1.5 0 0 0 1.5-1.5c0-.39-.15-.74-.39-1-.23-.27-.38-.62-.38-1a1.5 1.5 0 0 1 1.5-1.5H16a5 5 0 0 0 5-5c0-4.42-4.03-8-9-8"/></svg>
+
+    </a>
+    ColorPickerView
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/skydoves/ColorPickerView" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ColorPickerView
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ColorPickerView
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ColorPickerView
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#palette" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Palette
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Palette">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#default-hsv-palette" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Default HSV Palette
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-palette" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom Palette
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#palette-from-gallery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Palette from Gallery
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#actionmode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ActionMode
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#debounce" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Debounce
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#selector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Selector
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Selector">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#custom-selector-drawable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom Selector Drawable
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#selector-position" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Selector Position
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#zoom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zoom
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#methods-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Methods Reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lifecycle-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lifecycle Management
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sliders
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sliders
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sliders/alpha-slidebar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AlphaSlideBar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sliders/brightness-slidebar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BrightnessSlideBar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../color-picker-dialog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ColorPickerDialog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../flagview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FlagView
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../alphatileview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AlphaTileView
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../preference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Preference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sponsor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sponsor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#palette" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Palette
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Palette">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#default-hsv-palette" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Default HSV Palette
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-palette" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom Palette
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#palette-from-gallery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Palette from Gallery
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#actionmode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ActionMode
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#debounce" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Debounce
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#selector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Selector
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Selector">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#custom-selector-drawable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom Selector Drawable
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#selector-position" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Selector Position
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#zoom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zoom
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#methods-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Methods Reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lifecycle-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lifecycle Management
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="colorpickerview">ColorPickerView<a class="headerlink" href="#colorpickerview" title="Permanent link">&para;</a></h1>
+<p><code>ColorPickerView</code> is the core component that displays a color palette and allows users to select colors by tapping or dragging.</p>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/24237865/53681606-38f75000-3d2f-11e9-8586-848d638f23b1.gif" width="280"/>
+</p>
+
+<h2 id="palette">Palette<a class="headerlink" href="#palette" title="Permanent link">&para;</a></h2>
+<h3 id="default-hsv-palette">Default HSV Palette<a class="headerlink" href="#default-hsv-palette" title="Permanent link">&para;</a></h3>
+<p>If you do not set any custom palette, the default palette will be the <code>ColorHsvPalette</code>. You can manually select a specific point for the selector by specifying a color value:</p>
+<div class="highlight"><pre><span></span><code><span class="n">colorPickerView</span><span class="p">.</span><span class="na">selectByHsvColor</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
+<span class="n">colorPickerView</span><span class="p">.</span><span class="na">selectByHsvColorRes</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">color</span><span class="p">.</span><span class="na">colorPrimary</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="custom-palette">Custom Palette<a class="headerlink" href="#custom-palette" title="Permanent link">&para;</a></h3>
+<p>You can change the palette to any desired image drawable:</p>
+<div class="highlight"><pre><span></span><code><span class="n">colorPickerView</span><span class="p">.</span><span class="na">setPaletteDrawable</span><span class="p">(</span><span class="n">drawable</span><span class="p">)</span>
+</code></pre></div>
+<p>To revert to the default HSV palette:</p>
+<div class="highlight"><pre><span></span><code><span class="n">colorPickerView</span><span class="p">.</span><span class="na">setHsvPaletteDrawable</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="palette-from-gallery">Palette from Gallery<a class="headerlink" href="#palette-from-gallery" title="Permanent link">&para;</a></h3>
+<p>You can pick colors from gallery images by setting a bitmap drawable as the palette.</p>
+<p><img src="https://user-images.githubusercontent.com/24237865/52941911-313dc000-33ad-11e9-8264-6d78f4ad613a.jpg" width="280"/></p>
+<p>First, declare the permission in your <code>AndroidManifest.xml</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;uses-permission</span><span class="w"> </span><span class="na">android:name=</span><span class="s">"android.permission.READ_EXTERNAL_STORAGE"</span><span class="nt">/&gt;</span>
+</code></pre></div>
+<p>Launch the gallery picker:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">val</span><span class="w"> </span><span class="nv">photoPickerIntent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Intent</span><span class="p">(</span><span class="n">Intent</span><span class="p">.</span><span class="na">ACTION_PICK</span><span class="p">)</span>
+<span class="n">photoPickerIntent</span><span class="p">.</span><span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"image/*"</span>
+<span class="n">startActivityForResult</span><span class="p">(</span><span class="n">photoPickerIntent</span><span class="p">,</span><span class="w"> </span><span class="n">REQUEST_CODE_GALLERY</span><span class="p">)</span>
+</code></pre></div>
+<p>In <code>onActivityResult</code>, set the selected image as the palette:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">onActivityResult</span><span class="p">(</span><span class="n">requestCode</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="n">resultCode</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">:</span><span class="w"> </span><span class="n">Intent?</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">super</span><span class="p">.</span><span class="na">onActivityResult</span><span class="p">(</span><span class="n">requestCode</span><span class="p">,</span><span class="w"> </span><span class="n">resultCode</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">requestCode</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">REQUEST_CODE_GALLERY</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">resultCode</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">RESULT_OK</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">val</span><span class="w"> </span><span class="nv">imageUri</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="o">?.</span><span class="na">data</span>
+<span class="w">            </span><span class="kd">val</span><span class="w"> </span><span class="nv">imageStream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">contentResolver</span><span class="p">.</span><span class="na">openInputStream</span><span class="p">(</span><span class="n">imageUri</span><span class="o">!!</span><span class="p">)</span>
+<span class="w">            </span><span class="kd">val</span><span class="w"> </span><span class="nv">selectedImage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BitmapFactory</span><span class="p">.</span><span class="na">decodeStream</span><span class="p">(</span><span class="n">imageStream</span><span class="p">)</span>
+<span class="w">            </span><span class="kd">val</span><span class="w"> </span><span class="nv">drawable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BitmapDrawable</span><span class="p">(</span><span class="n">resources</span><span class="p">,</span><span class="w"> </span><span class="n">selectedImage</span><span class="p">)</span>
+<span class="w">            </span><span class="n">colorPickerView</span><span class="p">.</span><span class="na">setPaletteDrawable</span><span class="p">(</span><span class="n">drawable</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="p">:</span><span class="w"> </span><span class="n">FileNotFoundException</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">()</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="actionmode">ActionMode<a class="headerlink" href="#actionmode" title="Permanent link">&para;</a></h2>
+<p><code>ActionMode</code> controls when the <code>ColorListener</code> is invoked based on user actions.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Invoke listener only when finger is released</span>
+<span class="n">colorPickerView</span><span class="p">.</span><span class="na">setActionMode</span><span class="p">(</span><span class="n">ActionMode</span><span class="p">.</span><span class="na">LAST</span><span class="p">)</span>
+
+<span class="c1">// Invoke listener on every touch event (default)</span>
+<span class="n">colorPickerView</span><span class="p">.</span><span class="na">setActionMode</span><span class="p">(</span><span class="n">ActionMode</span><span class="p">.</span><span class="na">ALWAYS</span><span class="p">)</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ALWAYS</code></td>
+<td>ColorListener is invoked on every touch event (down, move, up)</td>
+</tr>
+<tr>
+<td><code>LAST</code></td>
+<td>ColorListener is invoked only when the finger is released</td>
+</tr>
+</tbody>
+</table>
+<h2 id="debounce">Debounce<a class="headerlink" href="#debounce" title="Permanent link">&para;</a></h2>
+<p>To limit how frequently the color listener is called, you can set a debounce duration:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">XML</label><label for="__tabbed_1_2">Kotlin</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>app:debounceDuration="150"
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="n">colorPickerView</span><span class="p">.</span><span class="na">setDebounceDuration</span><span class="p">(</span><span class="m">150</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>This is useful for performance optimization when updating UI based on color changes.</p>
+<h2 id="selector">Selector<a class="headerlink" href="#selector" title="Permanent link">&para;</a></h2>
+<h3 id="custom-selector-drawable">Custom Selector Drawable<a class="headerlink" href="#custom-selector-drawable" title="Permanent link">&para;</a></h3>
+<p>You can customize the selector appearance:</p>
+<div class="highlight"><pre><span></span><code><span class="n">colorPickerView</span><span class="p">.</span><span class="na">setSelectorDrawable</span><span class="p">(</span><span class="n">drawable</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="selector-position">Selector Position<a class="headerlink" href="#selector-position" title="Permanent link">&para;</a></h3>
+<p>Programmatically move the selector to a specific position:</p>
+<div class="highlight"><pre><span></span><code><span class="n">colorPickerView</span><span class="p">.</span><span class="na">setSelectorPoint</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span>
+</code></pre></div>
+<p>Or select the center of the palette:</p>
+<div class="highlight"><pre><span></span><code><span class="n">colorPickerView</span><span class="p">.</span><span class="na">selectCenter</span><span class="p">()</span>
+</code></pre></div>
+<h2 id="zoom">Zoom<a class="headerlink" href="#zoom" title="Permanent link">&para;</a></h2>
+<p>A bitmap palette can be zoomed by a pinch gesture, which helps to pick tiny color spots of an image.
+The gesture is disabled by default and it doesn't affect the default HSV palette.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Kotlin</label><label for="__tabbed_2_2">Java</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="n">colorPickerView</span><span class="p">.</span><span class="na">setPaletteDrawable</span><span class="p">(</span><span class="n">drawable</span><span class="p">)</span>
+<span class="n">colorPickerView</span><span class="p">.</span><span class="na">isZoomEnabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="n">colorPickerView</span><span class="p">.</span><span class="na">maxZoom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5.0f</span><span class="w"> </span><span class="c1">// the default value is 3.0f.</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="n">colorPickerView</span><span class="p">.</span><span class="na">setPaletteDrawable</span><span class="p">(</span><span class="n">drawable</span><span class="p">);</span>
+<span class="n">colorPickerView</span><span class="p">.</span><span class="na">setZoomEnabled</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+<span class="n">colorPickerView</span><span class="p">.</span><span class="na">setMaxZoom</span><span class="p">(</span><span class="mf">5.0f</span><span class="p">);</span><span class="w"> </span><span class="c1">// the default value is 3.0f.</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>A pinch gesture zooms the palette in and out and a two finger drag moves the zoomed palette,
+while a single touch still selects a color. <code>resetZoom()</code> restores the original scale and position.</p>
+<h2 id="methods-reference">Methods Reference<a class="headerlink" href="#methods-reference" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Return</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>getColor()</code></td>
+<td><code>Int</code></td>
+<td>Gets the last selected color</td>
+</tr>
+<tr>
+<td><code>getColorEnvelope()</code></td>
+<td><code>ColorEnvelope</code></td>
+<td>Gets the ColorEnvelope of the last selected color</td>
+</tr>
+<tr>
+<td><code>setPaletteDrawable(Drawable)</code></td>
+<td><code>void</code></td>
+<td>Changes the palette drawable</td>
+</tr>
+<tr>
+<td><code>setSelectorDrawable(Drawable)</code></td>
+<td><code>void</code></td>
+<td>Changes the selector drawable</td>
+</tr>
+<tr>
+<td><code>setSelectorPoint(Int, Int)</code></td>
+<td><code>void</code></td>
+<td>Selects a specific coordinate on the palette</td>
+</tr>
+<tr>
+<td><code>selectByHsvColor(Int)</code></td>
+<td><code>void</code></td>
+<td>Moves selector to match a specific color</td>
+</tr>
+<tr>
+<td><code>selectByHsvColorRes(Int)</code></td>
+<td><code>void</code></td>
+<td>Moves selector using a color resource</td>
+</tr>
+<tr>
+<td><code>setHsvPaletteDrawable()</code></td>
+<td><code>void</code></td>
+<td>Resets to default HSV palette</td>
+</tr>
+<tr>
+<td><code>selectCenter()</code></td>
+<td><code>void</code></td>
+<td>Selects the center of the palette</td>
+</tr>
+<tr>
+<td><code>setInitialColor(Int)</code></td>
+<td><code>void</code></td>
+<td>Sets initial selector position by color</td>
+</tr>
+<tr>
+<td><code>setInitialColorRes(Int)</code></td>
+<td><code>void</code></td>
+<td>Sets initial selector position by color resource</td>
+</tr>
+<tr>
+<td><code>setActionMode(ActionMode)</code></td>
+<td><code>void</code></td>
+<td>Sets the listener trigger mode</td>
+</tr>
+<tr>
+<td><code>setFlagView(FlagView)</code></td>
+<td><code>void</code></td>
+<td>Sets a FlagView on the ColorPickerView</td>
+</tr>
+<tr>
+<td><code>attachAlphaSlider(AlphaSlideBar)</code></td>
+<td><code>void</code></td>
+<td>Links an AlphaSlideBar</td>
+</tr>
+<tr>
+<td><code>attachBrightnessSlider(BrightnessSlideBar)</code></td>
+<td><code>void</code></td>
+<td>Links a BrightnessSlideBar</td>
+</tr>
+<tr>
+<td><code>setEnabled(Boolean)</code></td>
+<td><code>void</code></td>
+<td>Enables or disables the color picker</td>
+</tr>
+<tr>
+<td><code>setDebounceDuration(Long)</code></td>
+<td><code>void</code></td>
+<td>Sets the debounce duration in milliseconds</td>
+</tr>
+<tr>
+<td><code>setSelectorPointValidation(Boolean)</code></td>
+<td><code>void</code></td>
+<td>Approximates the selected point to the nearest valid color (default: true)</td>
+</tr>
+<tr>
+<td><code>setResetBrightnessOnLowSaturation(Boolean)</code></td>
+<td><code>void</code></td>
+<td>Resets the brightness slider on a low saturation color (default: true)</td>
+</tr>
+<tr>
+<td><code>setSyncSlidersWithPaletteColor(Boolean)</code></td>
+<td><code>void</code></td>
+<td>Moves the sliders to the alpha and the brightness of a picked pixel (default: true)</td>
+</tr>
+<tr>
+<td><code>setZoomEnabled(Boolean)</code></td>
+<td><code>void</code></td>
+<td>Enables the pinch zoom gesture for a bitmap palette (default: false)</td>
+</tr>
+<tr>
+<td><code>setMaxZoom(Float)</code></td>
+<td><code>void</code></td>
+<td>Sets the maximum scale of the zoom gesture (default: 3.0)</td>
+</tr>
+<tr>
+<td><code>getZoomScale()</code></td>
+<td><code>Float</code></td>
+<td>Gets the current scale of the zoomed palette</td>
+</tr>
+<tr>
+<td><code>resetZoom()</code></td>
+<td><code>void</code></td>
+<td>Restores the zoomed palette to its original scale and position</td>
+</tr>
+</tbody>
+</table>
+<h2 id="lifecycle-management">Lifecycle Management<a class="headerlink" href="#lifecycle-management" title="Permanent link">&para;</a></h2>
+<p>To properly save and restore the color picker state, set a lifecycle owner:</p>
+<div class="highlight"><pre><span></span><code><span class="n">colorPickerView</span><span class="p">.</span><span class="na">setLifecycleOwner</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+</code></pre></div>
+<p>This automatically saves the state when the activity or fragment is destroyed.</p>
+<div class="admonition warning">
+<p class="admonition-title">Important</p>
+<p>Always set the lifecycle owner to prevent state loss and ensure proper cleanup.</p>
+</div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["content.tabs.link", "content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
