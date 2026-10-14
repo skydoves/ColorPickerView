@@ -1,7 +1,7 @@
 [versions]
 agp = "8.13.2"
 dokka = "2.2.0"
-kotlin = "2.4.20"
+kotlin = "2.4.21"
 kotlinBinaryCompatibility = "0.18.2"
 jvmTarget = "17"
 nexusPlugin = "0.37.0"
